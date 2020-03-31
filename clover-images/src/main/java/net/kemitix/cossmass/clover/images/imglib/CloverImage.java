@@ -1,9 +1,7 @@
 package net.kemitix.cossmass.clover.images.imglib;
 
-import net.kemitix.cossmass.clover.images.CloverConfig;
-import net.kemitix.cossmass.clover.images.FontFace;
 import net.kemitix.cossmass.clover.images.Image;
-import net.kemitix.cossmass.clover.images.XY;
+import net.kemitix.cossmass.clover.images.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import static java.awt.Image.SCALE_SMOOTH;
@@ -125,7 +124,8 @@ class CloverImage implements Image {
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
         graphics.setFont(fontLoader.loadFont(fontFace));
-        graphics.setPaint(Color.getColor(fontFace.getColour()));
+        final Color colour = getColor(fontFace);
+        graphics.setPaint(colour);
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
                 xy.getX(),
@@ -135,6 +135,15 @@ class CloverImage implements Image {
                 xy.getX(),
                 xy.getY() + fontFace.getSize());
         return new CloverImage(withText, config, fontLoader);
+    }
+
+    private Color getColor(final FontFace fontFace) {
+        return Optional.ofNullable(
+                Color.getColor(
+                        fontFace.getColour()))
+                .orElseThrow(() ->
+                        new FatalCloverError(
+                                "Unknown colour: " + fontFace.getColour()));
     }
 
     private BufferedImage copyImage() {

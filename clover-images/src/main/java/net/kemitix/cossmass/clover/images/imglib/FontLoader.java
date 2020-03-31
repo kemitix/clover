@@ -1,5 +1,6 @@
 package net.kemitix.cossmass.clover.images.imglib;
 
+import net.kemitix.cossmass.clover.images.FatalCloverError;
 import net.kemitix.cossmass.clover.images.FontFace;
 
 import javax.enterprise.context.Dependent;
@@ -13,7 +14,7 @@ public class FontLoader {
         try {
             return Font.createFont(Font.TRUETYPE_FONT, fontFace.getFont());
         } catch (final FontFormatException | IOException e) {
-            throw new RuntimeException("Font load error", e);
+            throw new FatalCloverError("Font load error", e);
         }
     }
 
