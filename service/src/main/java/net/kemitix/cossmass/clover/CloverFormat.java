@@ -62,8 +62,8 @@ public abstract class CloverFormat {
     }
 
     protected Function<Image, Image> frontCover() {
+        LOGGER.info("Drawing the Front Cover");
         return image -> {
-            LOGGER.info("Drawing the Front Cover");
             // Do nothing - subclasses should override if they want a spine
             return image;
         };
@@ -78,4 +78,5 @@ public abstract class CloverFormat {
     }
 
     protected abstract String getName();
+
 }
