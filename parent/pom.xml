@@ -33,6 +33,7 @@
         <file-reader-writer.version>1.0.0</file-reader-writer.version>
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
         <microprofile-config-api.version>1.4</microprofile-config-api.version>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -79,6 +80,12 @@
                 <groupId>net.kemitix</groupId>
                 <artifactId>file-reader-writer</artifactId>
                 <version>${file-reader-writer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
 
             <dependency>
