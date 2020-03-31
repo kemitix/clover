@@ -31,6 +31,8 @@ public class CloverConfigProperties implements CloverConfig {
     int dropShadowXOffset;
     @ConfigProperty(name = "drop-shadow-y-offset")
     int dropShadowYOffset;
+    @ConfigProperty(name = "font-file")
+    String fontFile;
 
     @Override
     public List<String> getImageTypes() {
@@ -49,6 +51,6 @@ public class CloverConfigProperties implements CloverConfig {
 
     @Override
     public File getFontFile() {
-        return null;
+        return new File(fontFile);
     }
 }
