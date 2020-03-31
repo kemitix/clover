@@ -5,6 +5,7 @@ import net.kemitix.cossmass.clover.images.FatalCloverError;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
@@ -28,6 +29,9 @@ public class CloverMain {
                         service.run();
                     } catch (final FatalCloverError e) {
                         LOGGER.severe(e.getMessage());
+                        Optional.ofNullable(e.getCause())
+                                .ifPresent(cause ->
+                                        LOGGER.severe(cause.getMessage()));
                     } finally {
                         System.exit(0);
                     }
