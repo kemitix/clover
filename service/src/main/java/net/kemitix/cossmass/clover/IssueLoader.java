@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 public class IssueLoader {
 
-    private static final String CLOVER_JSON = "clover.json";
     private static final Logger LOGGER =
             Logger.getLogger(
                     IssueLoader.class.getName());
@@ -33,7 +32,7 @@ public class IssueLoader {
     @Produces
     @ApplicationScoped
     public Issue loadIssueJson() throws FileNotFoundException {
-        final Path cloverJsonPath = Paths.get(config.getIssueDir(), CLOVER_JSON);
+        final Path cloverJsonPath = Paths.get(config.getIssueDir(), config.getConfigFile());
         LOGGER.info("Reading: " + cloverJsonPath);
         final FileReader reader = new FileReader(cloverJsonPath.toFile());
         return jsonb.fromJson(reader, Issue.class);
