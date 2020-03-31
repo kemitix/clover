@@ -3,6 +3,7 @@ package net.kemitix.cossmass.clover;
 
 import net.kemitix.cossmass.clover.images.CloverConfig;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.json.bind.Jsonb;
 import java.io.FileNotFoundException;
@@ -30,6 +31,7 @@ public class IssueLoader {
     }
 
     @Produces
+    @ApplicationScoped
     public Issue loadIssueJson() throws FileNotFoundException {
         final Path cloverJsonPath = Paths.get(config.getIssueDir(), CLOVER_JSON);
         LOGGER.info("Reading: " + cloverJsonPath);
