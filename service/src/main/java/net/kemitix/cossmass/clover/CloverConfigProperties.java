@@ -5,6 +5,7 @@ import net.kemitix.cossmass.clover.images.CloverConfig;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.Dependent;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,5 +45,10 @@ public class CloverConfigProperties implements CloverConfig {
     @Override
     public int width() {
         return width * inchesToPX;
+    }
+
+    @Override
+    public File getFontFile() {
+        return null;
     }
 }

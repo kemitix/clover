@@ -16,9 +16,14 @@ public class CloverImageService implements ImageService {
             Logger.getLogger(
                     CloverImageService.class.getName());
     private final CloverConfig config;
+    private final FontLoader fontLoader;
 
-    public CloverImageService(final CloverConfig config) {
+    public CloverImageService(
+            final CloverConfig config,
+            final FontLoader fontLoader
+    ) {
         this.config = config;
+        this.fontLoader = fontLoader;
     }
 
     @Override
@@ -28,6 +33,6 @@ public class CloverImageService implements ImageService {
         LOGGER.info(String.format("Loaded: (%dx%d)",
                 image.getWidth(),
                 image.getHeight()));
-        return new CloverImage(image, config);
+        return new CloverImage(image, config, fontLoader);
     }
 }

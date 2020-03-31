@@ -37,12 +37,12 @@ public abstract class CloverFormat {
                 Paths.get(config.getBaseDir(), issue.coverArt())
                         .toFile();
 
-        cover = imageService.load(coverArtFile)
-                .scaleToCover(config.width(), config.height())
-                .crop(getCropXOffset(), getCropYOffset(), config.width(), config.height())
-                .apply(frontCover())
-                .apply(spine())
-                .apply(backCover());
+        final Image scaled = imageService.load(coverArtFile).scaleToCover(config.width(), config.height());
+        final Image cropped = scaled.crop(getCropXOffset(), getCropYOffset(), config.width(), config.height());
+        final Image withFrontCover = cropped.apply(frontCover());
+        final Image withSpine = withFrontCover.apply(spine());
+        final Image withBackCover = withSpine.apply(backCover());
+        cover = withBackCover;
     }
 
     protected Function<Image, Image> backCover() {

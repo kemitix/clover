@@ -2,8 +2,10 @@ package net.kemitix.cossmass.clover.images.imglib;
 
 import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
+import net.kemitix.cossmass.clover.images.XYPosition;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,20 +16,22 @@ import static java.awt.Image.SCALE_SMOOTH;
 
 class CloverImage implements Image {
 
-
     private static final Logger LOGGER =
             Logger.getLogger(
                     CloverImage.class.getName());
 
     private final BufferedImage image;
     private final CloverConfig config;
+    private final FontLoader fontLoader;
 
     CloverImage(
             final BufferedImage image,
-            final CloverConfig config
+            final CloverConfig config,
+            final FontLoader fontLoader
     ) {
         this.image = image;
         this.config = config;
+        this.fontLoader = fontLoader;
     }
 
     @Override
@@ -63,7 +67,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(resized, config);
+        return new CloverImage(resized, config, fontLoader);
     }
 
     public int getHeight() {
@@ -93,7 +97,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(cropped, config);
+        return new CloverImage(cropped, config, fontLoader);
     }
 
     @Override
@@ -107,6 +111,33 @@ class CloverImage implements Image {
                     final File file = path.resolve(name + "." + format).toFile();
                     write(format, file);
                 });
+    }
+
+    @Override
+    public Image withText(
+            final String text,
+            final XYPosition xyPosition,
+            final File font,
+            final int size,
+            final String colour
+    ) {
+        final BufferedImage withText = copyImage();
+        final Graphics2D graphics = withText.createGraphics();
+        graphics.setFont(fontLoader.loadFont(font, size));
+        graphics.setPaint(Color.getColor(colour));
+        LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
+                text, xyPosition.getX(), xyPosition.getY() + size, size));
+        graphics.drawString(text, xyPosition.getX(), xyPosition.getY() + size);
+        return new CloverImage(withText, config, fontLoader);
+    }
+
+    private BufferedImage copyImage() {
+        final BufferedImage copy =
+                new BufferedImage(getWidth(), getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
+        copy.createGraphics()
+                .drawImage(image, 0, 0, null);
+        return copy;
     }
 
     private void write(

@@ -1,5 +1,6 @@
 package net.kemitix.cossmass.clover.images;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Function;
 
@@ -13,4 +14,11 @@ public interface Image {
     }
 
     void write(Path path, String name);
+
+    Image withText(
+            String title,
+            XYPosition xyPosition,
+            File font,
+            int size,
+            String colour);
 }

@@ -3,6 +3,7 @@ package net.kemitix.cossmass.clover;
 import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.ImageService;
 import net.kemitix.cossmass.clover.images.imglib.CloverImageService;
+import net.kemitix.cossmass.clover.images.imglib.FontLoader;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
@@ -17,7 +18,12 @@ public class CloverConfiguration {
     }
 
     @Produces
-    ImageService imageService() {
-        return new CloverImageService(config);
+    FontLoader fontLoader() {
+        return new FontLoader();
+    }
+
+    @Produces
+    ImageService imageService(final FontLoader fontLoader) {
+        return new CloverImageService(config, fontLoader);
     }
 }
