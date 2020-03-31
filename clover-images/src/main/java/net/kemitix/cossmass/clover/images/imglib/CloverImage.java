@@ -122,15 +122,15 @@ class CloverImage implements Image {
             final XY xy,
             final FontFace fontFace
     ) {
-        final BufferedImage withText = copyImage();
-        final Graphics2D graphics = withText.createGraphics();
-        graphics.setFont(fontLoader.loadFont(fontFace));
-        graphics.setPaint(getColor(fontFace));
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
                 xy.getX(),
                 xy.getY() + fontFace.getSize(),
                 fontFace.getSize()));
+        final BufferedImage withText = copyImage();
+        final Graphics2D graphics = withText.createGraphics();
+        graphics.setFont(fontLoader.loadFont(fontFace));
+        graphics.setPaint(getColor(fontFace));
         graphics.drawString(text,
                 xy.getX(),
                 xy.getY() + fontFace.getSize());
