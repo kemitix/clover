@@ -1,6 +1,7 @@
 package net.kemitix.cossmass.clover.images.imglib;
 
 import net.kemitix.cossmass.clover.images.CloverConfig;
+import net.kemitix.cossmass.clover.images.FontFace;
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.XY;
 
@@ -108,7 +109,9 @@ class CloverImage implements Image {
         LOGGER.info(String.format("Writing %s to %s", name, path));
         config.getImageTypes()
                 .forEach(format -> {
-                    final File file = path.resolve(name + "." + format).toFile();
+                    final File file =
+                            path.resolve(name + "." + format)
+                                    .toFile();
                     write(format, file);
                 });
     }
@@ -117,17 +120,20 @@ class CloverImage implements Image {
     public Image withText(
             final String text,
             final XY xy,
-            final File font,
-            final int size,
-            final String colour
+            final FontFace fontFace
     ) {
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
-        graphics.setFont(fontLoader.loadFont(font, size));
-        graphics.setPaint(Color.getColor(colour));
+        graphics.setFont(fontLoader.loadFont(fontFace));
+        graphics.setPaint(Color.getColor(fontFace.getColour()));
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
-                text, xy.getX(), xy.getY() + size, size));
-        graphics.drawString(text, xy.getX(), xy.getY() + size);
+                text,
+                xy.getX(),
+                xy.getY() + fontFace.getSize(),
+                fontFace.getSize()));
+        graphics.drawString(text,
+                xy.getX(),
+                xy.getY() + fontFace.getSize());
         return new CloverImage(withText, config, fontLoader);
     }
 

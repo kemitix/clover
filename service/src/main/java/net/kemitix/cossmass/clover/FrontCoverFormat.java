@@ -1,9 +1,6 @@
 package net.kemitix.cossmass.clover;
 
-import net.kemitix.cossmass.clover.images.CloverConfig;
-import net.kemitix.cossmass.clover.images.Image;
-import net.kemitix.cossmass.clover.images.ImageService;
-import net.kemitix.cossmass.clover.images.XY;
+import net.kemitix.cossmass.clover.images.*;
 
 import java.io.File;
 import java.util.function.Function;
@@ -43,11 +40,16 @@ public abstract class FrontCoverFormat extends CloverFormat {
         final int size = 217;
         final String colour = issue.getTitleColour();
         return image -> {
-            //FIXME: this isn't being called
             LOGGER.info("drawTitle().apply()");
             return image
-                    .withText("Cossmass", XY.at(60, 90), font, size, colour)
-                    .withText("Infinities", XY.at(130, 307), font, size, colour);
+                    .withText(
+                            "Cossmass",
+                            XY.at(60, 90),
+                            FontFace.of(font, size, colour))
+                    .withText(
+                            "Infinities",
+                            XY.at(130, 307),
+                            FontFace.of(font, size, colour));
         };
     }
 
