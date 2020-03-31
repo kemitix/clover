@@ -17,7 +17,7 @@ public interface Image {
 
     Image withText(
             String title,
-            XYPosition xyPosition,
+            XY xy,
             File font,
             int size,
             String colour);

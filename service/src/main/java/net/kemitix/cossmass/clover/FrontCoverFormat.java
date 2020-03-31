@@ -3,7 +3,7 @@ package net.kemitix.cossmass.clover;
 import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.ImageService;
-import net.kemitix.cossmass.clover.images.XYPosition;
+import net.kemitix.cossmass.clover.images.XY;
 
 import java.io.File;
 import java.util.function.Function;
@@ -46,8 +46,8 @@ public abstract class FrontCoverFormat extends CloverFormat {
             //FIXME: this isn't being called
             LOGGER.info("drawTitle().apply()");
             return image
-                    .withText("Cossmass", XYPosition.at(60, 90), font, size, colour)
-                    .withText("Infinities", XYPosition.at(130, 307), font, size, colour);
+                    .withText("Cossmass", XY.at(60, 90), font, size, colour)
+                    .withText("Infinities", XY.at(130, 307), font, size, colour);
         };
     }
 

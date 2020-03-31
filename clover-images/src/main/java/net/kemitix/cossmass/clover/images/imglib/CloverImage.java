@@ -2,7 +2,7 @@ package net.kemitix.cossmass.clover.images.imglib;
 
 import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
-import net.kemitix.cossmass.clover.images.XYPosition;
+import net.kemitix.cossmass.clover.images.XY;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -116,7 +116,7 @@ class CloverImage implements Image {
     @Override
     public Image withText(
             final String text,
-            final XYPosition xyPosition,
+            final XY xy,
             final File font,
             final int size,
             final String colour
@@ -126,8 +126,8 @@ class CloverImage implements Image {
         graphics.setFont(fontLoader.loadFont(font, size));
         graphics.setPaint(Color.getColor(colour));
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
-                text, xyPosition.getX(), xyPosition.getY() + size, size));
-        graphics.drawString(text, xyPosition.getX(), xyPosition.getY() + size);
+                text, xy.getX(), xy.getY() + size, size));
+        graphics.drawString(text, xy.getX(), xy.getY() + size);
         return new CloverImage(withText, config, fontLoader);
     }
 
