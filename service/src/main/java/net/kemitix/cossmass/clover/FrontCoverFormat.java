@@ -27,7 +27,6 @@ public abstract class FrontCoverFormat extends CloverFormat {
 
     @Override
     protected Function<Image, Image> frontCover() {
-        LOGGER.info("Drawing the Front Cover");
         return super.frontCover()
                 .andThen(drawTitle())
                 .andThen(drawSubTitles())
@@ -35,12 +34,11 @@ public abstract class FrontCoverFormat extends CloverFormat {
     }
 
     private Function<Image, Image> drawTitle() {
-        LOGGER.info("drawTitle()");
         final File font = config.getFontFile();
         final int size = 217;
         final String colour = issue.getTitleColour();
         return image -> {
-            LOGGER.info("drawTitle().apply()");
+            LOGGER.info("Drawing title...");
             return image
                     .withText(
                             "Cossmass",
@@ -54,17 +52,15 @@ public abstract class FrontCoverFormat extends CloverFormat {
     }
 
     private Function<Image, Image> drawSubTitles() {
-        LOGGER.info("drawSubTitles()");
         return image -> {
-            LOGGER.info("drawSubTitles().apply()");
+            LOGGER.info("Drawing subtitle...");
             return image;
         };
     }
 
     private Function<Image, Image> drawAuthors() {
-        LOGGER.info("drawAuthors()");
         return image -> {
-            LOGGER.info("drawAuthors().apply()");
+            LOGGER.info("Drawing authors...");
             return image;
         };
     }
