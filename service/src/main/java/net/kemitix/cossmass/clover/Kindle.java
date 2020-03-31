@@ -25,12 +25,12 @@ public class Kindle extends FrontCoverFormat {
 
     @Override
     protected int getCropYOffset() {
-        return issue.kindleYOffset;
+        return issue.getKindleYOffset();
     }
 
     @Override
     protected int getCropXOffset() {
-        return issue.kindleXOffset;
+        return issue.getKindleXOffset();
     }
 
     @Override

@@ -27,12 +27,12 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected int getCropYOffset() {
-        return issue.paperbackYOffset;
+        return issue.getPaperbackYOffset();
     }
 
     @Override
     protected int getCropXOffset() {
-        return issue.paperbackXOffset;
+        return issue.getPaperbackXOffset();
     }
 
     @Override
