@@ -4,7 +4,6 @@ import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -58,9 +57,12 @@ class CloverImage implements Image {
     private Image scaleTo(final int width, final int height) {
         final BufferedImage resized =
                 new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(image.getScaledInstance(width, height, SCALE_SMOOTH), 0, 0, null);
-        g2d.dispose();
+        resized.createGraphics()
+                .drawImage(
+                        image.getScaledInstance(width, height, SCALE_SMOOTH),
+                        0,
+                        0,
+                        null);
         return new CloverImage(resized, config);
     }
 
@@ -83,7 +85,8 @@ class CloverImage implements Image {
                 xOffset, yOffset,
                 width, height
         ));
-        final BufferedImage cropped = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage cropped =
+                new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         cropped.createGraphics()
                 .drawImage(
                         image.getSubimage(xOffset, yOffset, width, height),
