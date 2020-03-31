@@ -2,6 +2,7 @@ package net.kemitix.cossmass.clover.images.imglib;
 
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.*;
+import org.beryx.awt.color.ColorFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -124,8 +125,7 @@ class CloverImage implements Image {
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
         graphics.setFont(fontLoader.loadFont(fontFace));
-        final Color colour = getColor(fontFace);
-        graphics.setPaint(colour);
+        graphics.setPaint(getColor(fontFace));
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
                 xy.getX(),
@@ -139,7 +139,7 @@ class CloverImage implements Image {
 
     private Color getColor(final FontFace fontFace) {
         return Optional.ofNullable(
-                Color.getColor(
+                ColorFactory.valueOf(
                         fontFace.getColour()))
                 .orElseThrow(() ->
                         new FatalCloverError(
