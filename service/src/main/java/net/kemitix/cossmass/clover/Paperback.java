@@ -23,7 +23,6 @@ public class Paperback extends FrontCoverFormat {
     ) {
         super(config, issue, imageService);
         this.issue = issue;
-        LOGGER.info("Paperback");
     }
 
     @Override

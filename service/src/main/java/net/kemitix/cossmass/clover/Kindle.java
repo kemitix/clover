@@ -21,7 +21,6 @@ public class Kindle extends FrontCoverFormat {
     ) {
         super(config, issue, imageService);
         this.issue = issue;
-        LOGGER.info("Kindle");
     }
 
     @Override
