@@ -54,4 +54,9 @@ public class Kindle extends FrontCoverFormat {
     protected String getName() {
         return "kindle";
     }
+
+    @Override
+    protected float writeScale() {
+        return 1;
+    }
 }

@@ -77,9 +77,11 @@ public abstract class CloverFormat {
     protected abstract int getCropXOffset();
 
     public void write() {
-        cover.write(Paths.get(config.getIssueDir()), getName());
+        cover.rescale(writeScale())
+                .write(Paths.get(config.getIssueDir()), getName());
     }
 
     protected abstract String getName();
 
+    protected abstract float writeScale();
 }

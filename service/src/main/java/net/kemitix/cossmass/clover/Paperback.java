@@ -30,7 +30,11 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected int frontPageXOffset() {
-        return (int) ((config.width() + issue.getSpine()) / 2);
+        return config.width() + getSpine();
+    }
+
+    private int getSpine() {
+        return (int) (issue.getSpine() * config.getInchesToPX());
     }
 
     @Override
@@ -49,13 +53,18 @@ public class Paperback extends FrontCoverFormat {
     }
 
     @Override
+    protected float writeScale() {
+        return 119f / 512f;
+    }
+
+    @Override
     protected int getHeight() {
         return config.height();
     }
 
     @Override
     protected int getWidth() {
-        return (int) ((config.width() * 2) + issue.getSpine());
+        return (int) ((config.width() * 2) + getSpine());
     }
 
     @Override

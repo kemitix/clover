@@ -24,4 +24,6 @@ public interface Image {
             List<String> title,
             XY xy,
             FontFace fontFace);
+
+    Image rescale(float scale);
 }

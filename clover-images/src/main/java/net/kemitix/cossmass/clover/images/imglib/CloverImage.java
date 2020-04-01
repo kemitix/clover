@@ -174,6 +174,13 @@ class CloverImage implements Image {
                 .orElse(this);
     }
 
+    @Override
+    public Image rescale(final float scale) {
+        return scaleTo(
+                ((int) (getWidth() * scale)),
+                ((int) (getHeight() * scale)));
+    }
+
     private int lineHeight(
             final String head,
             final FontFace fontFace
