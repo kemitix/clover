@@ -1,5 +1,6 @@
 package net.kemitix.cossmass.clover.images.imglib;
 
+import net.kemitix.cossmass.clover.Area;
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.*;
 import org.beryx.awt.color.ColorFactory;
@@ -40,10 +41,9 @@ class CloverImage implements Image {
     }
 
     @Override
-    public Image scaleToCover(
-            final int width,
-            final int height
-    ) {
+    public Image scaleToCover(final Area area) {
+        final int width = area.getWidth();
+        final int height = area.getHeight();
         LOGGER.info(String.format("Scaling to cover: %d x %d", width, height));
         final int originalWidth = getWidth();
         final int originalHeight = getHeight();
@@ -60,10 +60,12 @@ class CloverImage implements Image {
         }
         LOGGER.info(String.format("Resizing to %dx%d",
                 newWidth, newHeight));
-        return scaleTo(newWidth, newHeight);
+        return scaleTo(Area.of(newWidth, newHeight));
     }
 
-    private Image scaleTo(final int width, final int height) {
+    private Image scaleTo(final Area area) {
+        final int width = area.getWidth();
+        final int height = area.getHeight();
         final BufferedImage resized =
                 new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         resized.createGraphics()
@@ -75,21 +77,23 @@ class CloverImage implements Image {
         return new CloverImage(resized, config, fontCache);
     }
 
-    public int getHeight() {
+    private int getHeight() {
         return image.getHeight();
     }
 
-    public int getWidth() {
+    private int getWidth() {
         return image.getWidth();
     }
 
     @Override
     public Image crop(
-            final int xOffset,
-            final int yOffset,
-            final int width,
-            final int height
+            final XY cropOffset,
+            final Area area
     ) {
+        final int xOffset = cropOffset.getX();
+        final int yOffset = cropOffset.getY();
+        final int width = area.getWidth();
+        final int height = area.getHeight();
         LOGGER.info(String.format("Cropping from %d x %d by %d x %d",
                 xOffset, yOffset,
                 width, height
@@ -176,9 +180,9 @@ class CloverImage implements Image {
 
     @Override
     public Image rescale(final float scale) {
-        return scaleTo(
+        return scaleTo(Area.of(
                 ((int) (getWidth() * scale)),
-                ((int) (getHeight() * scale)));
+                ((int) (getHeight() * scale))));
     }
 
     private int lineHeight(

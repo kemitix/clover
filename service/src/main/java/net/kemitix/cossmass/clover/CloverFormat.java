@@ -3,6 +3,7 @@ package net.kemitix.cossmass.clover;
 import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.ImageService;
+import net.kemitix.cossmass.clover.images.XY;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -36,11 +37,10 @@ public abstract class CloverFormat {
         final File coverArtFile =
                 Paths.get(config.getBaseDir(), issue.coverArt())
                         .toFile();
-        final int width = getWidth();
-        final int height = getHeight();
+        final Area area = Area.of(getWidth(), getHeight());
         cover = imageService.load(coverArtFile)
-                .scaleToCover(width, height)
-                .crop(getCropXOffset(), getCropYOffset(), width, height)
+                .scaleToCover(area)
+                .crop(XY.at(getCropXOffset(), getCropYOffset()), area)
                 .apply(frontCover())
                 .apply(spine())
                 .apply(backCover());

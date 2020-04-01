@@ -1,13 +1,15 @@
 package net.kemitix.cossmass.clover.images;
 
+import net.kemitix.cossmass.clover.Area;
+
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Function;
 
 public interface Image {
-    Image scaleToCover(int width, int height);
+    Image scaleToCover(Area area);
 
-    Image crop(int xOffset, int yOffset, int width, int height);
+    Image crop(XY cropOffset, Area area);
 
     default Image apply(final Function<Image, Image> function) {
         return function.apply(this);
