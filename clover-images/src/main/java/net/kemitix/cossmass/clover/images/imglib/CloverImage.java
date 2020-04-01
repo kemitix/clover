@@ -6,6 +6,7 @@ import org.beryx.awt.color.ColorFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -125,15 +126,18 @@ class CloverImage implements Image {
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
                 xy.getX(),
-                xy.getY() + fontFace.getSize(),
+                xy.getY(),
                 fontFace.getSize()));
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
-        graphics.setFont(fontCache.loadFont(fontFace));
+        final Font font = fontCache.loadFont(fontFace);
+        graphics.setFont(font);
         graphics.setPaint(getColor(fontFace));
+        final Rectangle2D stringBounds =
+                font.getStringBounds(text, graphics.getFontRenderContext());
         graphics.drawString(text,
                 xy.getX(),
-                xy.getY() + fontFace.getSize());
+                (int) (xy.getY() - stringBounds.getY()));
         return new CloverImage(withText, config, fontCache);
     }
 
