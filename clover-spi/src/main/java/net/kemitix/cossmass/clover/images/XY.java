@@ -1,11 +1,11 @@
 package net.kemitix.cossmass.clover.images;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
+@ToString
 public class XY {
 
     private final int x;
