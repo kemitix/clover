@@ -54,7 +54,7 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected float writeScale() {
-        return 1;//119f / 512f;
+        return 119f / 512f;
     }
 
     @Override
