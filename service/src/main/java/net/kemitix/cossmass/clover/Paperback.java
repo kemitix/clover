@@ -54,7 +54,7 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected float writeScale() {
-        return 119f / 512f;
+        return 1;//119f / 512f;
     }
 
     @Override
@@ -145,10 +145,10 @@ public class Paperback extends FrontCoverFormat {
                                 "black"
                         ))
                 .andThen(image ->
-                        image.withAngledText(
+                        image.withRotatedCenteredText(
                                 spineText,
-                                XY.at(0, 0),
-                                fontFace,
-                                270));
+                                XY.at(config.width(), 0),
+                                Area.of(getSpine(), getHeight()),
+                                fontFace));
     }
 }

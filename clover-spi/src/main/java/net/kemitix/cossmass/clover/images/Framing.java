@@ -2,10 +2,12 @@ package net.kemitix.cossmass.clover.images;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import net.kemitix.cossmass.clover.Area;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
+@ToString
 public class Framing {
     private final Area outer;
     private final Area inner;
@@ -19,10 +21,10 @@ public class Framing {
 
     public XY centered() {
         if (inner.getHeight() > outer.getHeight()) {
-            throw new IllegalArgumentException("Inner is taller than outer");
+            throw new FatalCloverError(String.format("Inner is taller than outer: outer=%s, inner=%s", outer, inner));
         }
         if (inner.getWidth() > outer.getWidth()) {
-            throw new IllegalArgumentException("Inner is wider than outer");
+            throw new FatalCloverError(String.format("Inner is wider than outer: outer=%s, inner=%s", outer, inner));
         }
         final int x = (outer.getWidth() - inner.getWidth()) / 2;
         final int y = (outer.getHeight() - inner.getHeight()) / 2;

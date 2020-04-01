@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import static java.awt.Image.SCALE_SMOOTH;
@@ -140,10 +141,24 @@ class CloverImage implements Image {
                 fontFace.getSize()));
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
+        drawText(text, framing -> topLeft, fontFace, graphics);
+        return new CloverImage(withText, config, fontCache);
+    }
+
+    private void drawText(
+            final String text,
+            final Function<Framing, XY> positioning,
+            final FontFace fontFace,
+            final Graphics2D graphics
+    ) {
         final Font font = fontCache.loadFont(fontFace);
         graphics.setFont(font);
         final Rectangle2D stringBounds =
                 font.getStringBounds(text, graphics.getFontRenderContext());
+        final XY topLeft = positioning.apply(Framing.builder()
+                .outer(Area.of(image.getWidth(), image.getHeight()))
+                .inner(Area.of(((int) stringBounds.getWidth()), ((int) stringBounds.getHeight())))
+                .build());
         // Drop Shadow
         final XY shadowOffset = fontFace.getShadowOffset();
         if (shadowOffset.getX() != 0 || shadowOffset.getY() != 0) {
@@ -157,7 +172,6 @@ class CloverImage implements Image {
         graphics.drawString(text,
                 topLeft.getX(),
                 (int) (topLeft.getY() - stringBounds.getY()));
-        return new CloverImage(withText, config, fontCache);
     }
 
     @Override
@@ -202,13 +216,29 @@ class CloverImage implements Image {
     }
 
     @Override
-    public Image withAngledText(
+    public Image withRotatedCenteredText(
             final String text,
             final XY topLeft,
-            final FontFace fontFace,
-            final int angle
+            final Area area,
+            final FontFace fontFace
     ) {
-        return this;
+        LOGGER.info(String.format("Drawing text: %s - %d",
+                text, fontFace.getSize()));
+        final BufferedImage withText = copyImage();
+        final Graphics2D graphics = withText.createGraphics();
+        graphics.rotate(Math.PI / 2);
+        drawText(text,
+                framing -> framing.toBuilder()
+                        .outer(Area.builder()
+                                .width(area.getHeight())
+                                .height(area.getWidth())
+                                .build())
+                        .build()
+                        .centered()
+                        .map(xy -> XY.at(xy.getX() + topLeft.getY(), xy.getY() + topLeft.getX()))
+                        .map(xy -> XY.at(xy.getX(), -xy.getY())),
+                fontFace, graphics);
+        return new CloverImage(withText, config, fontCache);
     }
 
     private int lineHeight(

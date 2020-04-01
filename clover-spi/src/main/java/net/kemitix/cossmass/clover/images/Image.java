@@ -31,5 +31,5 @@ public interface Image {
 
     Image withFilledArea(XY topLeft, Area area, String fillColour);
 
-    Image withAngledText(String text, XY topLeft, FontFace fontFace, int angle);
+    Image withRotatedCenteredText(String text, XY topLeft, Area area, FontFace fontFace);
 }

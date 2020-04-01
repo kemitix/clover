@@ -2,9 +2,11 @@ package net.kemitix.cossmass.clover;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class Area {
 
     private final int width;
