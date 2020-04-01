@@ -93,7 +93,7 @@ public abstract class FrontCoverFormat extends CloverFormat {
             return image
                     .withText(issue.getAuthors(),
                             XY.at(
-                                    issue.getAuthorsXOffset(),
+                                    issue.getAuthorsXOffset() + frontPageXOffset(),
                                     issue.getAuthorsYOffset()),
                             fontFace);
         };
