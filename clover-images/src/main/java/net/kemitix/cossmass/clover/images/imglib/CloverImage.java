@@ -126,6 +126,9 @@ class CloverImage implements Image {
             final XY xy,
             final FontFace fontFace
     ) {
+        if ("".equals(text)) {
+            return this;
+        }
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
                 xy.getX(),
