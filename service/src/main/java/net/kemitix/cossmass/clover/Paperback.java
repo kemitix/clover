@@ -125,7 +125,30 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected Function<Image, Image> spine() {
-        //TODO draw spine
-        return super.spine();
+        final FontFace fontFace =
+                FontFace.of(
+                        config.getFontFile(),
+                        62,
+                        issue.getTextColour(),
+                        XY.at(
+                                config.getDropShadowXOffset(),
+                                config.getDropShadowYOffset()));
+        final String spineText = String.format(
+                "Cossmass Infinities - Issue %s - %s",
+                issue.getIssue(),
+                issue.getDate());
+        return super.spine()
+                .andThen(image ->
+                        image.withFilledArea(
+                                XY.at(config.width(), 0),
+                                Area.of(getSpine(), getHeight()),
+                                "black"
+                        ))
+                .andThen(image ->
+                        image.withAngledText(
+                                spineText,
+                                XY.at(0, 0),
+                                fontFace,
+                                270));
     }
 }

@@ -19,13 +19,17 @@ public interface Image {
 
     Image withText(
             String title,
-            XY xy,
+            XY topLeft,
             FontFace fontFace);
 
     Image withText(
             List<String> title,
-            XY xy,
+            XY topLeft,
             FontFace fontFace);
 
     Image rescale(float scale);
+
+    Image withFilledArea(XY topLeft, Area area, String fillColour);
+
+    Image withAngledText(String text, XY topLeft, FontFace fontFace, int angle);
 }

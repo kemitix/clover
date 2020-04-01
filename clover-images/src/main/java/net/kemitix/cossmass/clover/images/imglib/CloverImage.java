@@ -127,7 +127,7 @@ class CloverImage implements Image {
     @Override
     public Image withText(
             final String text,
-            final XY xy,
+            final XY topLeft,
             final FontFace fontFace
     ) {
         if ("".equals(text)) {
@@ -135,8 +135,8 @@ class CloverImage implements Image {
         }
         LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
                 text,
-                xy.getX(),
-                xy.getY(),
+                topLeft.getX(),
+                topLeft.getY(),
                 fontFace.getSize()));
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
@@ -149,31 +149,31 @@ class CloverImage implements Image {
         if (shadowOffset.getX() != 0 || shadowOffset.getY() != 0) {
             graphics.setPaint(getColor(fontFace.getShadowColour()));
             graphics.drawString(text,
-                    xy.getX() + shadowOffset.getX(),
-                    (int) (xy.getY() - stringBounds.getY() + shadowOffset.getY()));
+                    topLeft.getX() + shadowOffset.getX(),
+                    (int) (topLeft.getY() - stringBounds.getY() + shadowOffset.getY()));
         }
         // Text
         graphics.setPaint(getColor(fontFace.getColour()));
         graphics.drawString(text,
-                xy.getX(),
-                (int) (xy.getY() - stringBounds.getY()));
+                topLeft.getX(),
+                (int) (topLeft.getY() - stringBounds.getY()));
         return new CloverImage(withText, config, fontCache);
     }
 
     @Override
     public Image withText(
             final List<String> text,
-            final XY xy,
+            final XY topLeft,
             final FontFace fontFace
     ) {
         return head(text)
                 .map(head ->
-                        withText(head, xy, fontFace)
+                        withText(head, topLeft, fontFace)
                                 .withText(
                                         tail(text),
                                         XY.at(
-                                                xy.getX(),
-                                                xy.getY() + lineHeight(head, fontFace)),
+                                                topLeft.getX(),
+                                                topLeft.getY() + lineHeight(head, fontFace)),
                                         fontFace))
                 .orElse(this);
     }
@@ -183,6 +183,32 @@ class CloverImage implements Image {
         return scaleTo(Area.of(
                 ((int) (getWidth() * scale)),
                 ((int) (getHeight() * scale))));
+    }
+
+    @Override
+    public Image withFilledArea(
+            final XY topLeft,
+            final Area area,
+            final String fillColour
+    ) {
+        LOGGER.fine(String.format("Filled Area: %dx%d by %dx%d",
+                topLeft.getX(), topLeft.getY(),
+                area.getWidth(), area.getHeight()));
+        final BufferedImage withFilledArea = copyImage();
+        final Graphics2D graphics = withFilledArea.createGraphics();
+        graphics.setPaint(getColor(fillColour));
+        graphics.fillRect(topLeft.getX(), topLeft.getY(), area.getWidth(), area.getHeight());
+        return new CloverImage(withFilledArea, config, fontCache);
+    }
+
+    @Override
+    public Image withAngledText(
+            final String text,
+            final XY topLeft,
+            final FontFace fontFace,
+            final int angle
+    ) {
+        return this;
     }
 
     private int lineHeight(
