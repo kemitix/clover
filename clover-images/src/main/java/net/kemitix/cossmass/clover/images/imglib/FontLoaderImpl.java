@@ -24,7 +24,6 @@ public class FontLoaderImpl implements FontLoader {
         final Map<TextAttribute, Object> map = new HashMap<>();
         map.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         map.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
-        map.put(TextAttribute.TRACKING, TextAttribute.TRACKING_LOOSE);
         try {
             return Font.createFont(Font.TRUETYPE_FONT, fontFace.getFont())
                     .deriveFont(map);
