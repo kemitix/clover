@@ -69,14 +69,6 @@ public class Paperback extends FrontCoverFormat {
 
     @Override
     protected Function<Image, Image> backCover() {
-        return super.backCover()
-                .andThen(drawSFStories())
-//                .andThen(drawFantasyStories())
-//                .andThen(drawReprintStories())
-                ;
-    }
-
-    private Function<Image, Image> drawSFStories() {
         final FontFace fontFace =
                 FontFace.of(
                         config.getFontFile(),
@@ -85,6 +77,14 @@ public class Paperback extends FrontCoverFormat {
                         XY.at(
                                 config.getDropShadowXOffset(),
                                 config.getDropShadowYOffset()));
+        return super.backCover()
+                .andThen(drawSFStories(fontFace))
+                .andThen(drawFantasyStories(fontFace))
+                .andThen(drawReprintStories(fontFace))
+                ;
+    }
+
+    private Function<Image, Image> drawSFStories(final FontFace fontFace) {
         return image -> {
             LOGGER.info("Drawing SF Stories...");
             return image
@@ -93,6 +93,32 @@ public class Paperback extends FrontCoverFormat {
                                     "Science Fiction Stories",
                                     issue.getSfStories()),
                             XY.at(150, 200),
+                            fontFace);
+        };
+    }
+
+    private Function<Image, Image> drawFantasyStories(final FontFace fontFace) {
+        return image -> {
+            LOGGER.info("Drawing Fantasy Stories...");
+            return image
+                    .withText(
+                            storyListFormatter.format(
+                                    "Fantasy Stories",
+                                    issue.getFantasyStories()),
+                            XY.at(500, 1100),
+                            fontFace);
+        };
+    }
+
+    private Function<Image, Image> drawReprintStories(final FontFace fontFace) {
+        return image -> {
+            LOGGER.info("Drawing Reprint Stories...");
+            return image
+                    .withText(
+                            storyListFormatter.format(
+                                    "Plus",
+                                    issue.getReprintStories()),
+                            XY.at(150, 1800),
                             fontFace);
         };
     }
