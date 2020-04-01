@@ -37,17 +37,20 @@ public abstract class FrontCoverFormat extends CloverFormat {
         final File font = config.getFontFile();
         final int size = 217;
         final String colour = issue.getTitleColour();
+        final XY shadowOffset = XY.at(
+                config.getDropShadowXOffset(),
+                config.getDropShadowYOffset());
         return image -> {
             LOGGER.info("Drawing title...");
             return image
                     .withText(
                             "Cossmass",
                             XY.at(60 + frontPageXOffset(), 90),
-                            FontFace.of(font, size, colour))
+                            FontFace.of(font, size, colour, shadowOffset))
                     .withText(
                             "Infinities",
                             XY.at(130 + frontPageXOffset(), 307),
-                            FontFace.of(font, size, colour));
+                            FontFace.of(font, size, colour, shadowOffset));
         };
     }
 

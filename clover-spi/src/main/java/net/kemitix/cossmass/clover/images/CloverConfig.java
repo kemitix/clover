@@ -17,4 +17,8 @@ public interface CloverConfig {
     String getConfigFile();
 
     File getFontFile();
+
+    int getDropShadowXOffset();
+
+    int getDropShadowYOffset();
 }

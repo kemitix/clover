@@ -132,22 +132,30 @@ class CloverImage implements Image {
         final Graphics2D graphics = withText.createGraphics();
         final Font font = fontCache.loadFont(fontFace);
         graphics.setFont(font);
-        graphics.setPaint(getColor(fontFace));
         final Rectangle2D stringBounds =
                 font.getStringBounds(text, graphics.getFontRenderContext());
+        // Drop Shadow
+        final XY shadowOffset = fontFace.getShadowOffset();
+        if (shadowOffset.getX() != 0 || shadowOffset.getY() != 0) {
+            graphics.setPaint(getColor(fontFace.getShadowColour()));
+            graphics.drawString(text,
+                    xy.getX() + shadowOffset.getX(),
+                    (int) (xy.getY() - stringBounds.getY() + shadowOffset.getY()));
+        }
+        // Text
+        graphics.setPaint(getColor(fontFace.getColour()));
         graphics.drawString(text,
                 xy.getX(),
                 (int) (xy.getY() - stringBounds.getY()));
         return new CloverImage(withText, config, fontCache);
     }
 
-    private Color getColor(final FontFace fontFace) {
+    private Color getColor(final String colour) {
         return Optional.ofNullable(
-                ColorFactory.valueOf(
-                        fontFace.getColour()))
+                ColorFactory.valueOf(colour))
                 .orElseThrow(() ->
                         new FatalCloverError(
-                                "Unknown colour: " + fontFace.getColour()));
+                                "Unknown colour: " + colour));
     }
 
     private BufferedImage copyImage() {
