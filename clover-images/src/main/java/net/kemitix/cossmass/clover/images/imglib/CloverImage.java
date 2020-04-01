@@ -6,11 +6,14 @@ import org.beryx.awt.color.ColorFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -148,6 +151,49 @@ class CloverImage implements Image {
                 xy.getX(),
                 (int) (xy.getY() - stringBounds.getY()));
         return new CloverImage(withText, config, fontCache);
+    }
+
+    @Override
+    public Image withText(
+            final List<String> text,
+            final XY xy,
+            final FontFace fontFace
+    ) {
+        return head(text)
+                .map(head ->
+                        withText(head, xy, fontFace)
+                                .withText(
+                                        tail(text),
+                                        XY.at(
+                                                xy.getX(),
+                                                xy.getY() + lineHeight(head, fontFace)),
+                                        fontFace))
+                .orElse(this);
+    }
+
+    private int lineHeight(
+            final String head,
+            final FontFace fontFace
+    ) {
+        final Graphics2D graphics = image.createGraphics();
+        final FontMetrics fontMetrics = graphics.getFontMetrics(fontCache.loadFont(fontFace));
+        final LineMetrics lineMetrics = fontMetrics.getLineMetrics(head, graphics);
+        final float height = lineMetrics.getHeight();
+        return (int) height;
+    }
+
+    private List<String> tail(final List<String> list) {
+        if (list.size() < 1) {
+            return Collections.emptyList();
+        }
+        return list.subList(1, list.size());
+    }
+
+    private Optional<String> head(final List<String> list) {
+        if (list.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(list.get(0));
     }
 
     private Color getColor(final String colour) {

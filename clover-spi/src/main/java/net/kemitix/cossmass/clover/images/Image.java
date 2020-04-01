@@ -1,6 +1,7 @@
 package net.kemitix.cossmass.clover.images;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Function;
 
 public interface Image {
@@ -16,6 +17,11 @@ public interface Image {
 
     Image withText(
             String title,
+            XY xy,
+            FontFace fontFace);
+
+    Image withText(
+            List<String> title,
             XY xy,
             FontFace fontFace);
 }
