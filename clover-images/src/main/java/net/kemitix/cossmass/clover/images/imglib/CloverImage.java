@@ -172,6 +172,10 @@ class CloverImage implements Image {
         graphics.drawString(text,
                 topLeft.getX(),
                 (int) (topLeft.getY() - stringBounds.getY()));
+//        if (config.drawBoundingBoxes) {
+//            graphics.setPaint(getColor("red"));
+//            graphics.drawRect(topLeft.getX(), topLeft.getY(), ((int) stringBounds.getWidth()), ((int) stringBounds.getHeight()));
+//        }
     }
 
     @Override
@@ -228,14 +232,15 @@ class CloverImage implements Image {
         final Graphics2D graphics = withText.createGraphics();
         graphics.rotate(Math.PI / 2);
         drawText(text,
-                framing -> framing.toBuilder()
+                framing -> framing
+                        .toBuilder()
                         .outer(Area.builder()
                                 .width(area.getHeight())
                                 .height(area.getWidth())
                                 .build())
                         .build()
                         .centered()
-                        .map(xy -> XY.at(xy.getX() + topLeft.getY(), xy.getY() + topLeft.getX()))
+                        .map(xy -> XY.at(xy.getX() + topLeft.getY(), framing.getInner().getHeight() + topLeft.getX() + xy.getY()))
                         .map(xy -> XY.at(xy.getX(), -xy.getY())),
                 fontFace, graphics);
         return new CloverImage(withText, config, fontCache);
