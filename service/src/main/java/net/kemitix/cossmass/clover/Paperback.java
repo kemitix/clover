@@ -14,6 +14,7 @@ public class Paperback extends FrontCoverFormat {
             Logger.getLogger(
                     Paperback.class.getName());
     private final Issue issue;
+    private final CloverConfig config;
 
     protected Paperback(
             final CloverConfig config,
@@ -21,7 +22,13 @@ public class Paperback extends FrontCoverFormat {
             final ImageService imageService
     ) {
         super(config, issue, imageService);
+        this.config = config;
         this.issue = issue;
+    }
+
+    @Override
+    protected int frontPageXOffset() {
+        return (int) ((config.width() + issue.getSpine()) / 2);
     }
 
     @Override

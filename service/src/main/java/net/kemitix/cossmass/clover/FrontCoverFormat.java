@@ -42,14 +42,16 @@ public abstract class FrontCoverFormat extends CloverFormat {
             return image
                     .withText(
                             "Cossmass",
-                            XY.at(60, 90),
+                            XY.at(60 + frontPageXOffset(), 90),
                             FontFace.of(font, size, colour))
                     .withText(
                             "Infinities",
-                            XY.at(130, 307),
+                            XY.at(130 + frontPageXOffset(), 307),
                             FontFace.of(font, size, colour));
         };
     }
+
+    protected abstract int frontPageXOffset();
 
     private Function<Image, Image> drawSubTitles() {
         return image -> {
