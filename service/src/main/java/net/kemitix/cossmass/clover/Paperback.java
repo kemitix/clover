@@ -1,13 +1,12 @@
 package net.kemitix.cossmass.clover;
 
-import net.kemitix.cossmass.clover.images.CloverConfig;
-import net.kemitix.cossmass.clover.images.Image;
-import net.kemitix.cossmass.clover.images.ImageService;
+import net.kemitix.cossmass.clover.images.*;
 
+import javax.enterprise.context.Dependent;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
-//@Dependent
+@Dependent
 public class Paperback extends FrontCoverFormat {
 
     private static final Logger LOGGER =
@@ -15,15 +14,18 @@ public class Paperback extends FrontCoverFormat {
                     Paperback.class.getName());
     private final Issue issue;
     private final CloverConfig config;
+    private final StoryListFormatter storyListFormatter;
 
     protected Paperback(
             final CloverConfig config,
             final Issue issue,
-            final ImageService imageService
+            final ImageService imageService,
+            final StoryListFormatter storyListFormatter
     ) {
         super(config, issue, imageService);
         this.config = config;
         this.issue = issue;
+        this.storyListFormatter = storyListFormatter;
     }
 
     @Override
@@ -47,9 +49,43 @@ public class Paperback extends FrontCoverFormat {
     }
 
     @Override
+    protected int getHeight() {
+        return config.height();
+    }
+
+    @Override
+    protected int getWidth() {
+        return (int) ((config.width() * 2) + issue.getSpine());
+    }
+
+    @Override
     protected Function<Image, Image> backCover() {
-        //TODO draw back cover
-        return super.backCover();
+        return super.backCover()
+                .andThen(drawSFStories())
+//                .andThen(drawFantasyStories())
+//                .andThen(drawReprintStories())
+                ;
+    }
+
+    private Function<Image, Image> drawSFStories() {
+        final FontFace fontFace =
+                FontFace.of(
+                        config.getFontFile(),
+                        48,
+                        issue.getTextColour(),
+                        XY.at(
+                                config.getDropShadowXOffset(),
+                                config.getDropShadowYOffset()));
+        return image -> {
+            LOGGER.info("Drawing SF Stories...");
+            return image
+                    .withText(
+                            storyListFormatter.format(
+                                    "Science Fiction Stories",
+                                    issue.getSfStories()),
+                            XY.at(150, 200),
+                            fontFace);
+        };
     }
 
     @Override

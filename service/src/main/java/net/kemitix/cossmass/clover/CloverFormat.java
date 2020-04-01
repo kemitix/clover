@@ -45,6 +45,10 @@ public abstract class CloverFormat {
         cover = withBackCover;
     }
 
+    protected abstract int getHeight();
+
+    protected abstract int getWidth();
+
     protected Function<Image, Image> backCover() {
         return image -> {
             LOGGER.info("Drawing the Back Cover");
