@@ -4,12 +4,14 @@ import net.kemitix.cossmass.clover.images.CloverConfig;
 import net.kemitix.cossmass.clover.images.Image;
 import net.kemitix.cossmass.clover.images.ImageService;
 
+import javax.enterprise.context.Dependent;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+@Dependent
 public class CloverImageService implements ImageService {
 
     private static final Logger LOGGER =
