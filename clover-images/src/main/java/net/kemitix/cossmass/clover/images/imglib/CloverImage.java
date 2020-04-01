@@ -23,16 +23,16 @@ class CloverImage implements Image {
 
     private final BufferedImage image;
     private final CloverConfig config;
-    private final FontLoader fontLoader;
+    private final FontCache fontCache;
 
     CloverImage(
             final BufferedImage image,
             final CloverConfig config,
-            final FontLoader fontLoader
+            final FontCache fontCache
     ) {
         this.image = image;
         this.config = config;
-        this.fontLoader = fontLoader;
+        this.fontCache = fontCache;
     }
 
     @Override
@@ -68,7 +68,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(resized, config, fontLoader);
+        return new CloverImage(resized, config, fontCache);
     }
 
     public int getHeight() {
@@ -98,7 +98,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(cropped, config, fontLoader);
+        return new CloverImage(cropped, config, fontCache);
     }
 
     @Override
@@ -129,12 +129,12 @@ class CloverImage implements Image {
                 fontFace.getSize()));
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
-        graphics.setFont(fontLoader.loadFont(fontFace));
+        graphics.setFont(fontCache.loadFont(fontFace));
         graphics.setPaint(getColor(fontFace));
         graphics.drawString(text,
                 xy.getX(),
                 xy.getY() + fontFace.getSize());
-        return new CloverImage(withText, config, fontLoader);
+        return new CloverImage(withText, config, fontCache);
     }
 
     private Color getColor(final FontFace fontFace) {
