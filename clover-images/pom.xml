@@ -69,11 +69,14 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <properties>
-        <imglib2.version>5.8.0</imglib2.version>
-        <ij.version>1.52u</ij.version>
         <awt-color-factory.version>1.0.1</awt-color-factory.version>
     </properties>
 

@@ -17,11 +17,9 @@ public class FontLoaderImpl implements FontLoader {
 
     @Override
     public Font loadFont(final FontFace fontFace) {
-        LOGGER.info(String.format("Loading %s %d",
-                fontFace.getFont(), fontFace.getSize()));
+        LOGGER.info(String.format("Loading %s", fontFace.getFont()));
         try {
-            return Font.createFont(Font.TRUETYPE_FONT, fontFace.getFont())
-                    .deriveFont(Font.PLAIN, fontFace.getSize());
+            return Font.createFont(Font.TRUETYPE_FONT, fontFace.getFont());
         } catch (final FontFormatException | IOException e) {
             throw new FatalCloverError("Font load error", e);
         }
