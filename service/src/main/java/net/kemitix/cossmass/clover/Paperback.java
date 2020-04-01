@@ -129,7 +129,7 @@ public class Paperback extends FrontCoverFormat {
                 FontFace.of(
                         config.getFontFile(),
                         62,
-                        issue.getTextColour(),
+                        "yellow",
                         XY.at(
                                 config.getDropShadowXOffset(),
                                 config.getDropShadowYOffset()));
