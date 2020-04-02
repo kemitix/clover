@@ -42,6 +42,8 @@ public class Issue {
     private List<List<String>> reprintStories;
     @JsonbProperty("cover-art")
     private String coverArt;
+    @JsonbProperty("publication-title")
+    private String publicationTitle;
 
     String coverArt() {
         return "/cossmass/" + coverArt;

@@ -135,7 +135,8 @@ public class Paperback extends FrontCoverFormat {
                                 config.getDropShadowXOffset(),
                                 config.getDropShadowYOffset()));
         final String spineText = String.format(
-                "Cossmass Infinities - Issue %s - %s",
+                "%s - Issue %s - %s",
+                issue.getPublicationTitle(),
                 issue.getIssue(),
                 issue.getDate());
         return super.spine()
