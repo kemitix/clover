@@ -1,6 +1,6 @@
 [
   {
-    "name": "net.kemitix.cossmass.clover.Issue",
+    "name": "net.kemitix.clover.Issue",
     "allDeclaredConstructors": false,
     "allPublicConstructors": true,
     "allDeclaredMethods": false,
