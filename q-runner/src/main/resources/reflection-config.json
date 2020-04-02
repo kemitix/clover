@@ -1,6 +1,6 @@
 [
   {
-    "name": "net.kemitix.clover.Issue",
+    "name": "net.kemitix.clover.service.Issue",
     "allDeclaredConstructors": false,
     "allPublicConstructors": true,
     "allDeclaredMethods": false,

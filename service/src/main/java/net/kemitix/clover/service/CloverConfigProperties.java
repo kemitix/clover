@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.service;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.CloverConfig;

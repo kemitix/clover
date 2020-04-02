@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.service;
 
 import net.kemitix.files.FileReaderWriter;
 import org.junit.jupiter.api.DisplayName;

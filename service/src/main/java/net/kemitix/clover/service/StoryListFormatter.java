@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.service;
 
 import javax.enterprise.context.Dependent;
 import java.util.ArrayList;

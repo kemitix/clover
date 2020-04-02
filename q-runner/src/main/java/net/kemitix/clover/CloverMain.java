@@ -1,6 +1,7 @@
 package net.kemitix.clover;
 
 import io.quarkus.runtime.StartupEvent;
+import net.kemitix.clover.service.CloverService;
 import net.kemitix.clover.spi.FatalCloverError;
 
 import javax.enterprise.context.ApplicationScoped;

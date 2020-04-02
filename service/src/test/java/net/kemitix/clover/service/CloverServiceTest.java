@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

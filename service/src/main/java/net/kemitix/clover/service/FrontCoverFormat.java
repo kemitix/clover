@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverConfig;
 import net.kemitix.clover.spi.images.FontFace;
