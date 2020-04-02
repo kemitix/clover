@@ -1,6 +1,4 @@
-package net.kemitix.clover.images;
-
-import net.kemitix.clover.Area;
+package net.kemitix.clover.spi.images;
 
 import java.nio.file.Path;
 import java.util.List;

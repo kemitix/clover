@@ -1,9 +1,10 @@
 package net.kemitix.clover;
 
-import net.kemitix.clover.images.CloverConfig;
-import net.kemitix.clover.images.Image;
-import net.kemitix.clover.images.ImageService;
-import net.kemitix.clover.images.XY;
+import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.images.Area;
+import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.images.ImageService;
+import net.kemitix.clover.spi.images.XY;
 
 import javax.annotation.PostConstruct;
 import java.io.File;

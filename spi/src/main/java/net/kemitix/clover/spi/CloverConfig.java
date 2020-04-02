@@ -1,4 +1,4 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.spi;
 
 import java.io.File;
 import java.util.List;

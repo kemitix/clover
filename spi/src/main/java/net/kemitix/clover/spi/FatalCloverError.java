@@ -1,4 +1,4 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.spi;
 
 public class FatalCloverError extends RuntimeException {
     public FatalCloverError(final String message) {

@@ -1,4 +1,4 @@
-package net.kemitix.clover;
+package net.kemitix.clover.spi.images;
 
 import lombok.Builder;
 import lombok.Getter;

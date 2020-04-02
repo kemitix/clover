@@ -1,6 +1,10 @@
 package net.kemitix.clover;
 
-import net.kemitix.clover.images.*;
+import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.images.FontFace;
+import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.images.ImageService;
+import net.kemitix.clover.spi.images.XY;
 
 import java.util.function.Function;
 import java.util.logging.Logger;

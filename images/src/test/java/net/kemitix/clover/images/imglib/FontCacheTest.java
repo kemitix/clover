@@ -1,6 +1,6 @@
 package net.kemitix.clover.images.imglib;
 
-import net.kemitix.clover.images.FontFace;
+import net.kemitix.clover.spi.images.FontFace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

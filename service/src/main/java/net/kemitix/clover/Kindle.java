@@ -1,7 +1,7 @@
 package net.kemitix.clover;
 
-import net.kemitix.clover.images.CloverConfig;
-import net.kemitix.clover.images.ImageService;
+import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.images.ImageService;
 
 import javax.enterprise.context.Dependent;
 import java.util.logging.Logger;

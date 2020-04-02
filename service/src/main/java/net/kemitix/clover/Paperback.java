@@ -1,6 +1,7 @@
 package net.kemitix.clover;
 
-import net.kemitix.clover.images.*;
+import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.images.*;
 
 import javax.enterprise.context.Dependent;
 import java.util.function.Function;

@@ -1,8 +1,9 @@
 package net.kemitix.clover.images.imglib;
 
-import net.kemitix.clover.Area;
-import net.kemitix.clover.images.Image;
-import net.kemitix.clover.images.*;
+import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.FatalCloverError;
+import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.images.*;
 import org.beryx.awt.color.ColorFactory;
 
 import javax.imageio.ImageIO;

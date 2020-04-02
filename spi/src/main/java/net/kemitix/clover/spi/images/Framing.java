@@ -1,9 +1,9 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.spi.images;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import net.kemitix.clover.Area;
+import net.kemitix.clover.spi.FatalCloverError;
 
 @Getter
 @Builder(toBuilder = true)

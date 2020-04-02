@@ -2,7 +2,7 @@ package net.kemitix.clover.images.imglib;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import net.kemitix.clover.images.FontFace;
+import net.kemitix.clover.spi.images.FontFace;
 
 import javax.enterprise.context.Dependent;
 import java.awt.*;
