@@ -1,4 +1,4 @@
-package net.kemitix.clover.images.imglib;
+package net.kemitix.clover.images;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

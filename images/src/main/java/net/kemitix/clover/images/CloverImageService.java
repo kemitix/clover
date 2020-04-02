@@ -1,4 +1,4 @@
-package net.kemitix.clover.images.imglib;
+package net.kemitix.clover.images;
 
 import net.kemitix.clover.spi.CloverConfig;
 import net.kemitix.clover.spi.images.Image;
