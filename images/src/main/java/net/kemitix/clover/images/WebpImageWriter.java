@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 @Dependent
 public class WebpImageWriter implements ImageWriter {
 
-    public static final String FORMAT_NAME = "webp";
+    private static final String FORMAT_NAME = "webp";
     private static final Logger LOGGER =
             Logger.getLogger(
                     WebpImageWriter.class.getName());
