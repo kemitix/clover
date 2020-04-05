@@ -2,7 +2,6 @@ package net.kemitix.clover;
 
 import io.quarkus.runtime.StartupEvent;
 import net.kemitix.clover.service.CloverService;
-import net.kemitix.clover.spi.FatalCloverError;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -28,7 +27,7 @@ public class CloverMain {
                 .submit(() -> {
                     try {
                         service.run();
-                    } catch (final FatalCloverError e) {
+                    } catch (final Exception e) {
                         LOGGER.severe(e.getMessage());
                         Optional.ofNullable(e.getCause())
                                 .ifPresent(cause ->
