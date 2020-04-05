@@ -299,8 +299,11 @@ class CloverImage implements Image {
         imageWriters.stream()
                 .filter(iw -> iw.accepts(format))
                 .findFirst()
-                .orElseThrow()
-                .write(image, file);
+                .ifPresentOrElse(
+                        writer -> writer.write(image, file),
+                        () -> LOGGER.warning(String.format(
+                                "No ImageWriter found for %s",
+                                format)));
     }
 
 }
