@@ -38,11 +38,6 @@
             <!-- FIXME: Neither this not the PDF libs are being registered correctly -->
         </dependency>
         <dependency>
-            <groupId>com.twelvemonkeys.imageio</groupId>
-            <artifactId>imageio-pdf</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <dependency>
             <groupId>org.sejda.imageio</groupId>
             <artifactId>webp-imageio</artifactId>
             <version>0.1.1</version>
