@@ -47,6 +47,8 @@ public abstract class FrontCoverFormat extends CloverFormat {
                                 config.getDropShadowYOffset()));
         return image -> {
             LOGGER.info("Drawing title...");
+            // TODO - get the title from Issue, line-split it and use
+            //  Framing to center
             return image
                     .withText(
                             "Cossmass",
