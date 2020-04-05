@@ -1,0 +1,10 @@
+package net.kemitix.clover.images;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+public interface ImageWriter {
+    boolean accepts(String format);
+
+    void write(BufferedImage image, File file);
+}

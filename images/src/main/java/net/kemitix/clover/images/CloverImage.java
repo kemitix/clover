@@ -6,13 +6,12 @@ import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
 import org.beryx.awt.color.ColorFactory;
 
-import javax.imageio.ImageIO;
+import javax.enterprise.inject.Instance;
 import java.awt.*;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -31,15 +30,18 @@ class CloverImage implements Image {
     private final BufferedImage image;
     private final CloverConfig config;
     private final FontCache fontCache;
+    private final Instance<ImageWriter> imageWriters;
 
     CloverImage(
             final BufferedImage image,
             final CloverConfig config,
-            final FontCache fontCache
+            final FontCache fontCache,
+            final Instance<ImageWriter> imageWriters
     ) {
         this.image = image;
         this.config = config;
         this.fontCache = fontCache;
+        this.imageWriters = imageWriters;
     }
 
     @Override
@@ -76,7 +78,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(resized, config, fontCache);
+        return new CloverImage(resized, config, fontCache, imageWriters);
     }
 
     private int getHeight() {
@@ -108,7 +110,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(cropped, config, fontCache);
+        return new CloverImage(cropped, config, fontCache, imageWriters);
     }
 
     @Override
@@ -143,7 +145,7 @@ class CloverImage implements Image {
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
         drawText(text, framing -> topLeft, fontFace, graphics);
-        return new CloverImage(withText, config, fontCache);
+        return new CloverImage(withText, config, fontCache, imageWriters);
     }
 
     private void drawText(
@@ -217,7 +219,7 @@ class CloverImage implements Image {
         final Graphics2D graphics = withFilledArea.createGraphics();
         graphics.setPaint(getColor(fillColour));
         graphics.fillRect(topLeft.getX(), topLeft.getY(), area.getWidth(), area.getHeight());
-        return new CloverImage(withFilledArea, config, fontCache);
+        return new CloverImage(withFilledArea, config, fontCache, imageWriters);
     }
 
     @Override
@@ -244,7 +246,7 @@ class CloverImage implements Image {
                         .map(xy -> XY.at(xy.getX() + topLeft.getY(), framing.getInner().getHeight() + topLeft.getX() + xy.getY()))
                         .map(xy -> XY.at(xy.getX(), -xy.getY())),
                 fontFace, graphics);
-        return new CloverImage(withText, config, fontCache);
+        return new CloverImage(withText, config, fontCache, imageWriters);
     }
 
     private int lineHeight(
@@ -294,15 +296,11 @@ class CloverImage implements Image {
             final File file
     ) {
         LOGGER.info(String.format("Writing %s file as %s", format, file));
-        try {
-            if (ImageIO.write(image, format, file)) {
-                LOGGER.info("Wrote: " + file);
-            } else {
-                LOGGER.severe("No writer found for " + format);
-            }
-        } catch (final IOException e) {
-            LOGGER.severe("Failed to write " + file);
-        }
+        imageWriters.stream()
+                .filter(iw -> iw.accepts(format))
+                .findFirst()
+                .orElseThrow()
+                .write(image, file);
     }
 
 }
