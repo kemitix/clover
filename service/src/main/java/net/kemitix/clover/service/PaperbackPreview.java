@@ -43,8 +43,8 @@ public class PaperbackPreview extends Paperback {
                 image.withFilledArea(
                         XY.at(930, 2060),
                         Area.builder()
-                                .width(2 * config.getInchesToPX())
-                                .height((int) (1.2 * config.getInchesToPX()))
+                                .width(2 * config.getDpi())
+                                .height((int) (1.2 * config.getDpi()))
                                 .build(),
                         "red"
                 );

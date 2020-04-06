@@ -25,8 +25,8 @@ public class CloverConfigProperties implements CloverConfig {
     int width;
     @ConfigProperty(name = "height")
     int height;
-    @ConfigProperty(name = "inches-to-px")
-    int inchesToPX;
+    @ConfigProperty(name = "dpi")
+    int dpi;
     @ConfigProperty(name = "drop-shadow-x-offset")
     int dropShadowXOffset;
     @ConfigProperty(name = "drop-shadow-y-offset")
@@ -41,12 +41,12 @@ public class CloverConfigProperties implements CloverConfig {
 
     @Override
     public int height() {
-        return height * inchesToPX;
+        return height * dpi;
     }
 
     @Override
     public int width() {
-        return width * inchesToPX;
+        return width * dpi;
     }
 
     @Override
