@@ -2,6 +2,7 @@ package net.kemitix.clover.images;
 
 import net.kemitix.clover.spi.CloverConfig;
 import net.kemitix.clover.spi.FatalCloverError;
+import net.kemitix.clover.spi.TypedProperties;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
 import org.beryx.awt.color.ColorFactory;
@@ -116,7 +117,8 @@ class CloverImage implements Image {
     @Override
     public void write(
             final Path path,
-            final String name
+            final String name,
+            final TypedProperties properties
     ) {
         LOGGER.info(String.format("Writing %s to %s", name, path));
         config.getImageTypes()
@@ -124,7 +126,7 @@ class CloverImage implements Image {
                     final File file =
                             path.resolve(name + "." + format)
                                     .toFile();
-                    write(format, file);
+                    write(format, file, properties);
                 });
     }
 
@@ -293,14 +295,15 @@ class CloverImage implements Image {
 
     private void write(
             final String format,
-            final File file
+            final File file,
+            final TypedProperties properties
     ) {
         LOGGER.info(String.format("Writing %s file as %s", format, file));
         imageWriters.stream()
                 .filter(iw -> iw.accepts(format))
                 .findFirst()
                 .ifPresentOrElse(
-                        writer -> writer.write(image, file),
+                        writer -> writer.write(image, file, properties),
                         () -> LOGGER.warning(String.format(
                                 "No ImageWriter found for %s",
                                 format)));

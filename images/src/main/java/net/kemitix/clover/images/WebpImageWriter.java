@@ -1,5 +1,7 @@
 package net.kemitix.clover.images;
 
+import net.kemitix.clover.spi.TypedProperties;
+
 import javax.enterprise.context.Dependent;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -23,7 +25,8 @@ public class WebpImageWriter implements ImageWriter {
     @Override
     public void write(
             final BufferedImage image,
-            final File file
+            final File file,
+            final TypedProperties properties
     ) {
         try {
             ImageIO.write(image, FORMAT_NAME, file);
