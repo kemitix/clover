@@ -23,4 +23,14 @@ public interface CloverConfig {
     int getDropShadowYOffset();
 
     int getDpi();
+
+    int getBarcodeLeft();
+
+    int getBarcodeTop();
+
+    int getBarcodeWidth();
+
+    int getBarcodeHeight();
+
+    String getBarcodeFillColour();
 }

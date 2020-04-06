@@ -39,14 +39,15 @@ public class PaperbackPreview extends Paperback {
     }
 
     private Function<Image, Image> drawBarcodeSpacer() {
+        final XY topLeft = XY.at(
+                config.getBarcodeLeft(),
+                config.getBarcodeTop());
+        final Area area = Area.builder()
+                .width(config.getBarcodeWidth())
+                .height(config.getBarcodeHeight())
+                .build();
+        final String fillColour = config.getBarcodeFillColour();
         return image ->
-                image.withFilledArea(
-                        XY.at(930, 2060),
-                        Area.builder()
-                                .width(2 * config.getDpi())
-                                .height((int) (1.2 * config.getDpi()))
-                                .build(),
-                        "red"
-                );
+                image.withFilledArea(topLeft, area, fillColour);
     }
 }
