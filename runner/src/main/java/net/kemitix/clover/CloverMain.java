@@ -2,6 +2,7 @@ package net.kemitix.clover;
 
 import io.quarkus.runtime.StartupEvent;
 import net.kemitix.clover.service.CloverService;
+import net.kemitix.clover.spi.FatalCloverError;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -22,16 +23,19 @@ public class CloverMain {
         this.service = service;
     }
 
-    void onStart(@Observes final StartupEvent ev) throws InterruptedException {
+    void onStart(@Observes final StartupEvent ev) {
         Executors.newSingleThreadExecutor()
                 .submit(() -> {
                     try {
                         service.run();
-                    } catch (final Exception e) {
+                    } catch (final FatalCloverError e) {
                         LOGGER.severe(e.getMessage());
                         Optional.ofNullable(e.getCause())
                                 .ifPresent(cause ->
                                         LOGGER.severe(cause.getMessage()));
+                    } catch (final Exception e) {
+                        LOGGER.severe("Unexpected error");
+                        e.printStackTrace();
                     } finally {
                         System.exit(0);
                     }
