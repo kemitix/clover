@@ -10,10 +10,10 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CloverConfigTest {
+public class CloverPropertiesTest {
 
-    private final CloverConfigProperties cloverConfig =
-            new CloverConfigProperties();
+    private final ServiceCloverProperties cloverConfig =
+            new ServiceCloverProperties();
 
     @Test
     @DisplayName("ImageTypes are parsed as comma-delimited")
@@ -75,7 +75,7 @@ public class CloverConfigTest {
         final int dropShadowXOffset = random.nextInt();
         final int dropShadowYOffset = random.nextInt();
         //when
-        final CloverConfigProperties config = new CloverConfigProperties();
+        final ServiceCloverProperties config = new ServiceCloverProperties();
         config.issueDir = issueDir;
         config.width = width;
         config.height = height;

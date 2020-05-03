@@ -3,7 +3,7 @@ package net.kemitix.clover.spi;
 import java.io.File;
 import java.util.List;
 
-public interface CloverConfig {
+public interface CloverProperties {
     List<String> getImageTypes();
 
     int height();

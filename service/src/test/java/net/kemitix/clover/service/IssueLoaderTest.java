@@ -25,8 +25,8 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 public class IssueLoaderTest {
 
-    private final CloverConfigProperties cloverConfig =
-            new CloverConfigProperties();
+    private final ServiceCloverProperties cloverConfig =
+            new ServiceCloverProperties();
     private final String issueNumber = UUID.randomUUID().toString();
     private final Jsonb jsonb = JsonbBuilder.create();
     private final IssueLoader issueLoader = new IssueLoader();

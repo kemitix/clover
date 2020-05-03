@@ -1,6 +1,6 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.Area;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
@@ -38,7 +38,7 @@ public class PaperbackPreview extends FrontCoverFormat {
     }
 
     @Override
-    protected CloverConfig getCloverConfig() {
+    protected CloverProperties getCloverConfig() {
         return paperback.getCloverConfig();
     }
 

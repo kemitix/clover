@@ -1,6 +1,6 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.Area;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
@@ -20,7 +20,7 @@ public abstract class CloverFormat {
             Logger.getLogger(
                     CloverFormat.class.getName());
 
-    protected abstract CloverConfig getCloverConfig();
+    protected abstract CloverProperties getCloverConfig();
     protected abstract Issue getIssue();
     protected abstract ImageService getImageService();
     private Image cover;

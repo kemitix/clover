@@ -1,6 +1,6 @@
 package net.kemitix.clover.images;
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
 
@@ -19,13 +19,13 @@ public class CloverImageService implements ImageService {
     private static final Logger LOGGER =
             Logger.getLogger(
                     CloverImageService.class.getName());
-    private final CloverConfig config;
+    private final CloverProperties config;
     private final FontCache fontCache;
     private final Instance<ImageWriter> imageWriters;
 
     @Inject
     public CloverImageService(
-            final CloverConfig config,
+            final CloverProperties config,
             final FontCache fontCache,
             final Instance<ImageWriter> imageWriters
     ) {

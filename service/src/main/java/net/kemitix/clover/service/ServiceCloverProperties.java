@@ -1,7 +1,7 @@
 package net.kemitix.clover.service;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 @ApplicationScoped
 @Getter
-public class CloverConfigProperties implements CloverConfig {
+public class ServiceCloverProperties implements CloverProperties {
 
     private static final Logger LOGGER =
             Logger.getLogger(

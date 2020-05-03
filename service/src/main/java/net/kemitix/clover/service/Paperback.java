@@ -1,13 +1,12 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.PdfHeight;
 import net.kemitix.clover.spi.PdfWidth;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -19,7 +18,7 @@ public class Paperback extends FrontCoverFormat {
             Logger.getLogger(
                     Paperback.class.getName());
     private Issue issue;
-    private CloverConfig config;
+    private CloverProperties config;
     private ImageService imageService;
     private StoryListFormatter storyListFormatter;
 
@@ -28,7 +27,7 @@ public class Paperback extends FrontCoverFormat {
 
     @Inject
     protected Paperback(
-            final CloverConfig config,
+            final CloverProperties config,
             final Issue issue,
             final ImageService imageService,
             final StoryListFormatter storyListFormatter
@@ -69,7 +68,7 @@ public class Paperback extends FrontCoverFormat {
     }
 
     @Override
-    protected CloverConfig getCloverConfig() {
+    protected CloverProperties getCloverConfig() {
         return config;
     }
 

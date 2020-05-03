@@ -1,7 +1,7 @@
 package net.kemitix.clover.service;
 
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.files.FileReader;
 import net.kemitix.files.FileReaderWriter;
 
@@ -28,11 +28,12 @@ public class IssueLoader {
     @Produces
     @ApplicationScoped
     public Issue loadIssueJson(
-            final CloverConfig config,
+            final CloverProperties config,
             final FileReader fileReader,
             final Jsonb jsonb
     ) throws IOException {
-        final Path cloverJsonPath = Paths.get(config.getIssueDir(), config.getConfigFile());
+        final Path cloverJsonPath =
+                Paths.get(config.getIssueDir(), config.getConfigFile());
         LOGGER.info("Reading: " + cloverJsonPath);
         final String json = fileReader.read(cloverJsonPath.toFile());
         return jsonb.fromJson(json, Issue.class);

@@ -1,10 +1,10 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CloverConfig;
+import lombok.Getter;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.ImageService;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.logging.Logger;
 
@@ -14,16 +14,18 @@ public class Kindle extends FrontCoverFormat {
     private static final Logger LOGGER =
             Logger.getLogger(
                     Kindle.class.getName());
+    @Getter
     private Issue issue;
+    @Getter
     private ImageService imageService;
-    private CloverConfig config;
+    private CloverProperties config;
 
     public Kindle() {
     }
 
     @Inject
     protected Kindle(
-            final CloverConfig config,
+            final CloverProperties config,
             final Issue issue,
             final ImageService imageService
     ) {
@@ -33,18 +35,8 @@ public class Kindle extends FrontCoverFormat {
     }
 
     @Override
-    protected CloverConfig getCloverConfig() {
+    protected CloverProperties getCloverConfig() {
         return config;
-    }
-
-    @Override
-    protected Issue getIssue() {
-        return issue;
-    }
-
-    @Override
-    protected ImageService getImageService() {
-        return imageService;
     }
 
     @Override

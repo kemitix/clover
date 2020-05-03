@@ -1,6 +1,6 @@
 package net.kemitix.clover.images;
 
-import net.kemitix.clover.spi.CloverConfig;
+import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
@@ -29,13 +29,13 @@ class CloverImage implements Image {
                     CloverImage.class.getName());
 
     private final BufferedImage image;
-    private final CloverConfig config;
+    private final CloverProperties config;
     private final FontCache fontCache;
     private final Instance<ImageWriter> imageWriters;
 
     CloverImage(
             final BufferedImage image,
-            final CloverConfig config,
+            final CloverProperties config,
             final FontCache fontCache,
             final Instance<ImageWriter> imageWriters
     ) {
