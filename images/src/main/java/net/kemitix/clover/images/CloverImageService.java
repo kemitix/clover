@@ -7,6 +7,7 @@ import net.kemitix.clover.spi.images.ImageService;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class CloverImageService implements ImageService {
     private final FontCache fontCache;
     private final Instance<ImageWriter> imageWriters;
 
+    @Inject
     public CloverImageService(
             final CloverConfig config,
             final FontCache fontCache,
