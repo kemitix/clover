@@ -36,7 +36,7 @@ public class CloverImageService implements ImageService {
 
     @Override
     public Image load(final File file) throws IOException {
-        LOGGER.info("Loading " + file);
+        LOGGER.info("Loading " + file.getCanonicalPath());
         final BufferedImage image = ImageIO.read(file);
         LOGGER.info(String.format("Loaded: (%dx%d)",
                 image.getWidth(),

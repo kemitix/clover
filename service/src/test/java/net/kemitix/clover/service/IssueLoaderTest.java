@@ -29,7 +29,7 @@ public class IssueLoaderTest {
             new ServiceCloverProperties();
     private final String issueNumber = UUID.randomUUID().toString();
     private final Jsonb jsonb = JsonbBuilder.create();
-    private final IssueLoader issueLoader = new IssueLoader();
+    private final IssueConfigLoader issueLoader = new IssueConfigLoader();
     private final FileReader fileReader;
 
     public IssueLoaderTest(@Mock FileReader fileReader) {
@@ -50,7 +50,7 @@ public class IssueLoaderTest {
                         "}", issueNumber);
         given(fileReader.read(any())).willReturn(content);
         //when
-        final Issue issue = issueLoader.loadIssueJson(cloverConfig, fileReader, jsonb);
+        final IssueConfig issue = issueLoader.loadIssueJson(cloverConfig, fileReader, jsonb);
         //then
         assertThat(issue.getIssue()).isEqualTo(issueNumber);
         assertThat(issue.getTitleColour()).isEqualTo("red");

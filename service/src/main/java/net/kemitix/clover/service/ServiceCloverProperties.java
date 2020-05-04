@@ -2,6 +2,7 @@ package net.kemitix.clover.service;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.images.Area;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;
@@ -62,16 +63,6 @@ public class ServiceCloverProperties implements CloverProperties {
     }
 
     @Override
-    public int height() {
-        return (int) (height * dpi);
-    }
-
-    @Override
-    public int width() {
-        return (int) (width * dpi);
-    }
-
-    @Override
     public File getFontFile() {
         return new File(fontFile);
     }
@@ -84,5 +75,12 @@ public class ServiceCloverProperties implements CloverProperties {
     @Override
     public int getBarcodeHeight() {
         return (int) (barcodeHeight * dpi);
+    }
+
+    @Override
+    public Area getKindleFrontArea() {
+        return Area.builder()
+                .width((int) getWidth())
+                .height((int) getHeight()).build();
     }
 }

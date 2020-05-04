@@ -31,35 +31,31 @@ public class CloverPropertiesTest {
     }
 
     @Test
-    @DisplayName("Height has been converted from inches to PX")
-    public void heightIsInPX() {
+    @DisplayName("Height has NOT been converted from inches to PX")
+    public void heightIsInInches() {
         //given
         final Random random = new Random();
         final int height = random.nextInt();
-        final int dpi = random.nextInt();
         cloverConfig.height = height;
-        cloverConfig.dpi = dpi;
         //when
-        final int result = cloverConfig.height();
+        final float result = cloverConfig.getHeight();
         //then
         assertThat(result)
-                .isEqualTo(height * dpi);
+                .isEqualTo(height);
     }
 
     @Test
-    @DisplayName("Width has been converted from inches to PX")
-    public void widthIsInPX() {
+    @DisplayName("Width has NOT been converted from inches to PX")
+    public void widthIsInInches() {
         //given
         final Random random = new Random();
         final int width = random.nextInt();
-        final int dpi = random.nextInt();
         cloverConfig.width = width;
-        cloverConfig.dpi = dpi;
         //when
-        final int result = cloverConfig.width();
+        final float result = cloverConfig.getWidth();
         //then
         assertThat(result)
-                .isEqualTo(width * dpi);
+                .isEqualTo(width);
     }
 
     @Test
