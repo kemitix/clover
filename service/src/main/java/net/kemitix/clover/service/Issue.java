@@ -45,7 +45,4 @@ public class Issue {
     @JsonbProperty("publication-title")
     private String publicationTitle;
 
-    String coverArt() {
-        return "/cossmass/" + coverArt;
-    }
 }

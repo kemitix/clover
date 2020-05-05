@@ -37,8 +37,9 @@ public abstract class CloverFormat {
     @PostConstruct
     public void create() throws IOException {
         final File coverArtFile =
-                Paths.get(config.getBaseDir(), issue.coverArt())
+                Paths.get(config.getIssueDir(), issue.getCoverArt())
                         .toFile();
+        LOGGER.info(String.format("Cover Art: %s", coverArtFile));
         final Area area = Area.of(getWidth(), getHeight());
         cover = imageService.load(coverArtFile)
                 .scaleToCover(area)

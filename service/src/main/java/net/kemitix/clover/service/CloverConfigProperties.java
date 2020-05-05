@@ -4,17 +4,17 @@ import lombok.Getter;
 import net.kemitix.clover.spi.CloverConfig;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-@Dependent
+@ApplicationScoped
 @Getter
 public class CloverConfigProperties implements CloverConfig {
 
-    @ConfigProperty(name = "base-dir")
-    public String baseDir;
     @ConfigProperty(name = "config-file")
     String configFile;
     @ConfigProperty(name = "image-types")
@@ -43,6 +43,13 @@ public class CloverConfigProperties implements CloverConfig {
     float barcodeHeight;
     @ConfigProperty(name = "barcode-fill-colour")
     String barcodeFillColour;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("issueDir = " + issueDir);
+        System.out.println("configFile = " + configFile);
+        System.out.println("fontFile = " + fontFile);
+    }
 
     @Override
     public List<String> getImageTypes() {
