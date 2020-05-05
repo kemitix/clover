@@ -5,6 +5,7 @@ import net.kemitix.clover.spi.CloverConfig;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,20 +19,12 @@ public class IssueLoader {
             Logger.getLogger(
                     IssueLoader.class.getName());
 
-    private final CloverConfig config;
-    private final Jsonb jsonb;
-
-    public IssueLoader(
-            final CloverConfig config,
-            final Jsonb jsonb
-    ) {
-        this.config = config;
-        this.jsonb = jsonb;
-    }
-
     @Produces
     @ApplicationScoped
-    public Issue loadIssueJson() throws FileNotFoundException {
+    public Issue loadIssueJson(
+            final CloverConfig config,
+            final Jsonb jsonb
+    ) throws FileNotFoundException {
         final Path cloverJsonPath = Paths.get(config.getIssueDir(), config.getConfigFile());
         LOGGER.info("Reading: " + cloverJsonPath);
         final FileReader reader = new FileReader(cloverJsonPath.toFile());

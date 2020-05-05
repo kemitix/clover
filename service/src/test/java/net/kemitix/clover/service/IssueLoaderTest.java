@@ -20,8 +20,7 @@ public class IssueLoaderTest {
             new CloverConfigProperties();
     private final String issueNumber = UUID.randomUUID().toString();
     private final Jsonb jsonb = JsonbBuilder.create();
-    private final IssueLoader issueLoader =
-            new IssueLoader(cloverConfig, jsonb);
+    private final IssueLoader issueLoader = new IssueLoader();
     @TempDir
     Path directory;
 
@@ -38,7 +37,7 @@ public class IssueLoaderTest {
         cloverConfig.issueDir = directory.toString();
         cloverConfig.configFile = "clover.json";
         //when
-        final Issue issue = issueLoader.loadIssueJson();
+        final Issue issue = issueLoader.loadIssueJson(cloverConfig, jsonb);
         //then
         assertThat(issue.getIssue()).isEqualTo(issueNumber);
     }
@@ -50,6 +49,6 @@ public class IssueLoaderTest {
         cloverConfig.configFile = "clover.json";
         //then
         assertThatExceptionOfType(IOException.class)
-                .isThrownBy(issueLoader::loadIssueJson);
+                .isThrownBy(() -> issueLoader.loadIssueJson(cloverConfig, jsonb));
     }
 }

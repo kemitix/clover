@@ -6,30 +6,60 @@ import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
 import net.kemitix.clover.spi.images.XY;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
-@Dependent
-public class PaperbackPreview extends Paperback {
+@ApplicationScoped
+public class PaperbackPreview extends FrontCoverFormat {
     private static final Logger LOGGER =
             Logger.getLogger(
                     Kindle.class.getName());
-    private final CloverConfig config;
 
-    protected PaperbackPreview(
-            final CloverConfig config,
-            final Issue issue,
-            final ImageService imageService,
-            final StoryListFormatter storyListFormatter
-    ) {
-        super(config, issue, imageService, storyListFormatter);
-        this.config = config;
+    private Paperback paperback;
+
+    public PaperbackPreview() {
+    }
+
+    @Inject
+    public PaperbackPreview(Paperback paperback) {
+        this.paperback = paperback;
     }
 
     @Override
     protected String getName() {
-        return super.getName() + "-preview";
+        return paperback.getName() + "-preview";
+    }
+
+    @Override
+    protected float writeScale() {
+        return paperback.writeScale();
+    }
+
+    @Override
+    protected CloverConfig getCloverConfig() {
+        return paperback.getCloverConfig();
+    }
+
+    @Override
+    protected Issue getIssue() {
+        return paperback.getIssue();
+    }
+
+    @Override
+    protected ImageService getImageService() {
+        return paperback.getImageService();
+    }
+
+    @Override
+    protected int getHeight() {
+        return paperback.getHeight();
+    }
+
+    @Override
+    protected int getWidth() {
+        return paperback.getWidth();
     }
 
     @Override
@@ -38,16 +68,31 @@ public class PaperbackPreview extends Paperback {
                 .andThen(drawBarcodeSpacer());
     }
 
+    @Override
+    protected int getCropYOffset() {
+        return paperback.getCropYOffset();
+    }
+
+    @Override
+    protected int getCropXOffset() {
+        return paperback.getCropXOffset();
+    }
+
     private Function<Image, Image> drawBarcodeSpacer() {
         final XY topLeft = XY.at(
-                config.getBarcodeLeft(),
-                config.getBarcodeTop());
+                getCloverConfig().getBarcodeLeft(),
+                getCloverConfig().getBarcodeTop());
         final Area area = Area.builder()
-                .width(config.getBarcodeWidth())
-                .height(config.getBarcodeHeight())
+                .width(getCloverConfig().getBarcodeWidth())
+                .height(getCloverConfig().getBarcodeHeight())
                 .build();
-        final String fillColour = config.getBarcodeFillColour();
+        final String fillColour = getCloverConfig().getBarcodeFillColour();
         return image ->
                 image.withFilledArea(topLeft, area, fillColour);
+    }
+
+    @Override
+    protected int frontPageXOffset() {
+        return paperback.frontPageXOffset();
     }
 }
