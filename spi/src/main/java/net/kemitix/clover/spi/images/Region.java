@@ -1,10 +1,12 @@
 package net.kemitix.clover.spi.images;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class Region {
 
     @Builder.Default
