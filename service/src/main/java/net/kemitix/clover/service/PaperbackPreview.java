@@ -63,8 +63,13 @@ public class PaperbackPreview extends FrontCoverFormat {
     }
 
     @Override
+    protected Function<Image, Image> spine() {
+        return paperback.spine();
+    }
+
+    @Override
     protected Function<Image, Image> backCover() {
-        return super.backCover()
+        return paperback.backCover()
                 .andThen(drawBarcodeSpacer());
     }
 
