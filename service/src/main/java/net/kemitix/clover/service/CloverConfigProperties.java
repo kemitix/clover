@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,9 +47,8 @@ public class CloverConfigProperties implements CloverConfig {
 
     @PostConstruct
     public void init() {
-        System.out.println("issueDir = " + issueDir);
-        System.out.println("configFile = " + configFile);
-        System.out.println("fontFile = " + fontFile);
+        System.out.println("config file: " + Paths.get(issueDir, configFile));
+        System.out.println("font file  : " + fontFile);
     }
 
     @Override
