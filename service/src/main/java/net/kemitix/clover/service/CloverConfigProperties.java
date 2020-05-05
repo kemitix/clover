@@ -11,10 +11,15 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 @Getter
 public class CloverConfigProperties implements CloverConfig {
+
+    private static final Logger LOGGER =
+            Logger.getLogger(
+                    CloverConfigProperties.class.getName());
 
     @ConfigProperty(name = "config-file")
     String configFile;
@@ -47,8 +52,8 @@ public class CloverConfigProperties implements CloverConfig {
 
     @PostConstruct
     public void init() {
-        System.out.println("config file: " + Paths.get(issueDir, configFile));
-        System.out.println("font file  : " + fontFile);
+        LOGGER.info("Config file: " + Paths.get(issueDir, configFile));
+        LOGGER.info("Font file  : " + fontFile);
     }
 
     @Override
