@@ -1,15 +1,14 @@
 package net.kemitix.clover.service;
 
-
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
+import net.kemitix.files.FileReader;
+import net.kemitix.files.FileReaderWriter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.json.bind.Jsonb;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,16 +22,22 @@ public class IssueConfigLoader {
 
     @Produces
     @ApplicationScoped
+    public FileReader fileReader() {
+        return new FileReaderWriter();
+    }
+
+    @Produces
+    @ApplicationScoped
     public IssueConfig loadIssueJson(
-            final CloverProperties cloverProperties,
+            final CloverProperties config,
+            final FileReader fileReader,
             final Jsonb jsonb
-    ) throws FileNotFoundException {
+    ) throws IOException {
         final Path cloverJsonPath =
-                Paths.get(cloverProperties.getIssueDir(),
-                        cloverProperties.getConfigFile());
+                Paths.get(config.getIssueDir(), config.getConfigFile());
         LOGGER.info("Reading: " + cloverJsonPath);
-        final FileReader reader = new FileReader(cloverJsonPath.toFile());
-        return jsonb.fromJson(reader, IssueConfig.class);
+        final String json = fileReader.read(cloverJsonPath.toFile());
+        return jsonb.fromJson(json, IssueConfig.class);
     }
 
     @Produces

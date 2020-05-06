@@ -20,7 +20,7 @@ public class ServiceCloverProperties implements CloverProperties {
 
     private static final Logger LOGGER =
             Logger.getLogger(
-                    CloverConfigProperties.class.getName());
+                    ServiceCloverProperties.class.getName());
 
     @ConfigProperty(name = "config-file")
     String configFile;

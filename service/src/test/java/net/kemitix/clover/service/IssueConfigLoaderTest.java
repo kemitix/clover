@@ -1,41 +1,60 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.files.FileReader;
+import net.kemitix.files.FileReaderWriter;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.as;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.AdditionalMatchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+
+@ExtendWith(MockitoExtension.class)
 public class IssueConfigLoaderTest {
 
-//    private final ServiceCloverProperties cloverConfig =
-//            new ServiceCloverProperties();
-//    private final String issueNumber = UUID.randomUUID().toString();
-//    private final Jsonb jsonb = JsonbBuilder.create();
-//    private final IssueConfigLoader issueConfigLoader =
-//            new IssueConfigLoader(cloverConfig, jsonb);
-//    @TempDir
-//    Path directory;
-//
-//    @Test
-//    @DisplayName("Loads the clover.json file")
-//    public void loadIssueJson() throws IOException {
-//        //given
-//        final String content =
-//                String.format("{\"issue\":\"%s\"}}", issueNumber);
-//        new FileReaderWriter()
-//                .write(
-//                        directory.resolve("clover.json").toFile(),
-//                        content);
-//        cloverConfig.issueDir = directory.toString();
-//        cloverConfig.configFile = "clover.json";
-//        //when
-//        final Issue issue = issueConfigLoader.loadIssueJson();
-//        //then
-//        assertThat(issue.getIssue()).isEqualTo(issueNumber);
-//    }
-//
-//    @Test
-//    @DisplayName("When clover.json is missing throws an exception")
-//    public void whenMissingThenThrow() {
-//        cloverConfig.issueDir = directory.toString();
-//        cloverConfig.configFile = "clover.json";
-//        //then
-//        assertThatExceptionOfType(IOException.class)
-//                .isThrownBy(issueConfigLoader::loadIssueJson);
-//    }
+    private final ServiceCloverProperties cloverConfig =
+            new ServiceCloverProperties();
+    private final String issueNumber = UUID.randomUUID().toString();
+    private final Jsonb jsonb = JsonbBuilder.create();
+    private final IssueConfigLoader issueLoader = new IssueConfigLoader();
+    private final FileReader fileReader;
+
+    public IssueConfigLoaderTest(@Mock FileReader fileReader) {
+        this.fileReader = fileReader;
+    }
+
+    @Test
+    @DisplayName("Loads the clover.json file")
+    public void loadIssueJson() throws IOException {
+        //given
+        cloverConfig.issueDir = "dir";
+        cloverConfig.configFile = "clover.json";
+        final String content =
+                String.format("{" +
+                        "\"issue\":\"%s\"," +
+                        "\"title-colour\":\"red\"," +
+                        "\"sub-title-colour\":\"yellow\"" +
+                        "}", issueNumber);
+        given(fileReader.read(any())).willReturn(content);
+        //when
+        final IssueConfig issue =
+                issueLoader.loadIssueJson(cloverConfig, fileReader, jsonb);
+        //then
+        assertThat(issue.getIssue()).isEqualTo(issueNumber);
+        assertThat(issue.getTitleColour()).isEqualTo("red");
+        assertThat(issue.getSubTitleColour()).isEqualTo("yellow");
+    }
 }
