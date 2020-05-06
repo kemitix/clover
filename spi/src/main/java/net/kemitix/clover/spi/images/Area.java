@@ -12,7 +12,6 @@ public class Area {
     private final float width;
     private final float height;
 
-    @Deprecated
     public static Area of(final float width, final float height) {
         return Area.builder()
                 .width(width)
