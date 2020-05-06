@@ -210,9 +210,13 @@ class CloverImage implements Image {
 
     @Override
     public Image rescale(final float scale) {
-        return scaleTo(Area.of(
-                ((int) (getWidth() * scale)),
-                ((int) (getHeight() * scale))));
+        LOGGER.info("Rescale from: " + getRegion());
+        LOGGER.info(" by: " + scale);
+        Area area = Area.of(
+                (int) (getWidth() * scale),
+                (int) (getHeight() * scale));
+        LOGGER.info(" to: " + area);
+        return scaleTo(area);
     }
 
     @Override

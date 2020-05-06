@@ -20,16 +20,11 @@ public class Paperback implements CloverFormat {
             Logger.getLogger(
                     Paperback.class.getName());
 
-    private IssueConfig issueConfig;
     private CloverProperties cloverProperties;
-    private StoryListFormatter storyListFormatter;
-
-    @Getter
-    private Region frontCoverCropRegion;
-    @Getter
-    private Region fullCoverCropRegion;
-    @Getter
+    private IssueConfig issueConfig;
+    private Dimensions dimensions;
     private Image coverArtImage;
+    private StoryListFormatter storyListFormatter;
     @Getter
     private Image image;
 
@@ -40,107 +35,26 @@ public class Paperback implements CloverFormat {
     protected Paperback(
             final CloverProperties cloverProperties,
             final IssueConfig issueConfig,
-            final StoryListFormatter storyListFormatter,
-            final Image coverArtImage
-    ) {
+            final Dimensions dimensions,
+            final Image coverArtImage,
+            final StoryListFormatter storyListFormatter) {
         this.cloverProperties = cloverProperties;
         this.issueConfig = issueConfig;
-        this.storyListFormatter = storyListFormatter;
+        this.dimensions = dimensions;
         this.coverArtImage = coverArtImage;
+        this.storyListFormatter = storyListFormatter;
     }
 
     @PostConstruct
     public void init() {
-        final Area coverArtImageArea = coverArtImage.getArea();
-        final Region coverArtRegion = Region.builder()
-                .width(coverArtImageArea.getWidth())
-                .height(coverArtImageArea.getHeight()).build();
-        System.out.println("coverArtRegion = " + coverArtRegion);
-        final int frontOffsetLeft = issueConfig.getKindleXOffset();
-        System.out.println("frontOffsetLeft = " + frontOffsetLeft);
-        final int frontOffsetTop = issueConfig.getKindleYOffset();
-        System.out.println("frontOffsetTop = " + frontOffsetTop);
-        final int frontWidth = issueConfig.getFrontWidth();
-        final float kindleCoverRatio = cloverProperties.getWidth() / cloverProperties.getHeight();
-        final Region frontRegion = Region.builder()
-                .left(frontOffsetLeft)
-                .top(frontOffsetTop)
-                .width(frontWidth)
-                .height((int) (frontWidth / kindleCoverRatio))
-                .build();
-        System.out.println("frontRegion = " + frontRegion);
-
-        final int dpi = cloverProperties.getDpi();
-        final Region kindleCoverRegion = Region.builder()
-                .width((int) (cloverProperties.getWidth() * dpi))
-                .height((int) (cloverProperties.getHeight() * dpi))
-                .build();
-        final float kindleCoverRegionHeight = kindleCoverRegion.getHeight();
-        System.out.println("kindleCoverRegionHeight = " + kindleCoverRegionHeight);
-        final float frontRegionHeight = frontRegion.getHeight();
-        System.out.println("frontRegionHeight = " + frontRegionHeight);
-        final float scaleToKindle = kindleCoverRegionHeight / frontRegionHeight;
-        System.out.println("scaleToKindle = " + scaleToKindle);
-
-        final float spineInches = issueConfig.getSpine();
-        System.out.println("spineInches = " + spineInches);
-        final float spineWidth = spineInches * dpi;
-        System.out.println("spineWidth = " + spineWidth);
-        final float spineArt = spineWidth / scaleToKindle;
-        System.out.println("spineArt = " + spineArt);
-        System.out.println("frontRegion.getLeft() = " + frontRegion.getLeft());
-        System.out.println("frontRegion.getWidth() = " + frontRegion.getWidth());
-        final Region fullRegion = Region.builder()
-                .left(frontRegion.getLeft() - frontRegion.getWidth() - spineArt)
-                .top(frontRegion.getTop())
-                .width(frontRegion.getWidth() * 2 + spineArt)
-                .height(frontRegion.getHeight()).build();
-
-        fullRegion.mustContain(frontRegion);
-
-        final Region scaledFull = Region.builder()
-                .top(fullRegion.getTop() * scaleToKindle)
-                .left(fullRegion.getLeft() * scaleToKindle)
-                .width(fullRegion.getWidth() * scaleToKindle)
-                .height(fullRegion.getHeight() * scaleToKindle).build();
-
-        final Region frontWithinScaledFull = Region.builder()
-                .top(0)
-                .left(scaledFull.getWidth() - (frontWidth * scaleToKindle))
-                .width(frontRegion.getWidth() * scaleToKindle)
-                .height(scaledFull.getHeight()).build();
-
-        System.out.println("coverArtRegion = " + coverArtRegion);
-        System.out.println("frontRegion = " + frontRegion);
-        System.out.println("fullRegion = " + fullRegion);
-        System.out.println("---------------");
-        System.out.println("scaledFull = " + scaledFull);
-        System.out.println("frontWithinScaledFull = " + frontWithinScaledFull);
-        System.out.println("---------------");
-
-        scaledFull.mustContain(frontWithinScaledFull);
-        assertThat(frontWithinScaledFull.getRight() == scaledFull.getRight());
-        assertThat(frontWithinScaledFull.getTop() == 0);
-        assertThat(frontWithinScaledFull.getBottom() == scaledFull.getBottom());
-        assertThat(frontWithinScaledFull.getHeight() == scaledFull.getHeight());
-
-        System.out.println("Cropping coverArtImage to fullRegion");
-        final Image croppedFullRegionImage = coverArtImage.crop(fullRegion);
-        System.out.println("Rescaling croppedFullRegionImage to scaleToKindle");
-        image = croppedFullRegionImage.rescale(scaleToKindle);
-        System.out.println("scaledFull = " + scaledFull);
-        System.out.println("image.getRegion() = " + image.getRegion());
-        if (!scaledFull.equals(image.getRegion())) {
-            throw new IllegalStateException("Image is not expected size");
-        }
-        fullCoverCropRegion = scaledFull;
-        frontCoverCropRegion = frontWithinScaledFull;
-        fullCoverCropRegion.mustContain(frontCoverCropRegion);
+        image =
+                coverArtImage
+                        .rescale(dimensions.getScaleFromOriginal())
+                        .crop(dimensions.getWrapCrop());
 //                frontCover()
 //                .andThen(spine())
 //                .andThen(backCover())
 //                .apply(cropped)
-        System.out.println("Paperback.init - done");
     }
 
     private void assertThat(final boolean test) {
@@ -237,9 +151,10 @@ public class Paperback implements CloverFormat {
 
     @Override
     public TypedProperties getImageProperties() {
+        Region wrapCrop = dimensions.getWrapCrop();
         return TypedProperties.create()
-                .with(PdfWidth.class, (int) fullCoverCropRegion.getWidth())
-                .with(PdfHeight.class, (int) fullCoverCropRegion.getHeight());
+                .with(PdfWidth.class, (int) wrapCrop.getWidth())
+                .with(PdfHeight.class, (int) wrapCrop.getHeight());
     }
 
     protected Function<Image, Image> frontCover() {

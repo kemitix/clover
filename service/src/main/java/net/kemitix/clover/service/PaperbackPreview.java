@@ -29,8 +29,8 @@ public class PaperbackPreview implements CloverFormat {
 
     @Override
     public Image getImage() {
-        //TODO: draw barcode spacer
-        return paperback.getImage();
+        return drawBarcodeSpacer()
+                .apply(paperback.getImage());
     }
 
     @Override

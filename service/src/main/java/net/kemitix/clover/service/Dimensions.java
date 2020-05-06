@@ -7,6 +7,7 @@ import net.kemitix.clover.spi.images.Region;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 @Getter
 @ApplicationScoped
@@ -28,10 +29,12 @@ public class Dimensions {
     private Region backCrop;
     private Region wrapCrop;
     private Region scaledCoverArt;
+    private Region frontWithinWrapCrop;
 
     public Dimensions() {
     }
 
+    @Inject
     public Dimensions(
             Image coverArtImage,
             CloverProperties cloverProperties,
@@ -70,6 +73,12 @@ public class Dimensions {
         wrapCrop = backCrop.toBuilder()
                 .width(backCrop.getWidth() + spineCrop.getWidth() + frontCrop.getWidth())
                 .build();
+        frontWithinWrapCrop = Region.builder()
+                .top(0)
+                .left(kindleCover.getWidth() + spineWidth)
+                .width(kindleCover.getWidth())
+                .height(wrapCrop.getHeight()).build();
+        wrapCrop.mustContain(frontWithinWrapCrop);
         wrapCrop.mustContain(frontCrop);
         wrapCrop.mustContain(spineCrop);
         wrapCrop.mustContain(backCrop);
