@@ -53,29 +53,29 @@ public class Dimensions {
     @PostConstruct
     public void init() {
         Region kindleCover = Region.builder()
-                .width(kindleWidthInches * dpi)
-                .height(kindleHeightInches * dpi).build();
+                .width((int) (kindleWidthInches * dpi))
+                .height((int) (kindleHeightInches * dpi)).build();
         scaleFromOriginal = kindleCover.getWidth() / widthFrontCoverOriginal;
         scaledCoverArt = fullImageOriginal.toBuilder()
-                .width(fullImageOriginal.getWidth() * scaleFromOriginal)
-                .height(fullImageOriginal.getHeight() * scaleFromOriginal)
+                .width((int) (fullImageOriginal.getWidth() * scaleFromOriginal))
+                .height((int) (fullImageOriginal.getHeight() * scaleFromOriginal))
                 .build();
         frontCrop = kindleCover.toBuilder()
-                .top(topFrontCoverOriginal * scaleFromOriginal)
-                .left(leftFrontCoverOriginal * scaleFromOriginal).build();
-        float spineWidth = spineWidthInches * dpi;
+                .top((int) (topFrontCoverOriginal * scaleFromOriginal))
+                .left((int) (leftFrontCoverOriginal * scaleFromOriginal)).build();
+        int spineWidth = (int) (spineWidthInches * dpi);
         spineCrop = frontCrop.toBuilder()
-                .left(frontCrop.getLeft() - spineWidth)
-                .width(spineWidth).build();
+                .left((int) (frontCrop.getLeft() - spineWidth))
+                .width((int) spineWidth).build();
         backCrop = frontCrop.toBuilder()
-                .left(frontCrop.getLeft() - spineWidth - frontCrop.getWidth())
+                .left((int) (frontCrop.getLeft() - spineWidth - frontCrop.getWidth()))
                 .build();
         wrapCrop = backCrop.toBuilder()
                 .width(backCrop.getWidth() + spineCrop.getWidth() + frontCrop.getWidth())
                 .build();
         frontWithinWrapCrop = Region.builder()
                 .top(0)
-                .left(kindleCover.getWidth() + spineWidth)
+                .left((int) (kindleCover.getWidth() + spineWidth))
                 .width(kindleCover.getWidth())
                 .height(wrapCrop.getHeight()).build();
         wrapCrop.mustContain(frontWithinWrapCrop);

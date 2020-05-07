@@ -94,8 +94,8 @@ public class DimensionsTest
         assertThat(dimensions.getSpineCrop())
                 .isEqualTo(Region.builder()
                         .top(0)
-                        .left(3030.4f)
-                        .width(169.59999f)
+                        .left(3030)
+                        .width(169)
                         .height(2560).build());
     }
 
@@ -108,7 +108,7 @@ public class DimensionsTest
         assertThat(dimensions.getBackCrop())
                 .isEqualTo(Region.builder()
                         .top(0)
-                        .left(1430.3999f)
+                        .left(1430)
                         .width(1600)
                         .height(2560).build());
     }
@@ -122,8 +122,8 @@ public class DimensionsTest
         assertThat(dimensions.getWrapCrop())
                 .isEqualTo(Region.builder()
                         .top(0)
-                        .left(1430.3999f)
-                        .width(3369.6f)
+                        .left(1430)
+                        .width(3369)
                         .height(2560).build());
     }
 }

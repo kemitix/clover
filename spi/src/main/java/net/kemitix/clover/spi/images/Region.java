@@ -10,17 +10,17 @@ import lombok.Getter;
 public class Region {
 
     @Builder.Default
-    private final float top = 0;
+    private final int top = 0;
     @Builder.Default
-    private final float left = 0;
-    private final float width;
-    private final float height;
+    private final int left = 0;
+    private final int width;
+    private final int height;
 
-    public float getRight() {
+    public int getRight() {
         return getLeft() + getWidth();
     }
 
-    public float getBottom() {
+    public int getBottom() {
         return getTop() + getHeight();
     }
 
@@ -48,17 +48,17 @@ public class Region {
     private void notContains(final String message, final Region inner) {
         throw new IllegalArgumentException(String.format(
                 "Inner %s container:\n" +
-                        " Container: %s - right=%f, bottom=%f\n" +
-                        "     Inner: %s - right=%f, bottom=%f",
+                        " Container: %s - right=%d, bottom=%d\n" +
+                        "     Inner: %s - right=%d, bottom=%d",
                 message,
                 this, getRight(), getBottom(),
                 inner, inner.getRight(), inner.getBottom()));
     }
 
     private boolean isBetween(
-            final float subject,
-            final float lower,
-            final float upper
+            final int subject,
+            final int lower,
+            final int upper
     ) {
         return lower <= subject && subject <= upper;
     }
