@@ -25,12 +25,7 @@ public class Region {
     }
 
     public void mustContain(final Region inner) {
-        if (inner.getWidth() > getWidth()) {
-            notContains("is wider than", inner);
-        }
-        if (inner.getHeight() > getHeight()) {
-            notContains("is taller than", inner);
-        }
+        mustBeBiggerThan(inner);
         if (!isBetween(inner.getLeft(), getLeft(), getRight())) {
             notContains("left edge is outside", inner);
         }
@@ -42,6 +37,15 @@ public class Region {
         }
         if (!isBetween(inner.getBottom(), getTop(), getBottom())) {
             notContains("bottom edge is outside", inner);
+        }
+    }
+
+    public void mustBeBiggerThan(Region inner) {
+        if (inner.getWidth() > getWidth()) {
+            notContains("is wider than", inner);
+        }
+        if (inner.getHeight() > getHeight()) {
+            notContains("is taller than", inner);
         }
     }
 
@@ -74,4 +78,5 @@ public class Region {
                 ", height=" + height +
                 '}';
     }
+
 }

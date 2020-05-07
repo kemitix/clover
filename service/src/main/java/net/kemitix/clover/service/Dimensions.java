@@ -26,10 +26,8 @@ public class Dimensions {
     private float scaleFromOriginal;
     private Region frontCrop;
     private Region spineCrop;
-    private Region backCrop;
     private Region wrapCrop;
     private Region scaledCoverArt;
-    private Region frontWithinWrapCrop;
 
     public Dimensions() {
     }
@@ -60,28 +58,38 @@ public class Dimensions {
                 .width((int) (fullImageOriginal.getWidth() * scaleFromOriginal))
                 .height((int) (fullImageOriginal.getHeight() * scaleFromOriginal))
                 .build();
-        frontCrop = kindleCover.toBuilder()
+
+        Region frontRegion = kindleCover.toBuilder()
                 .top((int) (topFrontCoverOriginal * scaleFromOriginal))
                 .left((int) (leftFrontCoverOriginal * scaleFromOriginal)).build();
+        scaledCoverArt.mustContain(frontRegion);
+
         int spineWidth = (int) (spineWidthInches * dpi);
-        spineCrop = frontCrop.toBuilder()
-                .left((int) (frontCrop.getLeft() - spineWidth))
-                .width((int) spineWidth).build();
-        backCrop = frontCrop.toBuilder()
-                .left((int) (frontCrop.getLeft() - spineWidth - frontCrop.getWidth()))
+
+        // backCrop is relative to scaledCoverArt
+        Region backRegion = frontRegion.toBuilder()
+                .left(frontRegion.getLeft() - spineWidth - frontRegion.getWidth())
                 .build();
-        wrapCrop = backCrop.toBuilder()
-                .width(backCrop.getWidth() + spineCrop.getWidth() + frontCrop.getWidth())
+        scaledCoverArt.mustContain(backRegion);
+
+        // wrapCrop is relative to scaledCoverArt
+        wrapCrop = backRegion.toBuilder()
+                .width(backRegion.getWidth() + spineWidth + frontRegion.getWidth())
                 .build();
-        frontWithinWrapCrop = Region.builder()
+        scaledCoverArt.mustContain(wrapCrop);
+
+        // frontCrop is relative to backCrop
+        frontCrop = Region.builder()
                 .top(0)
-                .left((int) (kindleCover.getWidth() + spineWidth))
+                .left(kindleCover.getWidth() + spineWidth)
                 .width(kindleCover.getWidth())
                 .height(wrapCrop.getHeight()).build();
-        wrapCrop.mustContain(frontWithinWrapCrop);
         wrapCrop.mustContain(frontCrop);
-        wrapCrop.mustContain(spineCrop);
-        wrapCrop.mustContain(backCrop);
-        scaledCoverArt.mustContain(wrapCrop);
+
+        // spineCrop is relative to backCrop
+        spineCrop = frontCrop.toBuilder()
+                .left(frontCrop.getLeft() - spineWidth)
+                .width(spineWidth).build();
+        wrapCrop.mustBeBiggerThan(spineCrop);
     }
 }

@@ -47,20 +47,20 @@ public class Paperback implements CloverFormat {
 
     @PostConstruct
     public void init() {
-        image =
-                coverArtImage
-                        .rescale(dimensions.getScaleFromOriginal())
-                        .crop(dimensions.getWrapCrop());
-//                frontCover()
-//                .andThen(spine())
-//                .andThen(backCover())
-//                .apply(cropped)
+        image = rescale(dimensions.getScaleFromOriginal())
+                .andThen(crop(dimensions.getWrapCrop()))
+                .andThen(frontCover())
+                .andThen(spine())
+                .andThen(backCover())
+                .apply(coverArtImage);
     }
 
-    private void assertThat(final boolean test) {
-        if (!test) {
-            throw new IllegalStateException("Test failed");
-        }
+    private Function<Image, Image> crop(Region cropRegion) {
+        return image -> image.crop(cropRegion);
+    }
+
+    private Function<Image, Image> rescale(float factor) {
+        return image -> image.rescale(factor);
     }
 
     @Override
@@ -135,18 +135,13 @@ public class Paperback implements CloverFormat {
                 issueConfig.getPublicationTitle(),
                 issueConfig.getIssue(),
                 issueConfig.getDate());
-        return image ->
-                image.withFilledArea(
-                        getSpineRegion(),
-                        "black"
-                ).withRotatedCenteredText(
-                        spineText,
-                        getSpineRegion(),
-                        fontFace);
-    }
-
-    private Region getSpineRegion() {
-        return null;
+        return image -> image.withFilledArea(
+                dimensions.getSpineCrop(),
+                "black"
+        ).withRotatedCenteredText(
+                spineText,
+                dimensions.getSpineCrop(),
+                fontFace);
     }
 
     @Override
@@ -159,8 +154,8 @@ public class Paperback implements CloverFormat {
 
     protected Function<Image, Image> frontCover() {
         return drawTitle()
-//                .andThen(drawSubTitles())
-//                .andThen(drawAuthors())
+                .andThen(drawSubTitles())
+                .andThen(drawAuthors())
                 ;
     }
 

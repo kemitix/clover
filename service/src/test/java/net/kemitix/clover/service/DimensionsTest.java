@@ -3,7 +3,6 @@ package net.kemitix.clover.service;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.Region;
-import net.kemitix.clover.spi.images.XY;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -96,20 +95,6 @@ public class DimensionsTest
                         .top(0)
                         .left(3030)
                         .width(169)
-                        .height(2560).build());
-    }
-
-    @Test
-    @DisplayName("Back Cover")
-    public void backCoverIsAsExpected() {
-        //when
-        dimensions.init();
-        //then
-        assertThat(dimensions.getBackCrop())
-                .isEqualTo(Region.builder()
-                        .top(0)
-                        .left(1430)
-                        .width(1600)
                         .height(2560).build());
     }
 
