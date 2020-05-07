@@ -175,17 +175,17 @@ public class Paperback implements CloverFormat {
             return image
                     .withText(
                             "Cossmass",
-                            XY.at(60 + frontPageXOffset(), 90),
+                            XY.at(60 + frontLeftEdge(), 90),
                             fontFace)
                     .withText(
                             "Infinities",
-                            XY.at(130 + frontPageXOffset(), 307),
+                            XY.at(130 + frontLeftEdge(), 307),
                             fontFace);
         };
     }
 
-    private int frontPageXOffset() {
-        return issueConfig.getKindleXOffset();
+    private int frontLeftEdge() {
+        return dimensions.getFrontCrop().getLeft();
     }
 
     private Function<Image, Image> drawSubTitles() {
@@ -201,12 +201,12 @@ public class Paperback implements CloverFormat {
             LOGGER.info("Drawing subtitle...");
             return image
                     .withText(String.format("Issue %s", issueConfig.getIssue()),
-                            XY.at(60 + frontPageXOffset(), 485), fontFace)
+                            XY.at(60 + frontLeftEdge(), 485), fontFace)
                     .withText(issueConfig.getDate(),
                             //TODO use a right-edge and the text width to find X
-                            XY.at(1200 + frontPageXOffset(), 485), fontFace)
+                            XY.at(1200 + frontLeftEdge(), 485), fontFace)
                     .withText("Science Fiction and Fantasy",
-                            XY.at(760 + frontPageXOffset(), 109), fontFace);
+                            XY.at(760 + frontLeftEdge(), 109), fontFace);
         };
     }
 
@@ -224,7 +224,7 @@ public class Paperback implements CloverFormat {
             return image
                     .withText(issueConfig.getAuthors(),
                             XY.at(
-                                    issueConfig.getAuthorsXOffset() + frontPageXOffset(),
+                                    issueConfig.getAuthorsXOffset() + frontLeftEdge(),
                                     issueConfig.getAuthorsYOffset()),
                             fontFace);
         };
