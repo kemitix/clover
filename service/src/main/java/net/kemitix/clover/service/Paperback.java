@@ -25,6 +25,7 @@ public class Paperback implements CloverFormat {
     private Dimensions dimensions;
     private Image coverArtImage;
     private StoryListFormatter storyListFormatter;
+    private FrontCover frontCover;
     @Getter
     private Image image;
 
@@ -37,19 +38,22 @@ public class Paperback implements CloverFormat {
             final IssueConfig issueConfig,
             final Dimensions dimensions,
             final Image coverArtImage,
-            final StoryListFormatter storyListFormatter) {
+            final StoryListFormatter storyListFormatter,
+            final FrontCover frontCover
+    ) {
         this.cloverProperties = cloverProperties;
         this.issueConfig = issueConfig;
         this.dimensions = dimensions;
         this.coverArtImage = coverArtImage;
         this.storyListFormatter = storyListFormatter;
+        this.frontCover = frontCover;
     }
 
     @PostConstruct
     public void init() {
         image = rescale(dimensions.getScaleFromOriginal())
                 .andThen(crop(dimensions.getWrapCrop()))
-                .andThen(frontCover())
+                .andThen(frontCover)
                 .andThen(spine())
                 .andThen(backCover())
                 .apply(coverArtImage);
@@ -152,81 +156,4 @@ public class Paperback implements CloverFormat {
                 .with(PdfHeight.class, (int) wrapCrop.getHeight());
     }
 
-    protected Function<Image, Image> frontCover() {
-        return drawTitle()
-                .andThen(drawSubTitles())
-                .andThen(drawAuthors())
-                ;
-    }
-
-    private Function<Image, Image> drawTitle() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        217,
-                        issueConfig.getTitleColour(),
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        return image -> {
-            LOGGER.info("Drawing title...");
-            // TODO - get the title from Issue, line-split it and use
-            //  Framing to center
-            return image
-                    .withText(
-                            "Cossmass",
-                            XY.at(60 + frontLeftEdge(), 90),
-                            fontFace)
-                    .withText(
-                            "Infinities",
-                            XY.at(130 + frontLeftEdge(), 307),
-                            fontFace);
-        };
-    }
-
-    private int frontLeftEdge() {
-        return dimensions.getFrontCrop().getLeft();
-    }
-
-    private Function<Image, Image> drawSubTitles() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        36,
-                        issueConfig.getSubTitleColour(),
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        return image -> {
-            LOGGER.info("Drawing subtitle...");
-            return image
-                    .withText(String.format("Issue %s", issueConfig.getIssue()),
-                            XY.at(60 + frontLeftEdge(), 485), fontFace)
-                    .withText(issueConfig.getDate(),
-                            //TODO use a right-edge and the text width to find X
-                            XY.at(1200 + frontLeftEdge(), 485), fontFace)
-                    .withText("Science Fiction and Fantasy",
-                            XY.at(760 + frontLeftEdge(), 109), fontFace);
-        };
-    }
-
-    private Function<Image, Image> drawAuthors() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        48,
-                        issueConfig.getTextColour(),
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        return image -> {
-            LOGGER.info("Drawing authors...");
-            return image
-                    .withText(issueConfig.getAuthors(),
-                            XY.at(
-                                    issueConfig.getAuthorsXOffset() + frontLeftEdge(),
-                                    issueConfig.getAuthorsYOffset()),
-                            fontFace);
-        };
-    }
 }
