@@ -16,17 +16,11 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class Paperback implements CloverFormat {
 
-    private static final Logger LOGGER =
-            Logger.getLogger(
-                    Paperback.class.getName());
-
-    private CloverProperties cloverProperties;
-    private IssueConfig issueConfig;
     private Dimensions dimensions;
     private Image coverArtImage;
-    private StoryListFormatter storyListFormatter;
     private FrontCover frontCover;
     private Spine spine;
+    private BackCover backCover;
     @Getter
     private Image image;
 
@@ -35,21 +29,17 @@ public class Paperback implements CloverFormat {
 
     @Inject
     protected Paperback(
-            final CloverProperties cloverProperties,
-            final IssueConfig issueConfig,
             final Dimensions dimensions,
             final Image coverArtImage,
-            final StoryListFormatter storyListFormatter,
             final FrontCover frontCover,
-            final Spine spine
+            final Spine spine,
+            final BackCover backCover
     ) {
-        this.cloverProperties = cloverProperties;
-        this.issueConfig = issueConfig;
         this.dimensions = dimensions;
         this.coverArtImage = coverArtImage;
-        this.storyListFormatter = storyListFormatter;
         this.frontCover = frontCover;
         this.spine = spine;
+        this.backCover = backCover;
     }
 
     @PostConstruct
@@ -58,7 +48,7 @@ public class Paperback implements CloverFormat {
                 .andThen(crop(dimensions.getWrapCrop()))
                 .andThen(frontCover)
                 .andThen(spine)
-                .andThen(backCover())
+                .andThen(backCover)
                 .apply(coverArtImage);
     }
 
@@ -73,59 +63,6 @@ public class Paperback implements CloverFormat {
     @Override
     public String getName() {
         return "paperback";
-    }
-
-    protected Function<Image, Image> backCover() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        48,
-                        issueConfig.getTextColour(),
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        return drawSFStories(fontFace)
-                .andThen(drawFantasyStories(fontFace))
-                .andThen(drawReprintStories(fontFace));
-    }
-
-    private Function<Image, Image> drawSFStories(final FontFace fontFace) {
-        return image -> {
-            LOGGER.info("Drawing SF Stories...");
-            return image
-                    .withText(
-                            storyListFormatter.format(
-                                    "Science Fiction Stories",
-                                    issueConfig.getSfStories()),
-                            XY.at(150, 200),
-                            fontFace);
-        };
-    }
-
-    private Function<Image, Image> drawFantasyStories(final FontFace fontFace) {
-        return image -> {
-            LOGGER.info("Drawing Fantasy Stories...");
-            return image
-                    .withText(
-                            storyListFormatter.format(
-                                    "Fantasy Stories",
-                                    issueConfig.getFantasyStories()),
-                            XY.at(500, 1100),
-                            fontFace);
-        };
-    }
-
-    private Function<Image, Image> drawReprintStories(final FontFace fontFace) {
-        return image -> {
-            LOGGER.info("Drawing Reprint Stories...");
-            return image
-                    .withText(
-                            storyListFormatter.format(
-                                    "Plus",
-                                    issueConfig.getReprintStories()),
-                            XY.at(150, 1800),
-                            fontFace);
-        };
     }
 
     @Override
