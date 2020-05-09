@@ -1,5 +1,6 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.clover.spi.CenteredTextEffect;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.images.FontFace;
 import net.kemitix.clover.spi.images.Image;
@@ -20,6 +21,7 @@ public class FrontCover implements Function<Image, Image> {
     private CloverProperties cloverProperties;
     private IssueConfig issueConfig;
     private Dimensions dimensions;
+    private CenteredTextEffect centeredText;
 
     public FrontCover() {
     }
@@ -28,11 +30,13 @@ public class FrontCover implements Function<Image, Image> {
     public FrontCover(
             CloverProperties cloverProperties,
             IssueConfig issueConfig,
-            Dimensions dimensions
+            Dimensions dimensions,
+            CenteredTextEffect centeredText
     ) {
         this.cloverProperties = cloverProperties;
         this.issueConfig = issueConfig;
         this.dimensions = dimensions;
+        this.centeredText = centeredText;
     }
 
 
@@ -57,15 +61,11 @@ public class FrontCover implements Function<Image, Image> {
             LOGGER.info("Drawing title...");
             // TODO - get the title from Issue, line-split it and use
             //  Framing to center
-            return image
-                    .withText(
-                            "Cossmass",
-                            XY.at(60 + frontLeftEdge(), 90),
-                            fontFace)
-                    .withText(
-                            "Infinities",
-                            XY.at(130 + frontLeftEdge(), 307),
-                            fontFace);
+            return centeredText
+                    .text("Cossmass\nInfinities")
+                    .fontFace(fontFace)
+                    .region(dimensions.getFrontCrop().withPadding(90))
+                    .apply(image);
         };
     }
 
