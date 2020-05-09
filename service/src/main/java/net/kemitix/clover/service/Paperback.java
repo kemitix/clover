@@ -26,6 +26,7 @@ public class Paperback implements CloverFormat {
     private Image coverArtImage;
     private StoryListFormatter storyListFormatter;
     private FrontCover frontCover;
+    private Spine spine;
     @Getter
     private Image image;
 
@@ -39,7 +40,8 @@ public class Paperback implements CloverFormat {
             final Dimensions dimensions,
             final Image coverArtImage,
             final StoryListFormatter storyListFormatter,
-            final FrontCover frontCover
+            final FrontCover frontCover,
+            final Spine spine
     ) {
         this.cloverProperties = cloverProperties;
         this.issueConfig = issueConfig;
@@ -47,6 +49,7 @@ public class Paperback implements CloverFormat {
         this.coverArtImage = coverArtImage;
         this.storyListFormatter = storyListFormatter;
         this.frontCover = frontCover;
+        this.spine = spine;
     }
 
     @PostConstruct
@@ -54,7 +57,7 @@ public class Paperback implements CloverFormat {
         image = rescale(dimensions.getScaleFromOriginal())
                 .andThen(crop(dimensions.getWrapCrop()))
                 .andThen(frontCover)
-                .andThen(spine())
+                .andThen(spine)
                 .andThen(backCover())
                 .apply(coverArtImage);
     }
@@ -123,29 +126,6 @@ public class Paperback implements CloverFormat {
                             XY.at(150, 1800),
                             fontFace);
         };
-    }
-
-    protected Function<Image, Image> spine() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        62,
-                        "yellow",
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        final String spineText = String.format(
-                "%s - Issue %s - %s",
-                issueConfig.getPublicationTitle(),
-                issueConfig.getIssue(),
-                issueConfig.getDate());
-        return image -> image.withFilledArea(
-                dimensions.getSpineCrop(),
-                "black"
-        ).withRotatedCenteredText(
-                spineText,
-                dimensions.getSpineCrop(),
-                fontFace);
     }
 
     @Override
