@@ -79,4 +79,12 @@ public class Region {
                 '}';
     }
 
+    public Region withPadding(int padding) {
+        return Region.builder()
+                .top(top + padding)
+                .left(left + padding)
+                .width(width - (2 * padding))
+                .height(height - (2 * padding))
+                .build();
+    }
 }
