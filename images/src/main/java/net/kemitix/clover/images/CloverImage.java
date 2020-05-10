@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -73,13 +74,12 @@ class CloverImage implements Image {
         final int height = (int) area.getHeight();
         final BufferedImage resized =
                 new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        resized.createGraphics()
-                .drawImage(
+        return useGraphics(resized, graphics2D ->
+                graphics2D.drawImage(
                         image.getScaledInstance(width, height, SCALE_SMOOTH),
                         0,
                         0,
-                        null);
-        return withBufferedImage(resized);
+                        null));
     }
 
     private int getHeight() {
@@ -97,17 +97,16 @@ class CloverImage implements Image {
         getRegion().mustContain(region);
         final BufferedImage cropped =
                 new BufferedImage(
-                        (int) region.getWidth(), (int) region.getHeight(),
+                        region.getWidth(), region.getHeight(),
                         BufferedImage.TYPE_INT_ARGB);
-        cropped.createGraphics()
-                .drawImage(image.getSubimage(
-                        (int) region.getLeft(),
-                        (int) region.getTop(),
-                        (int) region.getWidth(),
-                        (int) region.getHeight()),
-                        0, 0, null);
-        LOGGER.info("cropped");
-        return withBufferedImage(cropped);
+        return useGraphics(cropped, graphics2D ->
+                graphics2D.drawImage(
+                        image.getSubimage(
+                                region.getLeft(),
+                                region.getTop(),
+                                region.getWidth(),
+                                region.getHeight()),
+                        0, 0, null));
     }
 
     @Override
@@ -148,10 +147,8 @@ class CloverImage implements Image {
                 topLeft.getX(),
                 topLeft.getY(),
                 fontFace.getSize()));
-        final BufferedImage withText = copyImage();
-        final Graphics2D graphics = withText.createGraphics();
-        drawText(text, framing -> topLeft, fontFace, graphics);
-        return withBufferedImage(withText);
+        return useGraphics(copyImage(), graphics2D ->
+                drawText(text, framing -> topLeft, fontFace, graphics2D));
     }
 
     private void drawText(
@@ -224,17 +221,16 @@ class CloverImage implements Image {
             final Region region,
             final String fillColour
     ) {
-        final int top = (int) region.getTop();
-        final int left = (int) region.getLeft();
-        final int width = (int) region.getWidth();
-        final int height = (int) region.getHeight();
+        final int top = region.getTop();
+        final int left = region.getLeft();
+        final int width = region.getWidth();
+        final int height = region.getHeight();
         LOGGER.fine(String.format("Filled Area: %dx%d by %dx%d",
                 left, top, width, height));
-        final BufferedImage withFilledArea = copyImage();
-        final Graphics2D graphics = withFilledArea.createGraphics();
-        graphics.setPaint(getColor(fillColour));
-        graphics.fillRect(left, top, width, height);
-        return withBufferedImage(withFilledArea);
+        return useGraphics(copyImage(), graphics2D -> {
+            graphics2D.setPaint(getColor(fillColour));
+            graphics2D.fillRect(left, top, width, height);
+        });
     }
 
     @Override
@@ -245,24 +241,23 @@ class CloverImage implements Image {
     ) {
         LOGGER.info(String.format("Drawing text: %s - %d",
                 text, fontFace.getSize()));
-        final BufferedImage withText = copyImage();
-        final Graphics2D graphics = withText.createGraphics();
-        graphics.rotate(Math.PI / 2);
-        drawText(text,
-                framing -> framing
-                        .toBuilder()
-                        .outer(Area.builder()
-                                .width(region.getHeight())
-                                .height(region.getWidth())
-                                .build())
-                        .build()
-                        .centered()
-                        .map(xy -> XY.at(
-                                (int) (xy.getX() + region.getTop()),
-                                (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
-                        .map(xy -> XY.at(xy.getX(), -xy.getY())),
-                fontFace, graphics);
-        return withBufferedImage(withText);
+        return useGraphics(copyImage(), graphics2D -> {
+            graphics2D.rotate(Math.PI / 2);
+            drawText(text,
+                    framing -> framing
+                            .toBuilder()
+                            .outer(Area.builder()
+                                    .width(region.getHeight())
+                                    .height(region.getWidth())
+                                    .build())
+                            .build()
+                            .centered()
+                            .map(xy -> XY.at(
+                                    xy.getX() + region.getTop(),
+                                    (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
+                            .map(xy -> XY.at(xy.getX(), -xy.getY())),
+                    fontFace, graphics2D);
+        });
     }
 
     @Override
@@ -328,6 +323,14 @@ class CloverImage implements Image {
                         () -> LOGGER.warning(String.format(
                                 "No ImageWriter found for %s",
                                 format)));
+    }
+
+    public Image useGraphics(
+            BufferedImage bufferedImage,
+            Consumer<Graphics2D> graphics2DEffect
+    ) {
+        graphics2DEffect.accept(bufferedImage.createGraphics());
+        return withBufferedImage(bufferedImage);
     }
 
     private Image withBufferedImage(BufferedImage newImage) {
