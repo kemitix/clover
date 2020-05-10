@@ -79,7 +79,7 @@ class CloverImage implements Image {
                         0,
                         0,
                         null);
-        return new CloverImage(resized, config, fontCache, imageWriters);
+        return withBufferedImage(resized);
     }
 
     private int getHeight() {
@@ -107,7 +107,7 @@ class CloverImage implements Image {
                         (int) region.getHeight()),
                         0, 0, null);
         LOGGER.info("cropped");
-        return new CloverImage(cropped, config, fontCache, imageWriters);
+        return withBufferedImage(cropped);
     }
 
     @Override
@@ -151,7 +151,7 @@ class CloverImage implements Image {
         final BufferedImage withText = copyImage();
         final Graphics2D graphics = withText.createGraphics();
         drawText(text, framing -> topLeft, fontFace, graphics);
-        return new CloverImage(withText, config, fontCache, imageWriters);
+        return withBufferedImage(withText);
     }
 
     private void drawText(
@@ -234,7 +234,7 @@ class CloverImage implements Image {
         final Graphics2D graphics = withFilledArea.createGraphics();
         graphics.setPaint(getColor(fillColour));
         graphics.fillRect(left, top, width, height);
-        return new CloverImage(withFilledArea, config, fontCache, imageWriters);
+        return withBufferedImage(withFilledArea);
     }
 
     @Override
@@ -262,7 +262,7 @@ class CloverImage implements Image {
                                 (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
                         .map(xy -> XY.at(xy.getX(), -xy.getY())),
                 fontFace, graphics);
-        return new CloverImage(withText, config, fontCache, imageWriters);
+        return withBufferedImage(withText);
     }
 
     @Override
@@ -328,6 +328,10 @@ class CloverImage implements Image {
                         () -> LOGGER.warning(String.format(
                                 "No ImageWriter found for %s",
                                 format)));
+    }
+
+    private Image withBufferedImage(BufferedImage newImage) {
+        return new CloverImage(newImage, config, fontCache, imageWriters);
     }
 
 }
