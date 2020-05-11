@@ -158,14 +158,16 @@ class CloverImage implements Image {
                 topLeft.getY(),
                 fontFace.getSize()));
         return withGraphics(graphics2D ->
-                drawText(text, framing -> topLeft, fontFace, graphics2D));
+                drawText(text, framing -> topLeft, fontFace, graphics2D, fontCache, image));
     }
 
-    private void drawText(
+    public static void drawText(
             final String text,
             final Function<Framing, XY> positioning,
             final FontFace fontFace,
-            final Graphics2D graphics
+            final Graphics2D graphics,
+            final FontCache fontCache,
+            final BufferedImage image
     ) {
         final Font font = fontCache.loadFont(fontFace);
         graphics.setRenderingHint(
@@ -204,14 +206,12 @@ class CloverImage implements Image {
             final FontFace fontFace
     ) {
         return head(text)
-                .map(head ->
-                        withText(head, topLeft, fontFace)
-                                .withText(
-                                        tail(text),
-                                        XY.at(
-                                                topLeft.getX(),
-                                                topLeft.getY() + lineHeight(head, fontFace)),
-                                        fontFace))
+                .map(head -> withText(head, topLeft, fontFace)
+                        .withText(tail(text),
+                                XY.at(topLeft.getX(), topLeft.getY() +
+                                        ((int) textArea(head, fontFace)
+                                                .getHeight())),
+                                fontFace))
                 .orElse(this);
     }
 
@@ -253,7 +253,7 @@ class CloverImage implements Image {
                 text, fontFace.getSize()));
         return withGraphics(graphics2D -> {
             graphics2D.rotate(Math.PI / 2);
-            drawText(text,
+            CloverImage.drawText(text,
                     framing -> framing
                             .toBuilder()
                             .outer(Area.builder()
@@ -266,7 +266,7 @@ class CloverImage implements Image {
                                     xy.getX() + region.getTop(),
                                     (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
                             .map(xy -> XY.at(xy.getX(), -xy.getY())),
-                    fontFace, graphics2D);
+                    fontFace, graphics2D, fontCache, image);
         });
     }
 
@@ -304,7 +304,7 @@ class CloverImage implements Image {
         return Optional.ofNullable(list.get(0));
     }
 
-    private Color getColor(final String colour) {
+    private static Color getColor(final String colour) {
         return Optional.ofNullable(
                 ColorFactory.valueOf(colour))
                 .orElseThrow(() ->
