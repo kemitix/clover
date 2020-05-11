@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 @Getter
@@ -17,6 +18,16 @@ public class Region {
     private final int left = 0;
     private final int width;
     private final int height;
+
+    public static Region from(Rectangle2D rectangle2D) {
+        Rectangle bounds = rectangle2D.getBounds();
+        return Region.builder()
+                .top(bounds.y)
+                .left(bounds.x)
+                .width(bounds.width)
+                .height(bounds.height)
+                .build();
+    }
 
     public int getRight() {
         return getLeft() + getWidth();
