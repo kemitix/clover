@@ -55,14 +55,6 @@ public class Paperback implements CloverFormat {
                         .apply(coverArtImage));
     }
 
-    private Function<Image, Image> crop(Region cropRegion) {
-        return image -> image.crop(cropRegion);
-    }
-
-    private Function<Image, Image> rescale(float factor) {
-        return image -> image.rescale(factor);
-    }
-
     @Override
     public String getName() {
         return "paperback";
