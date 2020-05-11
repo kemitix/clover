@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 @ApplicationScoped
 @With
@@ -44,11 +45,9 @@ public class CentredTextEffectImpl
     @Override
     public Image apply(Image image) {
         return image.withGraphics(graphics2d -> {
-            int lineCount = 0;
-            for (String line : text.split("\n")) {
-                drawText(image, graphics2d, lineCount, line);
-                lineCount++;
-            }
+            String[] split = text.split("\n");
+            IntStream.range(0, split.length)
+                    .forEach(i -> drawText(image, graphics2d, i, split[i]));
         });
     }
 
