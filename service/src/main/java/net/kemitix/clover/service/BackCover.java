@@ -58,7 +58,7 @@ public class BackCover implements Function<Image, Image> {
                     .withText(
                             storyListFormatter.format(
                                     "Science Fiction Stories",
-                                    issueConfig.getSfStories()),
+                                    issueConfig.getStories().getSf()),
                             XY.at(150, 200),
                             fontFace);
         };
@@ -71,7 +71,7 @@ public class BackCover implements Function<Image, Image> {
                     .withText(
                             storyListFormatter.format(
                                     "Fantasy Stories",
-                                    issueConfig.getFantasyStories()),
+                                    issueConfig.getStories().getFantasy()),
                             XY.at(500, 1100),
                             fontFace);
         };
@@ -84,7 +84,7 @@ public class BackCover implements Function<Image, Image> {
                     .withText(
                             storyListFormatter.format(
                                     "Plus",
-                                    issueConfig.getReprintStories()),
+                                    issueConfig.getStories().getReprint()),
                             XY.at(150, 1800),
                             fontFace);
         };

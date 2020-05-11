@@ -131,7 +131,7 @@ public class FrontCover implements Function<Image, Image> {
         return image -> {
             LOGGER.info("Drawing authors...");
             return image
-                    .withText(issueConfig.getAuthors(),
+                    .withText(issueConfig.authors(),
                             XY.at(
                                     issueConfig.getAuthorsXOffset() + frontLeftEdge(),
                                     issueConfig.getAuthorsYOffset()),
