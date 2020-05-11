@@ -55,16 +55,9 @@ public class CentredTextEffectImpl
 
     private void drawText(Image image, Graphics2D graphics2d, int lineCount, String line) {
         Rectangle2D stringBounds = getStringBounds(graphics2d, line);
-        int lineHeight = (int) stringBounds.getHeight();
-        int lineWidth = (int) stringBounds.getWidth();
-        CloverImage.drawText(line, framing -> {
-                    XY centered = framing.toBuilder()
-                            .outer(region.getArea())
-                            .inner(Area.of(lineWidth, region.getHeight()))
-                            .build().centered();
-                    return XY.at(centered.getX() + region.getLeft(),
-                            centered.getY() + region.getTop() + (lineHeight * lineCount));
-                },
+        int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
+        int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
+        CloverImage.drawText(line, framing -> XY.at(left, top),
                 fontFace, graphics2d, fontCache, image.getBufferedImage());
     }
 
