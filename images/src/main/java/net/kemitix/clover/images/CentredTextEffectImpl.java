@@ -20,7 +20,7 @@ import java.util.function.Function;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CentredTextEffectImpl
         implements CenteredTextEffect,
-        CenteredTextEffect.FontFaceNext,
+        CenteredTextEffect.TextNext,
         CenteredTextEffect.RegionNext,
         Function<Image, Image> {
 
@@ -76,7 +76,7 @@ public class CentredTextEffectImpl
     }
 
     @Override
-    public FontFaceNext text(String text) {
+    public Function<Image, Image> text(String text) {
         return toBuilder().text(text).build();
     }
 
@@ -86,7 +86,7 @@ public class CentredTextEffectImpl
     }
 
     @Override
-    public Function<Image, Image> region(Region region) {
+    public TextNext region(Region region) {
         return toBuilder().region(region).build();
     }
 

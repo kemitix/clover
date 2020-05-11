@@ -62,9 +62,9 @@ public class FrontCover implements Function<Image, Image> {
             // TODO - get the title from Issue, line-split it and use
             //  Framing to center
             return centeredText
-                    .text("Cossmass\nInfinities")
                     .fontFace(fontFace)
                     .region(dimensions.getFrontCrop().withPadding(90))
+                    .text("Cossmass\nInfinities")
                     .apply(image);
         };
     }

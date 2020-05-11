@@ -7,13 +7,15 @@ import net.kemitix.clover.spi.images.Region;
 import java.util.function.Function;
 
 public interface CenteredTextEffect {
-    FontFaceNext text(String text);
 
-    interface FontFaceNext {
-        RegionNext fontFace(FontFace fontFace);
-    }
+    RegionNext fontFace(FontFace fontFace);
 
     interface RegionNext {
-        Function<Image, Image> region(Region region);
+        TextNext region(Region region);
     }
+
+    interface TextNext {
+        Function<Image, Image> text(String text);
+    }
+
 }
