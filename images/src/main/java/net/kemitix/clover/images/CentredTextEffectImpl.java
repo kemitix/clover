@@ -2,8 +2,8 @@ package net.kemitix.clover.images;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.With;
 import net.kemitix.clover.spi.CenteredTextEffect;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.*;
@@ -12,12 +12,11 @@ import net.kemitix.clover.spi.images.Image;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.util.function.Function;
 
 @ApplicationScoped
-@Builder(toBuilder = true)
+@With
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CentredTextEffectImpl
     extends AbstractTextEffect
@@ -63,17 +62,17 @@ public class CentredTextEffectImpl
 
     @Override
     public Function<Image, Image> text(String text) {
-        return toBuilder().text(text).build();
+        return withText(text);
     }
 
     @Override
     public RegionNext fontFace(FontFace fontFace) {
-        return toBuilder().fontFace(fontFace).build();
+        return withFontFace(fontFace);
     }
 
     @Override
     public TextNext region(Region region) {
-        return toBuilder().region(region).build();
+        return withRegion(region);
     }
 
 }
