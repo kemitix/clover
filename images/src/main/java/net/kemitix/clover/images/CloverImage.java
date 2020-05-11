@@ -118,6 +118,11 @@ class CloverImage implements Image {
     }
 
     @Override
+    public Image withGraphics(Consumer<Graphics2D> graphics2DEffect) {
+        return useGraphics(copyImage(), graphics2DEffect);
+    }
+
+    @Override
     public void write(
             final Path path,
             final String name,
@@ -147,7 +152,7 @@ class CloverImage implements Image {
                 topLeft.getX(),
                 topLeft.getY(),
                 fontFace.getSize()));
-        return useGraphics(copyImage(), graphics2D ->
+        return withGraphics(graphics2D ->
                 drawText(text, framing -> topLeft, fontFace, graphics2D));
     }
 
@@ -227,7 +232,7 @@ class CloverImage implements Image {
         final int height = region.getHeight();
         LOGGER.fine(String.format("Filled Area: %dx%d by %dx%d",
                 left, top, width, height));
-        return useGraphics(copyImage(), graphics2D -> {
+        return withGraphics(graphics2D -> {
             graphics2D.setPaint(getColor(fillColour));
             graphics2D.fillRect(left, top, width, height);
         });
@@ -241,7 +246,7 @@ class CloverImage implements Image {
     ) {
         LOGGER.info(String.format("Drawing text: %s - %d",
                 text, fontFace.getSize()));
-        return useGraphics(copyImage(), graphics2D -> {
+        return withGraphics(graphics2D -> {
             graphics2D.rotate(Math.PI / 2);
             drawText(text,
                     framing -> framing
