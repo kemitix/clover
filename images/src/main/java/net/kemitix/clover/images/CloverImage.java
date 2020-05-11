@@ -1,5 +1,7 @@
 package net.kemitix.clover.images;
 
+import lombok.Builder;
+import lombok.Getter;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.FontCache;
@@ -23,6 +25,7 @@ import java.util.logging.Logger;
 
 import static java.awt.Image.SCALE_SMOOTH;
 
+@Builder(toBuilder = true)
 class CloverImage implements Image {
 
     private static final Logger LOGGER =
@@ -33,17 +36,21 @@ class CloverImage implements Image {
     private final CloverProperties config;
     private final FontCache fontCache;
     private final Instance<ImageWriter> imageWriters;
+    @Getter
+    private final String nameQualifier;
 
     CloverImage(
             final BufferedImage image,
             final CloverProperties config,
             final FontCache fontCache,
-            final Instance<ImageWriter> imageWriters
+            final Instance<ImageWriter> imageWriters,
+            final String nameQualifier
     ) {
         this.image = image;
         this.config = config;
         this.fontCache = fontCache;
         this.imageWriters = imageWriters;
+        this.nameQualifier = nameQualifier;
     }
 
     @Override
@@ -290,6 +297,11 @@ class CloverImage implements Image {
                 fontMetrics.getHeight());
     }
 
+    @Override
+    public Image withNameQualifier(String nameQualifier) {
+        return toBuilder().nameQualifier(nameQualifier).build();
+    }
+
     private List<String> tail(final List<String> list) {
         if (list.size() < 1) {
             return Collections.emptyList();
@@ -346,7 +358,7 @@ class CloverImage implements Image {
     }
 
     private Image withBufferedImage(BufferedImage newImage) {
-        return new CloverImage(newImage, config, fontCache, imageWriters);
+        return new CloverImage(newImage, config, fontCache, imageWriters, "");
     }
 
 }

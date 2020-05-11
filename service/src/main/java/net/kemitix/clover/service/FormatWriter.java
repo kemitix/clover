@@ -26,9 +26,10 @@ public class FormatWriter {
     }
 
     public void write(final CloverFormat format) {
-        final Image cropped = format.getImage();
-        cropped.write(Paths.get(cloverProperties.getIssueDir()),
-                format.getName(),
-                format.getImageProperties());
+        format.getImages().forEach(image -> {
+            image.write(Paths.get(cloverProperties.getIssueDir()),
+                    format.getName() + image.getNameQualifier(),
+                    format.getImageProperties());
+        });
     }
 }

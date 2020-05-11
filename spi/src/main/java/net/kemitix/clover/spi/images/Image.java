@@ -45,4 +45,8 @@ public interface Image {
     BufferedImage getBufferedImage();
 
     Area textArea(String text, FontFace fontFace);
+
+    String getNameQualifier();
+
+    Image withNameQualifier(String substring);
 }

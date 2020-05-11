@@ -49,6 +49,6 @@ public class CloverImageService implements ImageService {
         LOGGER.info(String.format("Loaded: (%dx%d)",
                 image.getWidth(),
                 image.getHeight()));
-        return new CloverImage(image, config, fontCache, imageWriters);
+        return new CloverImage(image, config, fontCache, imageWriters, "");
     }
 }
