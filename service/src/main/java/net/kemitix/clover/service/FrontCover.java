@@ -67,7 +67,8 @@ public class FrontCover implements Function<Image, Image> {
                                 cloverProperties.getDropShadowYOffset()));
         return image -> {
             LOGGER.info("Drawing title...");
-            var text = String.join("\n", issueConfig.getPublicationTitle().split(" "));
+            var text = String.join("\n",
+                    issueConfig.getPublicationTitle().split(" "));
             return centeredText
                     .fontFace(fontFace)
                     .region(dimensions.getFrontCrop().withPadding(85))
@@ -104,7 +105,7 @@ public class FrontCover implements Function<Image, Image> {
         return image ->
                 rightAlignText.fontFace(fontFace)
                         .region(dimensions.getFrontCrop().toBuilder()
-                               .top(10).build().withPadding(85))
+                                .top(10).build().withPadding(85))
                         .text("Science Fiction and Fantasy")
                         .apply(image);
     }
