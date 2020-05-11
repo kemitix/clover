@@ -95,7 +95,7 @@ public class FrontCover implements Function<Image, Image> {
                     .andThen(drawBannerSubtitle(fontFace))
                     .apply(image)
                     .withText(String.format("Issue %s", issueConfig.getIssue()),
-                            XY.at(85 + frontLeftEdge(), 485), fontFace)
+                            XY.at(85 + frontLeftEdge(), 475), fontFace)
                     ;
         };
     }
@@ -104,7 +104,7 @@ public class FrontCover implements Function<Image, Image> {
         return image ->
                 rightAlignText.fontFace(fontFace)
                         .region(dimensions.getFrontCrop().toBuilder()
-                               .top(0).build().withPadding(85))
+                               .top(10).build().withPadding(85))
                         .text("Science Fiction and Fantasy")
                         .apply(image);
     }
@@ -112,7 +112,7 @@ public class FrontCover implements Function<Image, Image> {
     private Function<Image, Image> drawDateSubtitle(FontFace fontFace) {
         return rightAlignText.fontFace(fontFace)
                 .region(Region.builder()
-                        .top(400).left(frontLeftEdge())
+                        .top(390).left(frontLeftEdge())
                         .width(dimensions.getFrontCrop().getWidth())
                         .height(dimensions.getFrontCrop().getHeight())
                         .build().withPadding(85))
