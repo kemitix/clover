@@ -2,6 +2,7 @@ package net.kemitix.clover.images;
 
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.FatalCloverError;
+import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.properties.typed.TypedProperties;
@@ -9,7 +10,6 @@ import org.beryx.awt.color.ColorFactory;
 
 import javax.enterprise.inject.Instance;
 import java.awt.*;
-import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -120,6 +120,11 @@ class CloverImage implements Image {
     @Override
     public Image withGraphics(Consumer<Graphics2D> graphics2DEffect) {
         return useGraphics(copyImage(), graphics2DEffect);
+    }
+
+    @Override
+    public BufferedImage getBufferedImage() {
+        return image;
     }
 
     @Override
@@ -272,15 +277,17 @@ class CloverImage implements Image {
                 .height(image.getHeight()).build();
     }
 
-    private int lineHeight(
-            final String head,
+    @Override
+    public Area textArea(
+            final String text,
             final FontFace fontFace
     ) {
         final Graphics2D graphics = image.createGraphics();
-        final FontMetrics fontMetrics = graphics.getFontMetrics(fontCache.loadFont(fontFace));
-        final LineMetrics lineMetrics = fontMetrics.getLineMetrics(head, graphics);
-        final float height = lineMetrics.getHeight();
-        return (int) height;
+        final FontMetrics fontMetrics =
+                graphics.getFontMetrics(fontCache.loadFont(fontFace));
+        return Area.of(
+                fontMetrics.stringWidth(text),
+                fontMetrics.getHeight());
     }
 
     private List<String> tail(final List<String> list) {
