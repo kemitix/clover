@@ -29,6 +29,14 @@ public class Region {
                 .build();
     }
 
+    public static Region from(Area area) {
+        return Region.builder()
+                .top(0).left(0)
+                .width((int) area.getWidth())
+                .height((int) area.getHeight())
+                .build();
+    }
+
     public int getRight() {
         return getLeft() + getWidth();
     }
