@@ -4,10 +4,8 @@ import lombok.*;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.SimpleTextEffect;
 import net.kemitix.clover.spi.TextEffect;
-import net.kemitix.clover.spi.images.FontFace;
+import net.kemitix.clover.spi.images.*;
 import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.Region;
-import net.kemitix.clover.spi.images.XY;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -35,16 +33,25 @@ public class SimpleTextEffectImpl
     @Override
     public Image apply(Image image) {
         return image.withGraphics(graphics2D -> {
+            double lineHeight = getStringBounds(graphics2D, "X").getHeight();
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
-                    .forEach(i -> drawText(image, graphics2D, i, split[i]));
+                    .forEach(lineNumber -> {
+                        int lineOffset = (int) lineHeight * lineNumber;
+                        drawLineOfText(image, graphics2D, split[lineNumber], lineOffset);
+                    });
         });
     }
 
-    private void drawText(Image image, Graphics2D graphics2D, int lineLumber, String line) {
-        AbstractTextEffect.drawText(text, framing ->
-                        XY.at(region.getLeft(), region.getTop()),
-                fontFace, graphics2D, fontCache, image.getBufferedImage());
+    private void drawLineOfText(
+            Image image,
+            Graphics2D graphics2D,
+            String lineOfText,
+            int lineOffset
+    ) {
+        XY position = XY.at(region.getLeft(), region.getTop() + lineOffset);
+        AbstractTextEffect.drawText(lineOfText, framing -> position, fontFace,
+                graphics2D, fontCache, image.getBufferedImage());
     }
 
     @Override
