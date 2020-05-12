@@ -1,8 +1,6 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CenteredTextEffect;
-import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.RightAlignTextEffect;
+import net.kemitix.clover.spi.*;
 import net.kemitix.clover.spi.images.FontFace;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.Region;
@@ -10,11 +8,8 @@ import net.kemitix.clover.spi.images.XY;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.function.Function;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FrontCover implements Function<Image, Image> {
@@ -33,6 +28,8 @@ public class FrontCover implements Function<Image, Image> {
     CenteredTextEffect centeredText;
     @Inject
     RightAlignTextEffect rightAlignText;
+    @Inject
+    SimpleTextEffect simpleTextEffect;
 
     @Override
     public Image apply(Image image) {
@@ -80,10 +77,22 @@ public class FrontCover implements Function<Image, Image> {
             LOGGER.info("Drawing subtitle...");
             return drawDateSubtitle(fontFace)
                     .andThen(drawBannerSubtitle(fontFace))
-                    .apply(image)
-                    .withText(String.format("Issue %s", issueConfig.getIssue()),
-                            XY.at(85 + frontLeftEdge(), 475), fontFace)
-                    ;
+                    .andThen(issueNumber(fontFace))
+                    .apply(image);
+        };
+    }
+
+    private Function<Image, Image> issueNumber(FontFace fontFace) {
+        return image -> {
+            LOGGER.info("issueNumber");
+            return simpleTextEffect.fontFace(fontFace)
+                    .region(Region.builder()
+                            .top(475).left(85 + frontLeftEdge())
+                            .width((int) image.getArea().getWidth() - (85 + frontLeftEdge()))
+                            .height((int) image.getArea().getHeight() - 475)
+                            .build())
+                    .text(String.format("Issue %s", issueConfig.getIssue()))
+                    .apply(image);
         };
     }
 
