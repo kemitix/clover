@@ -78,6 +78,7 @@ public class ServiceCloverProperties implements CloverProperties {
     }
 
     @Override
+    @Deprecated
     public Area getKindleFrontArea() {
         return Area.builder()
                 .width((int) getWidth())
