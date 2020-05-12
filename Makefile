@@ -3,6 +3,9 @@ ISSUE_DIR=-Dissue-dir=${HOME}/cossmass/issues/002-2020-05-may
 FONT_FILE=-Dfont-file=${HOME}/cossmass/binder/fonts/Snowslider/SnowSL_Std.OTF
 RUN_PARAMS=${ISSUE_DIR} ${FONT_FILE}
 
+graphs:
+	mvn validate
+
 install:
 	mvn install
 
