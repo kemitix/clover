@@ -38,8 +38,12 @@ public class CentredTextEffectImpl
         return image.withGraphics(graphics2d -> {
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
-                    .forEach(i ->
-                            drawText(graphics2d, i, split[i], image.getArea()));
+                    .forEach(lineNumber -> {
+                        String lineOfText = split[lineNumber];
+                        if (lineOfText.length() > 0) {
+                            drawText(graphics2d, lineNumber, lineOfText, image.getArea());
+                        }
+                    });
         });
     }
 

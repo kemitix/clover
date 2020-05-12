@@ -37,8 +37,11 @@ public class SimpleTextEffectImpl
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
                     .forEach(lineNumber -> {
-                        int lineOffset = (int) lineHeight * lineNumber;
-                        drawLineOfText(image, graphics2D, split[lineNumber], lineOffset);
+                        String lineOfText = split[lineNumber];
+                        if (lineOfText.length() > 0) {
+                            int lineOffset = (int) lineHeight * lineNumber;
+                            drawLineOfText(image, graphics2D, lineOfText, lineOffset);
+                        }
                     });
         });
     }
