@@ -1,9 +1,6 @@
 package net.kemitix.clover.images;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.With;
+import lombok.*;
 import net.kemitix.clover.spi.CenteredTextEffect;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.*;
@@ -19,6 +16,7 @@ import java.util.stream.IntStream;
 @ApplicationScoped
 @With
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class CentredTextEffectImpl
     extends AbstractTextEffect
         implements CenteredTextEffect,
@@ -27,20 +25,13 @@ public class CentredTextEffectImpl
         Function<Image, Image> {
 
     private String text;
+    @Inject
     @Getter
     private FontCache fontCache;
     @Getter
     private FontFace fontFace;
     @Getter
     private Region region;
-
-    public CentredTextEffectImpl() {
-    }
-
-    @Inject
-    public CentredTextEffectImpl(FontCache fontCache) {
-        this.fontCache = fontCache;
-    }
 
     @Override
     public Image apply(Image image) {
