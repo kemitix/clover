@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.kemitix.clover.spi.images.Region;
 import net.kemitix.clover.spi.images.XY;
 
 import javax.json.bind.annotation.JsonbProperty;
@@ -37,6 +38,7 @@ public class IssueConfig {
     private int authorsXOffset;
     @JsonbProperty("authors-y-offset")
     private int authorsYOffset;
+    private Cards cards;
     private Stories stories;
     List<String> authors() {
         return stories.stream()
@@ -86,6 +88,31 @@ public class IssueConfig {
         private String forename;
         public String authorName() {
             return String.join(" ", Arrays.asList(forename, surname));
+        }
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Cards {
+        private Crop crop;
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Crop {
+        private int top;
+        private int left;
+        private int width;
+        private int height;
+        public Region getRegion() {
+            return Region.builder()
+                    .top(top).left(left)
+                    .width(width).height(height)
+                    .build();
         }
     }
 }
