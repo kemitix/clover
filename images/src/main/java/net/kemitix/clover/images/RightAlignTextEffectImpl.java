@@ -60,7 +60,7 @@ public class RightAlignTextEffectImpl
                     int top = region.getTop();
                     return XY.at(left, top);
                 },
-                fontFace, graphics2D, fontCache, image.getBufferedImage());
+                fontFace, graphics2D, fontCache, image.getArea());
     }
 
     @Override

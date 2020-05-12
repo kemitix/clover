@@ -8,7 +8,6 @@ import org.beryx.awt.color.ColorFactory;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -21,7 +20,7 @@ abstract class AbstractTextEffect {
             final FontFace fontFace,
             final Graphics2D graphics,
             final FontCache fontCache,
-            final BufferedImage image
+            final Area imageArea
     ) {
         final Font font = fontCache.loadFont(fontFace);
         graphics.setRenderingHint(
@@ -31,7 +30,7 @@ abstract class AbstractTextEffect {
         final Rectangle2D stringBounds =
                 font.getStringBounds(text, graphics.getFontRenderContext());
         final XY topLeft = positioning.apply(Framing.builder()
-                .outer(Area.of(image.getWidth(), image.getHeight()))
+                .outer(imageArea)
                 .inner(Area.of(((int) stringBounds.getWidth()), ((int) stringBounds.getHeight())))
                 .build());
         // Drop Shadow

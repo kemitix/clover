@@ -161,7 +161,8 @@ class CloverImage implements Image {
                 topLeft.getY(),
                 fontFace.getSize()));
         return withGraphics(graphics2D ->
-                AbstractTextEffect.drawText(text, framing -> topLeft, fontFace, graphics2D, fontCache, image));
+                AbstractTextEffect.drawText(text, framing -> topLeft, fontFace,
+                        graphics2D, fontCache, getArea()));
     }
 
     @Override
@@ -221,17 +222,14 @@ class CloverImage implements Image {
             AbstractTextEffect.drawText(text,
                     framing -> framing
                             .toBuilder()
-                            .outer(Area.builder()
-                                    .width(region.getHeight())
-                                    .height(region.getWidth())
-                                    .build())
+                            .outer(region.getArea().transposed())
                             .build()
                             .centered()
                             .map(xy -> XY.at(
                                     xy.getX() + region.getTop(),
                                     (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
                             .map(xy -> XY.at(xy.getX(), -xy.getY())),
-                    fontFace, graphics2D, fontCache, image);
+                    fontFace, graphics2D, fontCache, getArea().transposed());
         });
     }
 

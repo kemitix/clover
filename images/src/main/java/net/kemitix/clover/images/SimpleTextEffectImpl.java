@@ -51,7 +51,7 @@ public class SimpleTextEffectImpl
     ) {
         XY position = XY.at(region.getLeft(), region.getTop() + lineOffset);
         AbstractTextEffect.drawText(lineOfText, framing -> position, fontFace,
-                graphics2D, fontCache, image.getBufferedImage());
+                graphics2D, fontCache, image.getArea());
     }
 
     @Override

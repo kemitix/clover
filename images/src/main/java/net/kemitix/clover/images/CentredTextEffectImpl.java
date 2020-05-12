@@ -38,16 +38,22 @@ public class CentredTextEffectImpl
         return image.withGraphics(graphics2d -> {
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
-                    .forEach(i -> drawText(image, graphics2d, i, split[i]));
+                    .forEach(i ->
+                            drawText(graphics2d, i, split[i], image.getArea()));
         });
     }
 
-    private void drawText(Image image, Graphics2D graphics2d, int lineCount, String line) {
+    private void drawText(
+            Graphics2D graphics2d,
+            int lineCount,
+            String line,
+            Area imageArea
+    ) {
         Rectangle2D stringBounds = getStringBounds(graphics2d, line);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
         int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
-                fontFace, graphics2d, fontCache, image.getBufferedImage());
+                fontFace, graphics2d, fontCache, imageArea);
     }
 
     @Override

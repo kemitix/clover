@@ -18,4 +18,8 @@ public class Area {
                 .height(height)
                 .build();
     }
+
+    public Area transposed() {
+        return Area.of(height, width);
+    }
 }
