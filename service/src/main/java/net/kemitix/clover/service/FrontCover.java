@@ -23,30 +23,16 @@ public class FrontCover implements Function<Image, Image> {
             Logger.getLogger(
                     FrontCover.class.getName());
 
-    private CloverProperties cloverProperties;
-    private IssueConfig issueConfig;
-    private Dimensions dimensions;
-    private CenteredTextEffect centeredText;
-    private RightAlignTextEffect rightAlignText;
-
-    public FrontCover() {
-    }
-
     @Inject
-    public FrontCover(
-            CloverProperties cloverProperties,
-            IssueConfig issueConfig,
-            Dimensions dimensions,
-            CenteredTextEffect centeredText,
-            RightAlignTextEffect rightAlignText
-    ) {
-        this.cloverProperties = cloverProperties;
-        this.issueConfig = issueConfig;
-        this.dimensions = dimensions;
-        this.centeredText = centeredText;
-        this.rightAlignText = rightAlignText;
-    }
-
+    CloverProperties cloverProperties;
+    @Inject
+    IssueConfig issueConfig;
+    @Inject
+    Dimensions dimensions;
+    @Inject
+    CenteredTextEffect centeredText;
+    @Inject
+    RightAlignTextEffect rightAlignText;
 
     @Override
     public Image apply(Image image) {
