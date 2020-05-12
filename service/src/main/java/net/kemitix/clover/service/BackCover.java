@@ -17,23 +17,12 @@ public class BackCover implements Function<Image, Image> {
             Logger.getLogger(
                     BackCover.class.getName());
 
-    private CloverProperties cloverProperties;
-    private IssueConfig issueConfig;
-    private StoryListFormatter storyListFormatter;
-
-    public BackCover() {
-    }
-
     @Inject
-    public BackCover(
-            CloverProperties cloverProperties,
-            IssueConfig issueConfig,
-            StoryListFormatter storyListFormatter
-    ) {
-        this.cloverProperties = cloverProperties;
-        this.issueConfig = issueConfig;
-        this.storyListFormatter = storyListFormatter;
-    }
+    CloverProperties cloverProperties;
+    @Inject
+    IssueConfig issueConfig;
+    @Inject
+    StoryListFormatter storyListFormatter;
 
     @Override
     public Image apply(Image image) {
