@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 abstract class AbstractTextEffect {
 
+    @Deprecated
     public static void drawText(
             final String text,
             final Function<Framing, XY> positioning,
