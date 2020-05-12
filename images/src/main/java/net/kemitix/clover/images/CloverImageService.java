@@ -5,6 +5,7 @@ import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.ImageService;
+import net.kemitix.clover.spi.images.ImageWriter;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;

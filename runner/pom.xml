@@ -25,6 +25,11 @@
             <groupId>net.kemitix.clover</groupId>
             <artifactId>clover-images</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.kemitix.clover</groupId>
+            <artifactId>clover-image-io</artifactId>
+        </dependency>
+
 
         <!-- quarkus -->
         <dependency>

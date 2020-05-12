@@ -21,6 +21,7 @@
         <module>runner</module>
         <module>images</module>
         <module>spi</module>
+        <module>image-io</module>
     </modules>
 
     <build>

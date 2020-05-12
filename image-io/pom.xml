@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>net.kemitix.clover</groupId>
         <artifactId>clover-parent</artifactId>
@@ -11,13 +10,23 @@
         <relativePath>../parent</relativePath>
     </parent>
 
-    <artifactId>clover-images</artifactId>
+    <artifactId>clover-image-io</artifactId>
+
+    <properties>
+        <itextpdf.version>7.1.11</itextpdf.version>
+        <webp-imageio.version>0.1.5</webp-imageio.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -26,9 +35,20 @@
         </dependency>
 
         <dependency>
-            <groupId>org.beryx</groupId>
-            <artifactId>awt-color-factory</artifactId>
-            <version>${awt-color-factory.version}</version>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-jpeg</artifactId>
+            <version>3.5</version>
+            <!-- FIXME: This not being registered correctly -->
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>pdfa</artifactId>
+            <version>${itextpdf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>${itextpdf.version}</version>
         </dependency>
 
         <!-- tests -->
@@ -52,15 +72,6 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
-
-    <properties>
-        <awt-color-factory.version>1.0.1</awt-color-factory.version>
-    </properties>
 
 </project>
