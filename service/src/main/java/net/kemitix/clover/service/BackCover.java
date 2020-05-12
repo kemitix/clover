@@ -1,8 +1,10 @@
 package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.SimpleTextEffect;
 import net.kemitix.clover.spi.images.FontFace;
 import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.images.Region;
 import net.kemitix.clover.spi.images.XY;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,6 +25,8 @@ public class BackCover implements Function<Image, Image> {
     IssueConfig issueConfig;
     @Inject
     StoryListFormatter storyListFormatter;
+    @Inject
+    SimpleTextEffect simpleTextEffect;
 
     @Override
     public Image apply(Image image) {
@@ -43,39 +47,57 @@ public class BackCover implements Function<Image, Image> {
     private Function<Image, Image> drawSFStories(final FontFace fontFace) {
         return image -> {
             LOGGER.info("Drawing SF Stories...");
-            return image
-                    .withText(
+            int top = 200;
+            int left = 150;
+            return simpleTextEffect.fontFace(fontFace)
+                    .region(Region.builder()
+                            .top(top).left(left)
+                            .width(image.getRegion().getWidth() - left)
+                            .height(image.getRegion().getHeight() - top)
+                            .build())
+                    .text(String.join("\n",
                             storyListFormatter.format(
                                     "Science Fiction Stories",
-                                    issueConfig.getStories().getSf()),
-                            XY.at(150, 200),
-                            fontFace);
+                                    issueConfig.getStories().getSf())))
+                    .apply(image);
         };
     }
 
     private Function<Image, Image> drawFantasyStories(final FontFace fontFace) {
         return image -> {
             LOGGER.info("Drawing Fantasy Stories...");
-            return image
-                    .withText(
+            int top = 1100;
+            int left = 500;
+            return simpleTextEffect.fontFace(fontFace)
+                    .region(Region.builder()
+                            .top(top).left(left)
+                            .width(image.getRegion().getWidth() - left)
+                            .height(image.getRegion().getHeight() - top)
+                            .build())
+                    .text(String.join("\n",
                             storyListFormatter.format(
                                     "Fantasy Stories",
-                                    issueConfig.getStories().getFantasy()),
-                            XY.at(500, 1100),
-                            fontFace);
+                                    issueConfig.getStories().getFantasy())))
+                    .apply(image);
         };
     }
 
     private Function<Image, Image> drawReprintStories(final FontFace fontFace) {
         return image -> {
             LOGGER.info("Drawing Reprint Stories...");
-            return image
-                    .withText(
+            int top = 1800;
+            int left = 150;
+            return simpleTextEffect.fontFace(fontFace)
+                    .region(Region.builder()
+                            .top(top).left(left)
+                            .width(image.getRegion().getWidth() - left)
+                            .height(image.getRegion().getHeight() - top)
+                            .build())
+                    .text(String.join("\n",
                             storyListFormatter.format(
                                     "Plus",
-                                    issueConfig.getStories().getReprint()),
-                            XY.at(150, 1800),
-                            fontFace);
+                                    issueConfig.getStories().getReprint())))
+                    .apply(image);
         };
     }
 
