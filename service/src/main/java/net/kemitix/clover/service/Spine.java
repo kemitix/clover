@@ -11,23 +11,13 @@ import java.util.function.Function;
 
 @ApplicationScoped
 public class Spine implements Function<Image, Image> {
-    private CloverProperties cloverProperties;
-    private IssueConfig issueConfig;
-    private Dimensions dimensions;
-
-    public Spine() {
-    }
 
     @Inject
-    public Spine(
-            CloverProperties cloverProperties,
-            IssueConfig issueConfig,
-            Dimensions dimensions
-    ) {
-        this.cloverProperties = cloverProperties;
-        this.issueConfig = issueConfig;
-        this.dimensions = dimensions;
-    }
+    CloverProperties cloverProperties;
+    @Inject
+    IssueConfig issueConfig;
+    @Inject
+    Dimensions dimensions;
 
     @Override
     public Image apply(Image image) {
