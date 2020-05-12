@@ -126,12 +126,16 @@ public class FrontCover implements Function<Image, Image> {
                                 cloverProperties.getDropShadowYOffset()));
         return image -> {
             LOGGER.info("Drawing authors...");
-            return image
-                    .withText(issueConfig.authors(),
-                            XY.at(
-                                    issueConfig.getAuthorsXOffset() + frontLeftEdge(),
-                                    issueConfig.getAuthorsYOffset()),
-                            fontFace);
+            int top = issueConfig.getAuthorsYOffset();
+            int left = issueConfig.getAuthorsXOffset() + frontLeftEdge();
+            return simpleTextEffect.fontFace(fontFace)
+                    .region(Region.builder()
+                            .top(top).left(left)
+                            .width(image.getRegion().getWidth() - left)
+                            .height(image.getRegion().getHeight() - top)
+                            .build())
+                    .text(String.join("\n", issueConfig.authors()))
+                    .apply(image);
         };
     }
 }
