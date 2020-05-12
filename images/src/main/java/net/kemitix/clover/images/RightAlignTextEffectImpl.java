@@ -55,7 +55,7 @@ public class RightAlignTextEffectImpl
     private void drawText(Image image, Graphics2D graphics2D, int lineCount, String line) {
         Rectangle2D stringBounds = getStringBounds(graphics2D, line);
         int lineWidth = (int) stringBounds.getWidth();
-        CloverImage.drawText(line, framing -> {
+        AbstractTextEffect.drawText(line, framing -> {
                     int left = region.getRight() - lineWidth;
                     int top = region.getTop();
                     return XY.at(left, top);

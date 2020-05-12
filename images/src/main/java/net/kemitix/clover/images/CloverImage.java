@@ -3,16 +3,13 @@ package net.kemitix.clover.images;
 import lombok.Builder;
 import lombok.Getter;
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.properties.typed.TypedProperties;
-import org.beryx.awt.color.ColorFactory;
 
 import javax.enterprise.inject.Instance;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
@@ -20,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.logging.Logger;
 
 import static java.awt.Image.SCALE_SMOOTH;
@@ -165,45 +161,7 @@ class CloverImage implements Image {
                 topLeft.getY(),
                 fontFace.getSize()));
         return withGraphics(graphics2D ->
-                drawText(text, framing -> topLeft, fontFace, graphics2D, fontCache, image));
-    }
-
-    public static void drawText(
-            final String text,
-            final Function<Framing, XY> positioning,
-            final FontFace fontFace,
-            final Graphics2D graphics,
-            final FontCache fontCache,
-            final BufferedImage image
-    ) {
-        final Font font = fontCache.loadFont(fontFace);
-        graphics.setRenderingHint(
-                RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
-        graphics.setFont(font);
-        final Rectangle2D stringBounds =
-                font.getStringBounds(text, graphics.getFontRenderContext());
-        final XY topLeft = positioning.apply(Framing.builder()
-                .outer(Area.of(image.getWidth(), image.getHeight()))
-                .inner(Area.of(((int) stringBounds.getWidth()), ((int) stringBounds.getHeight())))
-                .build());
-        // Drop Shadow
-        final XY shadowOffset = fontFace.getShadowOffset();
-        if (shadowOffset.getX() != 0 || shadowOffset.getY() != 0) {
-            graphics.setPaint(getColor(fontFace.getShadowColour()));
-            graphics.drawString(text,
-                    topLeft.getX() + shadowOffset.getX(),
-                    (int) (topLeft.getY() - stringBounds.getY() + shadowOffset.getY()));
-        }
-        // Text
-        graphics.setPaint(getColor(fontFace.getColour()));
-        graphics.drawString(text,
-                topLeft.getX(),
-                (int) (topLeft.getY() - stringBounds.getY()));
-//        if (config.drawBoundingBoxes) {
-//            graphics.setPaint(getColor("red"));
-//            graphics.drawRect(topLeft.getX(), topLeft.getY(), ((int) stringBounds.getWidth()), ((int) stringBounds.getHeight()));
-//        }
+                AbstractTextEffect.drawText(text, framing -> topLeft, fontFace, graphics2D, fontCache, image));
     }
 
     @Override
@@ -245,7 +203,7 @@ class CloverImage implements Image {
         LOGGER.fine(String.format("Filled Area: %dx%d by %dx%d",
                 left, top, width, height));
         return withGraphics(graphics2D -> {
-            graphics2D.setPaint(getColor(fillColour));
+            graphics2D.setPaint(AbstractTextEffect.getColor(fillColour));
             graphics2D.fillRect(left, top, width, height);
         });
     }
@@ -260,7 +218,7 @@ class CloverImage implements Image {
                 text, fontFace.getSize()));
         return withGraphics(graphics2D -> {
             graphics2D.rotate(Math.PI / 2);
-            CloverImage.drawText(text,
+            AbstractTextEffect.drawText(text,
                     framing -> framing
                             .toBuilder()
                             .outer(Area.builder()
@@ -314,14 +272,6 @@ class CloverImage implements Image {
             return Optional.empty();
         }
         return Optional.ofNullable(list.get(0));
-    }
-
-    private static Color getColor(final String colour) {
-        return Optional.ofNullable(
-                ColorFactory.valueOf(colour))
-                .orElseThrow(() ->
-                        new FatalCloverError(
-                                "Unknown colour: " + colour));
     }
 
     private BufferedImage copyImage() {

@@ -55,7 +55,7 @@ public class CentredTextEffectImpl
         Rectangle2D stringBounds = getStringBounds(graphics2d, line);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
         int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
-        CloverImage.drawText(line, framing -> XY.at(left, top),
+        AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 fontFace, graphics2d, fontCache, image.getBufferedImage());
     }
 
