@@ -18,20 +18,20 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class CentredTextEffectImpl
-    extends AbstractTextEffect
+        extends AbstractTextEffect
         implements CenteredTextEffect,
         CenteredTextEffect.TextNext,
         CenteredTextEffect.RegionNext,
         Function<Image, Image> {
 
-    private String text;
     @Inject
     @Getter
-    private FontCache fontCache;
+    FontCache fontCache;
     @Getter
-    private FontFace fontFace;
+    FontFace fontFace;
     @Getter
-    private Region region;
+    Region region;
+    String text;
 
     @Override
     public Image apply(Image image) {
