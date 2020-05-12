@@ -72,11 +72,8 @@ public class IssueConfig {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Story {
-        @JsonbProperty("author")
         private Author author;
-        @JsonbProperty("title")
         private String title;
-        @JsonbProperty("sample")
         private String sample;
     }
 
@@ -85,9 +82,7 @@ public class IssueConfig {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Author {
-        @JsonbProperty("surname")
         private String surname;
-        @JsonbProperty("forename")
         private String forename;
         public String authorName() {
             return String.join(" ", Arrays.asList(forename, surname));
