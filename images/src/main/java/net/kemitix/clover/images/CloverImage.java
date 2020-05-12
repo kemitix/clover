@@ -49,29 +49,6 @@ class CloverImage implements Image {
         this.nameQualifier = nameQualifier;
     }
 
-    @Override
-    public Image scaleToCover(final Area area) {
-        final float width = area.getWidth();
-        final float height = area.getHeight();
-        LOGGER.info(String.format("Scaling to cover: %f x %f", width, height));
-        final float originalWidth = getWidth();
-        final float originalHeight = getHeight();
-        final float ratio = originalWidth / originalHeight;
-        LOGGER.info("Ratio: " + ratio);
-        final float newWidth;
-        final float newHeight;
-        if (ratio > 1) { // is wide
-            newWidth = height * ratio;
-            newHeight = height;
-        } else { // is tall
-            newWidth = width;
-            newHeight = width / ratio;
-        }
-        LOGGER.info(String.format("Resizing to %fx%f",
-                newWidth, newHeight));
-        return scaleTo(Area.of(newWidth, newHeight));
-    }
-
     private Image scaleTo(final Area area) {
         final int width = (int) area.getWidth();
         final int height = (int) area.getHeight();
@@ -126,11 +103,6 @@ class CloverImage implements Image {
     }
 
     @Override
-    public BufferedImage getBufferedImage() {
-        return image;
-    }
-
-    @Override
     public void write(
             final Path path,
             final String name,
@@ -144,41 +116,6 @@ class CloverImage implements Image {
                                     .toFile();
                     write(format, file, properties);
                 });
-    }
-
-    @Override
-    public Image withText(
-            final String text,
-            final XY topLeft,
-            final FontFace fontFace
-    ) {
-        if ("".equals(text)) {
-            return this;
-        }
-        LOGGER.info(String.format("Drawing text: %s at %dx%d - %d",
-                text,
-                topLeft.getX(),
-                topLeft.getY(),
-                fontFace.getSize()));
-        return withGraphics(graphics2D ->
-                AbstractTextEffect.drawText(text, framing -> topLeft, fontFace,
-                        graphics2D, fontCache, getArea()));
-    }
-
-    @Override
-    public Image withText(
-            final List<String> text,
-            final XY topLeft,
-            final FontFace fontFace
-    ) {
-        return head(text)
-                .map(head -> withText(head, topLeft, fontFace)
-                        .withText(tail(text),
-                                XY.at(topLeft.getX(), topLeft.getY() +
-                                        ((int) textArea(head, fontFace)
-                                                .getHeight())),
-                                fontFace))
-                .orElse(this);
     }
 
     @Override
@@ -238,38 +175,6 @@ class CloverImage implements Image {
         return Area.builder()
                 .width(image.getWidth())
                 .height(image.getHeight()).build();
-    }
-
-    @Override
-    public Area textArea(
-            final String text,
-            final FontFace fontFace
-    ) {
-        final Graphics2D graphics = image.createGraphics();
-        final FontMetrics fontMetrics =
-                graphics.getFontMetrics(fontCache.loadFont(fontFace));
-        return Area.of(
-                fontMetrics.stringWidth(text),
-                fontMetrics.getHeight());
-    }
-
-    @Override
-    public Image withNameQualifier(String nameQualifier) {
-        return toBuilder().nameQualifier(nameQualifier).build();
-    }
-
-    private List<String> tail(final List<String> list) {
-        if (list.size() < 1) {
-            return Collections.emptyList();
-        }
-        return list.subList(1, list.size());
-    }
-
-    private Optional<String> head(final List<String> list) {
-        if (list.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(list.get(0));
     }
 
     private BufferedImage copyImage() {
