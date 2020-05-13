@@ -3,18 +3,18 @@ package net.kemitix.clover.images;
 import lombok.Builder;
 import lombok.Getter;
 import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.properties.typed.TypedProperties;
+import org.beryx.awt.color.ColorFactory;
 
 import javax.enterprise.inject.Instance;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -141,33 +141,17 @@ class CloverImage implements Image {
         LOGGER.fine(String.format("Filled Area: %dx%d by %dx%d",
                 left, top, width, height));
         return withGraphics(graphics2D -> {
-            graphics2D.setPaint(AbstractTextEffect.getColor(fillColour));
+            graphics2D.setPaint(getColor(fillColour));
             graphics2D.fillRect(left, top, width, height);
         });
     }
 
-    @Override
-    public Image withRotatedCenteredText(
-            final String text,
-            final Region region,
-            final FontFace fontFace
-    ) {
-        LOGGER.info(String.format("Drawing text: %s - %d",
-                text, fontFace.getSize()));
-        return withGraphics(graphics2D -> {
-            graphics2D.rotate(Math.PI / 2);
-            AbstractTextEffect.drawText(text,
-                    framing -> framing
-                            .toBuilder()
-                            .outer(region.getArea().transposed())
-                            .build()
-                            .centered()
-                            .map(xy -> XY.at(
-                                    xy.getX() + region.getTop(),
-                                    (int) (framing.getInner().getHeight() + region.getLeft() + xy.getY())))
-                            .map(xy -> XY.at(xy.getX(), -xy.getY())),
-                    fontFace, graphics2D, fontCache, getArea().transposed());
-        });
+    static Color getColor(final String colour) {
+        return Optional.ofNullable(
+                ColorFactory.valueOf(colour))
+                .orElseThrow(() ->
+                        new FatalCloverError(
+                                "Unknown colour: " + colour));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.image.effects;
 
 import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.FontCache;

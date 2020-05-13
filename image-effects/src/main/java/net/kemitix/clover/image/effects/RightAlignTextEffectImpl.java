@@ -1,4 +1,4 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.image.effects;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

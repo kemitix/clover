@@ -1,8 +1,8 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.FontCache;
-import net.kemitix.clover.spi.SimpleTextEffect;
+import net.kemitix.clover.spi.RotatedCenteredTextEffect;
 import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.clover.spi.images.Image;
@@ -10,6 +10,8 @@ import net.kemitix.clover.spi.images.Image;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -17,44 +19,54 @@ import java.util.stream.IntStream;
 @ApplicationScoped
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class SimpleTextEffectImpl
+public class RotatedCenteredTextEffectImpl
         extends AbstractTextEffect
-        implements SimpleTextEffect,
+        implements RotatedCenteredTextEffect,
         TextEffect.RegionNext,
         TextEffect.TextNext,
         Function<Image, Image> {
 
     @Inject
-    @Getter FontCache fontCache;
+    @Getter
+    FontCache fontCache;
+
     @Getter FontFace fontFace;
     @Getter Region region;
     @Getter String text;
 
     @Override
     public Image apply(Image image) {
-        return image.withGraphics(graphics2D -> {
-            double lineHeight = getStringBounds(graphics2D, "X").getHeight();
+        return image.withGraphics(graphics2d -> {
+            graphics2d.setTransform(
+                    AffineTransform.getQuadrantRotateInstance(1));
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
                     .forEach(lineNumber -> {
                         String lineOfText = split[lineNumber];
                         if (lineOfText.length() > 0) {
-                            int lineOffset = (int) lineHeight * lineNumber;
-                            drawLineOfText(image, graphics2D, lineOfText, lineOffset);
+                            drawText(graphics2d, lineNumber, lineOfText,
+                                    image.getArea().rotateCW(),
+                                    region
+                                            .rotateCW()
+                                            .flipVertically(0)
+                            );
                         }
                     });
         });
     }
 
-    private void drawLineOfText(
-            Image image,
-            Graphics2D graphics2D,
-            String lineOfText,
-            int lineOffset
+    private void drawText(
+            Graphics2D graphics2d,
+            int lineCount,
+            String line,
+            Area imageArea,
+            Region region
     ) {
-        XY position = XY.at(region.getLeft(), region.getTop() + lineOffset);
-        AbstractTextEffect.drawText(lineOfText, framing -> position, fontFace,
-                graphics2D, fontCache, image.getArea());
+        Rectangle2D stringBounds = getStringBounds(graphics2d, line);
+        int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount) - region.getHeight();
+        int left = region.getWidth() + region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
+        AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
+                fontFace, graphics2d, fontCache, imageArea);
     }
 
     @Override

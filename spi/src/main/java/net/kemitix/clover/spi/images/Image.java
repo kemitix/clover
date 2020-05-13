@@ -22,8 +22,6 @@ public interface Image {
 
     Image withFilledArea(Region region, String fillColour);
 
-    Image withRotatedCenteredText(String text, Region region, FontFace fontFace);
-
     Area getArea();
 
     Region getRegion();

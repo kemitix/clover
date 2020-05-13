@@ -1,56 +1,47 @@
-package net.kemitix.clover.images;
+package net.kemitix.clover.image.effects;
 
 import lombok.*;
+import net.kemitix.clover.spi.CenteredTextEffect;
 import net.kemitix.clover.spi.FontCache;
-import net.kemitix.clover.spi.RotatedCenteredTextEffect;
-import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.clover.spi.images.*;
 import net.kemitix.clover.spi.images.Image;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
-import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-@With
 @ApplicationScoped
-@NoArgsConstructor
+@With
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class RotatedCenteredTextEffectImpl
+@NoArgsConstructor
+public class CentredTextEffectImpl
         extends AbstractTextEffect
-        implements RotatedCenteredTextEffect,
-        TextEffect.RegionNext,
-        TextEffect.TextNext,
+        implements CenteredTextEffect,
+        CenteredTextEffect.TextNext,
+        CenteredTextEffect.RegionNext,
         Function<Image, Image> {
 
     @Inject
     @Getter
     FontCache fontCache;
-
-    @Getter FontFace fontFace;
-    @Getter Region region;
-    @Getter String text;
+    @Getter
+    FontFace fontFace;
+    @Getter
+    Region region;
+    String text;
 
     @Override
     public Image apply(Image image) {
         return image.withGraphics(graphics2d -> {
-            graphics2d.setTransform(
-                    AffineTransform.getQuadrantRotateInstance(1));
             String[] split = text.split("\n");
             IntStream.range(0, split.length)
                     .forEach(lineNumber -> {
                         String lineOfText = split[lineNumber];
                         if (lineOfText.length() > 0) {
-                            drawText(graphics2d, lineNumber, lineOfText,
-                                    image.getArea().rotateCW(),
-                                    region
-                                            .rotateCW()
-                                            .flipVertically(0)
-                            );
+                            drawText(graphics2d, lineNumber, lineOfText, image.getArea());
                         }
                     });
         });
@@ -60,14 +51,18 @@ public class RotatedCenteredTextEffectImpl
             Graphics2D graphics2d,
             int lineCount,
             String line,
-            Area imageArea,
-            Region region
+            Area imageArea
     ) {
         Rectangle2D stringBounds = getStringBounds(graphics2d, line);
-        int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount) - region.getHeight();
-        int left = region.getWidth() + region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
+        int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
+        int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 fontFace, graphics2d, fontCache, imageArea);
+    }
+
+    @Override
+    public Function<Image, Image> text(String text) {
+        return withText(text);
     }
 
     @Override
@@ -80,8 +75,4 @@ public class RotatedCenteredTextEffectImpl
         return withRegion(region);
     }
 
-    @Override
-    public Function<Image, Image> text(String text) {
-        return withText(text);
-    }
 }
