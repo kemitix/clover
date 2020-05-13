@@ -10,7 +10,8 @@ import java.awt.geom.Rectangle2D;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
-public class Region {
+public class Region
+        implements RotateQuadrant<Region>, FlipAxis<Region> {
 
     @Builder.Default
     private final int top = 0;
@@ -132,6 +133,36 @@ public class Region {
         return Area.builder()
                 .width(width)
                 .height(height)
+                .build();
+    }
+
+    public Region transposed() {
+        return Region.builder()
+                .top(left).left(top)
+                .width(height).height(width)
+                .build();
+    }
+
+    public Region rotateCW() {
+        return Region.builder()
+                .top(left).left(-(top + height))
+                .width(height).height(width)
+                .build();
+    }
+    public Region rotateCCW() {
+        return Region.builder()
+                .top(-(left + width)).left(this.top)
+                .width(height).height(width)
+                .build();
+    }
+
+    public Region flipVertically(int axis) {
+        return toBuilder().top((axis - top) + axis)
+                .build();
+    }
+
+    public Region flipHorizontally(int axis) {
+        return toBuilder().left((axis - left) + axis)
                 .build();
     }
 }
