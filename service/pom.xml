@@ -28,12 +28,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.eclipse.microprofile.config</groupId>
-            <artifactId>microprofile-config-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>net.kemitix.clover</groupId>
             <artifactId>clover-spi</artifactId>
         </dependency>
