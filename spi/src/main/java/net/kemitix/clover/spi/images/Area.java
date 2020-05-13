@@ -7,7 +7,8 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class Area {
+public class Area
+        implements RotateQuadrant<Area> {
 
     private final float width;
     private final float height;
@@ -21,5 +22,15 @@ public class Area {
 
     public Area transposed() {
         return Area.of(height, width);
+    }
+
+    @Override
+    public Area rotateCW() {
+        return transposed();
+    }
+
+    @Override
+    public Area rotateCCW() {
+        return transposed();
     }
 }

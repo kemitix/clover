@@ -165,4 +165,11 @@ public class Region
         return toBuilder().left((axis - left) + axis)
                 .build();
     }
+
+    public Region withOffset(int x, int y) {
+        return toBuilder()
+                .left(left + y)
+                .top(top + x)
+                .build();
+    }
 }

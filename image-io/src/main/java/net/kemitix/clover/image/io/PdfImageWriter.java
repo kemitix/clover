@@ -12,7 +12,7 @@ import net.kemitix.clover.spi.PdfWidth;
 import net.kemitix.clover.spi.images.ImageWriter;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@Dependent
+@ApplicationScoped
 public class PdfImageWriter implements ImageWriter {
 
     private static final String FORMAT_NAME = "pdf";

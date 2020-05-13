@@ -46,10 +46,8 @@ abstract class AbstractTextEffect {
         graphics.drawString(text,
                 topLeft.getX(),
                 (int) (topLeft.getY() - stringBounds.getY()));
-//        if (config.drawBoundingBoxes) {
-//            graphics.setPaint(getColor("red"));
-//            graphics.drawRect(topLeft.getX(), topLeft.getY(), ((int) stringBounds.getWidth()), ((int) stringBounds.getHeight()));
-//        }
+
+
     }
 
     static Color getColor(final String colour) {
@@ -72,7 +70,6 @@ abstract class AbstractTextEffect {
         Font font = getFont();
         FontRenderContext fontRenderContext = graphics2d.getFontRenderContext();
         Rectangle2D stringBounds = font.getStringBounds(text, fontRenderContext);
-        getRegion().mustContain(stringBounds);
         return stringBounds;
     }
 
