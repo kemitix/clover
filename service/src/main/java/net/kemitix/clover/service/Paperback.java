@@ -13,31 +13,18 @@ import java.util.List;
 @ApplicationScoped
 public class Paperback implements CloverFormat {
 
-    private IssueDimensions dimensions;
-    private Image coverArtImage;
-    private FrontCover frontCover;
-    private SpineBlock spineBlock;
-    private BackCover backCover;
+    @Inject
+    IssueDimensions dimensions;
+    @Inject
+    Image coverArtImage;
+    @Inject
+    FrontCover frontCover;
+    @Inject
+    SpineBlock spineBlock;
+    @Inject
+    BackCover backCover;
     @Getter
     private List<Image> images;
-
-    public Paperback() {
-    }
-
-    @Inject
-    protected Paperback(
-            final IssueDimensions dimensions,
-            final Image coverArtImage,
-            final FrontCover frontCover,
-            final SpineBlock spineBlock,
-            final BackCover backCover
-    ) {
-        this.dimensions = dimensions;
-        this.coverArtImage = coverArtImage;
-        this.frontCover = frontCover;
-        this.spineBlock = spineBlock;
-        this.backCover = backCover;
-    }
 
     @PostConstruct
     public void init() {
