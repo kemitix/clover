@@ -1,5 +1,7 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.clover.spi.CloverFormat;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;

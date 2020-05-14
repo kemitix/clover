@@ -1,4 +1,4 @@
-package net.kemitix.clover.service;
+package net.kemitix.clover.spi;
 
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.clover.spi.images.Region;

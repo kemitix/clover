@@ -1,7 +1,7 @@
 package net.kemitix.clover.service;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.PdfHeight;
 import net.kemitix.clover.spi.PdfWidth;
 import net.kemitix.clover.spi.images.*;
@@ -12,8 +12,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
-import java.util.logging.Logger;
 
 @ApplicationScoped
 public class Paperback implements CloverFormat {

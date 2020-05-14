@@ -1,11 +1,11 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.images.Image;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
