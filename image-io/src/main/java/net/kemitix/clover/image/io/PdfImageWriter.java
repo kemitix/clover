@@ -9,7 +9,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import net.kemitix.clover.spi.PdfHeight;
 import net.kemitix.clover.spi.PdfWidth;
-import net.kemitix.clover.spi.images.ImageWriter;
+import net.kemitix.clover.spi.ImageWriter;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;

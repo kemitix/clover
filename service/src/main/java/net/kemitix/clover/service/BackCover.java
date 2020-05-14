@@ -2,10 +2,10 @@ package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.SimpleTextEffect;
-import net.kemitix.clover.spi.images.FontFace;
-import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.Region;
-import net.kemitix.clover.spi.images.XY;
+import net.kemitix.clover.spi.FontFace;
+import net.kemitix.clover.spi.Image;
+import net.kemitix.clover.spi.Region;
+import net.kemitix.clover.spi.XY;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

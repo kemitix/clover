@@ -4,14 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.kemitix.clover.spi.images.Region;
-import net.kemitix.clover.spi.images.XY;
+import net.kemitix.clover.spi.Region;
 
 import javax.enterprise.inject.Vetoed;
 import javax.json.bind.annotation.JsonbProperty;
-import javax.websocket.server.ServerEndpoint;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

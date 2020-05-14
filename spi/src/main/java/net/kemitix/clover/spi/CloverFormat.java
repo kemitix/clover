@@ -1,7 +1,5 @@
 package net.kemitix.clover.spi;
 
-import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.Region;
 import net.kemitix.properties.typed.TypedProperties;
 
 import java.util.List;

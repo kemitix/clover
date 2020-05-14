@@ -2,7 +2,7 @@ package net.kemitix.clover;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.images.Area;
+import net.kemitix.clover.spi.Area;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;

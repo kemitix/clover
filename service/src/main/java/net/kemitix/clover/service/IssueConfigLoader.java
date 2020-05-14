@@ -1,9 +1,8 @@
 package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.ImageFactory;
-import net.kemitix.clover.spi.images.ImageLoader;
+import net.kemitix.clover.spi.Image;
+import net.kemitix.clover.spi.ImageLoader;
 import net.kemitix.files.FileReader;
 import net.kemitix.files.FileReaderWriter;
 

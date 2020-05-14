@@ -2,11 +2,8 @@ package net.kemitix.clover.images;
 
 import lombok.Builder;
 import lombok.Getter;
-import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.FatalCloverError;
-import net.kemitix.clover.spi.FontCache;
-import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.*;
+import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.Image;
 import net.kemitix.properties.typed.TypedProperties;
 import org.beryx.awt.color.ColorFactory;
 

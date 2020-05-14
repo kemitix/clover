@@ -1,4 +1,4 @@
-package net.kemitix.clover.spi.images;
+package net.kemitix.clover.spi;
 
 public interface FlipAxis<T> {
     T flipVertically(int axis);

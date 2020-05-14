@@ -1,7 +1,5 @@
 package net.kemitix.clover.spi;
 
-import net.kemitix.clover.spi.images.Area;
-
 import java.io.File;
 import java.util.List;
 

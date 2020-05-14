@@ -1,8 +1,6 @@
-package net.kemitix.clover.spi.images;
+package net.kemitix.clover.spi;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public interface ImageFactory {
 

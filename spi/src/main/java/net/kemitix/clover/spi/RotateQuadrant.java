@@ -1,4 +1,4 @@
-package net.kemitix.clover.spi.images;
+package net.kemitix.clover.spi;
 
 public interface RotateQuadrant<T> {
     T rotateCW();

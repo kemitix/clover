@@ -1,4 +1,4 @@
-package net.kemitix.clover.spi.images;
+package net.kemitix.clover.spi;
 
 import net.kemitix.properties.typed.TypedProperties;
 

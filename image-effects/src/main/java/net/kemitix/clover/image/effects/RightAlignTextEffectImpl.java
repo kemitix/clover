@@ -4,11 +4,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import net.kemitix.clover.spi.FontCache;
-import net.kemitix.clover.spi.RightAlignTextEffect;
-import net.kemitix.clover.spi.TextEffect;
-import net.kemitix.clover.spi.images.*;
-import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

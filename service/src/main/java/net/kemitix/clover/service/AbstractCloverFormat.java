@@ -1,8 +1,8 @@
 package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.images.Image;
-import net.kemitix.clover.spi.images.ImageFactory;
+import net.kemitix.clover.spi.Image;
+import net.kemitix.clover.spi.ImageFactory;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.annotation.PostConstruct;

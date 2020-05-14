@@ -1,11 +1,8 @@
 package net.kemitix.clover.image.effects;
 
 import lombok.*;
-import net.kemitix.clover.spi.FontCache;
-import net.kemitix.clover.spi.SimpleTextEffect;
-import net.kemitix.clover.spi.TextEffect;
-import net.kemitix.clover.spi.images.*;
-import net.kemitix.clover.spi.images.Image;
+import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,7 +23,8 @@ public class SimpleTextEffectImpl
 
     @Inject
     @Getter FontCache fontCache;
-    @Getter FontFace fontFace;
+    @Getter
+    FontFace fontFace;
     @Getter Region region;
     @Getter String text;
 

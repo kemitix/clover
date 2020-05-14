@@ -1,10 +1,7 @@
 package net.kemitix.clover.service;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.CloverFormat;
-import net.kemitix.clover.spi.PdfHeight;
-import net.kemitix.clover.spi.PdfWidth;
-import net.kemitix.clover.spi.images.*;
+import net.kemitix.clover.spi.*;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.annotation.PostConstruct;

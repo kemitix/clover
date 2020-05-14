@@ -1,11 +1,9 @@
-package net.kemitix.clover.spi.images;
+package net.kemitix.clover.spi;
 
 import net.kemitix.properties.typed.TypedProperties;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
