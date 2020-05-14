@@ -13,7 +13,7 @@ import java.util.List;
 @ApplicationScoped
 public class Paperback implements CloverFormat {
 
-    private Dimensions dimensions;
+    private IssueDimensions dimensions;
     private Image coverArtImage;
     private FrontCover frontCover;
     private Spine spine;
@@ -26,7 +26,7 @@ public class Paperback implements CloverFormat {
 
     @Inject
     protected Paperback(
-            final Dimensions dimensions,
+            final IssueDimensions dimensions,
             final Image coverArtImage,
             final FrontCover frontCover,
             final Spine spine,

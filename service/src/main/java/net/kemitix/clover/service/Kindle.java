@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class Kindle implements CloverFormat {
 
-    private Dimensions dimensions;
+    private IssueDimensions dimensions;
     private Paperback paperback;
 
     public Kindle() {
@@ -20,7 +20,7 @@ public class Kindle implements CloverFormat {
 
     @Inject
     protected Kindle(
-            Dimensions dimensions,
+            IssueDimensions dimensions,
             final Paperback paperback
     ) {
         this.dimensions = dimensions;

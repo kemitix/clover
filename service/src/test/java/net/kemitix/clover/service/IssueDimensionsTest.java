@@ -14,15 +14,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-public class DimensionsTest
+public class IssueDimensionsTest
         implements WithAssertions {
 
     private final Image coverArtImage;
     private final CloverProperties cloverProperties;
     private final IssueConfig issueConfig;
-    private Dimensions dimensions;
+    private IssueDimensions dimensions;
 
-    public DimensionsTest(
+    public IssueDimensionsTest(
             @Mock Image coverArtImage,
             @Mock CloverProperties cloverProperties,
             @Mock IssueConfig issueConfig
@@ -46,7 +46,7 @@ public class DimensionsTest
         given(issueConfig.getFrontWidth()).willReturn(1250);
         given(issueConfig.getSpine()).willReturn(0.53f);
         dimensions =
-                new Dimensions(coverArtImage, cloverProperties, issueConfig);
+                new IssueDimensions(coverArtImage, cloverProperties, issueConfig);
     }
 
     @Test

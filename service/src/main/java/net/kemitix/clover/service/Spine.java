@@ -23,7 +23,7 @@ public class Spine implements Function<Image, Image> {
     @Inject
     IssueConfig issueConfig;
     @Inject
-    Dimensions dimensions;
+    IssueDimensions dimensions;
     @Inject
     RotatedCenteredTextEffect rotatedCenteredTextEffect;
 
