@@ -2,9 +2,8 @@ package net.kemitix.clover.service;
 
 import lombok.Getter;
 import lombok.extern.java.Log;
-import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.Image;
-import net.kemitix.clover.spi.Region;
+import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.Issue;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -12,8 +11,9 @@ import javax.inject.Inject;
 
 @Log
 @Getter
+@Issue
 @ApplicationScoped
-public class IssueDimensions {
+public class IssueDimensions implements Dimensions {
 
     // Inputs
     private Region fullImageOriginal;

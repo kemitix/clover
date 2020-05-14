@@ -1,5 +1,4 @@
 package net.kemitix.clover.spi;
 
-public interface SpineElement
-        extends Element {
+public interface SpineElement extends Element {
 }
