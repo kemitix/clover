@@ -16,7 +16,7 @@ public class Paperback implements CloverFormat {
     private IssueDimensions dimensions;
     private Image coverArtImage;
     private FrontCover frontCover;
-    private Spine spine;
+    private SpineBlock spineBlock;
     private BackCover backCover;
     @Getter
     private List<Image> images;
@@ -29,13 +29,13 @@ public class Paperback implements CloverFormat {
             final IssueDimensions dimensions,
             final Image coverArtImage,
             final FrontCover frontCover,
-            final Spine spine,
+            final SpineBlock spineBlock,
             final BackCover backCover
     ) {
         this.dimensions = dimensions;
         this.coverArtImage = coverArtImage;
         this.frontCover = frontCover;
-        this.spine = spine;
+        this.spineBlock = spineBlock;
         this.backCover = backCover;
     }
 
@@ -45,7 +45,7 @@ public class Paperback implements CloverFormat {
                 rescale(dimensions.getScaleFromOriginal())
                         .andThen(crop(dimensions.getWrapCrop()))
                         .andThen(frontCover)
-                        .andThen(spine)
+                        .andThen(spineBlock)
                         .andThen(backCover)
                         .apply(coverArtImage));
     }

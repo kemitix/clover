@@ -1,22 +1,19 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.RotatedCenteredTextEffect;
-import net.kemitix.clover.spi.FontFace;
-import net.kemitix.clover.spi.Image;
-import net.kemitix.clover.spi.XY;
+import net.kemitix.clover.spi.*;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-public class Spine implements Function<Image, Image> {
+public class SpineBlock implements Function<Image, Image> {
 
     private static final Logger LOGGER =
             Logger.getLogger(
-                    Spine.class.getName());
+                    SpineBlock.class.getName());
 
     @Inject
     CloverProperties cloverProperties;

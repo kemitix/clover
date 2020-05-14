@@ -6,8 +6,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
+@Spine
 @ApplicationScoped
-public class SpineText implements SpineElement {
+public class SpineText implements Element {
 
     @Inject
     @Issue
