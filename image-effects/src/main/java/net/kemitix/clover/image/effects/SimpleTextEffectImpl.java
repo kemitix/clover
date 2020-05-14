@@ -16,9 +16,9 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SimpleTextEffectImpl
         extends AbstractTextEffect
-        implements SimpleTextEffect,
-        TextEffect.RegionNext,
-        TextEffect.TextNext,
+        implements SimpleTextEffect<Image>,
+        TextEffect.RegionNext<Image>,
+        TextEffect.TextNext<Image>,
         Function<Image, Image> {
 
     @Inject

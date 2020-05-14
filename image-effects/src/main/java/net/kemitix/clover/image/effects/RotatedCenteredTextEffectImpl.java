@@ -18,9 +18,9 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RotatedCenteredTextEffectImpl
         extends AbstractTextEffect
-        implements RotatedCenteredTextEffect,
-        TextEffect.RegionNext,
-        TextEffect.TextNext,
+        implements RotatedCenteredTextEffect<Image>,
+        TextEffect.RegionNext<Image>,
+        TextEffect.TextNext<Image>,
         Function<Image, Image> {
 
     @Inject

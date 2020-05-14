@@ -19,9 +19,9 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RightAlignTextEffectImpl
     extends AbstractTextEffect
-        implements RightAlignTextEffect,
-        TextEffect.RegionNext,
-        TextEffect.TextNext,
+        implements RightAlignTextEffect<Image>,
+        TextEffect.RegionNext<Image>,
+        TextEffect.TextNext<Image>,
         Function<Image, Image> {
 
     private String text;

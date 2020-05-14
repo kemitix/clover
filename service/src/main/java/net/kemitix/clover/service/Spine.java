@@ -25,7 +25,7 @@ public class Spine implements Function<Image, Image> {
     @Inject
     IssueDimensions dimensions;
     @Inject
-    RotatedCenteredTextEffect rotatedCenteredTextEffect;
+    RotatedCenteredTextEffect<Image> rotatedCenteredTextEffect;
 
     @Override
     public Image apply(Image image) {

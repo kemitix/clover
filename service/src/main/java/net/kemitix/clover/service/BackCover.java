@@ -26,7 +26,7 @@ public class BackCover implements Function<Image, Image> {
     @Inject
     StoryListFormatter storyListFormatter;
     @Inject
-    SimpleTextEffect simpleTextEffect;
+    SimpleTextEffect<Image> simpleTextEffect;
 
     @Override
     public Image apply(Image image) {

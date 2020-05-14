@@ -17,9 +17,9 @@ import java.util.stream.IntStream;
 @NoArgsConstructor
 public class CentredTextEffectImpl
         extends AbstractTextEffect
-        implements CenteredTextEffect,
-        CenteredTextEffect.TextNext,
-        CenteredTextEffect.RegionNext,
+        implements CenteredTextEffect<Image>,
+        CenteredTextEffect.TextNext<Image>,
+        CenteredTextEffect.RegionNext<Image>,
         Function<Image, Image> {
 
     @Inject

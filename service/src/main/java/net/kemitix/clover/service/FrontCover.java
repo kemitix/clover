@@ -25,11 +25,11 @@ public class FrontCover implements Function<Image, Image> {
     @Inject
     IssueDimensions dimensions;
     @Inject
-    CenteredTextEffect centeredText;
+    CenteredTextEffect<Image> centeredText;
     @Inject
-    RightAlignTextEffect rightAlignText;
+    RightAlignTextEffect<Image> rightAlignText;
     @Inject
-    SimpleTextEffect simpleTextEffect;
+    SimpleTextEffect<Image> simpleTextEffect;
 
     @Override
     public Image apply(Image image) {
