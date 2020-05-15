@@ -11,19 +11,15 @@ import java.awt.*;
 @ApplicationScoped
 public class StoriesSF implements Element<Graphics2D> {
 
-    @Getter
-    private final int priority = 10;
+    @Getter private final int priority = 10;
+
     private final int top = 200;
     private final int left = 150;
 
-    @Inject @BackCover
-    FontFace fontFace;
-    @Inject
-    SimpleTextEffect<Graphics2D> simpleTextEffect;
-    @Inject
-    StoryListFormatter storyListFormatter;
-    @Inject
-    IssueConfig issueConfig;
+    @Inject @BackCover FontFace fontFace;
+    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
+    @Inject StoryListFormatter storyListFormatter;
+    @Inject IssueConfig issueConfig;
 
     @Override
     public void draw(Graphics2D drawable) {

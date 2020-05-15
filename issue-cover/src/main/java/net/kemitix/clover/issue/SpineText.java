@@ -17,21 +17,13 @@ public class SpineText implements Element<Graphics2D> {
             Logger.getLogger(
                     SpineText.class.getName());
 
-    @Getter
-    private final int priority = 20;
+    @Getter private final int priority = 20;
 
-    @Inject
-    IssueDimensions dimensions;
-    @Inject
-    Colours colours;
-    @Inject
-    RotatedCenteredTextEffect<Graphics2D> rotatedCenteredTextEffect;
-
-    @Inject @Spine
-    Supplier<String> spineText;
-
-    @Inject @Spine
-    FontFace fontFace;
+    @Inject IssueDimensions dimensions;
+    @Inject Colours colours;
+    @Inject RotatedCenteredTextEffect<Graphics2D> rotatedCenteredTextEffect;
+    @Inject @Spine Supplier<String> spineText;
+    @Inject @Spine FontFace fontFace;
 
     @Override
     public void draw(Graphics2D graphics2D) {

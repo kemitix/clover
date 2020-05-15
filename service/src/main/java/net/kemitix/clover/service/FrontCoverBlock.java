@@ -32,7 +32,6 @@ public class FrontCoverBlock implements Function<Image, Image> {
     public Image apply(Image image) {
         return drawTitle()
                 .andThen(drawSubTitles())
-                .andThen(drawAuthors())
                 .andThen(elements())
                 .apply(image);
     }

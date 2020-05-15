@@ -16,14 +16,10 @@ public class SpineArea implements Element<Graphics2D> {
             Logger.getLogger(
                     SpineArea.class.getName());
 
-    @Getter
-    private final int priority = 10;
+    @Getter private final int priority = 10;
 
-    @Inject
-    IssueDimensions dimensions;
-
-    @Inject @Spine
-    private Paint paint;
+    @Inject IssueDimensions dimensions;
+    @Inject @Spine Paint paint;
 
     @Override
     public void draw(Graphics2D graphics2D) {

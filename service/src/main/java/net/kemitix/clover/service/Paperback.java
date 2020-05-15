@@ -44,14 +44,8 @@ public class Paperback implements CloverFormat {
     private Function<Image, Image> blocks() {
         return image ->
                 image.withGraphics(graphics2D ->
-                {
-                    LOG.info("Draw blocks " + blocks.toString());
-                    blocks.stream()
-                            .forEach(block -> {
-                                LOG.info("Block: " + block);
-                                block.draw(graphics2D);
-                            });
-                });
+                    blocks.stream().forEach(block ->
+                            block.draw(graphics2D)));
     }
 
     @Override
@@ -63,8 +57,8 @@ public class Paperback implements CloverFormat {
     public TypedProperties getImageProperties() {
         Region wrapCrop = dimensions.getWrapCrop();
         return TypedProperties.create()
-                .with(PdfWidth.class, (int) wrapCrop.getWidth())
-                .with(PdfHeight.class, (int) wrapCrop.getHeight());
+                .with(PdfWidth.class, wrapCrop.getWidth())
+                .with(PdfHeight.class, wrapCrop.getHeight());
     }
 
     @Override

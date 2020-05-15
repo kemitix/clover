@@ -11,8 +11,7 @@ import java.awt.*;
 @ApplicationScoped
 public class SpineBlock extends AbstractBlock {
 
-    @Getter
-    private final int priority = 30;
+    @Getter private final int priority = 30;
 
     @Getter
     @Inject @Spine Instance<Element<Graphics2D>> elements;
