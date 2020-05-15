@@ -12,11 +12,11 @@ import java.util.function.Function;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-public class FrontCover implements Function<Image, Image> {
+public class FrontCoverBlock implements Function<Image, Image> {
 
     private static final Logger LOGGER =
             Logger.getLogger(
-                    FrontCover.class.getName());
+                    FrontCoverBlock.class.getName());
 
     @Inject
     CloverProperties cloverProperties;

@@ -27,7 +27,7 @@ public class Paperback implements CloverFormat {
     @Inject
     Image coverArtImage;
     @Inject
-    FrontCover frontCover;
+    FrontCoverBlock frontCover;
     @Inject
     Instance<Block<Graphics2D>> blocks;
     @Getter
