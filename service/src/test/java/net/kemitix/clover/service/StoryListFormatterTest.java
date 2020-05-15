@@ -2,6 +2,7 @@ package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.IssueAuthor;
 import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.clover.spi.StoryListFormatter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StoryListFormatterTest {
 
     private final StoryListFormatter formatter =
-            new StoryListFormatter();
+            new StoryListFormatterImpl();
     private final String header = "Header";
     private final String title1 = "Title 1";
     private final IssueAuthor author1 = author("Author", "1");
