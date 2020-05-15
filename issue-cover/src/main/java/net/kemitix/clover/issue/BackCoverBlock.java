@@ -9,16 +9,12 @@ import javax.inject.Inject;
 import java.awt.*;
 
 @ApplicationScoped
-public class BackCoverBlock implements Block<Graphics2D> {
+public class BackCoverBlock extends AbstractBlock {
 
     @Getter
     private final int priority = 20;
 
+    @Getter
     @Inject @BackCover Instance<Element<Graphics2D>> elements;
-
-    @Override
-    public void draw(Graphics2D drawable) {
-        Drawable.draw(elements, drawable);
-    }
 
 }

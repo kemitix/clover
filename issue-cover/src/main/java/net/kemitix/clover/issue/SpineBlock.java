@@ -9,16 +9,12 @@ import javax.inject.Inject;
 import java.awt.*;
 
 @ApplicationScoped
-public class SpineBlock implements Block<Graphics2D> {
+public class SpineBlock extends AbstractBlock {
 
     @Getter
     private final int priority = 30;
 
+    @Getter
     @Inject @Spine Instance<Element<Graphics2D>> elements;
-
-    @Override
-    public void draw(Graphics2D drawable) {
-        Drawable.draw(elements, drawable);
-    }
 
 }
