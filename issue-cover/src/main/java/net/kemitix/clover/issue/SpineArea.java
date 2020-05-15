@@ -1,21 +1,23 @@
 package net.kemitix.clover.issue;
 
+import lombok.Getter;
 import net.kemitix.clover.spi.*;
 
-import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 import java.util.logging.Logger;
 
 @Spine
-@Priority(10)
 @ApplicationScoped
 public class SpineArea implements Element<Graphics2D> {
 
     private static final Logger LOG =
             Logger.getLogger(
                     SpineArea.class.getName());
+
+    @Getter
+    private final int priority = 10;
 
     @Inject @Issue
     Dimensions dimensions;
