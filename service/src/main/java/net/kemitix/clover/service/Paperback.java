@@ -30,8 +30,6 @@ public class Paperback implements CloverFormat {
     FrontCover frontCover;
     @Inject
     Instance<Block<Graphics2D>> blocks;
-    @Inject
-    BackCover backCover;
     @Getter
     private List<Image> images;
 
@@ -41,7 +39,6 @@ public class Paperback implements CloverFormat {
                 rescale(dimensions.getScaleFromOriginal())
                         .andThen(crop(dimensions.getWrapCrop()))
                         .andThen(frontCover)
-                        .andThen(backCover)
                         .andThen(blocks())
                         .apply(coverArtImage));
     }

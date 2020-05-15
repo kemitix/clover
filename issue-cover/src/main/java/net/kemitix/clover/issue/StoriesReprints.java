@@ -16,7 +16,8 @@ public class StoriesReprints implements Element<Graphics2D> {
     private final int top = 1800;
     private final int left = 150;
 
-    @Inject @BackCover FontFace fontFace;
+    @Inject @BackCover
+    FontFace fontFace;
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject StoryListFormatter storyListFormatter;
     @Inject IssueConfig issueConfig;
