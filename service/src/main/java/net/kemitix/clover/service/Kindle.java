@@ -2,6 +2,7 @@ package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.Image;
+import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;

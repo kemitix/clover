@@ -20,7 +20,7 @@ public class IssueDimensionsTest
     private final Image coverArtImage;
     private final CloverProperties cloverProperties;
     private final ServiceIssueConfig issueConfig;
-    private IssueDimensions dimensions;
+    private IssueDimensionsImpl dimensions;
 
     public IssueDimensionsTest(
             @Mock Image coverArtImage,
@@ -46,7 +46,7 @@ public class IssueDimensionsTest
         given(issueConfig.getFrontWidth()).willReturn(1250);
         given(issueConfig.getSpine()).willReturn(0.53f);
         dimensions =
-                new IssueDimensions(coverArtImage, cloverProperties, issueConfig);
+                new IssueDimensionsImpl(coverArtImage, cloverProperties, issueConfig);
     }
 
     @Test

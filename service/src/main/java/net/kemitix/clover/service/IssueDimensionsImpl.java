@@ -11,9 +11,8 @@ import javax.inject.Inject;
 
 @Log
 @Getter
-@Issue
 @ApplicationScoped
-public class IssueDimensions implements Dimensions {
+public class IssueDimensionsImpl implements IssueDimensions {
 
     // Inputs
     private Region fullImageOriginal;
@@ -31,11 +30,11 @@ public class IssueDimensions implements Dimensions {
     private Region wrapCrop;
     private Region scaledCoverArt;
 
-    public IssueDimensions() {
+    public IssueDimensionsImpl() {
     }
 
     @Inject
-    public IssueDimensions(
+    public IssueDimensionsImpl(
             Image coverArtImage,
             CloverProperties cloverProperties,
             IssueConfig issueConfig

@@ -19,8 +19,8 @@ public class SpineArea implements Element<Graphics2D> {
     @Getter
     private final int priority = 10;
 
-    @Inject @Issue
-    Dimensions dimensions;
+    @Inject
+    IssueDimensions dimensions;
 
     @Inject @Spine
     private Paint paint;

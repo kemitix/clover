@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @ApplicationScoped
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class SimpleTextEffectImpl
+public class SimpleTextEffectImage
         extends AbstractTextEffect
         implements SimpleTextEffect<Image>,
         TextEffect.RegionNext<Image>,

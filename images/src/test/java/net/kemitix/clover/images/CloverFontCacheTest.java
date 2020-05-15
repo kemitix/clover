@@ -37,7 +37,8 @@ public class CloverFontCacheTest {
     @DisplayName("When cache is empty then load font")
     public void emptyCache() {
         //given
-        final FontCache fontCache = new CloverFontCache(fontLoader);
+        final CloverFontCache fontCache = new CloverFontCache();
+        fontCache.fontLoader = fontLoader;
         final FontFace fontFace = FontFace.of(fontFile, 26, colour);
         //when
         fontCache.loadFont(fontFace);
@@ -49,7 +50,8 @@ public class CloverFontCacheTest {
     @DisplayName("When cache has font, but not size, then don't reload font")
     public void notInSize() {
         //given
-        final FontCache fontCache = new CloverFontCache(fontLoader);
+        final CloverFontCache fontCache = new CloverFontCache();
+        fontCache.fontLoader = fontLoader;
         final FontFace previousFontFace = FontFace.of(fontFile, 16, colour);
         fontCache.loadFont(previousFontFace);
         final FontFace fontFace = FontFace.of(fontFile, 26, colour);
@@ -64,7 +66,8 @@ public class CloverFontCacheTest {
     @DisplayName("When cache has font in size, then don't load font")
     public void available() {
         //given
-        final FontCache fontCache = new CloverFontCache(fontLoader);
+        final CloverFontCache fontCache = new CloverFontCache();
+        fontCache.fontLoader = fontLoader;
         final FontFace fontFace = FontFace.of(fontFile, 26, colour);
         //when
         fontCache.loadFont(fontFace);

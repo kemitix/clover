@@ -21,8 +21,7 @@ public class SpineText implements Element<Graphics2D> {
     private final int priority = 20;
 
     @Inject
-    @Issue
-    Dimensions dimensions;
+    IssueDimensions dimensions;
     @Inject
     Colours colours;
     @Inject

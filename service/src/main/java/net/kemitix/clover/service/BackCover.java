@@ -1,9 +1,12 @@
 package net.kemitix.clover.service;
 
 import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.awt.*;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -22,6 +25,8 @@ public class BackCover implements Function<Image, Image> {
     StoryListFormatter storyListFormatter;
     @Inject
     SimpleTextEffect<Image> simpleTextEffect;
+    @Inject @net.kemitix.clover.spi.BackCover
+    Instance<Element<Graphics2D>> backCoverElements;
 
     @Override
     public Image apply(Image image) {
@@ -33,29 +38,15 @@ public class BackCover implements Function<Image, Image> {
                         XY.at(
                                 cloverProperties.getDropShadowXOffset(),
                                 cloverProperties.getDropShadowYOffset()));
-        return drawSFStories(fontFace)
-                .andThen(drawFantasyStories(fontFace))
+        return drawFantasyStories(fontFace)
                 .andThen(drawReprintStories(fontFace))
+                .andThen(elements())
                 .apply(image);
     }
 
-    private Function<Image, Image> drawSFStories(final FontFace fontFace) {
-        return image -> {
-            LOGGER.info("Drawing SF Stories...");
-            int top = 200;
-            int left = 150;
-            return simpleTextEffect.fontFace(fontFace)
-                    .region(Region.builder()
-                            .top(top).left(left)
-                            .width(image.getRegion().getWidth() - left)
-                            .height(image.getRegion().getHeight() - top)
-                            .build())
-                    .text(String.join("\n",
-                            storyListFormatter.format(
-                                    "Science Fiction Stories",
-                                    issueConfig.getStories().getSf())))
-                    .apply(image);
-        };
+    private Function<Image, Image> elements() {
+        return image -> image.withGraphics(graphics2D ->
+                Drawable.draw(backCoverElements, graphics2D));
     }
 
     private Function<Image, Image> drawFantasyStories(final FontFace fontFace) {
