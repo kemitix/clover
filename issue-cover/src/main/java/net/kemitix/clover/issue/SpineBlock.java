@@ -1,17 +1,12 @@
-package net.kemitix.clover.service;
+package net.kemitix.clover.issue;
 
 import net.kemitix.clover.spi.*;
-import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.awt.*;
-import java.util.List;
-import java.util.function.Function;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class SpineBlock implements Block<Graphics2D> {
