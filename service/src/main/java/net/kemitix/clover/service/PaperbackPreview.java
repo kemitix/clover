@@ -15,20 +15,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class PaperbackPreview implements CloverFormat {
 
-    private CloverProperties cloverProperties;
-    private Paperback paperback;
-
-    public PaperbackPreview() {
-    }
-
-    @Inject
-    public PaperbackPreview(
-            final CloverProperties cloverProperties,
-            final Paperback paperback
-    ) {
-        this.cloverProperties = cloverProperties;
-        this.paperback = paperback;
-    }
+    @Inject CloverProperties cloverProperties;
+    @Inject Paperback paperback;
 
     @Override
     public List<Image> getImages() {
@@ -46,6 +34,11 @@ public class PaperbackPreview implements CloverFormat {
     @Override
     public TypedProperties getImageProperties() {
         return paperback.getImageProperties();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return cloverProperties.isEnablePaperbackPreview();
     }
 
     private Function<Image, Image> drawBarcodeSpacer() {

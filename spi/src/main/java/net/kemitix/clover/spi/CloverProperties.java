@@ -40,4 +40,12 @@ public interface CloverProperties {
 
     @Deprecated(since = "issue-3")
     Area getKindleFrontArea();
+
+    boolean isEnablePdf();
+    boolean isEnableWebp();
+    boolean isEnableJpg();
+
+    boolean isEnableKindle();
+    boolean isEnablePaperback();
+    boolean isEnablePaperbackPreview();
 }

@@ -7,7 +7,9 @@ import net.kemitix.clover.spi.Region;
 import net.kemitix.clover.spi.XY;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.awt.*;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -18,25 +20,27 @@ public class FrontCoverBlock implements Function<Image, Image> {
             Logger.getLogger(
                     FrontCoverBlock.class.getName());
 
-    @Inject
-    CloverProperties cloverProperties;
-    @Inject
-    IssueConfig issueConfig;
-    @Inject
-    IssueDimensions dimensions;
-    @Inject
-    CenteredTextEffect<Image> centeredText;
-    @Inject
-    RightAlignTextEffect<Image> rightAlignText;
-    @Inject
-    SimpleTextEffect<Image> simpleTextEffect;
+    @Inject CloverProperties cloverProperties;
+    @Inject IssueConfig issueConfig;
+    @Inject IssueDimensions dimensions;
+    @Inject CenteredTextEffect<Image> centeredText;
+    @Inject RightAlignTextEffect<Image> rightAlignText;
+    @Inject SimpleTextEffect<Image> simpleTextEffect;
+    @Inject @FrontCover Instance<Element<Graphics2D>> elements;
 
     @Override
     public Image apply(Image image) {
         return drawTitle()
                 .andThen(drawSubTitles())
                 .andThen(drawAuthors())
+                .andThen(elements())
                 .apply(image);
+    }
+
+    private Function<Image, Image> elements() {
+        return image ->
+                image.withGraphics(graphics2D ->
+                        Drawable.draw(elements, graphics2D));
     }
 
     private Function<Image, Image> drawTitle() {

@@ -35,6 +35,14 @@ public class ServiceCloverProperties implements CloverProperties {
     float barcodeHeight;
     String barcodeFillColour;
 
+    boolean enablePdf;
+    boolean enableWebp;
+    boolean enableJpg;
+
+    boolean enableKindle;
+    boolean enablePaperback;
+    boolean enablePaperbackPreview;
+
     @Override
     public List<String> getImageTypes() {
         return Arrays.asList(imageTypes.split(","));
@@ -62,4 +70,5 @@ public class ServiceCloverProperties implements CloverProperties {
                 .width((int) getWidth())
                 .height((int) getHeight()).build();
     }
+
 }

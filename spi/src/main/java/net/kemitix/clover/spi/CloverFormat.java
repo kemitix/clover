@@ -19,4 +19,6 @@ public interface CloverFormat {
     default Function<Image, Image> rescale(float factor) {
         return image -> image.rescale(factor);
     }
+
+    boolean isEnabled();
 }

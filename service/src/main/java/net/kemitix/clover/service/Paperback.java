@@ -22,14 +22,12 @@ public class Paperback implements CloverFormat {
             Logger.getLogger(
                     Paperback.class.getName());
 
-    @Inject
-    IssueDimensions dimensions;
-    @Inject
-    Image coverArtImage;
-    @Inject
-    FrontCoverBlock frontCover;
-    @Inject
-    Instance<Block<Graphics2D>> blocks;
+    @Inject IssueDimensions dimensions;
+    @Inject Image coverArtImage;
+    @Inject FrontCoverBlock frontCover;
+    @Inject Instance<Block<Graphics2D>> blocks;
+    @Inject CloverProperties cloverProperties;
+
     @Getter
     private List<Image> images;
 
@@ -67,6 +65,11 @@ public class Paperback implements CloverFormat {
         return TypedProperties.create()
                 .with(PdfWidth.class, (int) wrapCrop.getWidth())
                 .with(PdfHeight.class, (int) wrapCrop.getHeight());
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return cloverProperties.isEnablePaperback();
     }
 
 }
