@@ -39,7 +39,6 @@ public class BackCover implements Function<Image, Image> {
                                 cloverProperties.getDropShadowXOffset(),
                                 cloverProperties.getDropShadowYOffset()));
         return drawFantasyStories(fontFace)
-                .andThen(drawReprintStories(fontFace))
                 .andThen(elements())
                 .apply(image);
     }
@@ -64,25 +63,6 @@ public class BackCover implements Function<Image, Image> {
                             storyListFormatter.format(
                                     "Fantasy Stories",
                                     issueConfig.getStories().getFantasy())))
-                    .apply(image);
-        };
-    }
-
-    private Function<Image, Image> drawReprintStories(final FontFace fontFace) {
-        return image -> {
-            LOGGER.info("Drawing Reprint Stories...");
-            int top = 1800;
-            int left = 150;
-            return simpleTextEffect.fontFace(fontFace)
-                    .region(Region.builder()
-                            .top(top).left(left)
-                            .width(image.getRegion().getWidth() - left)
-                            .height(image.getRegion().getHeight() - top)
-                            .build())
-                    .text(String.join("\n",
-                            storyListFormatter.format(
-                                    "Plus",
-                                    issueConfig.getStories().getReprint())))
                     .apply(image);
         };
     }
