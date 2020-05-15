@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.awt.*;
+
 @Getter
 @Builder
 @ToString

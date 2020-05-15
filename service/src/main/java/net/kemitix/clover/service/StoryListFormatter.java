@@ -1,5 +1,7 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.clover.spi.IssueStory;
+
 import javax.enterprise.context.Dependent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +14,7 @@ public class StoryListFormatter {
 
     public List<String> format(
             final String label,
-            final List<IssueConfig.Story> stories
+            final List<? extends IssueStory> stories
     ) {
         final List<String> list = new ArrayList<>();
         list.add(label);

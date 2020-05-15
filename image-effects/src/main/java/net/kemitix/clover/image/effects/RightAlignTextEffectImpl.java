@@ -68,12 +68,12 @@ public class RightAlignTextEffectImpl
     }
 
     @Override
-    public RegionNext fontFace(FontFace fontFace) {
+    public RegionNext<Image> fontFace(FontFace fontFace) {
         return toBuilder().fontFace(fontFace).build();
     }
 
     @Override
-    public TextNext region(Region region) {
+    public TextNext<Image> region(Region region) {
         return toBuilder().region(region).build();
     }
 

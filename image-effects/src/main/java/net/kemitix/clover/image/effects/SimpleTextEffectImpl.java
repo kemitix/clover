@@ -56,12 +56,12 @@ public class SimpleTextEffectImpl
     }
 
     @Override
-    public RegionNext fontFace(FontFace fontFace) {
+    public RegionNext<Image> fontFace(FontFace fontFace) {
         return withFontFace(fontFace);
     }
 
     @Override
-    public TextNext region(Region region) {
+    public TextNext<Image> region(Region region) {
         return withRegion(region);
     }
 

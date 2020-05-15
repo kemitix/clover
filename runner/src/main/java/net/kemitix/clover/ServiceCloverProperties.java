@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 @ApplicationScoped
 @Getter
 public class ServiceCloverProperties implements CloverProperties {
-
     private static final Logger LOGGER =
             Logger.getLogger(
                     ServiceCloverProperties.class.getName());

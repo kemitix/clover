@@ -19,13 +19,13 @@ public class IssueDimensionsTest
 
     private final Image coverArtImage;
     private final CloverProperties cloverProperties;
-    private final IssueConfig issueConfig;
+    private final ServiceIssueConfig issueConfig;
     private IssueDimensions dimensions;
 
     public IssueDimensionsTest(
             @Mock Image coverArtImage,
             @Mock CloverProperties cloverProperties,
-            @Mock IssueConfig issueConfig
+            @Mock ServiceIssueConfig issueConfig
     ) {
         this.coverArtImage = coverArtImage;
         this.cloverProperties = cloverProperties;
