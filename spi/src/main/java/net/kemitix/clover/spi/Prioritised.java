@@ -6,7 +6,7 @@ public interface Prioritised {
     int getPriority();
 
     static Comparator<Prioritised> byPriority() {
-        return Comparator.comparing(Prioritised::getPriority).reversed();
+        return Comparator.comparing(Prioritised::getPriority);
     }
 
 }
