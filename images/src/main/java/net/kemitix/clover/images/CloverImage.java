@@ -105,7 +105,6 @@ class CloverImage implements Image {
             final String name,
             final TypedProperties properties
     ) {
-        LOGGER.info(String.format("Writing %s to %s", name, path));
         config.getImageTypes()
                 .forEach(format -> {
                     final File file =
@@ -172,7 +171,6 @@ class CloverImage implements Image {
             final File file,
             final TypedProperties properties
     ) {
-        LOGGER.info(String.format("Writing %s file as %s", format, file));
         imageWriters.stream()
                 .filter(iw -> iw.accepts(format))
                 .findFirst()

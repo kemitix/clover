@@ -49,7 +49,6 @@ public class PdfImageWriter implements ImageWriter {
         final int pageHeight =
                 properties.find(PdfHeight.class, Integer.class)
                         .orElseGet(srcImage::getHeight);
-        LOGGER.info(String.format("Writing %s", file));
         try {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(srcImage, "png", baos);
