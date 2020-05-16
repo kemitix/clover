@@ -4,6 +4,7 @@ import net.kemitix.clover.spi.Drawable;
 import net.kemitix.clover.spi.Element;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.properties.typed.TypedProperties;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -32,7 +33,9 @@ public class StoryCardFactory {
     public Image create(IssueStory issueStory) {
         return backgroundImage
                 .withGraphics(graphics2D ->
-                        Drawable.draw(elements, graphics2D))
+                        Drawable.draw(elements, graphics2D,
+                                TypedProperties.create().
+                                        with(TypedKeys.Story.class, issueStory)))
                 .withNameQualifier(slug(issueStory));
     }
 

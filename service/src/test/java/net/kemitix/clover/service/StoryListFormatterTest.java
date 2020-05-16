@@ -138,6 +138,11 @@ public class StoryListFormatterTest {
             public String getSample() {
                 return sample;
             }
+
+            @Override
+            public int getStoryCardFontSize() {
+                return 100;
+            }
         };
     }
 

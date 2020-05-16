@@ -2,6 +2,7 @@ package net.kemitix.clover.issue;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
+import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ public class LogoStraps implements Element<Graphics2D> {
     @Inject RightAlignTextEffect<Graphics2D> rightAlignText;
 
     @Override
-    public void draw(Graphics2D drawable) {
+    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         FontFace fontFace = fontFace();
         issueNumber(fontFace)
                 .andThen(issueDate(fontFace))

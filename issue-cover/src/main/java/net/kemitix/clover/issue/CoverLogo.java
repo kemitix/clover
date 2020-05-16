@@ -2,6 +2,7 @@ package net.kemitix.clover.issue;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
+import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class CoverLogo implements Element<Graphics2D> {
     @Inject IssueDimensions dimensions;
 
     @Override
-    public void draw(Graphics2D drawable) {
+    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         FontFace fontFace = FontFace.of(
                 cloverProperties.getFontFile(),
                 217,

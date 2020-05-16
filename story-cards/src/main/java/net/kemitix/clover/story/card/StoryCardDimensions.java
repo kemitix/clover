@@ -15,10 +15,12 @@ public class StoryCardDimensions {
 
     @Getter private float scaleFromOriginal;
     @Getter private Region sourceRegion;
+    @Getter private Region cardRegion;
 
     @PostConstruct
     void init() {
         Region targetSizeRegion = properties.getRegion();
+        cardRegion = targetSizeRegion.toBuilder().top(0).left(0).build();
         IssueStoryCards storyCardSpec = issueConfig.getStoryCards();
         scaleFromOriginal = targetSizeRegion.getWidth() / storyCardSpec.getWidth();
         sourceRegion = Region.builder()
@@ -36,6 +38,16 @@ public class StoryCardDimensions {
         return region.toBuilder()
                 .top(top)
                 .height(height)
+                .build()
+                .withPadding(properties.getPadding());
+    }
+
+    public Region getTitleRegion() {
+        Region region = properties.getRegion();
+        int height = region.getHeight() / 3;
+        return region.toBuilder()
+                .height(height)
+                .width(properties.getWidth())
                 .build()
                 .withPadding(properties.getPadding());
     }

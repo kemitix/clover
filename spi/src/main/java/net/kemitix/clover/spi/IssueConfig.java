@@ -52,4 +52,5 @@ public interface IssueConfig {
     }
 
     IssueStoryCards getStoryCards();
+
 }

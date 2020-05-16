@@ -2,6 +2,7 @@ package net.kemitix.clover.issue;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
+import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class StoriesReprints implements Element<Graphics2D> {
     @Inject IssueConfig issueConfig;
 
     @Override
-    public void draw(Graphics2D drawable) {
+    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         simpleTextEffect.fontFace(fontFace)
                 .region(region())
                 .text(text())

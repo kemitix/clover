@@ -2,6 +2,7 @@ package net.kemitix.clover.issue;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
+import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ public class SpineText implements Element<Graphics2D> {
     @Inject @Spine FontFace fontFace;
 
     @Override
-    public void draw(Graphics2D graphics2D) {
+    public void draw(Graphics2D graphics2D, TypedProperties typedProperties) {
         String text = spineText.get();
         LOG.info("Draw Spine Text: " + text);
         rotatedCenteredTextEffect.fontFace(fontFace)

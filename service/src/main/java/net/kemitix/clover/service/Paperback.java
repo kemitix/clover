@@ -49,7 +49,7 @@ public class Paperback implements CloverFormat {
         return image ->
                 image.withGraphics(graphics2D ->
                     blocks.stream().forEach(block ->
-                            block.draw(graphics2D)));
+                            block.draw(graphics2D, TypedProperties.create())));
     }
 
     @Override

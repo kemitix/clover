@@ -10,33 +10,42 @@ import java.awt.*;
 
 @StoryCard
 @ApplicationScoped
-public class CardLogo implements Element<Graphics2D> {
+public class StoryTitle implements Element<Graphics2D> {
 
-    @Getter private final int priority = 10;
+    @Getter private final int priority = 20;
 
     @Inject CenteredTextEffect<Graphics2D> centeredText;
     @Inject CloverProperties cloverProperties;
-    @Inject StoryCardProperties properties;
     @Inject IssueConfig issueConfig;
     @Inject StoryCardDimensions dimensions;
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
+        IssueStory story =
+                typedProperties.find(TypedKeys.Story.class, IssueStory.class)
+                        .orElseThrow();
+        int storyCardFontSize = story.getStoryCardFontSize();
+        System.out.println("storyCardFontSize = " + storyCardFontSize);
         FontFace fontFace = FontFace.of(
                 cloverProperties.getFontFile(),
-                properties.getLogoFontSize(),
+                storyCardFontSize,
                 issueConfig.getTitleColour(),
                 XY.at(
                         cloverProperties.getDropShadowXOffset(),
                         cloverProperties.getDropShadowYOffset()));
-        var text = String.join("\n",
-                issueConfig.getPublicationTitle().split(" "));
-        Region region = dimensions.getLogoRegion();
+        var text =
+//                String.join("\n",
+                story.getTitle()
+//                        .split(" "))
+                ;
+        Region region = dimensions.getTitleRegion();
+        System.out.println("region = " + region);
         centeredText
                 .fontFace(fontFace)
                 .region(region)
                 .text(text)
                 .apply(drawable);
+
         drawable.drawRect(region.getLeft(), region.getTop(),
                 region.getWidth(), region.getHeight());
     }
