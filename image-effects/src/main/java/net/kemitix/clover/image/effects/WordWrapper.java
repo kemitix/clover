@@ -29,7 +29,6 @@ public class WordWrapper {
             Graphics2D graphics2D,
             int width
     ) {
-        System.out.println("width = " + width);
         String source = String.join(" ", text.split("\n"));
         Font font = fontCache.loadFont(fontFace);
         List<Word> words = wordLengths(source.split(" "), font, graphics2D);
@@ -49,8 +48,6 @@ public class WordWrapper {
             }
             line.add(word.word);
             end += word.width;
-            System.out.println(String.format("end %d - (%d - %s)",
-                    end, word.width, word.word));
         }
         lines.add(String.join(" ", line));
         return lines.stream()
