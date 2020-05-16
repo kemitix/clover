@@ -24,7 +24,6 @@ public class Paperback implements CloverFormat {
 
     @Inject IssueDimensions dimensions;
     @Inject Image coverArtImage;
-    @Inject FrontCoverBlock frontCover;
     @Inject Instance<Block<Graphics2D>> blocks;
     @Inject CloverProperties cloverProperties;
 
@@ -36,7 +35,6 @@ public class Paperback implements CloverFormat {
         images = Collections.singletonList(
                 rescale(dimensions.getScaleFromOriginal())
                         .andThen(crop(dimensions.getWrapCrop()))
-                        .andThen(frontCover)
                         .andThen(blocks())
                         .apply(coverArtImage));
     }
