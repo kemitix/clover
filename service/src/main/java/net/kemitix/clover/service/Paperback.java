@@ -27,10 +27,16 @@ public class Paperback implements CloverFormat {
     @Inject Instance<Block<Graphics2D>> blocks;
     @Inject CloverProperties cloverProperties;
 
-    @Getter
     private List<Image> images;
 
-    @PostConstruct
+    @Override
+    public List<Image> getImages() {
+        if (images == null) {
+            init();
+        }
+        return images;
+    }
+
     public void init() {
         images = Collections.singletonList(
                 rescale(dimensions.getScaleFromOriginal())
