@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 @ApplicationScoped
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class SimpleTextEffectG2D
+public class SimpleTextEffectImpl
         extends AbstractTextEffect
         implements SimpleTextEffect<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
