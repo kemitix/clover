@@ -29,4 +29,14 @@ public class StoryCardDimensions {
                 .build();
     }
 
+    public Region getLogoRegion() {
+        Region region = properties.getRegion();
+        int height = region.getHeight() / 3;
+        int top = region.getHeight() - height;
+        return region.toBuilder()
+                .top(top)
+                .height(height)
+                .build()
+                .withPadding(properties.getPadding());
+    }
 }

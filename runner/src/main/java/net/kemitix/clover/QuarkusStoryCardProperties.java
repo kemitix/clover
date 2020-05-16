@@ -14,6 +14,8 @@ public class QuarkusStoryCardProperties implements StoryCardProperties {
     private boolean enabled;
     private int width;
     private int height;
+    private int padding;
+    private int logoFontSize;
 
     @Override
     public Region getRegion() {

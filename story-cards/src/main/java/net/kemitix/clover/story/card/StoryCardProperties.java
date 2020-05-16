@@ -10,4 +10,7 @@ public interface StoryCardProperties {
     int getHeight();
 
     Region getRegion();
+
+    int getPadding();
+    int getLogoFontSize();
 }
