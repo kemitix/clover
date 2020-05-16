@@ -100,6 +100,11 @@ class CloverImage implements Image {
     }
 
     @Override
+    public Image withNameQualifier(String nameQualifier) {
+        return toBuilder().nameQualifier(nameQualifier).build();
+    }
+
+    @Override
     public void write(
             final Path path,
             final String name,
