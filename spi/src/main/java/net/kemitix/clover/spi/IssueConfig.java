@@ -51,4 +51,5 @@ public interface IssueConfig {
                 getDate());
     }
 
+    IssueStoryCards getStoryCards();
 }

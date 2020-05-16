@@ -3,6 +3,7 @@ package net.kemitix.clover;
 import io.quarkus.arc.config.ConfigProperties;
 import lombok.Getter;
 import lombok.Setter;
+import net.kemitix.clover.spi.Region;
 import net.kemitix.clover.story.card.StoryCardProperties;
 
 @Setter
@@ -11,5 +12,13 @@ import net.kemitix.clover.story.card.StoryCardProperties;
 public class QuarkusStoryCardProperties implements StoryCardProperties {
 
     private boolean enabled;
+    private int width;
+    private int height;
 
+    @Override
+    public Region getRegion() {
+        return Region.builder()
+                .width(width).height(height)
+                .build();
+    }
 }

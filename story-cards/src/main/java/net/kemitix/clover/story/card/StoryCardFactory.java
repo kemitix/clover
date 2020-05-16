@@ -14,7 +14,6 @@ import java.awt.*;
 @ApplicationScoped
 public class StoryCardFactory {
 
-    @Inject StoryCardProperties storyCardProperties;
     @Inject Image coverArtImage;
     @Inject StoryCardDimensions dimensions;
     @Inject @StoryCard Instance<Element<Graphics2D>> elements;
@@ -26,7 +25,8 @@ public class StoryCardFactory {
         backgroundImage =
                 coverArtImage
                         .rescale(dimensions.getScaleFromOriginal())
-                        .crop(dimensions.getRegion());
+                        .crop(dimensions.getSourceRegion())
+        ;
     }
 
     public Image create(IssueStory issueStory) {
