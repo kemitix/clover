@@ -23,15 +23,13 @@ public class FrontCoverBlock implements Function<Image, Image> {
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject IssueDimensions dimensions;
-    @Inject CenteredTextEffect<Image> centeredText;
     @Inject RightAlignTextEffect<Image> rightAlignText;
     @Inject SimpleTextEffect<Image> simpleTextEffect;
     @Inject @FrontCover Instance<Element<Graphics2D>> elements;
 
     @Override
     public Image apply(Image image) {
-        return drawTitle()
-                .andThen(drawSubTitles())
+        return drawSubTitles()
                 .andThen(elements())
                 .apply(image);
     }
@@ -40,27 +38,6 @@ public class FrontCoverBlock implements Function<Image, Image> {
         return image ->
                 image.withGraphics(graphics2D ->
                         Drawable.draw(elements, graphics2D));
-    }
-
-    private Function<Image, Image> drawTitle() {
-        final FontFace fontFace =
-                FontFace.of(
-                        cloverProperties.getFontFile(),
-                        217,
-                        issueConfig.getTitleColour(),
-                        XY.at(
-                                cloverProperties.getDropShadowXOffset(),
-                                cloverProperties.getDropShadowYOffset()));
-        return image -> {
-            LOGGER.info("Drawing title...");
-            var text = String.join("\n",
-                    issueConfig.getPublicationTitle().split(" "));
-            return centeredText
-                    .fontFace(fontFace)
-                    .region(dimensions.getFrontCrop().withPadding(85))
-                    .text(text)
-                    .apply(image);
-        };
     }
 
     private int frontLeftEdge() {
