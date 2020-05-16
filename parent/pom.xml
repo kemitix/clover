@@ -92,6 +92,11 @@
                 <artifactId>clover-issue-cover</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.kemitix.clover</groupId>
+                <artifactId>clover-story-cards</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>net.kemitix</groupId>
