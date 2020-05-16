@@ -2,7 +2,6 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
-import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -23,13 +22,15 @@ public class CentredTextEffectImpl
         Function<Graphics2D, Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
+    @Inject WordWrapper wordWrapper;
     @Getter FontFace fontFace;
     @Getter Region region;
     String text;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
-        String[] split = text.split("\n");
+        String[] split =
+                wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
         IntStream.range(0, split.length)
                 .forEach(lineNumber -> {
                     String lineOfText = split[lineNumber];

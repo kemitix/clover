@@ -20,19 +20,17 @@ public class SimpleTextEffectImpl
         TextEffect.TextNext<Graphics2D>,
         Function<Graphics2D, Graphics2D> {
 
-    @Inject
-    @Getter
-    FontCache fontCache;
-    @Getter
-    FontFace fontFace;
-    @Getter
-    Region region;
+    @Inject @Getter FontCache fontCache;
+    @Inject WordWrapper wordWrapper;
+    @Getter FontFace fontFace;
+    @Getter Region region;
     @Getter String text;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
         double lineHeight = getStringBounds(graphics2D, "X").getHeight();
-        String[] split = text.split("\n");
+        String[] split =
+                wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
         IntStream.range(0, split.length)
                 .forEach(lineNumber -> {
                     String lineOfText = split[lineNumber];

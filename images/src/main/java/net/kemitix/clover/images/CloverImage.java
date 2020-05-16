@@ -179,11 +179,13 @@ class CloverImage implements Image {
         imageWriters.stream()
                 .filter(iw -> iw.accepts(format))
                 .findFirst()
-                .ifPresentOrElse(
-                        writer -> writer.write(image, file, properties),
-                        () -> LOGGER.warning(String.format(
-                                "No ImageWriter found for %s",
-                                format)));
+                .ifPresent(
+                        writer -> writer.write(image, file, properties)
+//                        ,
+//                        () -> LOGGER.warning(String.format(
+//                                "No ImageWriter found for %s",
+//                                format))
+                );
     }
 
     public Image useGraphics(

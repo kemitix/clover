@@ -22,22 +22,28 @@ public class CardLogo implements Element<Graphics2D> {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        FontFace fontFace = FontFace.of(
+        Region region = dimensions.getLogoRegion();
+        centeredText
+                .fontFace(fontFace())
+                .region(region)
+                .text(text())
+                .apply(drawable);
+        drawable.drawRect(region.getLeft(), region.getTop(),
+                region.getWidth(), region.getHeight());
+    }
+
+    private String text() {
+        return String.join("\n",
+                issueConfig.getPublicationTitle().split(" "));
+    }
+
+    private FontFace fontFace() {
+        return FontFace.of(
                 cloverProperties.getFontFile(),
                 properties.getLogoFontSize(),
                 issueConfig.getTitleColour(),
                 XY.at(
                         cloverProperties.getDropShadowXOffset(),
                         cloverProperties.getDropShadowYOffset()));
-        var text = String.join("\n",
-                issueConfig.getPublicationTitle().split(" "));
-        Region region = dimensions.getLogoRegion();
-        centeredText
-                .fontFace(fontFace)
-                .region(region)
-                .text(text)
-                .apply(drawable);
-        drawable.drawRect(region.getLeft(), region.getTop(),
-                region.getWidth(), region.getHeight());
     }
 }

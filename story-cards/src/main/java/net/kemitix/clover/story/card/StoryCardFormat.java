@@ -30,6 +30,7 @@ public class StoryCardFormat implements CloverFormat {
 
     private List<Image> buildImages() {
         return issueConfig.getStories().stream()
+                .filter(s -> s.getStoryCardFontSize() > 0)
                 .map(storyCardFactory::create)
                 .collect(Collectors.toList());
     }

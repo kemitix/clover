@@ -25,7 +25,6 @@ public class StoryTitle implements Element<Graphics2D> {
                 typedProperties.find(TypedKeys.Story.class, IssueStory.class)
                         .orElseThrow();
         int storyCardFontSize = story.getStoryCardFontSize();
-        System.out.println("storyCardFontSize = " + storyCardFontSize);
         FontFace fontFace = FontFace.of(
                 cloverProperties.getFontFile(),
                 storyCardFontSize,
@@ -33,13 +32,8 @@ public class StoryTitle implements Element<Graphics2D> {
                 XY.at(
                         cloverProperties.getDropShadowXOffset(),
                         cloverProperties.getDropShadowYOffset()));
-        var text =
-//                String.join("\n",
-                story.getTitle()
-//                        .split(" "))
-                ;
+        var text = story.getTitle();
         Region region = dimensions.getTitleRegion();
-        System.out.println("region = " + region);
         centeredText
                 .fontFace(fontFace)
                 .region(region)
