@@ -6,6 +6,4 @@ public interface IssueStory {
     String getTitle();
 
     String getSample();
-
-    int getStoryCardFontSize();
 }

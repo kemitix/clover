@@ -24,10 +24,9 @@ public class StoryTitle implements Element<Graphics2D> {
         IssueStory story =
                 typedProperties.find(TypedKeys.Story.class, IssueStory.class)
                         .orElseThrow();
-        int storyCardFontSize = story.getStoryCardFontSize();
         FontFace fontFace = FontFace.of(
                 cloverProperties.getFontFile(),
-                storyCardFontSize,
+                0,
                 issueConfig.getTitleColour(),
                 XY.at(
                         cloverProperties.getDropShadowXOffset(),

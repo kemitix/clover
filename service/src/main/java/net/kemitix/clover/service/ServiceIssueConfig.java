@@ -62,8 +62,6 @@ public class ServiceIssueConfig implements IssueConfig {
         private Author author;
         private String title;
         private String sample;
-        @JsonbProperty("card-font-size")
-        private int storyCardFontSize;
     }
 
     @Setter
