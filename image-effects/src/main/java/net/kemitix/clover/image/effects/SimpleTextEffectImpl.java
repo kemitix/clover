@@ -22,12 +22,15 @@ public class SimpleTextEffectImpl
 
     @Inject @Getter FontCache fontCache;
     @Inject WordWrapper wordWrapper;
+    @Inject FitToRegion fitToRegion;
+
     @Getter FontFace fontFace;
     @Getter Region region;
     @Getter String text;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
+        FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
         double lineHeight = getStringBounds(graphics2D, "X").getHeight();
         String[] split =
                 wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
@@ -36,15 +39,20 @@ public class SimpleTextEffectImpl
                     String lineOfText = split[lineNumber];
                     if (lineOfText.length() > 0) {
                         int lineOffset = (int) lineHeight * lineNumber;
-                        drawLineOfText(graphics2D, lineOfText, lineOffset);
+                        drawLineOfText(graphics2D, lineOfText, lineOffset, face);
                     }
                 });
         return graphics2D;
     }
 
-    private void drawLineOfText(Graphics2D graphics2D, String lineOfText, int lineOffset) {
+    private void drawLineOfText(
+            Graphics2D graphics2D,
+            String lineOfText,
+            int lineOffset,
+            FontFace face
+    ) {
         XY position = XY.at(region.getLeft(), region.getTop() + lineOffset);
-        AbstractTextEffect.drawText(lineOfText, framing -> position, fontFace,
+        AbstractTextEffect.drawText(lineOfText, framing -> position, face,
                 graphics2D, fontCache, region.getArea());
     }
 

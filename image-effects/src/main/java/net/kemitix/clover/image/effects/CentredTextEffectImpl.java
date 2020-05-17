@@ -26,9 +26,11 @@ public class CentredTextEffectImpl
     @Getter FontFace fontFace;
     @Getter Region region;
     String text;
+    @Inject FitToRegion fitToRegion;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
+        FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
         String[] split =
                 wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
         IntStream.range(0, split.length)
@@ -36,7 +38,7 @@ public class CentredTextEffectImpl
                     String lineOfText = split[lineNumber];
                     if (lineOfText.length() > 0) {
                         drawText(graphics2D, lineNumber, lineOfText,
-                                region.getArea());
+                                region.getArea(), face);
                     }
                 });
         return graphics2D;
@@ -46,13 +48,14 @@ public class CentredTextEffectImpl
             Graphics2D graphics2d,
             int lineCount,
             String line,
-            Area imageArea
+            Area imageArea,
+            FontFace face
     ) {
         Rectangle2D stringBounds = getStringBounds(graphics2d, line);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
         int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
-                fontFace, graphics2d, fontCache, imageArea);
+                face, graphics2d, fontCache, imageArea);
     }
 
     @Override
