@@ -33,7 +33,7 @@ public class StoryCardDimensions {
 
     public Region getLogoRegion() {
         Region region = properties.getRegion();
-        int height = region.getHeight() / 3;
+        int height = region.getHeight() / 4;
         int top = region.getHeight() - height;
         return region.toBuilder()
                 .top(top)
@@ -44,8 +44,20 @@ public class StoryCardDimensions {
 
     public Region getTitleRegion() {
         Region region = properties.getRegion();
-        int height = region.getHeight() / 3;
+        int height = region.getHeight() / 4;
         return region.toBuilder()
+                .height(height)
+                .width(properties.getWidth())
+                .build()
+                .withPadding(properties.getPadding());
+    }
+
+    public Region getAuthorRegion() {
+        Region region = properties.getRegion();
+        int top = region.getHeight() / 4;
+        int height = region.getHeight() / 12;
+        return region.toBuilder()
+                .top(top)
                 .height(height)
                 .width(properties.getWidth())
                 .build()
