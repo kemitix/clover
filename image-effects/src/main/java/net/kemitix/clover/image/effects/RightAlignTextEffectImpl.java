@@ -18,11 +18,13 @@ public class RightAlignTextEffectImpl
         implements RightAlignTextEffect<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
-        Function<Graphics2D, Graphics2D> {
+        Function<Graphics2D, Graphics2D>, TextEffect.HAlignNext<Graphics2D>, TextEffect.VAlignNext<Graphics2D> {
 
     private String text;
     @Getter private FontFace fontFace;
     @Getter private Region region;
+    HAlignment hAlignment;
+    VAlignment vAlignment;
 
     @Inject @Getter FontCache fontCache;
     @Inject @Getter
@@ -60,12 +62,22 @@ public class RightAlignTextEffectImpl
     }
 
     @Override
-    public TextNext<Graphics2D> region(Region region) {
+    public HAlignNext<Graphics2D> region(Region region) {
         return withRegion(region);
     }
 
     @Override
     public Function<Graphics2D, Graphics2D> text(String text) {
         return withText(text);
+    }
+
+    @Override
+    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
+    }
+
+    @Override
+    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
+        return withVAlignment(vAlignment);
     }
 }

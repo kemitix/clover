@@ -18,6 +18,8 @@ public class CentredTextEffectImpl
         implements CenteredTextEffect<Graphics2D>,
         CenteredTextEffect.TextNext<Graphics2D>,
         CenteredTextEffect.RegionNext<Graphics2D>,
+        TextEffect.HAlignNext<Graphics2D>,
+        TextEffect.VAlignNext<Graphics2D>,
         Function<Graphics2D, Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
@@ -27,6 +29,8 @@ public class CentredTextEffectImpl
 
     @Getter Region region;
 
+    HAlignment hAlignment;
+    VAlignment vAlignment;
     FontFace fontFace;
     String text;
 
@@ -72,8 +76,17 @@ public class CentredTextEffectImpl
     }
 
     @Override
-    public TextNext<Graphics2D> region(Region region) {
+    public HAlignNext<Graphics2D> region(Region region) {
         return withRegion(region);
     }
 
+    @Override
+    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
+    }
+
+    @Override
+    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
+        return withVAlignment(vAlignment);
+    }
 }

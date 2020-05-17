@@ -17,6 +17,8 @@ public class SimpleTextEffectImpl
         extends AbstractTextEffect
         implements SimpleTextEffect<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
+        TextEffect.HAlignNext<Graphics2D>,
+        TextEffect.VAlignNext<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
         Function<Graphics2D, Graphics2D> {
 
@@ -28,6 +30,8 @@ public class SimpleTextEffectImpl
 
     @Getter FontFace fontFace;
     @Getter Region region;
+    HAlignment hAlignment;
+    VAlignment vAlignment;
     @Getter String text;
 
     @Override
@@ -64,8 +68,18 @@ public class SimpleTextEffectImpl
     }
 
     @Override
-    public TextNext<Graphics2D> region(Region region) {
+    public HAlignNext<Graphics2D> region(Region region) {
         return withRegion(region);
+    }
+
+    @Override
+    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
+    }
+
+    @Override
+    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
+        return withVAlignment(vAlignment);
     }
 
     @Override

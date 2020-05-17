@@ -26,6 +26,8 @@ public class StoriesFantasy implements Element<Graphics2D> {
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         simpleTextEffect.fontFace(fontFace)
                 .region(region())
+                .hAlign(TextEffect.HAlignment.TOP)
+                .vAlign(TextEffect.VAlignment.LEFT)
                 .text(text())
                 .apply(drawable);
     }

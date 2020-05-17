@@ -33,6 +33,8 @@ public class SpineText implements Element<Graphics2D> {
         rotatedCenteredTextEffect.fontFace(fontFace)
                 .region(dimensions.getSpineCrop()
                         .withOffset(0, (int) (-fontFace.getSize() * 0.8)))
+                .hAlign(TextEffect.HAlignment.CENTRE)
+                .vAlign(TextEffect.VAlignment.CENTRE)
                 .text(text)
                 .apply(graphics2D);
     }

@@ -33,6 +33,8 @@ public class CoverLogo implements Element<Graphics2D> {
         centeredText
                 .fontFace(fontFace)
                 .region(dimensions.getFrontCrop().withPadding(85))
+                .hAlign(TextEffect.HAlignment.TOP)
+                .vAlign(TextEffect.VAlignment.CENTRE)
                 .text(text)
                 .apply(drawable);
     }
