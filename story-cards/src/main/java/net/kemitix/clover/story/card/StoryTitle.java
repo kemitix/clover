@@ -15,6 +15,7 @@ public class StoryTitle implements Element<Graphics2D> {
     @Getter private final int priority = 20;
 
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
+    @Inject OpaqueFill<Graphics2D> opaqueFill;
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject StoryCardDimensions dimensions;
@@ -33,6 +34,11 @@ public class StoryTitle implements Element<Graphics2D> {
                         cloverProperties.getDropShadowYOffset()));
         var text = story.getTitle();
         Region region = dimensions.getTitleRegion();
+        opaqueFill
+                .opacity(0.7D)
+                .colour("gray")
+                .region(region)
+                .accept(drawable);
         simpleTextEffect
                 .fontFace(fontFace)
                 .text(text)
