@@ -14,7 +14,7 @@ public class CardLogo implements Element<Graphics2D> {
 
     @Getter private final int priority = 10;
 
-    @Inject CenteredTextEffect<Graphics2D> centeredText;
+    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject CloverProperties cloverProperties;
     @Inject StoryCardProperties properties;
     @Inject IssueConfig issueConfig;
@@ -23,7 +23,7 @@ public class CardLogo implements Element<Graphics2D> {
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         Region region = dimensions.getLogoRegion();
-        centeredText
+        simpleTextEffect
                 .fontFace(fontFace())
                 .region(region)
                 .hAlign(TextEffect.VHAlignment.TOP)

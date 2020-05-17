@@ -9,57 +9,95 @@ import java.awt.*;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-@With
 @ApplicationScoped
-@NoArgsConstructor
+@With
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class SimpleTextEffectImpl
         extends AbstractTextEffect
-        implements SimpleTextEffect<Graphics2D>,
+        implements
+        SimpleTextEffect<Graphics2D>,
+        TextEffect.TextNext<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.HAlignNext<Graphics2D>,
         TextEffect.VAlignNext<Graphics2D>,
-        TextEffect.TextNext<Graphics2D>,
+        TextEffect<Graphics2D>,
         Function<Graphics2D, Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
-    @Inject @Getter
-    FontMetrics fontMetrics;
+    @Inject @Getter FontMetrics fontMetrics;
     @Inject WordWrapper wordWrapper;
     @Inject FitToRegion fitToRegion;
 
-    @Getter FontFace fontFace;
     @Getter Region region;
-    VHAlignment VHAlignment;
+
+    VHAlignment vAlignment;
     HAlignment hAlignment;
-    @Getter String text;
+    FontFace fontFace;
+    String text;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
         FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
-        double lineHeight = getStringBounds(graphics2D, "X", face).getHeight();
         String[] split =
-                wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
+                wordWrapper.wrap(text, face, graphics2D, region.getWidth());
+        int top = topEdge(split.length * face.getSize());
         IntStream.range(0, split.length)
                 .forEach(lineNumber -> {
                     String lineOfText = split[lineNumber];
                     if (lineOfText.length() > 0) {
-                        int lineOffset = (int) lineHeight * lineNumber;
-                        drawLineOfText(graphics2D, lineOfText, lineOffset, face);
+                        drawText(graphics2D, lineNumber, lineOfText,
+                                region.getArea(), face, top);
                     }
                 });
         return graphics2D;
     }
 
-    private void drawLineOfText(
-            Graphics2D graphics2D,
-            String lineOfText,
-            int lineOffset,
-            FontFace face
+    private void drawText(
+            Graphics2D graphics2d,
+            int lineCount,
+            String line,
+            Area imageArea,
+            FontFace face,
+            int topOffset
     ) {
-        XY position = XY.at(region.getLeft(), region.getTop() + lineOffset);
-        AbstractTextEffect.drawText(lineOfText, framing -> position, face,
-                graphics2D, fontCache, region.getArea());
+        Area stringBounds = getStringBounds(graphics2d, line, face);
+        int top = topOffset + ((int) stringBounds.getHeight() * lineCount);
+        int left = lineLeftEdge((int) stringBounds.getWidth());
+        AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
+                face, graphics2d, fontCache, imageArea);
+        graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
+    }
+
+    private int topEdge(int height) {
+        switch (vAlignment) {
+            case TOP:
+                return region.getTop();
+            case BOTTOM:
+                return region.getTop() + (region.getHeight() - height);
+            case CENTRE:
+                return region.getTop() + ((region.getHeight() - height) / 2);
+        }
+        throw new UnsupportedOperationException(
+                "Unknown Vertical Alignment: " + vAlignment);
+    }
+
+    private int lineLeftEdge(int width) {
+        switch (hAlignment) {
+            case LEFT:
+                return region.getLeft();
+            case RIGHT:
+                return region.getWidth() - width;
+            case CENTRE:
+                return region.getLeft() + ((region.getWidth() - width) / 2);
+        }
+        throw new UnsupportedOperationException(
+                "Unknown Horizontal Alignment: " + hAlignment);
+    }
+
+    @Override
+    public Function<Graphics2D, Graphics2D> text(String text) {
+        return withText(text);
     }
 
     @Override
@@ -74,16 +112,11 @@ public class SimpleTextEffectImpl
 
     @Override
     public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
-        return withVHAlignment(VHAlignment);
+        return withVAlignment(VHAlignment);
     }
 
     @Override
     public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
         return withHAlignment(hAlignment);
-    }
-
-    @Override
-    public Function<Graphics2D, Graphics2D> text(String text) {
-        return withText(text);
     }
 }

@@ -14,7 +14,7 @@ public class StoryTitle implements Element<Graphics2D> {
 
     @Getter private final int priority = 20;
 
-    @Inject CenteredTextEffect<Graphics2D> centeredText;
+    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject StoryCardDimensions dimensions;
@@ -33,7 +33,7 @@ public class StoryTitle implements Element<Graphics2D> {
                         cloverProperties.getDropShadowYOffset()));
         var text = story.getTitle();
         Region region = dimensions.getTitleRegion();
-        centeredText
+        simpleTextEffect
                 .fontFace(fontFace)
                 .region(region)
                 .hAlign(TextEffect.VHAlignment.TOP)

@@ -16,7 +16,7 @@ public class CoverLogo implements Element<Graphics2D> {
 
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
-    @Inject CenteredTextEffect<Graphics2D> centeredText;
+    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject IssueDimensions dimensions;
 
     @Override
@@ -30,7 +30,7 @@ public class CoverLogo implements Element<Graphics2D> {
                         cloverProperties.getDropShadowYOffset()));
         var text = String.join("\n",
                 issueConfig.getPublicationTitle().split(" "));
-        centeredText
+        simpleTextEffect
                 .fontFace(fontFace)
                 .region(dimensions.getFrontCrop().withPadding(85))
                 .hAlign(TextEffect.VHAlignment.TOP)

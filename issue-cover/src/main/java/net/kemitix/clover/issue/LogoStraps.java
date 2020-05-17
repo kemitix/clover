@@ -19,7 +19,6 @@ public class LogoStraps implements Element<Graphics2D> {
     @Inject IssueConfig issueConfig;
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject IssueDimensions issueDimensions;
-    @Inject RightAlignTextEffect<Graphics2D> rightAlignText;
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
@@ -31,7 +30,7 @@ public class LogoStraps implements Element<Graphics2D> {
     }
 
     private Function<Graphics2D, Graphics2D> strapLine(FontFace fontFace) {
-        return rightAlignText.fontFace(fontFace)
+        return simpleTextEffect.fontFace(fontFace)
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(10).build().withPadding(85))
                 .hAlign(TextEffect.VHAlignment.TOP)
@@ -41,7 +40,7 @@ public class LogoStraps implements Element<Graphics2D> {
 
     private Function<Graphics2D, Graphics2D> issueDate(FontFace fontFace) {
         int top = 390;
-        return rightAlignText.fontFace(fontFace)
+        return simpleTextEffect.fontFace(fontFace)
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(top).build()
                         .withPadding(85))
