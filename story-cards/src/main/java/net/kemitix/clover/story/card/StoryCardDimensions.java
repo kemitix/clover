@@ -17,10 +17,14 @@ public class StoryCardDimensions {
     @Getter private Region sourceRegion;
     @Getter private Region cardRegion;
 
+    private int strips = 9;
+    private int stripHeight;
+
     @PostConstruct
     void init() {
         Region targetSizeRegion = properties.getRegion();
         cardRegion = targetSizeRegion.toBuilder().top(0).left(0).build();
+        stripHeight = cardRegion.getHeight() / strips;
         IssueStoryCards storyCardSpec = issueConfig.getStoryCards();
         scaleFromOriginal = targetSizeRegion.getWidth() / storyCardSpec.getWidth();
         sourceRegion = Region.builder()
@@ -32,9 +36,9 @@ public class StoryCardDimensions {
     }
 
     public Region getLogoRegion() {
-        Region region = properties.getRegion();
-        int height = region.getHeight() / 4;
-        int top = region.getHeight() - height;
+        Region region = cardRegion;
+        int top = 0 * stripHeight;
+        int height = 3 * stripHeight;
         return region.toBuilder()
                 .top(top)
                 .height(height)
@@ -43,9 +47,11 @@ public class StoryCardDimensions {
     }
 
     public Region getTitleRegion() {
-        Region region = properties.getRegion();
-        int height = region.getHeight() / 4;
+        Region region = cardRegion;
+        int top = 3 * stripHeight;
+        int height = 3 * stripHeight;
         return region.toBuilder()
+                .top(top)
                 .height(height)
                 .width(properties.getWidth())
                 .build()
@@ -53,9 +59,9 @@ public class StoryCardDimensions {
     }
 
     public Region getAuthorRegion() {
-        Region region = properties.getRegion();
-        int top = region.getHeight() / 4;
-        int height = region.getHeight() / 12;
+        Region region = cardRegion;
+        int top = 6 * stripHeight;
+        int height = (int) (0.6 * stripHeight);
         return region.toBuilder()
                 .top(top)
                 .height(height)
