@@ -2,7 +2,7 @@ package net.kemitix.clover.spi;
 
 import java.util.function.Function;
 
-public interface TextEffect<T> {
+public interface TextEffect<T> extends Effect<T> {
 
     RegionNext<T> fontFace(FontFace fontFace);
 
