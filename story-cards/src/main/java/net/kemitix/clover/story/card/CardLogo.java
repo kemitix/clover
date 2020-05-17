@@ -30,8 +30,8 @@ public class CardLogo implements Element<Graphics2D> {
                 .vAlign(TextEffect.HAlignment.CENTRE)
                 .text(text())
                 .apply(drawable);
-        drawable.drawRect(region.getLeft(), region.getTop(),
-                region.getWidth(), region.getHeight());
+//        drawable.drawRect(region.getLeft(), region.getTop(),
+//                region.getWidth(), region.getHeight());
     }
 
     private String text() {

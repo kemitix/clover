@@ -66,7 +66,7 @@ public class SimpleTextEffectImpl
         int left = lineLeftEdge((int) stringBounds.getWidth());
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 face, graphics2d, fontCache, imageArea);
-        graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
+        //graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
     }
 
     private int topEdge(int height) {
