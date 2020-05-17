@@ -3,7 +3,6 @@ package net.kemitix.clover.issue;
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
 import net.kemitix.properties.typed.TypedProperties;
-import net.kemitix.properties.typed.TypedProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,8 +26,8 @@ public class StoriesSF implements Element<Graphics2D> {
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         simpleTextEffect.fontFace(fontFace)
                 .region(region())
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.LEFT)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.LEFT)
                 .text(text())
                 .apply(drawable);
     }

@@ -29,8 +29,8 @@ public class CentredTextEffectImpl
 
     @Getter Region region;
 
+    VHAlignment VHAlignment;
     HAlignment hAlignment;
-    VAlignment vAlignment;
     FontFace fontFace;
     String text;
 
@@ -81,12 +81,12 @@ public class CentredTextEffectImpl
     }
 
     @Override
-    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
-        return withHAlignment(hAlignment);
+    public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
+        return withVHAlignment(VHAlignment);
     }
 
     @Override
-    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
-        return withVAlignment(vAlignment);
+    public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
     }
 }

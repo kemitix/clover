@@ -25,8 +25,8 @@ public class RotatedCenteredTextEffectImpl
 
     @Inject @Getter FontCache fontCache;
     @Inject @Getter FontMetrics fontMetrics;
+    VHAlignment VHAlignment;
     HAlignment hAlignment;
-    VAlignment vAlignment;
 
     @Getter FontFace fontFace;
     @Getter Region region;
@@ -82,12 +82,12 @@ public class RotatedCenteredTextEffectImpl
     }
 
     @Override
-    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
-        return withHAlignment(hAlignment);
+    public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
+        return withVHAlignment(VHAlignment);
     }
 
     @Override
-    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
-        return withVAlignment(vAlignment);
+    public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
     }
 }

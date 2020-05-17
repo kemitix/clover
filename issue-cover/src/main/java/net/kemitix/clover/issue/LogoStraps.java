@@ -34,8 +34,8 @@ public class LogoStraps implements Element<Graphics2D> {
         return rightAlignText.fontFace(fontFace)
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(10).build().withPadding(85))
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.RIGHT)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.RIGHT)
                 .text("Science Fiction and Fantasy");
     }
 
@@ -45,8 +45,8 @@ public class LogoStraps implements Element<Graphics2D> {
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(top).build()
                         .withPadding(85))
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.RIGHT)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.RIGHT)
                 .text(issueConfig.getDate());
     }
 
@@ -60,8 +60,8 @@ public class LogoStraps implements Element<Graphics2D> {
                                 (left + issueDimensions.getFrontCrop().getLeft()))
                         .height(issueDimensions.getFrontCrop().getHeight() - top)
                         .build())
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.LEFT)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.LEFT)
                 .text(String.format("Issue %s", issueConfig.getIssue()));
     }
 

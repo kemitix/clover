@@ -23,8 +23,8 @@ public class RightAlignTextEffectImpl
     private String text;
     @Getter private FontFace fontFace;
     @Getter private Region region;
+    VHAlignment VHAlignment;
     HAlignment hAlignment;
-    VAlignment vAlignment;
 
     @Inject @Getter FontCache fontCache;
     @Inject @Getter
@@ -72,12 +72,12 @@ public class RightAlignTextEffectImpl
     }
 
     @Override
-    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
-        return withHAlignment(hAlignment);
+    public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
+        return withVHAlignment(VHAlignment);
     }
 
     @Override
-    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
-        return withVAlignment(vAlignment);
+    public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
     }
 }

@@ -11,22 +11,22 @@ public interface TextEffect<T> {
     }
 
     interface HAlignNext<T> {
-        VAlignNext<T> hAlign(HAlignment hAlignment);
+        VAlignNext<T> hAlign(VHAlignment VHAlignment);
     }
 
     interface VAlignNext<T> {
-        TextNext<T> vAlign(VAlignment vAlignment);
+        TextNext<T> vAlign(HAlignment hAlignment);
     }
 
     interface TextNext<T> {
         Function<T, T> text(String text);
     }
 
-    enum VAlignment {
+    enum HAlignment {
         LEFT, RIGHT, CENTRE
     }
 
-    enum HAlignment {
+    enum VHAlignment {
         TOP, BOTTOM, CENTRE
     }
 

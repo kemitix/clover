@@ -26,8 +26,8 @@ public class CardLogo implements Element<Graphics2D> {
         centeredText
                 .fontFace(fontFace())
                 .region(region)
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.CENTRE)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.CENTRE)
                 .text(text())
                 .apply(drawable);
         drawable.drawRect(region.getLeft(), region.getTop(),

@@ -30,8 +30,8 @@ public class SimpleTextEffectImpl
 
     @Getter FontFace fontFace;
     @Getter Region region;
+    VHAlignment VHAlignment;
     HAlignment hAlignment;
-    VAlignment vAlignment;
     @Getter String text;
 
     @Override
@@ -73,13 +73,13 @@ public class SimpleTextEffectImpl
     }
 
     @Override
-    public VAlignNext<Graphics2D> hAlign(HAlignment hAlignment) {
-        return withHAlignment(hAlignment);
+    public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
+        return withVHAlignment(VHAlignment);
     }
 
     @Override
-    public TextNext<Graphics2D> vAlign(VAlignment vAlignment) {
-        return withVAlignment(vAlignment);
+    public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
     }
 
     @Override

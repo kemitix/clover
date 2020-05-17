@@ -26,8 +26,8 @@ public class AuthorsElement implements Element<Graphics2D> {
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
                 .region(region(top, left))
-                .hAlign(TextEffect.HAlignment.TOP)
-                .vAlign(TextEffect.VAlignment.LEFT)
+                .hAlign(TextEffect.VHAlignment.TOP)
+                .vAlign(TextEffect.HAlignment.LEFT)
                 .text(String.join("\n", issueConfig.authors()))
                 .apply(drawable);
     }
