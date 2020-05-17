@@ -21,6 +21,8 @@ public class SimpleTextEffectImpl
         Function<Graphics2D, Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
+    @Inject @Getter
+    FontMetrics fontMetrics;
     @Inject WordWrapper wordWrapper;
     @Inject FitToRegion fitToRegion;
 
@@ -31,7 +33,7 @@ public class SimpleTextEffectImpl
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
         FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
-        double lineHeight = getStringBounds(graphics2D, "X").getHeight();
+        double lineHeight = getStringBounds(graphics2D, "X", face).getHeight();
         String[] split =
                 wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
         IntStream.range(0, split.length)

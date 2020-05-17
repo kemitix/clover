@@ -2,12 +2,10 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
-import net.kemitix.clover.spi.Image;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -16,7 +14,7 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class RightAlignTextEffectImpl
-    extends AbstractTextEffect
+        extends AbstractTextEffect
         implements RightAlignTextEffect<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
@@ -27,6 +25,8 @@ public class RightAlignTextEffectImpl
     @Getter private Region region;
 
     @Inject @Getter FontCache fontCache;
+    @Inject @Getter
+    FontMetrics fontMetrics;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
@@ -47,7 +47,7 @@ public class RightAlignTextEffectImpl
             String line,
             Area area
     ) {
-        Rectangle2D stringBounds = getStringBounds(graphics2D, line);
+        Area stringBounds = getStringBounds(graphics2D, line, fontFace);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
         int left = region.getRight() - (int) stringBounds.getWidth();
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),

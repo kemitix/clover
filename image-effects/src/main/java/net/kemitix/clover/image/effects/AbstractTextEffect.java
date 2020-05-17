@@ -4,7 +4,6 @@ import net.kemitix.clover.spi.*;
 import org.beryx.awt.color.ColorFactory;
 
 import java.awt.*;
-import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.util.Optional;
 import java.util.function.Function;
@@ -56,20 +55,13 @@ abstract class AbstractTextEffect {
                                 "Unknown colour: " + colour));
     }
 
-    private Font getFont() {
-        return getFontCache().loadFont(getFontFace());
+    protected Area getStringBounds(
+            Graphics2D graphics2d,
+            String text,
+            FontFace face
+    ) {
+        return getFontMetrics().bounds(graphics2d, text, face);
     }
 
-    protected abstract FontFace getFontFace();
-
-    protected abstract FontCache getFontCache();
-
-    protected Rectangle2D getStringBounds(Graphics2D graphics2d, String text) {
-        Font font = getFont();
-        FontRenderContext fontRenderContext = graphics2d.getFontRenderContext();
-        Rectangle2D stringBounds = font.getStringBounds(text, fontRenderContext);
-        return stringBounds;
-    }
-
-    protected abstract Region getRegion();
+    protected abstract FontMetrics getFontMetrics();
 }

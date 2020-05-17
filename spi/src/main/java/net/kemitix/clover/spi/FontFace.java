@@ -31,4 +31,6 @@ public interface FontFace {
     String getShadowColour();
 
     XY getShadowOffset();
+
+    FontFace withSize(int size);
 }

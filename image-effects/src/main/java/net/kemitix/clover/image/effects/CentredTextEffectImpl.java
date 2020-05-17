@@ -6,7 +6,6 @@ import net.kemitix.clover.spi.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -22,17 +21,20 @@ public class CentredTextEffectImpl
         Function<Graphics2D, Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
+    @Inject @Getter FontMetrics fontMetrics;
     @Inject WordWrapper wordWrapper;
-    @Getter FontFace fontFace;
-    @Getter Region region;
-    String text;
     @Inject FitToRegion fitToRegion;
+
+    @Getter Region region;
+
+    FontFace fontFace;
+    String text;
 
     @Override
     public Graphics2D apply(Graphics2D graphics2D) {
         FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
         String[] split =
-                wordWrapper.wrap(text, fontFace, graphics2D, region.getWidth());
+                wordWrapper.wrap(text, face, graphics2D, region.getWidth());
         IntStream.range(0, split.length)
                 .forEach(lineNumber -> {
                     String lineOfText = split[lineNumber];
@@ -51,11 +53,12 @@ public class CentredTextEffectImpl
             Area imageArea,
             FontFace face
     ) {
-        Rectangle2D stringBounds = getStringBounds(graphics2d, line);
+        Area stringBounds = getStringBounds(graphics2d, line, face);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount);
         int left = region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 face, graphics2d, fontCache, imageArea);
+        graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
     }
 
     @Override
