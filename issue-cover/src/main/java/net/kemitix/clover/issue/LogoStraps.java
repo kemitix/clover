@@ -31,37 +31,40 @@ public class LogoStraps implements Element<Graphics2D> {
 
     private Function<Graphics2D, Graphics2D> strapLine(FontFace fontFace) {
         return simpleTextEffect.fontFace(fontFace)
+                .text("Science Fiction and Fantasy")
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.RIGHT)
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(10).build().withPadding(85))
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.RIGHT)
-                .text("Science Fiction and Fantasy");
+                ;
     }
 
     private Function<Graphics2D, Graphics2D> issueDate(FontFace fontFace) {
         int top = 390;
         return simpleTextEffect.fontFace(fontFace)
+                .text(issueConfig.getDate())
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.RIGHT)
                 .region(issueDimensions.getFrontCrop().toBuilder()
                         .top(top).build()
                         .withPadding(85))
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.RIGHT)
-                .text(issueConfig.getDate());
+                ;
     }
 
     private Function<Graphics2D, Graphics2D> issueNumber(FontFace fontFace) {
         int top = 475;
         int left = 85;
         return simpleTextEffect.fontFace(fontFace)
+                .text(String.format("Issue %s", issueConfig.getIssue()))
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.LEFT)
                 .region(Region.builder()
                         .top(top).left(left + issueDimensions.getFrontCrop().getLeft())
                         .width(issueDimensions.getFrontCrop().getWidth() -
                                 (left + issueDimensions.getFrontCrop().getLeft()))
                         .height(issueDimensions.getFrontCrop().getHeight() - top)
                         .build())
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.LEFT)
-                .text(String.format("Issue %s", issueConfig.getIssue()));
+                ;
     }
 
     private FontFace fontFace() {

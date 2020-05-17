@@ -31,7 +31,7 @@ public class SimpleTextEffectImpl
 
     @Getter Region region;
 
-    VHAlignment vAlignment;
+    VAlignment vAlignment;
     HAlignment hAlignment;
     FontFace fontFace;
     String text;
@@ -79,7 +79,7 @@ public class SimpleTextEffectImpl
                 return region.getTop() + ((region.getHeight() - height) / 2);
         }
         throw new UnsupportedOperationException(
-                "Unknown Vertical Alignment: " + vAlignment);
+                "Unknown Vertical Alignment: " + hAlignment);
     }
 
     private int lineLeftEdge(int width) {
@@ -96,27 +96,27 @@ public class SimpleTextEffectImpl
     }
 
     @Override
-    public Function<Graphics2D, Graphics2D> text(String text) {
+    public VAlignNext<Graphics2D> text(String text) {
         return withText(text);
     }
 
     @Override
-    public RegionNext<Graphics2D> fontFace(FontFace fontFace) {
+    public TextNext<Graphics2D> fontFace(FontFace fontFace) {
         return withFontFace(fontFace);
     }
 
     @Override
-    public HAlignNext<Graphics2D> region(Region region) {
+    public Function<Graphics2D, Graphics2D> region(Region region) {
         return withRegion(region);
     }
 
     @Override
-    public VAlignNext<Graphics2D> hAlign(VHAlignment VHAlignment) {
-        return withVAlignment(VHAlignment);
+    public RegionNext<Graphics2D> hAlign(HAlignment hAlignment) {
+        return withHAlignment(hAlignment);
     }
 
     @Override
-    public TextNext<Graphics2D> vAlign(HAlignment hAlignment) {
-        return withHAlignment(hAlignment);
+    public HAlignNext<Graphics2D> vAlign(VAlignment vAlignment) {
+        return withVAlignment(vAlignment);
     }
 }

@@ -35,10 +35,10 @@ public class AuthorBlock implements Element<Graphics2D> {
         Region region = dimensions.getAuthorRegion();
         simpleTextEffect
                 .fontFace(fontFace)
-                .region(region)
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.CENTRE)
                 .text(text)
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.CENTRE)
+                .region(region)
                 .apply(drawable);
 
 //        drawable.drawRect(region.getLeft(), region.getTop(),

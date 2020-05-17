@@ -35,10 +35,10 @@ public class StoryTitle implements Element<Graphics2D> {
         Region region = dimensions.getTitleRegion();
         simpleTextEffect
                 .fontFace(fontFace)
-                .region(region)
-                .hAlign(TextEffect.VHAlignment.CENTRE)
-                .vAlign(TextEffect.HAlignment.CENTRE)
                 .text(text)
+                .vAlign(TextEffect.VAlignment.CENTRE)
+                .hAlign(TextEffect.HAlignment.CENTRE)
+                .region(region)
                 .apply(drawable);
 
 //        drawable.drawRect(region.getLeft(), region.getTop(),

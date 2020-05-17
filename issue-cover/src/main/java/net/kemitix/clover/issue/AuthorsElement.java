@@ -25,10 +25,10 @@ public class AuthorsElement implements Element<Graphics2D> {
         int left = issueConfig.getAuthorsXOffset() +
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
-                .region(region(top, left))
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.LEFT)
                 .text(String.join("\n", issueConfig.authors()))
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.LEFT)
+                .region(region(top, left))
                 .apply(drawable);
     }
 

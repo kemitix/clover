@@ -31,11 +31,11 @@ public class SpineText implements Element<Graphics2D> {
         String text = spineText.get();
         LOG.info("Draw Spine Text: " + text);
         rotatedCenteredTextEffect.fontFace(fontFace)
+                .text(text)
+                .vAlign(TextEffect.VAlignment.CENTRE)
+                .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(dimensions.getSpineCrop()
                         .withOffset(0, (int) (-fontFace.getSize() * 0.8)))
-                .hAlign(TextEffect.VHAlignment.CENTRE)
-                .vAlign(TextEffect.HAlignment.CENTRE)
-                .text(text)
                 .apply(graphics2D);
     }
 }

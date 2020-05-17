@@ -32,10 +32,10 @@ public class CoverLogo implements Element<Graphics2D> {
                 issueConfig.getPublicationTitle().split(" "));
         simpleTextEffect
                 .fontFace(fontFace)
-                .region(dimensions.getFrontCrop().withPadding(85))
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.CENTRE)
                 .text(text)
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.CENTRE)
+                .region(dimensions.getFrontCrop().withPadding(85))
                 .apply(drawable);
     }
 }

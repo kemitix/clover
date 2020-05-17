@@ -25,10 +25,10 @@ public class StoriesReprints implements Element<Graphics2D> {
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         simpleTextEffect.fontFace(fontFace)
-                .region(region())
-                .hAlign(TextEffect.VHAlignment.TOP)
-                .vAlign(TextEffect.HAlignment.LEFT)
                 .text(text())
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.LEFT)
+                .region(region())
                 .apply(drawable);
     }
 
