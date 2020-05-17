@@ -6,6 +6,7 @@ import net.kemitix.clover.spi.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -21,8 +22,7 @@ public class SimpleTextEffectImpl
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.HAlignNext<Graphics2D>,
         TextEffect.VAlignNext<Graphics2D>,
-        TextEffect<Graphics2D>,
-        Function<Graphics2D, Graphics2D> {
+        TextEffect<Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
     @Inject @Getter FontMetrics fontMetrics;
@@ -37,7 +37,7 @@ public class SimpleTextEffectImpl
     String text;
 
     @Override
-    public Graphics2D apply(Graphics2D graphics2D) {
+    public void accept(Graphics2D graphics2D) {
         FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
         String[] split =
                 wordWrapper.wrap(text, face, graphics2D, region.getWidth());
@@ -50,7 +50,6 @@ public class SimpleTextEffectImpl
                                 region.getArea(), face, top);
                     }
                 });
-        return graphics2D;
     }
 
     private void drawText(
@@ -106,7 +105,7 @@ public class SimpleTextEffectImpl
     }
 
     @Override
-    public Function<Graphics2D, Graphics2D> region(Region region) {
+    public Consumer<Graphics2D> region(Region region) {
         return withRegion(region);
     }
 

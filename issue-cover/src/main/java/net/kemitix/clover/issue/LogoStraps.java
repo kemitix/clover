@@ -7,6 +7,7 @@ import net.kemitix.properties.typed.TypedProperties;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @FrontCover
@@ -26,10 +27,10 @@ public class LogoStraps implements Element<Graphics2D> {
         issueNumber(fontFace)
                 .andThen(issueDate(fontFace))
                 .andThen(strapLine(fontFace))
-                .apply(drawable);
+                .accept(drawable);
     }
 
-    private Function<Graphics2D, Graphics2D> strapLine(FontFace fontFace) {
+    private Consumer<Graphics2D> strapLine(FontFace fontFace) {
         return simpleTextEffect.fontFace(fontFace)
                 .text("Science Fiction and Fantasy")
                 .vAlign(TextEffect.VAlignment.TOP)
@@ -39,7 +40,7 @@ public class LogoStraps implements Element<Graphics2D> {
                 ;
     }
 
-    private Function<Graphics2D, Graphics2D> issueDate(FontFace fontFace) {
+    private Consumer<Graphics2D> issueDate(FontFace fontFace) {
         int top = 390;
         return simpleTextEffect.fontFace(fontFace)
                 .text(issueConfig.getDate())
@@ -51,7 +52,7 @@ public class LogoStraps implements Element<Graphics2D> {
                 ;
     }
 
-    private Function<Graphics2D, Graphics2D> issueNumber(FontFace fontFace) {
+    private Consumer<Graphics2D> issueNumber(FontFace fontFace) {
         int top = 475;
         int left = 85;
         return simpleTextEffect.fontFace(fontFace)

@@ -36,6 +36,6 @@ public class SpineText implements Element<Graphics2D> {
                 .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(dimensions.getSpineCrop()
                         .withOffset(0, (int) (-fontFace.getSize() * 0.8)))
-                .apply(graphics2D);
+                .accept(graphics2D);
     }
 }

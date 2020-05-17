@@ -39,7 +39,7 @@ public class StoryTitle implements Element<Graphics2D> {
                 .vAlign(TextEffect.VAlignment.CENTRE)
                 .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(region)
-                .apply(drawable);
+                .accept(drawable);
 
 //        drawable.drawRect(region.getLeft(), region.getTop(),
 //                region.getWidth(), region.getHeight());

@@ -36,6 +36,6 @@ public class CoverLogo implements Element<Graphics2D> {
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(dimensions.getFrontCrop().withPadding(85))
-                .apply(drawable);
+                .accept(drawable);
     }
 }

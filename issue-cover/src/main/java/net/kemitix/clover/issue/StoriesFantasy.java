@@ -29,7 +29,7 @@ public class StoriesFantasy implements Element<Graphics2D> {
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
                 .region(region())
-                .apply(drawable);
+                .accept(drawable);
     }
 
     private Region region() {

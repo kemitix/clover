@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -20,8 +21,7 @@ public class RotatedCenteredTextEffectImpl
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
         TextEffect.HAlignNext<Graphics2D>,
-        TextEffect.VAlignNext<Graphics2D>,
-        Function<Graphics2D, Graphics2D> {
+        TextEffect.VAlignNext<Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
     @Inject @Getter FontMetrics fontMetrics;
@@ -33,7 +33,7 @@ public class RotatedCenteredTextEffectImpl
     @Getter String text;
 
     @Override
-    public Graphics2D apply(Graphics2D graphics2d) {
+    public void accept(Graphics2D graphics2d) {
         graphics2d.setTransform(
                 AffineTransform.getQuadrantRotateInstance(1));
         String[] split = text.split("\n");
@@ -49,7 +49,6 @@ public class RotatedCenteredTextEffectImpl
                         );
                     }
                 });
-        return graphics2d;
     }
 
     private void drawText(
@@ -72,7 +71,7 @@ public class RotatedCenteredTextEffectImpl
     }
 
     @Override
-    public Function<Graphics2D, Graphics2D> region(Region region) {
+    public Consumer<Graphics2D> region(Region region) {
         return withRegion(region);
     }
 
