@@ -19,19 +19,14 @@ public class SampleBlock implements Element<Graphics2D> {
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject StoryCardDimensions dimensions;
+    @Inject @Named("alice") FontFace aliceFontFace;
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         IssueStory story =
                 typedProperties.find(TypedKeys.Story.class, IssueStory.class)
                         .orElseThrow();
-        FontFace fontFace = FontFace.of(
-                cloverProperties.getFontLocation(),
-                0,
-                issueConfig.getTitleColour(),
-                XY.at(
-                        cloverProperties.getDropShadowXOffset(),
-                        cloverProperties.getDropShadowYOffset()));
+        FontFace fontFace = aliceFontFace;
         var text = story.getSample() + "\n" +
                 "Organize content to meet your goals\n" +
                 "\n" +
