@@ -1,5 +1,6 @@
 package net.kemitix.clover.story.card;
 
+import lombok.experimental.Delegate;
 import net.kemitix.clover.spi.*;
 
 import javax.annotation.PostConstruct;
@@ -14,9 +15,8 @@ import java.net.URISyntaxException;
 @ApplicationScoped
 public class AliceFontFace implements FontFace {
 
+    @Delegate
     private FontFace delegate;
-    @Inject IssueConfig issueConfig;
-    @Inject CloverProperties cloverProperties;
 
     @PostConstruct
     void init() throws URISyntaxException {
@@ -25,37 +25,8 @@ public class AliceFontFace implements FontFace {
                         .getResource("alice/Alice-Regular.ttf")
                         .toURI(),
                 10,
-                issueConfig.getTitleColour(),
+                "white",
                 XY.at(0,0));
     }
 
-    @Override
-    public URI getFontLocation() {
-        return delegate.getFontLocation();
-    }
-
-    @Override
-    public int getSize() {
-        return delegate.getSize();
-    }
-
-    @Override
-    public String getColour() {
-        return delegate.getColour();
-    }
-
-    @Override
-    public String getShadowColour() {
-        return delegate.getShadowColour();
-    }
-
-    @Override
-    public XY getShadowOffset() {
-        return delegate.getShadowOffset();
-    }
-
-    @Override
-    public FontFace withSize(int size) {
-        return delegate.withSize(size);
-    }
 }
