@@ -6,6 +6,7 @@ import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.awt.*;
 
 @StoryCard
@@ -27,31 +28,19 @@ public class SampleBlock implements Element<Graphics2D> {
                 typedProperties.find(TypedKeys.Story.class, IssueStory.class)
                         .orElseThrow();
         FontFace fontFace = aliceFontFace;
-        var text = story.getSample() + "\n" +
-                "Organize content to meet your goals\n" +
-                "\n" +
-                "Channels are an intuitive way to organize and share Pluralsight content so you can reach your learning goals and business objectives more effectively. Create channels to curate content for your own learning, for team development or to share learning journeys with the world. \n" +
-                "Organize content to meet your goals\n" +
-                "\n" +
-                "Channels are an intuitive way to organize and share Pluralsight content so you can reach your learning goals and business objectives more effectively. Create channels to curate content for your own learning, for team development or to share learning journeys with the world. \n" +
-                "Organize content to meet your goals\n" +
-                "\n" +
-                "Channels are an intuitive way to organize and share Pluralsight content so you can reach your learning goals and business objectives more effectively. Create channels to curate content for your own learning, for team development or to share learning journeys with the world.";
+        var text = story.getSample();
         Region region = dimensions.getSampleRegion();
         opaqueFill
                 .opacity(0.7D)
-                .colour("gray")
+                .colour("black")
                 .region(region)
                 .accept(drawable);
         simpleTextEffect
-                .fontFace(fontFace)
+                .fontFace(fontFace.withColour("white"))
                 .text(text)
                 .vAlign(TextEffect.VAlignment.CENTRE)
                 .hAlign(TextEffect.HAlignment.CENTRE)
-                .region(region)
+                .region(region.withPadding(20))
                 .accept(drawable);
-
-//        drawable.drawRect(region.getLeft(), region.getTop(),
-//                region.getWidth(), region.getHeight());
     }
 }
