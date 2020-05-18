@@ -33,4 +33,7 @@ public interface FontFace {
     XY getShadowOffset();
 
     FontFace withSize(int size);
+    FontFace withColour(String colour);
+    FontFace withShadowColour(String colour);
+    FontFace withShadowOffset(XY offset);
 }
