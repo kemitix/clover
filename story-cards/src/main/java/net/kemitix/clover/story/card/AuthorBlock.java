@@ -26,7 +26,7 @@ public class AuthorBlock implements Element<Graphics2D> {
                 typedProperties.find(TypedKeys.Story.class, IssueStory.class)
                         .orElseThrow();
         FontFace fontFace = FontFace.of(
-                cloverProperties.getFontFile(),
+                cloverProperties.getFontLocation(),
                 0,
                 issueConfig.getTitleColour(),
                 XY.at(

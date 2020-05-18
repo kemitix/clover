@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 @FrontCover
 @ApplicationScoped
@@ -70,7 +69,7 @@ public class LogoStraps implements Element<Graphics2D> {
 
     private FontFace fontFace() {
         return FontFace.of(
-                cloverProperties.getFontFile(),
+                cloverProperties.getFontLocation(),
                 48,
                 issueConfig.getSubTitleColour(),
                 XY.at(

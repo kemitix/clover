@@ -42,7 +42,7 @@ public class CardLogo implements Element<Graphics2D> {
 
     private FontFace fontFace() {
         return FontFace.of(
-                cloverProperties.getFontFile(),
+                cloverProperties.getFontLocation(),
                 properties.getLogoFontSize(),
                 issueConfig.getTitleColour(),
                 XY.at(

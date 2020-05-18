@@ -22,7 +22,7 @@ public class CoverLogo implements Element<Graphics2D> {
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
         FontFace fontFace = FontFace.of(
-                cloverProperties.getFontFile(),
+                cloverProperties.getFontLocation(),
                 217,
                 issueConfig.getTitleColour(),
                 XY.at(

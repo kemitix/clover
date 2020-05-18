@@ -3,7 +3,7 @@ package net.kemitix.clover.spi;
 import lombok.*;
 
 import javax.enterprise.inject.Vetoed;
-import java.io.File;
+import java.net.URI;
 
 @Vetoed
 @Getter
@@ -12,7 +12,7 @@ import java.io.File;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class FontFaceImpl implements FontFace {
 
-    private File font;
+    private URI fontLocation;
     private int size;
     private String colour;
     private String shadowColour;
