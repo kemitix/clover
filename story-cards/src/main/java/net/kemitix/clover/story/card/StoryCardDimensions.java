@@ -69,4 +69,16 @@ public class StoryCardDimensions {
                 .build()
                 .withPadding(properties.getPadding());
     }
+
+    public Region getSampleRegion() {
+        Region region = cardRegion;
+        int top = 7 * stripHeight;
+        int height = 2 * stripHeight;
+        return region.toBuilder()
+                .top(top)
+                .height(height)
+                .width(properties.getWidth())
+                .build()
+                .withPadding(properties.getPadding());
+    }
 }
