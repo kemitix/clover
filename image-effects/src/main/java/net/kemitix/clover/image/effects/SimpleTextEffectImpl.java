@@ -2,13 +2,16 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
+import net.kemitix.text.fit.BoxFitter;
 import net.kemitix.text.fit.WordWrapper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 @ApplicationScoped
@@ -26,9 +29,8 @@ public class SimpleTextEffectImpl
         TextEffect<Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
-    @Inject @Getter FontMetrics fontMetrics;
     @Inject WordWrapper wordWrapper;
-    @Inject FitToRegion fitToRegion;
+    @Inject BoxFitter boxFitter;
 
     @Getter Region region;
 
@@ -39,16 +41,21 @@ public class SimpleTextEffectImpl
 
     @Override
     public void accept(Graphics2D graphics2D) {
-        FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
+        Function<Integer, Font> fontFactory = size ->
+                fontCache.loadFont(fontFace.withSize(size));
+        int size = boxFitter.fit(text, fontFactory, graphics2D,
+                new Rectangle(region.getLeft(), region.getTop(),
+                        region.getWidth(), region.getHeight()));
+        Font font = fontCache.loadFont(fontFace.withSize(size));
         List<String> split =
-                wordWrapper.wrap(text, fontCache.loadFont(face), graphics2D, region.getWidth());
-        int top = topEdge(split.size() * face.getSize());
+                wordWrapper.wrap(text, font, graphics2D, region.getWidth());
+        int top = topEdge(split.size() * size);
         IntStream.range(0, split.size())
                 .forEach(lineNumber -> {
                     String lineOfText = split.get(lineNumber);
                     if (lineOfText.length() > 0) {
                         drawText(graphics2D, lineNumber, lineOfText,
-                                region.getArea(), face, top);
+                                region.getArea(), fontFace.withSize(size), top);
                     }
                 });
     }
@@ -61,7 +68,8 @@ public class SimpleTextEffectImpl
             FontFace face,
             int topOffset
     ) {
-        Area stringBounds = getStringBounds(graphics2d, line, face);
+        Font font = fontCache.loadFont(face);
+        Rectangle2D stringBounds = getStringBounds(graphics2d, line, font);
         int top = topOffset + ((int) stringBounds.getHeight() * lineCount);
         int left = lineLeftEdge((int) stringBounds.getWidth());
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),

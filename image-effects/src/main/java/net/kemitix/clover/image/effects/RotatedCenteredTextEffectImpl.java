@@ -7,8 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 
 @With
@@ -24,7 +24,6 @@ public class RotatedCenteredTextEffectImpl
         TextEffect.VAlignNext<Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
-    @Inject @Getter FontMetrics fontMetrics;
     VAlignment VAlignment;
     HAlignment HAlignment;
 
@@ -58,7 +57,8 @@ public class RotatedCenteredTextEffectImpl
             Area imageArea,
             Region region
     ) {
-        Area stringBounds = getStringBounds(graphics2d, line, fontFace);
+        Font font = fontCache.loadFont(fontFace);
+        Rectangle2D stringBounds = getStringBounds(graphics2d, line, font);
         int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount) - region.getHeight();
         int left = region.getWidth() + region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),

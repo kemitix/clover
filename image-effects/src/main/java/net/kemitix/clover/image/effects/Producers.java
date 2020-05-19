@@ -1,5 +1,6 @@
 package net.kemitix.clover.image.effects;
 
+import net.kemitix.text.fit.BoxFitter;
 import net.kemitix.text.fit.TextFit;
 import net.kemitix.text.fit.WordWrapper;
 
@@ -14,4 +15,9 @@ public class Producers {
         return TextFit.wrapper();
     }
 
+    @Produces
+    @ApplicationScoped
+    BoxFitter boxFitter() {
+        return TextFit.fitter();
+    }
 }
