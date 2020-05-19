@@ -2,12 +2,13 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
+import net.kemitix.text.fit.WordWrapper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 
 @ApplicationScoped
@@ -39,12 +40,12 @@ public class SimpleTextEffectImpl
     @Override
     public void accept(Graphics2D graphics2D) {
         FontFace face = fitToRegion.fit(text, fontFace, graphics2D, region);
-        String[] split =
-                wordWrapper.wrap(text, face, graphics2D, region.getWidth());
-        int top = topEdge(split.length * face.getSize());
-        IntStream.range(0, split.length)
+        List<String> split =
+                wordWrapper.wrap(text, fontCache.loadFont(face), graphics2D, region.getWidth());
+        int top = topEdge(split.size() * face.getSize());
+        IntStream.range(0, split.size())
                 .forEach(lineNumber -> {
-                    String lineOfText = split[lineNumber];
+                    String lineOfText = split.get(lineNumber);
                     if (lineOfText.length() > 0) {
                         drawText(graphics2D, lineNumber, lineOfText,
                                 region.getArea(), face, top);

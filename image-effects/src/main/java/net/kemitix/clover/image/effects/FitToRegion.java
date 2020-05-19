@@ -1,13 +1,14 @@
 package net.kemitix.clover.image.effects;
 
 import net.kemitix.clover.spi.Area;
+import net.kemitix.clover.spi.FontCache;
 import net.kemitix.clover.spi.FontFace;
 import net.kemitix.clover.spi.Region;
+import net.kemitix.text.fit.WordWrapper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
 public class FitToRegion {
 
     @Inject WordWrapper wordWrapper;
-    @Inject
-    FontMetrics fontMetrics;
+    @Inject FontMetrics fontMetrics;
+    @Inject FontCache fontCache;
 
     public FontFace fit(
             String text,
@@ -44,9 +45,9 @@ public class FitToRegion {
         if (mid == min || mid == max) {
             return fontFace.withSize(min);
         }
-        String[] lines =
-                wordWrapper.wrap(text, face, graphics2D, region.getWidth());
-        List<Area> lineSizes = Arrays.stream(lines)
+        List<String> lines =
+                wordWrapper.wrap(text, fontCache.loadFont(face), graphics2D, region.getWidth());
+        List<Area> lineSizes = lines.stream()
                 .map(line -> fontMetrics.bounds(graphics2D, line, face))
                 .collect(Collectors.toList());
         int linesHeight = lineSizes.stream().map(Area::getHeight)
