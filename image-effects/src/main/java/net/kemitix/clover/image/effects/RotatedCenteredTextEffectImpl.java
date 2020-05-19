@@ -58,11 +58,24 @@ public class RotatedCenteredTextEffectImpl
             Region region
     ) {
         Font font = fontCache.loadFont(fontFace);
-        Rectangle2D stringBounds = getStringBounds(graphics2d, line, font);
-        int top = region.getTop() + ((int) stringBounds.getHeight() * lineCount) - region.getHeight();
-        int left = region.getWidth() + region.getLeft() + ((region.getWidth() - (int) stringBounds.getWidth()) / 2);
+        Rectangle2D stringBounds =
+                font.getStringBounds(line, graphics2d.getFontRenderContext());
+        int top = getTop(lineCount, region, (int) stringBounds.getHeight());
+        int left = getLeft(region, (int) stringBounds.getWidth());
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 fontFace, graphics2d, fontCache, imageArea);
+    }
+
+    private int getLeft(Region region, int lineWidth) {
+        return region.getWidth()
+                + region.getLeft()
+                + ((region.getWidth() - lineWidth) / 2);
+    }
+
+    private int getTop(int lineCount, Region region, int lineHeight) {
+        return region.getTop()
+                + (lineHeight * lineCount)
+                - region.getHeight();
     }
 
     @Override

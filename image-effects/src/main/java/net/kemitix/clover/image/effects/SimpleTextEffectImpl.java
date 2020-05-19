@@ -69,12 +69,18 @@ public class SimpleTextEffectImpl
             int topOffset
     ) {
         Font font = fontCache.loadFont(face);
-        Rectangle2D stringBounds = getStringBounds(graphics2d, line, font);
-        int top = topOffset + ((int) stringBounds.getHeight() * lineCount);
+        Rectangle2D stringBounds =
+                font.getStringBounds(line, graphics2d.getFontRenderContext());
+        int top = getTop(lineCount, topOffset, (int) stringBounds.getHeight());
         int left = lineLeftEdge((int) stringBounds.getWidth());
         AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
                 face, graphics2d, fontCache, imageArea);
         //graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
+    }
+
+    private int getTop(int lineCount, int topOffset, int lineHeight) {
+        return topOffset +
+                (lineHeight * lineCount);
     }
 
     private int topEdge(int height) {

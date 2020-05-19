@@ -55,12 +55,4 @@ abstract class AbstractTextEffect {
                                 "Unknown colour: " + colour));
     }
 
-    protected Rectangle2D getStringBounds(
-            Graphics2D graphics2d,
-            String text,
-            Font font
-    ) {
-        return font.getStringBounds(text, graphics2d.getFontRenderContext());
-    }
-
 }
