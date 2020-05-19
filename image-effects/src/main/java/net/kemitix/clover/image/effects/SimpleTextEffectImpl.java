@@ -2,6 +2,7 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.DrawText;
 import net.kemitix.text.fit.BoxFitter;
 import net.kemitix.text.fit.WordWrapper;
 
@@ -19,7 +20,6 @@ import java.util.stream.IntStream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class SimpleTextEffectImpl
-        extends AbstractTextEffect
         implements
         SimpleTextEffect<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
@@ -31,6 +31,7 @@ public class SimpleTextEffectImpl
     @Inject @Getter FontCache fontCache;
     @Inject WordWrapper wordWrapper;
     @Inject BoxFitter boxFitter;
+    @Inject DrawText drawText;
 
     @Getter Region region;
 
@@ -73,7 +74,7 @@ public class SimpleTextEffectImpl
                 font.getStringBounds(line, graphics2d.getFontRenderContext());
         int top = getTop(lineCount, topOffset, (int) stringBounds.getHeight());
         int left = lineLeftEdge((int) stringBounds.getWidth());
-        AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
+        drawText.draw(line, framing -> XY.at(left, top),
                 face, graphics2d, fontCache, imageArea);
         //graphics2d.drawRect(left, top, (int) stringBounds.getWidth(), (int) stringBounds.getHeight());
     }

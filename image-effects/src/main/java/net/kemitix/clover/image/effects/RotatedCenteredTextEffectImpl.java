@@ -2,6 +2,7 @@ package net.kemitix.clover.image.effects;
 
 import lombok.*;
 import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.DrawText;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,7 +17,6 @@ import java.util.stream.IntStream;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RotatedCenteredTextEffectImpl
-        extends AbstractTextEffect
         implements RotatedCenteredTextEffect<Graphics2D>,
         TextEffect.RegionNext<Graphics2D>,
         TextEffect.TextNext<Graphics2D>,
@@ -24,6 +24,8 @@ public class RotatedCenteredTextEffectImpl
         TextEffect.VAlignNext<Graphics2D> {
 
     @Inject @Getter FontCache fontCache;
+    @Inject DrawText drawText;
+
     VAlignment VAlignment;
     HAlignment HAlignment;
 
@@ -62,7 +64,7 @@ public class RotatedCenteredTextEffectImpl
                 font.getStringBounds(line, graphics2d.getFontRenderContext());
         int top = getTop(lineCount, region, (int) stringBounds.getHeight());
         int left = getLeft(region, (int) stringBounds.getWidth());
-        AbstractTextEffect.drawText(line, framing -> XY.at(left, top),
+        drawText.draw(line, framing -> XY.at(left, top),
                 fontFace, graphics2d, fontCache, imageArea);
     }
 

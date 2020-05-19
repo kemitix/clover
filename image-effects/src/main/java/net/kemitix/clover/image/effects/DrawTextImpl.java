@@ -3,15 +3,17 @@ package net.kemitix.clover.image.effects;
 import net.kemitix.clover.spi.*;
 import org.beryx.awt.color.ColorFactory;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Optional;
 import java.util.function.Function;
 
-abstract class AbstractTextEffect {
+@ApplicationScoped
+class DrawTextImpl implements DrawText {
 
-    @Deprecated
-    public static void drawText(
+    @Override
+    public void draw(
             final String text,
             final Function<Framing, XY> positioning,
             final FontFace fontFace,
