@@ -36,7 +36,7 @@
         <lombok.version>1.18.12</lombok.version>
         <mockito.version>3.3.3</mockito.version>
         <typed-properties.version>1.0.0</typed-properties.version>
-        <text-wrap-fit-box.version>DEV-SNAPSHOT</text-wrap-fit-box.version>
+        <text-wrap-fit-box.version>1.0.0</text-wrap-fit-box.version>
     </properties>
 
     <dependencyManagement>
