@@ -125,7 +125,7 @@ public class SimpleTextEffectImpl
             case LEFT:
                 return region.getLeft();
             case RIGHT:
-                return region.getWidth() - width;
+                return region.getLeft() + region.getWidth() - width;
             case CENTRE:
                 return region.getLeft() + ((region.getWidth() - width) / 2);
         }
