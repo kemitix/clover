@@ -41,6 +41,7 @@ public class AuthorBlock implements Element<Graphics2D> {
                 .accept(drawable);
         simpleTextEffect
                 .fontFace(fontFace)
+                .fit()
                 .text(text)
                 .vAlign(TextEffect.VAlignment.CENTRE)
                 .hAlign(TextEffect.HAlignment.CENTRE)

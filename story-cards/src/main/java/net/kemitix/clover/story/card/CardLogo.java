@@ -25,6 +25,7 @@ public class CardLogo implements Element<Graphics2D> {
         Region region = dimensions.getLogoRegion();
         simpleTextEffect
                 .fontFace(fontFace())
+                .fit()
                 .text(text())
                 .vAlign(TextEffect.VAlignment.CENTRE)
                 .hAlign(TextEffect.HAlignment.CENTRE)
