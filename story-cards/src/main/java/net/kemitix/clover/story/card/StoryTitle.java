@@ -35,8 +35,8 @@ public class StoryTitle implements Element<Graphics2D> {
         var text = story.getTitle();
         Region region = dimensions.getTitleRegion();
         opaqueFill
-                .opacity(0.7D)
-                .colour("gray")
+                .opacity(0.25D)
+                .colour("white")
                 .region(region)
                 .accept(drawable);
         simpleTextEffect
