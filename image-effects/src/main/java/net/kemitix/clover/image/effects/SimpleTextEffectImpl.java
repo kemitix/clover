@@ -115,9 +115,10 @@ public class SimpleTextEffectImpl
                 return region.getTop() + (region.getHeight() - height);
             case CENTRE:
                 return region.getTop() + ((region.getHeight() - height) / 2);
+            default:
+                throw new UnsupportedOperationException(
+                        "Unknown Vertical Alignment: " + hAlignment);
         }
-        throw new UnsupportedOperationException(
-                "Unknown Vertical Alignment: " + hAlignment);
     }
 
     private int lineLeftEdge(int width) {
@@ -128,9 +129,10 @@ public class SimpleTextEffectImpl
                 return region.getLeft() + region.getWidth() - width;
             case CENTRE:
                 return region.getLeft() + ((region.getWidth() - width) / 2);
+            default:
+                throw new UnsupportedOperationException(
+                        "Unknown Horizontal Alignment: " + hAlignment);
         }
-        throw new UnsupportedOperationException(
-                "Unknown Horizontal Alignment: " + hAlignment);
     }
 
     @Override
