@@ -30,7 +30,7 @@ public class StoryCardDimensions {
         sourceRegion = Region.builder()
                 .top(storyCardSpec.getTop())
                 .left(storyCardSpec.getLeft())
-                .width(storyCardSpec.getWidth())
+                .width(properties.getWidth())
                 .height((int) (targetSizeRegion.getHeight() * scaleFromOriginal))
                 .build();
     }
