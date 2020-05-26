@@ -27,7 +27,7 @@ public class CardLogo implements Element<Graphics2D> {
                 .fontFace(fontFace())
                 .fit()
                 .text(text())
-                .vAlign(TextEffect.VAlignment.CENTRE)
+                .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(region)
                 .accept(drawable);
