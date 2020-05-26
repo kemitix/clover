@@ -31,6 +31,13 @@ public class CardLogo implements Element<Graphics2D> {
                 .hAlign(TextEffect.HAlignment.CENTRE)
                 .region(region)
                 .accept(drawable);
+        drawable.setStroke(new BasicStroke(3));
+        drawable.drawLine(
+                region.getLeft(),
+                region.getBottom(),
+                region.getRight(),
+                region.getBottom()
+        );
 
 //        drawable.drawRect(region.getLeft(), region.getTop(),
 //                region.getWidth(), region.getHeight());
