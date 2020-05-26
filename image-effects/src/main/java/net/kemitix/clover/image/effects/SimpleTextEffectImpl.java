@@ -165,6 +165,6 @@ public class SimpleTextEffectImpl
 
     @Override
     public TextNext<Graphics2D> fit() {
-        return withFit(true);
+        return withFit(true).wrap();
     }
 }
