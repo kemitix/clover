@@ -60,4 +60,8 @@ public interface IssueConfig {
     int getFantasyTop();
 
     int getFantasyLeft();
+
+    int getSfTop();
+
+    int getSfLeft();
 }
