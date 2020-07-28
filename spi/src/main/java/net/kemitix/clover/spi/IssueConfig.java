@@ -53,4 +53,7 @@ public interface IssueConfig {
 
     IssueStoryCards getStoryCards();
 
+    int getReprintTop();
+
+    int getReprintLeft();
 }

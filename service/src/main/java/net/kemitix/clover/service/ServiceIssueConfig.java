@@ -47,6 +47,10 @@ public class ServiceIssueConfig implements IssueConfig {
     private int frontWidth;
     @JsonbProperty("story-cards")
     private StoryCards storyCards;
+    @JsonbProperty("reprint-top")
+    private int reprintTop;
+    @JsonbProperty("reprint-left")
+    private int reprintLeft;
 
     @Setter
     @Getter
