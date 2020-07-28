@@ -56,4 +56,8 @@ public interface IssueConfig {
     int getReprintTop();
 
     int getReprintLeft();
+
+    int getFantasyTop();
+
+    int getFantasyLeft();
 }

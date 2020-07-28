@@ -51,6 +51,10 @@ public class ServiceIssueConfig implements IssueConfig {
     private int reprintTop;
     @JsonbProperty("reprint-left")
     private int reprintLeft;
+    @JsonbProperty("fantasy-top")
+    private int fantasyTop;
+    @JsonbProperty("fantasy-left")
+    private int fantasyLeft;
 
     @Setter
     @Getter
