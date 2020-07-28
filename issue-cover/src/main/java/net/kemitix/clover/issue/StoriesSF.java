@@ -39,7 +39,7 @@ public class StoriesSF implements Element<Graphics2D> {
     private String text() {
         return String.join("\n",
                 storyListFormatter.format(
-                        "Science Fiction Stories",
+                        "Original Science Fiction",
                         issueConfig.getStories().getSf()));
     }
 
