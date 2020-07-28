@@ -25,6 +25,7 @@ run: install
 
 clean:
 	mvn clean
+	if [ -f .install ];then rm .install;fi
 
 quick-build:
 	mvn clean install -DskipTests -DskipITs
