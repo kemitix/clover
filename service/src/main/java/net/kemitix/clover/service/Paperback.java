@@ -2,6 +2,7 @@ package net.kemitix.clover.service;
 
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
+import lombok.extern.java.Log;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
+@Log
 @ApplicationScoped
 public class Paperback implements CloverFormat {
 
@@ -32,7 +34,9 @@ public class Paperback implements CloverFormat {
     @Override
     public List<Image> getImages() {
         if (images == null) {
+            log.info("Generating Paperback images...");
             init();
+            log.info("Generated Paperback images");
         }
         return images;
     }
