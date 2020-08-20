@@ -12,15 +12,10 @@ import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
-import java.util.logging.Logger;
 
 @Log
 @ApplicationScoped
 public class Paperback implements CloverFormat {
-
-    private static final Logger LOG =
-            Logger.getLogger(
-                    Paperback.class.getName());
 
     @Inject IssueDimensions dimensions;
     @Inject Image coverArtImage;
