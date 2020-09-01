@@ -67,7 +67,8 @@ public class LogoStraps extends AbstractElement {
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
                 .region(Region.builder()
-                        .top(top).left(left + issueDimensions.getFrontCrop().getLeft())
+                        .top(top)
+                        .left(left + issueDimensions.getFrontCrop().getLeft() + 30)
                         .width(issueDimensions.getFrontCrop().getWidth() -
                                 (left + issueDimensions.getFrontCrop().getLeft()))
                         .height(issueDimensions.getFrontCrop().getHeight() - top)
