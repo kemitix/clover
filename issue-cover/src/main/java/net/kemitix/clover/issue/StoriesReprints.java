@@ -31,10 +31,14 @@ public class StoriesReprints extends AbstractElement {
     }
 
     private String text() {
+        var reprints = issueConfig.getStories().getReprint();
+        if (reprints.isEmpty()) {
+            return "";
+        }
         return String.join("\n",
                 storyListFormatter.format(
                         "Plus",
-                        issueConfig.getStories().getReprint()));
+                        reprints));
     }
 
     private Region region() {
