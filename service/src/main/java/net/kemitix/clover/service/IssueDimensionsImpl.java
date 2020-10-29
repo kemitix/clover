@@ -26,6 +26,7 @@ public class IssueDimensionsImpl implements IssueDimensions {
     // Calculated
     private float scaleFromOriginal;
     private Region frontCrop;
+    private Region backCrop;
     private Region spineCrop;
     private Region wrapCrop;
     private Region scaledCoverArt;
@@ -82,15 +83,14 @@ public class IssueDimensionsImpl implements IssueDimensions {
 
         // backCrop is relative to scaledCoverArt
         log.info("Select back cover region on scaled cover art");
-        Region backRegion = frontRegion.toBuilder()
-                .left(frontRegion.getLeft() - spineWidth - frontRegion.getWidth())
-                .build();
-        scaledCoverArt.mustContain(backRegion);
+        backCrop = frontRegion.withLeft(left ->
+                0);
+        scaledCoverArt.mustContain(backCrop);
 
         // wrapCrop is relative to scaledCoverArt
         log.info("Select spine region on scaled cover art");
-        wrapCrop = backRegion.toBuilder()
-                .width(backRegion.getWidth() + spineWidth + frontRegion.getWidth())
+        wrapCrop = backCrop.toBuilder()
+                .width(backCrop.getWidth() + spineWidth + frontRegion.getWidth())
                 .build();
         scaledCoverArt.mustContain(wrapCrop);
 
