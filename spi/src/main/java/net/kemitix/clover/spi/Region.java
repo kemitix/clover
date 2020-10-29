@@ -250,4 +250,13 @@ public class Region
                 .build();
     }
 
+    public Region withMargin(int margin) {
+        return toBuilder()
+                .left(left + margin)
+                .top(top + margin)
+                .width(width - (2 * margin))
+                .height(height - (2 * margin))
+                .build();
+    }
+
 }
