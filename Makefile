@@ -7,7 +7,7 @@ graphs:
 install: .install
 
 .install:
-	mvn install
+	mvn install -DskipTests -Dpitest.skip
 	touch .install
 
 test:
