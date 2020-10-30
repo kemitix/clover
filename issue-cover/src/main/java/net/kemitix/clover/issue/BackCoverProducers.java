@@ -14,7 +14,7 @@ public class BackCoverProducers {
     ) {
         return FontFace.of(
                 cloverProperties.getFontLocation(),
-                48,
+                42,//TODO move to clover.json
                 issueConfig.getTextColour(),
                 cloverProperties.getDropShadowXOffset(),
                 cloverProperties.getDropShadowYOffset());
