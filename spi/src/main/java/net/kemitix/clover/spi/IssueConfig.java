@@ -35,10 +35,16 @@ public interface IssueConfig {
     default List<String> authors() {
         return getStories().stream()
                 .map(IssueStory::getAuthor)
-                .sorted(Comparator.comparing(IssueAuthor::getSurname)
-                        .thenComparing(IssueAuthor::getForename))
+                .sorted(byAuthorName())
                 .map(IssueAuthor::authorName)
                 .collect(Collectors.toList());
+    }
+
+    private Comparator<IssueAuthor> byAuthorName() {
+        return Comparator.comparing(
+                (IssueAuthor author1) -> author1.getSurname().toLowerCase())
+                .thenComparing(
+                        author2 -> author2.getForename().toLowerCase());
     }
 
     TextEffect.HAlignment getStoriesAlignment();
