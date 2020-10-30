@@ -84,7 +84,7 @@ public class IssueDimensionsImpl implements IssueDimensions {
         // backCrop is relative to scaledCoverArt
         log.info("Select back cover region on scaled cover art");
         backCrop = frontRegion.withLeft(left ->
-                0);
+                frontRegion.getLeft() - spineWidth - frontRegion.getWidth());
         scaledCoverArt.mustContain(backCrop);
 
         // wrapCrop is relative to scaledCoverArt
