@@ -1,6 +1,7 @@
 package net.kemitix.clover.image.effects;
 
 import lombok.*;
+import lombok.extern.java.Log;
 import net.kemitix.clover.spi.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 
+@Log
 @With
 @ApplicationScoped
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -24,7 +26,9 @@ public class OpaqueFillImpl implements OpaqueFill<Graphics2D>,
 
     @Override
     public void accept(Graphics2D graphics2D) {
+        log.info("Colour: %s, opacity: %f".formatted(colour, opacity));
         graphics2D.setPaint(colours.getColor(colour, opacity));
+        log.info("Region: %s".formatted(region));
         graphics2D.fillRect(region.getLeft(), region.getTop(),
                 region.getWidth(), region.getHeight());
     }

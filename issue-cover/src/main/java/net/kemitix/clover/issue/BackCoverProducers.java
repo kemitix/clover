@@ -19,4 +19,9 @@ public class BackCoverProducers {
                 cloverProperties.getDropShadowXOffset(),
                 cloverProperties.getDropShadowYOffset());
     }
+
+    @Produces
+    BackCoverOpaqueProperties backCoverOpaqueProperties() {
+        return new BackCoverOpaqueProperties(){};
+    }
 }

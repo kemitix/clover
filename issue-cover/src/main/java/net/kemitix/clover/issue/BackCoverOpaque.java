@@ -3,6 +3,7 @@ package net.kemitix.clover.issue;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
+import net.kemitix.clover.spi.BackCoverOpaqueProperties;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.IssueDimensions;
@@ -24,6 +25,7 @@ public class BackCoverOpaque
 
     @Inject OpaqueFill<Graphics2D> opaqueFill;
     @Inject IssueDimensions dimensions;
+    @Inject BackCoverOpaqueProperties properties;
     @Inject CloverProperties cloverProperties;
 
     @Override
@@ -31,9 +33,29 @@ public class BackCoverOpaque
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        box(drawable, 1D, "white", 40, 50);
-        box(drawable, 1D, "black", 50, 60);
-        fill(drawable, 0.25D, "white", 60);
+        if (properties.isEnableBackCoverBox()) {
+            box(drawable,
+                    properties.getBackCoverBoxOuterOpacity(),
+                    properties.getBackCoverBoxOuterColour(),
+                    getMargin(0),
+                    getMargin(1));
+            box(drawable,
+                    properties.getBackCoverBoxMidOpacity(),
+                    properties.getBackCoverBoxMidColour(),
+                    getMargin(1),
+                    getMargin(2));
+            fill(drawable,
+                    properties.getBackCoverBoxInnerOpacity(),
+                    properties.getBackCoverBoxInnerColour(),
+                    getMargin(2));
+        }
+    }
+
+    private int getMargin(
+            int steps
+    ) {
+        int outerMargin = properties.getBackCoverBoxOuterMargin();
+        return outerMargin + (steps * properties.getBackCoverBoxMarginStep());
     }
 
     private void box(

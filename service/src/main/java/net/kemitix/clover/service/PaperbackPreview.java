@@ -41,6 +41,7 @@ public class PaperbackPreview implements CloverFormat {
         return cloverProperties.isEnablePaperbackPreview();
     }
 
+    //TODO extract to an injectable and pull in a list of such implementation
     private Function<Image, Image> drawBarcodeSpacer() {
         final Region region = Region.builder()
                 .top(cloverProperties.getBarcodeTop())
