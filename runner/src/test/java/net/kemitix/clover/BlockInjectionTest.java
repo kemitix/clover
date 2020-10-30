@@ -51,9 +51,11 @@ public class BlockInjectionTest
     @Test
     @DisplayName("Expected Back Page Elements are @Injected")
     public void expectedBackPageElementsAreInjected() {
-        assertThat(backPageElements.stream().count()).isEqualTo(4);
+        assertThat(backPageElements.stream().count()).isEqualTo(5);
         assertThat(backPageElements.stream())
                 .anyMatch(e -> e instanceof BackCoverOpaque);
+        assertThat(backPageElements.stream())
+                .anyMatch(e -> e instanceof ArtCreditBlock);
         assertThat(backPageElements.stream())
                 .anyMatch(e -> e instanceof StoriesSF);
         assertThat(backPageElements.stream())

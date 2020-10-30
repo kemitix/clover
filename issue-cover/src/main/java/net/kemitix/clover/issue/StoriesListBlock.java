@@ -30,6 +30,9 @@ public class StoriesListBlock {
             Region region,
             String header
     ) {
+        if (text.isBlank()) {
+            return;
+        }
         simpleTextEffect.fontFace(fontFace)
                 .text(text)
                 .vAlign(TextEffect.VAlignment.TOP)
