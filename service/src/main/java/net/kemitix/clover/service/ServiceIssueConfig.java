@@ -43,6 +43,8 @@ public class ServiceIssueConfig implements IssueConfig {
     private Stories stories;
     @JsonbProperty("cover-art")
     private String coverArt;
+    @JsonbProperty("cover-artist")
+    private String coverArtist;
     @JsonbProperty("publication-title")
     private String publicationTitle;
     @JsonbProperty("front-width")

@@ -24,6 +24,8 @@ public interface IssueConfig {
 
     String getCoverArt();
 
+    String getCoverArtist();
+
     String getPublicationTitle();
 
     String getDate();
