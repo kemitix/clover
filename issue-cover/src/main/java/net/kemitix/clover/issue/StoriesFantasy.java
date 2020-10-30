@@ -16,6 +16,7 @@ import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.HEAD;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
@@ -28,54 +29,16 @@ public class StoriesFantasy extends AbstractElement {
     @Getter private final int priority = 10;
 
     @Inject @BackCover FontFace fontFace;
-    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject StoryListFormatter storyListFormatter;
     @Inject IssueConfig issueConfig;
-    @Inject OpaqueFill<Graphics2D> opaqueFill;
-    @Inject FontCache fontCache;
-    @Inject BackCoverBackgroundBox backgroundBox;
+    @Inject StoriesListBlock storiesListBlock;
 
     @Override
-    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        simpleTextEffect.fontFace(fontFace)
-                .text(text())
-                .vAlign(TextEffect.VAlignment.TOP)
-                .hAlign(issueConfig.getStoriesAlignment())
-                .region(region())
-                .accept(drawable);
-        opaqueFill.opacity(1d)
-                .colour(fontFace.getColour())
-                .region(hRuleRegion(drawable))
-                .accept(drawable);
-    }
-
-    private Region hRuleRegion(Graphics2D drawable) {
-        int width = lineWidth(drawable);
-        Region region = region()
-                .withTop(top -> top + lineHeight(drawable))
-                .withHeight(backgroundBox.getMarginStep())
-                .withWidth(width);
-        if (issueConfig.getStoriesAlignment()
-                .equals(TextEffect.HAlignment.CENTRE)) {
-            return region
-                    .withLeft(left -> left - (width / 2));
-        } else {
-            return region;
-        }
-    }
-
-    private int lineWidth(Graphics2D drawable) {
-        Font font = fontCache.loadFont(fontFace);
-        Rectangle2D stringBounds =
-                font.getStringBounds(HEADER, drawable.getFontRenderContext());
-        return (int) stringBounds.getWidth();
-    }
-
-    private int lineHeight(Graphics2D drawable) {
-        Font font = fontCache.loadFont(fontFace);
-        Rectangle2D stringBounds =
-                font.getStringBounds(HEADER, drawable.getFontRenderContext());
-        return (int) (stringBounds.getHeight() * 1.2);
+    public void draw(
+            Graphics2D drawable,
+            TypedProperties typedProperties
+    ) {
+        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
     }
 
     private Region region() {
