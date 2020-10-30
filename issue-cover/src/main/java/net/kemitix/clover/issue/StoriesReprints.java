@@ -13,21 +13,21 @@ import java.awt.*;
 @ApplicationScoped
 public class StoriesReprints extends AbstractElement {
 
+    private static final String HEADER = "Plus";
+
     @Getter private final int priority = 30;
 
     @Inject @BackCover FontFace fontFace;
-    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject StoryListFormatter storyListFormatter;
     @Inject IssueConfig issueConfig;
+    @Inject StoriesListBlock storiesListBlock;
 
     @Override
-    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        simpleTextEffect.fontFace(fontFace)
-                .text(text())
-                .vAlign(TextEffect.VAlignment.TOP)
-                .hAlign(TextEffect.HAlignment.LEFT)
-                .region(region())
-                .accept(drawable);
+    public void draw(
+            Graphics2D drawable,
+            TypedProperties typedProperties
+    ) {
+        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
     }
 
     private String text() {
@@ -37,7 +37,7 @@ public class StoriesReprints extends AbstractElement {
         }
         return String.join("\n",
                 storyListFormatter.format(
-                        "Plus",
+                        HEADER,
                         reprints));
     }
 

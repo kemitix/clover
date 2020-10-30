@@ -41,6 +41,8 @@ public interface IssueConfig {
                 .collect(Collectors.toList());
     }
 
+    TextEffect.HAlignment getStoriesAlignment();
+
     IssueStories getStories();
 
 
@@ -64,4 +66,6 @@ public interface IssueConfig {
     int getSfTop();
 
     int getSfLeft();
+
+    BackCoverBackgroundBox getBackCoverBackgroundBox();
 }

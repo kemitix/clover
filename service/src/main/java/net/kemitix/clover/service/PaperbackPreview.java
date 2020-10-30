@@ -1,13 +1,19 @@
 package net.kemitix.clover.service;
 
+import net.kemitix.clover.spi.Block;
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.Drawable;
+import net.kemitix.clover.spi.Element;
+import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.Region;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.awt.*;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -17,12 +23,13 @@ public class PaperbackPreview implements CloverFormat {
 
     @Inject CloverProperties cloverProperties;
     @Inject Paperback paperback;
+    @GuideLines @Inject Instance<Element<Graphics2D>> blocks;
 
     @Override
     public List<Image> getImages() {
         return paperback.getImages()
                 .stream()
-                .map(drawBarcodeSpacer())
+                .map(blocks())
                 .collect(Collectors.toList());
     }
 
@@ -40,16 +47,11 @@ public class PaperbackPreview implements CloverFormat {
     public boolean isEnabled() {
         return cloverProperties.isEnablePaperbackPreview();
     }
-
-    private Function<Image, Image> drawBarcodeSpacer() {
-        final Region region = Region.builder()
-                .top(cloverProperties.getBarcodeTop())
-                .left(cloverProperties.getBarcodeLeft())
-                .width(cloverProperties.getBarcodeWidth())
-                .height(cloverProperties.getBarcodeHeight())
-                .build();
-        final String fillColour = cloverProperties.getBarcodeFillColour();
-        return image -> image.withFilledArea(region, fillColour);
+    private Function<Image, Image> blocks() {
+        var properties = TypedProperties.create();
+        return image ->
+                image.withGraphics(graphics2D ->
+                        Drawable.draw(blocks, graphics2D, properties));
     }
 
 }

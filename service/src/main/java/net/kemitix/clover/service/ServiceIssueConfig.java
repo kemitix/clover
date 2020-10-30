@@ -38,6 +38,8 @@ public class ServiceIssueConfig implements IssueConfig {
     @JsonbProperty("authors-y-offset")
     private int authorsYOffset;
     private Cards cards;
+    @JsonbProperty("stories-alignment")
+    private TextEffect.HAlignment storiesAlignment;
     private Stories stories;
     @JsonbProperty("cover-art")
     private String coverArt;
@@ -59,6 +61,8 @@ public class ServiceIssueConfig implements IssueConfig {
     private int reprintTop;
     @JsonbProperty("reprint-left")
     private int reprintLeft;
+    @JsonbProperty("back-cover-background-box")
+    private BackCoverBackgroundBox backCoverBackgroundBox;
 
     @Setter
     @Getter

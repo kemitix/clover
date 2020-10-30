@@ -14,7 +14,7 @@ public class FrontCoverProducers {
     ) {
         return FontFace.of(
                 cloverProperties.getFontLocation(),
-                48,
+                48,//TODO move to clover.json
                 issueConfig.getTextColour(),
                 cloverProperties.getDropShadowXOffset(),
                 cloverProperties.getDropShadowYOffset());

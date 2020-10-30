@@ -1,7 +1,13 @@
 package net.kemitix.clover.image.effects;
 
-import lombok.*;
-import net.kemitix.clover.spi.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.With;
+import net.kemitix.clover.spi.Colours;
+import net.kemitix.clover.spi.Effect;
+import net.kemitix.clover.spi.OpaqueFill;
+import net.kemitix.clover.spi.Region;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

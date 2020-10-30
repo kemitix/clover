@@ -11,5 +11,7 @@ public interface IssueDimensions {
 
     Region getPaperbackCover();
 
+    Region getBackCrop();
+
     Region getPaperbackCoverWithTrim();
 }

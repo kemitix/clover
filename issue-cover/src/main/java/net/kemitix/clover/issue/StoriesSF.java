@@ -13,21 +13,21 @@ import java.awt.*;
 @ApplicationScoped
 public class StoriesSF extends AbstractElement {
 
+    private static final String HEADER = "Original Science Fiction";
+
     @Getter private final int priority = 10;
 
     @Inject @BackCover FontFace fontFace;
-    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject StoryListFormatter storyListFormatter;
     @Inject IssueConfig issueConfig;
+    @Inject StoriesListBlock storiesListBlock;
 
     @Override
-    public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        simpleTextEffect.fontFace(fontFace)
-                .text(text())
-                .vAlign(TextEffect.VAlignment.TOP)
-                .hAlign(TextEffect.HAlignment.LEFT)
-                .region(region())
-                .accept(drawable);
+    public void draw(
+            Graphics2D drawable,
+            TypedProperties typedProperties
+    ) {
+        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
     }
 
     private Region region() {
@@ -40,7 +40,7 @@ public class StoriesSF extends AbstractElement {
     private String text() {
         return String.join("\n",
                 storyListFormatter.format(
-                        "Original Science Fiction",
+                        HEADER,
                         issueConfig.getStories().getSf()));
     }
 
