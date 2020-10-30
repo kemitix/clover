@@ -25,7 +25,7 @@ public class StoriesReprints extends AbstractElement {
         simpleTextEffect.fontFace(fontFace)
                 .text(text())
                 .vAlign(TextEffect.VAlignment.TOP)
-                .hAlign(TextEffect.HAlignment.LEFT)
+                .hAlign(issueConfig.getStoriesAlignment())
                 .region(region())
                 .accept(drawable);
     }

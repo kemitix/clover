@@ -41,6 +41,8 @@ public interface IssueConfig {
                 .collect(Collectors.toList());
     }
 
+    TextEffect.HAlignment getStoriesAlignment();
+
     IssueStories getStories();
 
 
