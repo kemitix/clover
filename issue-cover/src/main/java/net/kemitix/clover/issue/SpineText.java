@@ -22,7 +22,6 @@ public class SpineText extends AbstractElement {
     @Getter private final int priority = 20;
 
     @Inject IssueDimensions dimensions;
-    @Inject Colours colours;
     @Inject RotatedCenteredTextEffect<Graphics2D> rotatedCenteredTextEffect;
     @Inject @Spine Supplier<String> spineText;
     @Inject @Spine FontFace fontFace;
