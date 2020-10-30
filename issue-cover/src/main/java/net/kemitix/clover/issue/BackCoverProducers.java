@@ -21,7 +21,7 @@ public class BackCoverProducers {
     }
 
     @Produces
-    BackCoverOpaqueProperties backCoverOpaqueProperties() {
-        return new BackCoverOpaqueProperties(){};
+    BackCoverBackgroundBox backCoverOpaqueProperties(IssueConfig issueConfig) {
+        return issueConfig.getBackCoverBackgroundBox();
     }
 }

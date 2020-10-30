@@ -64,4 +64,6 @@ public interface IssueConfig {
     int getSfTop();
 
     int getSfLeft();
+
+    BackCoverBackgroundBox getBackCoverBackgroundBox();
 }

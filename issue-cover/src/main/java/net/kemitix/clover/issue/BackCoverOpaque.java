@@ -1,9 +1,10 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
+import lombok.extern.java.Log;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
-import net.kemitix.clover.spi.BackCoverOpaqueProperties;
+import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.IssueDimensions;
@@ -15,6 +16,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
+@Log
 @BackCover
 @ApplicationScoped
 public class BackCoverOpaque
@@ -25,7 +27,7 @@ public class BackCoverOpaque
 
     @Inject OpaqueFill<Graphics2D> opaqueFill;
     @Inject IssueDimensions dimensions;
-    @Inject BackCoverOpaqueProperties properties;
+    @Inject BackCoverBackgroundBox backgroundBox;
     @Inject CloverProperties cloverProperties;
 
     @Override
@@ -33,20 +35,21 @@ public class BackCoverOpaque
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        if (properties.isEnableBackCoverBox()) {
+        log.info("BG-OPAQUE: " + backgroundBox);
+        if (backgroundBox.isShow()) {
             box(drawable,
-                    properties.getBackCoverBoxOuterOpacity(),
-                    properties.getBackCoverBoxOuterColour(),
+                    backgroundBox.getOuterBox().getOpacity(),
+                    backgroundBox.getOuterBox().getColour(),
                     getMargin(0),
                     getMargin(1));
             box(drawable,
-                    properties.getBackCoverBoxMidOpacity(),
-                    properties.getBackCoverBoxMidColour(),
+                    backgroundBox.getMiddleBox().getOpacity(),
+                    backgroundBox.getMiddleBox().getColour(),
                     getMargin(1),
                     getMargin(2));
             fill(drawable,
-                    properties.getBackCoverBoxInnerOpacity(),
-                    properties.getBackCoverBoxInnerColour(),
+                    backgroundBox.getInnerBox().getOpacity(),
+                    backgroundBox.getInnerBox().getColour(),
                     getMargin(2));
         }
     }
@@ -54,8 +57,8 @@ public class BackCoverOpaque
     private int getMargin(
             int steps
     ) {
-        int outerMargin = properties.getBackCoverBoxOuterMargin();
-        return outerMargin + (steps * properties.getBackCoverBoxMarginStep());
+        int outerMargin = backgroundBox.getOuterMargin();
+        return outerMargin + (steps * backgroundBox.getMarginStep());
     }
 
     private void box(

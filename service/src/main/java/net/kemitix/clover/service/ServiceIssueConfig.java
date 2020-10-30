@@ -59,6 +59,8 @@ public class ServiceIssueConfig implements IssueConfig {
     private int reprintTop;
     @JsonbProperty("reprint-left")
     private int reprintLeft;
+    @JsonbProperty("back-cover-background-box")
+    private BackCoverBackgroundBox backCoverBackgroundBox;
 
     @Setter
     @Getter
