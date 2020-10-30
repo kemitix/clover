@@ -18,13 +18,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>11</java.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-
         <tiles-maven-plugin.version>2.18</tiles-maven-plugin.version>
-        <kemitix-tiles.version>2.7.0</kemitix-tiles.version>
+        <kemitix-tiles.version>3.0.0</kemitix-tiles.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>
@@ -167,9 +162,7 @@
                 <configuration>
                     <tiles>
                         <tile>net.kemitix.tiles:maven-plugins:${kemitix-tiles.version}</tile>
-                        <tile>net.kemitix.tiles:enforcer:${kemitix-tiles.version}</tile>
-                        <tile>net.kemitix.tiles:compiler-jdk-${java.version}:${kemitix-tiles.version}</tile>
-                        <tile>net.kemitix.tiles:huntbugs:${kemitix-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:compiler-jdk-latest:${kemitix-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pmd:${kemitix-tiles.version}</tile>
                         <tile>net.kemitix.tiles:testing:${kemitix-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pitest:${kemitix-tiles.version}</tile>
