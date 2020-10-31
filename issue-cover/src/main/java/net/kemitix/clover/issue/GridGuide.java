@@ -51,16 +51,16 @@ public class GridGuide
         int stepsPerInch = cloverProperties.getGuideLinesPerInch();
         float stepSizeInches = (float) 1 / stepsPerInch;
 
-        IntStream.range(0, (int) (widthInches * 4))
-                .map(i -> (int) (i * stepSizeInches))
-                .map(this::dpi)
+        int xSteps = (int) (widthInches * stepsPerInch);
+        IntStream.range(0, xSteps)
+                .mapToDouble(step -> (step * stepSizeInches))
+                .mapToInt(this::dpi)
                 .forEach(x -> vLine(drawable, x));
-        ;
-        IntStream.range(0, (int) (heightInches * 4))
-                .map(i -> (int) (i * stepSizeInches))
-                .map(this::dpi)
+        int ySteps = (int) (heightInches * stepsPerInch);
+        IntStream.range(0, ySteps)
+                .mapToDouble(step -> (step * stepSizeInches))
+                .mapToInt(this::dpi)
                 .forEach(y -> hLine(drawable, y));
-
     }
 
     private void hLine(
@@ -86,7 +86,7 @@ public class GridGuide
     }
 
 
-    private int dpi(float inches) {
+    private int dpi(double inches) {
         return (int) (inches * cloverProperties.getDpi());
     }
 
