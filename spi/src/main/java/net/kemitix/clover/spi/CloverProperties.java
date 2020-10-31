@@ -50,4 +50,8 @@ public interface CloverProperties {
     boolean isEnablePaperbackPreview();
 
     float getTrim();//inches
+
+    int getCoverMargin();
+
+    int getGuideThickness();
 }
