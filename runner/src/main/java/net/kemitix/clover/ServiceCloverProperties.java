@@ -30,7 +30,12 @@ public class ServiceCloverProperties implements CloverProperties {
     float barcodeHeight;
     String barcodeFillColour;
     float trim;
-    int coverMargin;
+
+    String trimColour;
+    float trimTop;
+    float trimBottom;
+    float trimLeft;
+    float trimRight;
     int guideThickness;
 
     boolean enablePdf;

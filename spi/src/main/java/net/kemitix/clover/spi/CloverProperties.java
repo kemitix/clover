@@ -51,7 +51,15 @@ public interface CloverProperties {
 
     float getTrim();//inches
 
-    int getCoverMargin();
-
     int getGuideThickness();
+
+    String getTrimColour();
+
+    float getTrimTop();//inches
+
+    float getTrimLeft();//inches
+
+    float getTrimRight();//inches
+
+    float getTrimBottom();//inches
 }

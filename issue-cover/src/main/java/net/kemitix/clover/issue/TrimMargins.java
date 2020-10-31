@@ -31,12 +31,24 @@ public class TrimMargins
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        int margin = cloverProperties.getCoverMargin();
+        float trimTop = cloverProperties.getTrimTop();
+        float trimLeft = cloverProperties.getTrimLeft();
+        float trimRight = cloverProperties.getTrimRight();
+        float trimBottom = cloverProperties.getTrimBottom();
+        Region region = dimensions.getPaperbackCover()
+                .withTop(top -> top + dpi(trimTop))
+                .withLeft(left -> left + dpi(trimLeft))
+                .withWidth(width -> width - dpi(trimLeft + trimRight))
+                .withHeight(height -> height - dpi(trimTop + trimBottom));
         int thickness = cloverProperties.getGuideThickness();
-        Region region = dimensions.getPaperbackCover().withMargin(margin);
+        boxEffect.opacity(0.5d)
+                .thickness(thickness)
+                .colour("black")
+                .region(region.withMargin(-thickness))
+                .accept(drawable);
         boxEffect.opacity(1d)
                 .thickness(thickness)
-                .colour("red")
+                .colour(cloverProperties.getTrimColour())
                 .region(region)
                 .accept(drawable);
         boxEffect.opacity(0.5d)
@@ -44,6 +56,10 @@ public class TrimMargins
                 .colour("black")
                 .region(region.withMargin(thickness))
                 .accept(drawable);
+    }
+
+    private int dpi(float inches) {
+        return (int) (cloverProperties.getDpi() * inches);
     }
 
 }
