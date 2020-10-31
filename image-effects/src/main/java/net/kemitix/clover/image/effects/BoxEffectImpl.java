@@ -44,10 +44,7 @@ public class BoxEffectImpl
                         .colour(colour);
         getSides()
                 .forEach(side ->
-                {
-                    System.out.println("side = " + side);
-                    pen.region(side).accept(drawable);
-                });
+                        pen.region(side).accept(drawable));
     }
 
     private List<Region> getSides() {
