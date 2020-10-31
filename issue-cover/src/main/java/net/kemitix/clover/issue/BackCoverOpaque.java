@@ -90,10 +90,18 @@ public class BackCoverOpaque
     }
 
     private Region getRegion() {
+        int trim = dpi(cloverProperties.getTrimLeft());
         return Region.builder()
-                .width(dimensions.getFrontCrop().getWidth())
-                .height(cloverProperties.getBarcodeTop())
-                .build();
+                .top(trim)
+                .left(trim)
+                .width(dimensions.getFrontCrop().getWidth() - trim)
+                .build()
+                .withBottom(cloverProperties.getBarcodeTop())
+                ;
+    }
+
+    private int dpi(float inches) {
+        return (int) (inches * cloverProperties.getDpi());
     }
 
     private void fill(
