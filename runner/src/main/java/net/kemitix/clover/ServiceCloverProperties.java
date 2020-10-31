@@ -37,6 +37,7 @@ public class ServiceCloverProperties implements CloverProperties {
     float trimLeft;
     float trimRight;
     int guideThickness;
+    int guideLinesPerInch;
 
     boolean enablePdf;
     boolean enableWebp;

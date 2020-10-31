@@ -6,7 +6,6 @@ import net.kemitix.clover.spi.BoxEffect;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueDimensions;
-import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
 import net.kemitix.properties.typed.TypedProperties;
 

@@ -62,4 +62,6 @@ public interface CloverProperties {
     float getTrimRight();//inches
 
     float getTrimBottom();//inches
+
+    int getGuideLinesPerInch();
 }
