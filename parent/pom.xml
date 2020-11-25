@@ -32,7 +32,7 @@
         <jakartaee-api.version>9.0.0</jakartaee-api.version>
         <microprofile-config-api.version>1.4</microprofile-config-api.version>
         <lombok.version>1.18.16</lombok.version>
-        <mockito.version>3.5.15</mockito.version>
+        <mockito.version>3.6.28</mockito.version>
         <typed-properties.version>1.0.0</typed-properties.version>
         <text-wrap-fit-box.version>1.0.0</text-wrap-fit-box.version>
         <fontface.version>1.0.0</fontface.version>
