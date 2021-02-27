@@ -8,6 +8,9 @@ import net.kemitix.properties.typed.TypedProperties;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 @BackCover
 @ApplicationScoped
@@ -31,7 +34,10 @@ public class StoriesReprints extends AbstractElement {
     }
 
     private String text() {
-        var reprints = issueConfig.getStories().getReprint();
+        List<? extends IssueStory> reprints = Objects.requireNonNullElseGet(
+                issueConfig.getStories().getReprint(),
+                Collections::emptyList
+        );
         if (reprints.isEmpty()) {
             return "";
         }
