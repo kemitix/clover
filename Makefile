@@ -17,7 +17,7 @@ dev:
 	mvn -pl runner quarkus:dev ${RUN_PARAMS}
 
 run: install
-	java ${RUN_PARAMS} -jar runner/target/clover-runner.jar
+	java-jar runner/target/quarkus-app/quarkus-run.jar ${RUN_PARAMS}
 
 clean:
 	mvn clean
