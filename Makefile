@@ -1,5 +1,5 @@
 FONT_FILE=-Dfont-file=${HOME}/cossmass/binder/fonts/Snowslider/SnowSL_Std.OTF
-RUN_PARAMS=${ISSUE_DIR} ${FONT_FILE}
+RUN_PARAMS=${FONT_FILE}
 
 graphs:
 	mvn validate
@@ -13,11 +13,14 @@ install: .install
 test:
 	mvn test ${RUN_PARAMS}
 
-dev:
+issue-dir:
+	@test ${ISSUE_DIR}
+
+dev: issue-dir
 	mvn -pl runner quarkus:dev ${RUN_PARAMS}
 
-run: install
-	java ${RUN_PARAMS} -jar runner/target/clover-runner.jar
+run: issue-dir install
+	java -jar runner/target/quarkus-app/quarkus-run.jar ${RUN_PARAMS}
 
 clean:
 	mvn clean

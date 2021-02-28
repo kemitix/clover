@@ -2,11 +2,18 @@ package net.kemitix.clover.service;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.BackCoverBackgroundBox;
+import net.kemitix.clover.spi.IssueAuthor;
+import net.kemitix.clover.spi.IssueCards;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueCrop;
+import net.kemitix.clover.spi.IssueStories;
+import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.clover.spi.IssueStoryCards;
+import net.kemitix.clover.spi.TextEffect;
 
 import javax.enterprise.inject.Vetoed;
-import javax.json.bind.annotation.JsonbProperty;
-import java.util.*;
+import java.util.List;
 
 @Vetoed
 @Setter
@@ -18,52 +25,30 @@ public class ServiceIssueConfig implements IssueConfig {
 
     private String issue;
     private String date;
-    @JsonbProperty("title-colour")
     private String titleColour;
-    @JsonbProperty("sub-title-colour")
     private String subTitleColour;
-    @JsonbProperty("text-colour")
     private String textColour;
     private float spine;
-    @JsonbProperty("paperback-x-offset")
     private int paperbackXOffset;
-    @JsonbProperty("paperback-y-offset")
     private int paperbackYOffset;
-    @JsonbProperty("kindle-x-offset")
     private int kindleXOffset;
-    @JsonbProperty("kindle-y-offset")
     private int kindleYOffset;
-    @JsonbProperty("authors-x-offset")
     private int authorsXOffset;
-    @JsonbProperty("authors-y-offset")
     private int authorsYOffset;
     private Cards cards;
-    @JsonbProperty("stories-alignment")
     private TextEffect.HAlignment storiesAlignment;
     private Stories stories;
-    @JsonbProperty("cover-art")
     private String coverArt;
-    @JsonbProperty("cover-artist")
     private String coverArtist;
-    @JsonbProperty("publication-title")
     private String publicationTitle;
-    @JsonbProperty("front-width")
     private int frontWidth;
-    @JsonbProperty("story-cards")
     private StoryCards storyCards;
-    @JsonbProperty("sf-top")
     private int sfTop;
-    @JsonbProperty("sf-left")
     private int sfLeft;
-    @JsonbProperty("fantasy-top")
     private int fantasyTop;
-    @JsonbProperty("fantasy-left")
     private int fantasyLeft;
-    @JsonbProperty("reprint-top")
     private int reprintTop;
-    @JsonbProperty("reprint-left")
     private int reprintLeft;
-    @JsonbProperty("back-cover-background-box")
     private BackCoverBackgroundBox backCoverBackgroundBox;
 
     @Setter

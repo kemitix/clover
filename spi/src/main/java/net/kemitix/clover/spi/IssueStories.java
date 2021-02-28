@@ -2,6 +2,7 @@ package net.kemitix.clover.spi;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public interface IssueStories {
@@ -14,6 +15,7 @@ public interface IssueStories {
 
     default Stream<IssueStory> stream() {
         return Stream.of(getSf(), getFantasy(), getReprint())
+                .filter(Objects::nonNull)
                 .flatMap(Collection::stream);
     }
 }

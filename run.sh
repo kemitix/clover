@@ -19,7 +19,7 @@ if [ ! -f ${FONT_FILE} ];then
     exit -1
 fi
 
-JAR=${PWD}/runner/target/clover-runner.jar
+JAR=${PWD}/runner/target/quarkus-app/quarkus-run.jar
 if [ ! -f ${JAR} ];then
     echo "ERROR: Jar file not found: ${JAR}"
     exit -1

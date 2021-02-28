@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -54,7 +55,10 @@ public class ServiceCloverProperties implements CloverProperties {
 
     @Override
     public String getIssueDir() {
-        return System.getProperty("user.dir");
+        return Objects.requireNonNullElseGet(
+                System.getenv("ISSUE_DIR"),
+                () -> System.getProperty("user.dir")
+        );
     }
 
     @Override
