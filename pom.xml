@@ -25,6 +25,7 @@
         <module>image-effects</module>
         <module>issue-cover</module>
         <module>story-cards</module>
+        <module>clover-ui</module>
     </modules>
 
     <build>
