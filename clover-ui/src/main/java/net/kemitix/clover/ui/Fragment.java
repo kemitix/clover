@@ -25,6 +25,11 @@ public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
         return getChild(name).getRoot();
     }
 
-    interface FragmentName {}
+    interface FragmentName {
+        static FragmentName define() {
+            return new FragmentName() {
+            };
+        }
+    }
 
 }

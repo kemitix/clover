@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.Map;
+
 public abstract class AbstractFragment<C extends Controller<C, V>, V extends View<C, V>>
         implements Fragment<C, V> {
 
@@ -33,4 +35,10 @@ public abstract class AbstractFragment<C extends Controller<C, V>, V extends Vie
                 fragment -> fragment.initModel(model)
         );
     };
+
+    @Override
+    public Map<FragmentName, Fragment<?, ?>> getChildFragments() {
+        return Map.of();
+    }
+
 }

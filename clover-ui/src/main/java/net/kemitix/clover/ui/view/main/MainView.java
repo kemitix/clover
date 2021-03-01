@@ -17,6 +17,7 @@ class MainView
     @Override
     public Parent getRoot() {
         var pane = new BorderPane(fragment.getChildRoot(MainFragment.PART_PREVIEW));
+        pane.setTop(fragment.getChildRoot(MainFragment.PART_MENU));
         //TODO pane.setTop(new TopView().getView());
         //     pane.setLeft(new LeftView().getView());
         return pane;
