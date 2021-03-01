@@ -20,7 +20,7 @@ dev: issue-dir
 	mvn -pl runner quarkus:dev ${RUN_PARAMS}
 
 ui-run:
-	mvn -pl clover-ui -am package && mvn -pl clover-ui javafx:run
+	mvn -pl clover-ui -am install && mvn -pl clover-ui javafx:run
 
 run: issue-dir install
 	java -jar runner/target/quarkus-app/quarkus-run.jar ${RUN_PARAMS}

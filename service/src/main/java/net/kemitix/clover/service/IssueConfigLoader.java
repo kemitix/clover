@@ -12,7 +12,6 @@ import org.yaml.snakeyaml.error.YAMLException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.json.bind.Jsonb;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -44,7 +43,7 @@ public class IssueConfigLoader {
         return parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
     }
 
-    private <T> T parseYamlFromFile(
+    public <T> T parseYamlFromFile(
             final File file,
             final Class<T> theRoot,
             final FileReader fileReader
