@@ -1,5 +1,7 @@
 package net.kemitix.clover.ui.view.main;
 
+import javafx.stage.Stage;
+import lombok.Getter;
 import net.kemitix.clover.ui.AbstractFragment;
 import net.kemitix.clover.ui.Fragment;
 import net.kemitix.clover.ui.view.menu.MenuFragment;
@@ -13,8 +15,11 @@ public class MainFragment
     public static final FragmentName PART_PREVIEW = FragmentName.define();
     public static final FragmentName PART_MENU = FragmentName.define();
 
-    private final PreviewFragment previewFragment = new PreviewFragment();
-    private final MenuFragment menuFragment = new MenuFragment();
+    @Getter
+    private final Map<FragmentName, Fragment<?, ?>> childFragments = Map.of(
+            PART_PREVIEW, new PreviewFragment(),
+            PART_MENU, new MenuFragment()
+    );
 
     public MainFragment() {
         super(
@@ -23,11 +28,4 @@ public class MainFragment
         );
     }
 
-    @Override
-    public Map<FragmentName, Fragment<?, ?>> getChildFragments() {
-        return Map.of(
-                PART_PREVIEW, previewFragment,
-                PART_MENU, menuFragment
-        );
-    }
 }

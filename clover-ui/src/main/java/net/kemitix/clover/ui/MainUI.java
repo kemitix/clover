@@ -13,6 +13,8 @@ public class MainUI extends Application {
         AppModel model = new AppModel(getParameters());
         System.out.println("MainUI.model.getIssueDirectory() = " + model.getIssueDirectory());
         var mainFragment = new MainFragment();
+        mainFragment.setStage(stage);
+        mainFragment.init();
         mainFragment.initModel(model);
 
         Scene scene = new Scene(mainFragment.getRoot());

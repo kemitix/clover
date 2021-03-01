@@ -2,8 +2,10 @@ package net.kemitix.clover.ui;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 import java.util.Map;
+import java.util.Optional;
 
 public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
 
@@ -23,6 +25,18 @@ public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
 
     default Node getChildRoot(FragmentName name) {
         return getChild(name).getRoot();
+    }
+
+    void setParent(Fragment<?, ?> parent);
+    Fragment<?, ?> getParent();
+
+    Stage getStage();
+
+    default void init() {
+        getChildFragments().values()
+                .forEach(child -> {
+                    child.setParent(this);
+                });
     }
 
     interface FragmentName {
