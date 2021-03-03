@@ -1,6 +1,5 @@
 package net.kemitix.clover.ui.view.main;
 
-import javafx.stage.Stage;
 import lombok.Getter;
 import net.kemitix.clover.ui.AbstractFragment;
 import net.kemitix.clover.ui.Fragment;
