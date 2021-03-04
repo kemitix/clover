@@ -17,7 +17,7 @@ public class MainUI extends Application {
         mainFragment.init();
         mainFragment.initModel(model);
 
-        Scene scene = new Scene(mainFragment.getRoot());
+        Scene scene = new Scene(mainFragment.getRoot(), 640, 480);
         scene.getStylesheets().add(appCss());
         stage.setScene(scene);
         stage.setTitle("Clover UI");
