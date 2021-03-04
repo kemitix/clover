@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.main;
+package net.kemitix.clover.ui.fragment.main;
 
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;

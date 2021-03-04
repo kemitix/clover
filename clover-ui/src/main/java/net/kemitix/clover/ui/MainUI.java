@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import net.kemitix.clover.ui.view.main.MainFragment;
+import net.kemitix.clover.ui.fragment.main.MainFragment;
 
 public class MainUI extends Application {
 

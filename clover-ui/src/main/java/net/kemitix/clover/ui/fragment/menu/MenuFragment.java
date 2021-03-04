@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.menu;
+package net.kemitix.clover.ui.fragment.menu;
 
 import net.kemitix.clover.ui.AbstractFragment;
 

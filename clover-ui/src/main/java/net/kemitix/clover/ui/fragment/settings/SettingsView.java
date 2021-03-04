@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.settings;
+package net.kemitix.clover.ui.fragment.settings;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Label;

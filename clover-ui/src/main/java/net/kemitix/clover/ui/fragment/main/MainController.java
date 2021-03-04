@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.main;
+package net.kemitix.clover.ui.fragment.main;
 
 import net.kemitix.clover.ui.AbstractController;
 import net.kemitix.clover.ui.Controller;

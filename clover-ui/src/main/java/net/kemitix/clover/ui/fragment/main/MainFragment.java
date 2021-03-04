@@ -1,11 +1,11 @@
-package net.kemitix.clover.ui.view.main;
+package net.kemitix.clover.ui.fragment.main;
 
 import lombok.Getter;
 import net.kemitix.clover.ui.AbstractFragment;
 import net.kemitix.clover.ui.Fragment;
-import net.kemitix.clover.ui.view.menu.MenuFragment;
-import net.kemitix.clover.ui.view.body.BodyFragment;
-import net.kemitix.clover.ui.view.settings.SettingsFragment;
+import net.kemitix.clover.ui.fragment.menu.MenuFragment;
+import net.kemitix.clover.ui.fragment.body.BodyFragment;
+import net.kemitix.clover.ui.fragment.settings.SettingsFragment;
 
 import java.util.Map;
 

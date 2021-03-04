@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.menu;
+package net.kemitix.clover.ui.fragment.menu;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;

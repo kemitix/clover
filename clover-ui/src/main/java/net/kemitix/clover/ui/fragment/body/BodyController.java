@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.body;
+package net.kemitix.clover.ui.fragment.body;
 
 import lombok.Getter;
 import lombok.NonNull;
