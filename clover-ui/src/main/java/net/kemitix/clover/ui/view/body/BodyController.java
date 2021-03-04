@@ -1,4 +1,4 @@
-package net.kemitix.clover.ui.view.preview;
+package net.kemitix.clover.ui.view.body;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -7,9 +7,9 @@ import net.kemitix.clover.ui.AbstractController;
 import net.kemitix.clover.ui.AppModel;
 import net.kemitix.clover.ui.Controller;
 
-class PreviewController
-        extends AbstractController<PreviewController, PreviewView>
-        implements Controller<PreviewController, PreviewView> {
+class BodyController
+        extends AbstractController<BodyController, BodyView>
+        implements Controller<BodyController, BodyView> {
 
     @Setter
     @Getter
