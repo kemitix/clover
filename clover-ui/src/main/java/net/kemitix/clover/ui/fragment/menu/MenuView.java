@@ -3,9 +3,8 @@ package net.kemitix.clover.ui.fragment.menu;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyCombination;
 import net.kemitix.clover.ui.AbstractView;
+import net.kemitix.clover.ui.CloverMenuItem;
 import net.kemitix.clover.ui.View;
 
 public class MenuView
@@ -14,10 +13,19 @@ public class MenuView
 
     @Override
     public Parent getRoot() {
+        var quit = CloverMenuItem.accelerated()
+                .label("Quit")
+                .keys("Ctrl+q")
+                .action(e -> closeWindow());
+        var help = CloverMenuItem.plain()
+                .label("Help")
+                .action(e -> {
+                });
         return new MenuBar(
                 new Menu(
                         "File", null,
-                        new QuitMenuItem(e -> closeWindow())
+                        help,
+                        quit
                 )
         );
     }
