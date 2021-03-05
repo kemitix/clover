@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,7 +48,7 @@ public abstract class AbstractFragment<C extends Controller<C, V>, V extends Vie
     }
 
     @Override
-    public Parent getRoot() {
+    public Parent getViewRoot() {
         return getView().getRoot();
     }
 
@@ -56,5 +59,20 @@ public abstract class AbstractFragment<C extends Controller<C, V>, V extends Vie
                 fragment -> fragment.initModel(model)
         );
     };
+
+    @Getter
+    private final List<AppEventListener> eventListeners = new ArrayList<>();
+
+    @Override
+    public void handle(AppEvent event) {
+        getEventListeners()
+                .forEach(handler -> handler.onEvent(event));
+        Optional.ofNullable(parent)
+                .ifPresent(p -> p.handle(event));
+    }
+
+    protected void registerEventHandlers(AppEventListener... listeners) {
+        eventListeners.addAll(Arrays.asList(listeners));
+    }
 
 }

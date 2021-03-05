@@ -10,4 +10,7 @@ public abstract class AbstractFragmentComponent<C extends Controller<C, V>, V ex
     @Getter
     private Fragment<C, V> fragment;
 
+    public void emit(AppEvent event) {
+        getFragment().handle(event);
+    }
 }

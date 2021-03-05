@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.util.Map;
-import java.util.Optional;
 
 public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
 
@@ -15,7 +14,7 @@ public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
 
     Map<FragmentName, Fragment<?, ?>> getChildFragments();
 
-    Parent getRoot();
+    Parent getViewRoot();
 
     void initModel(AppModel model);
 
@@ -24,7 +23,7 @@ public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
     }
 
     default Node getChildRoot(FragmentName name) {
-        return getChild(name).getRoot();
+        return getChild(name).getViewRoot();
     }
 
     void setParent(Fragment<?, ?> parent);
@@ -38,6 +37,8 @@ public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
                     child.setParent(this);
                 });
     }
+
+    void handle(AppEvent event);
 
     interface FragmentName {
         static FragmentName define() {

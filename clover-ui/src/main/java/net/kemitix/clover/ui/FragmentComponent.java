@@ -16,12 +16,8 @@ public interface FragmentComponent<C extends Controller<C, V>, V extends View<C,
         return getFragment().getView();
     }
 
-    default Stage getStage() {
-        return getFragment().getStage();
+    default void emit(AppEvent appEvent) {
+        getController().emit(appEvent);
     }
 
-    default void closeWindow() {
-        System.out.println("Close Window");
-        getStage().close();
-    }
 }

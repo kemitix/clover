@@ -11,13 +11,16 @@ public class MainUI extends Application {
     @Override
     public void start(Stage stage) {
         AppModel model = new AppModel(getParameters());
-        System.out.println("MainUI.model.getIssueDirectory() = " + model.getIssueDirectory());
         var mainFragment = new MainFragment();
         mainFragment.setStage(stage);
         mainFragment.init();
         mainFragment.initModel(model);
+        mainFragment.registerEventHandlers(
+                new QuitAppEventListener(stage),
+                new SaveConfigEventListener(model)
+        );
 
-        Scene scene = new Scene(mainFragment.getRoot(), 640, 480);
+        Scene scene = new Scene(mainFragment.getViewRoot(), 640, 480);
         scene.getStylesheets().add(appCss());
         stage.setScene(scene);
         stage.setTitle("Clover UI");
