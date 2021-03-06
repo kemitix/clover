@@ -10,14 +10,15 @@ public class MainUI extends Application {
 
     @Override
     public void start(Stage stage) {
-        AppModel model = new AppModel(getParameters());
         var mainFragment = new MainFragment();
         mainFragment.setStage(stage);
         mainFragment.init();
+        AppModel model = new AppModel(getParameters(), mainFragment);
         mainFragment.initModel(model);
         mainFragment.registerEventHandlers(
                 new QuitAppEventListener(stage),
                 new LoadConfigEventListener(model),
+                new LoadConfigErrorEventListener(stage, model, mainFragment),
                 new SaveConfigEventListener(model)
         );
 

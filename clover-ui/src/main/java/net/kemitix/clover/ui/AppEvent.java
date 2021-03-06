@@ -17,6 +17,10 @@ public interface AppEvent {
         return new LoadConfigEvent() {};
     }
 
+    static AppEvent loadConfig() {
+        return new LoadConfigEvent() {};
+    }
+
     static AppEvent loadConfigError(ConfigLoadException e) {
         return (LoadConfigErrorEvent) () -> e;
     }
