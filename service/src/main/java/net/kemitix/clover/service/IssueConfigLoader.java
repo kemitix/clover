@@ -52,13 +52,13 @@ public class IssueConfigLoader {
             Yaml yaml = new Yaml(new Constructor(theRoot));
             T loaded = yaml.load(fileReader.read(file));
             if (loaded == null) {
-                throw new RuntimeException("File not compatible with %%s: %s%s"
-                        .formatted(theRoot.getName(), file));
+                throw new ConfigLoadException("File not compatible with %%s: %s%s",
+                        theRoot, file);
             }
             return loaded;
         } catch (YAMLException | IOException e) {
-            throw new RuntimeException("Error reading a %s from file %s"
-                    .formatted(theRoot.getName(), file), e);
+            throw new ConfigLoadException("Error reading a %s from file %s",
+                    theRoot, file, e);
         }
 
     }
