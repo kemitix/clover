@@ -8,10 +8,10 @@ import java.io.File;
 import java.util.function.Consumer;
 
 public class LoadConfigEventListener
-        implements AppEventListener {
+        implements AppEventListener<AppEvent.LoadConfigEvent> {
 
     @Getter
-    private final Class<? extends AppEvent> appEventType =
+    private final Class<AppEvent.LoadConfigEvent> appEventType =
             AppEvent.LoadConfigEvent.class;
 
     private final AppModel model;
@@ -21,7 +21,7 @@ public class LoadConfigEventListener
     }
 
     @Override
-    public void onEvent(AppEvent event) {
+    public void onEvent(AppEvent.LoadConfigEvent event) {
         show().accept(model.getIssueDirectoryProperty());
     }
 

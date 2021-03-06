@@ -3,10 +3,10 @@ package net.kemitix.clover.ui;
 import lombok.Getter;
 
 public class SaveConfigEventListener
-        implements AppEventListener {
+        implements AppEventListener<AppEvent.SaveConfigEvent> {
 
     @Getter
-    private final Class<? extends AppEvent> appEventType =
+    private final Class<AppEvent.SaveConfigEvent> appEventType =
             AppEvent.SaveConfigEvent.class;
 
     private final AppModel model;
@@ -16,7 +16,7 @@ public class SaveConfigEventListener
     }
 
     @Override
-    public void onEvent(AppEvent event) {
+    public void onEvent(AppEvent.SaveConfigEvent event) {
         System.out.println("Save Event handler");
         //TODO save config
     }

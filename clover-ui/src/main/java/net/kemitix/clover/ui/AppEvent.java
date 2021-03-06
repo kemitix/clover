@@ -1,6 +1,7 @@
 package net.kemitix.clover.ui;
 
 import javafx.event.ActionEvent;
+import net.kemitix.clover.service.ConfigLoadException;
 
 public interface AppEvent {
 
@@ -16,7 +17,14 @@ public interface AppEvent {
         return new LoadConfigEvent() {};
     }
 
+    static AppEvent loadConfigError(ConfigLoadException e) {
+        return (LoadConfigErrorEvent) () -> e;
+    }
+
     interface LoadConfigEvent extends AppEvent {}
+    interface LoadConfigErrorEvent extends AppEvent {
+        ConfigLoadException getException();
+    }
     interface SaveConfigEvent extends AppEvent {}
     interface QuitAppEvent extends AppEvent {}
 }

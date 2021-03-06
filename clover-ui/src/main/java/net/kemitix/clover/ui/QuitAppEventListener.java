@@ -4,10 +4,10 @@ import javafx.stage.Stage;
 import lombok.Getter;
 
 public class QuitAppEventListener
-        implements AppEventListener {
+        implements AppEventListener<AppEvent.QuitAppEvent> {
 
     @Getter
-    private final Class<? extends AppEvent> appEventType =
+    private final Class<AppEvent.QuitAppEvent> appEventType =
             AppEvent.QuitAppEvent.class;
 
     private final Stage stage;
@@ -17,7 +17,7 @@ public class QuitAppEventListener
     }
 
     @Override
-    public void onEvent(AppEvent event) {
+    public void onEvent(AppEvent.QuitAppEvent event) {
         stage.close();
     }
 

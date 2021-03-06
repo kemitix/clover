@@ -2,21 +2,23 @@ package net.kemitix.clover.ui;
 
 import java.util.EventListener;
 
-public interface AppEventListener
+public interface AppEventListener<T extends AppEvent>
         extends EventListener {
 
-    Class<? extends AppEvent> getAppEventType();
+    Class<T> getAppEventType();
 
     /**
      * Receives the event and performs any actions.
      *
      * @param event the event
      */
-    void onEvent(AppEvent event);
+    void onEvent(T event);
 
     default void handleEvent(AppEvent event) {
-        if (getAppEventType().isInstance(event)) {
-            onEvent(event);
+        Class<T> appEventType = getAppEventType();
+        if (appEventType.isInstance(event)) {
+            T e = appEventType.cast(event);
+            onEvent(e);
         }
     }
 
