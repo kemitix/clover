@@ -1,9 +1,14 @@
 package net.kemitix.clover.ui;
 
 import javafx.stage.Stage;
+import lombok.Getter;
 
 public class QuitAppEventListener
         implements AppEventListener {
+
+    @Getter
+    private final Class<? extends AppEvent> appEventType =
+            AppEvent.QuitAppEvent.class;
 
     private final Stage stage;
 
@@ -13,9 +18,7 @@ public class QuitAppEventListener
 
     @Override
     public void onEvent(AppEvent event) {
-        if (event instanceof AppEvent.QuitAppEvent) {
-            stage.close();
-        }
+        stage.close();
     }
 
 }

@@ -67,7 +67,7 @@ public abstract class AbstractFragment<C extends Controller<C, V>, V extends Vie
     @Override
     public void handle(AppEvent event) {
         getEventListeners()
-                .forEach(handler -> handler.onEvent(event));
+                .forEach(handler -> handler.handleEvent(event));
         Optional.ofNullable(parent)
                 .ifPresent(p -> p.handle(event));
     }

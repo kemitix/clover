@@ -12,6 +12,11 @@ public interface AppEvent {
         return new SaveConfigEvent() {};
     }
 
-    interface QuitAppEvent extends AppEvent {}
+    static AppEvent loadConfig(ActionEvent e) {
+        return new LoadConfigEvent() {};
+    }
+
+    interface LoadConfigEvent extends AppEvent {}
     interface SaveConfigEvent extends AppEvent {}
+    interface QuitAppEvent extends AppEvent {}
 }

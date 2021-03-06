@@ -23,7 +23,7 @@ public class SettingsView
                 new FlowPane(
                         CloverButton.builder()
                                 .label("Load")
-                                .action(e -> {/* TODO */}),
+                                .action(e -> emit(AppEvent.loadConfig(e))),
                         CloverButton.builder()
                                 .label("Save")
                                 .action(e -> emit(AppEvent.saveConfig(e))),

@@ -17,6 +17,7 @@ public class MainUI extends Application {
         mainFragment.initModel(model);
         mainFragment.registerEventHandlers(
                 new QuitAppEventListener(stage),
+                new LoadConfigEventListener(model),
                 new SaveConfigEventListener(model)
         );
 
