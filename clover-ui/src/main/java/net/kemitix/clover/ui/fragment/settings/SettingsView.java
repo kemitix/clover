@@ -42,6 +42,7 @@ public class SettingsView
                                 .action(e -> emit(AppEvent.quitApp(e)))
                 )
         );
+        root.setSpacing(8);
         root.setStyle(style);
         root.setPrefWidth(width);
         return root;

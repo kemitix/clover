@@ -1,6 +1,11 @@
 package net.kemitix.clover.ui;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.stage.DirectoryChooser;
 import lombok.Getter;
+
+import java.io.File;
+import java.util.function.Consumer;
 
 public class LoadConfigEventListener
         implements AppEventListener {
@@ -17,9 +22,17 @@ public class LoadConfigEventListener
 
     @Override
     public void onEvent(AppEvent event) {
-        if (event instanceof AppEvent.LoadConfigEvent) {
-            System.out.println("Load Event handler");
-            //TODO save config
-        }
+        show().accept(model.getIssueDirectoryProperty());
+    }
+
+    private Consumer<SimpleStringProperty> show() {
+        return dir -> dir.setValue(chooser(dir.getValue()));
+    }
+
+    private String chooser(String directory) {
+        var directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File(directory));
+        return directoryChooser.showDialog(null)
+                .getAbsolutePath();
     }
 }
