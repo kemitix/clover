@@ -29,6 +29,7 @@ public class MainFragment
                 new MainController(),
                 new MainView()
         );
+        setFragment(this);
     }
 
     @Override
