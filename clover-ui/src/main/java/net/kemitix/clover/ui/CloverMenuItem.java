@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
-import net.kemitix.clover.ui.AbstractActionMenuItem;
 
 public interface CloverMenuItem {
 

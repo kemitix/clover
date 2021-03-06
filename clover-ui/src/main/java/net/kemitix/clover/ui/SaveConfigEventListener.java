@@ -13,6 +13,7 @@ public class SaveConfigEventListener
     public void onEvent(AppEvent event) {
         if (event instanceof AppEvent.SaveConfigEvent) {
             System.out.println("Save Event handler");
+            //TODO save config
         }
     }
 
