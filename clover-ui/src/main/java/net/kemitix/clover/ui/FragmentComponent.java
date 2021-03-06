@@ -1,8 +1,7 @@
 package net.kemitix.clover.ui;
 
-import javafx.stage.Stage;
-
-public interface FragmentComponent<C extends Controller<C, V>, V extends View<C, V>> {
+public interface FragmentComponent<C extends Controller<C, V>, V extends View<C, V>>
+        extends HasResources{
 
     void setFragment(Fragment<C, V> fragment);
 

@@ -13,4 +13,14 @@ public abstract class AbstractFragmentComponent<C extends Controller<C, V>, V ex
     public void emit(AppEvent event) {
         getFragment().handle(event);
     }
+
+    @Override
+    public String getStringResource(String prefix, String name) {
+        return getFragment().getParent().getStringResource(prefix, name);
+    }
+
+    @Override
+    public int getIntResource(String prefix, String name) {
+        return getFragment().getParent().getIntResource(prefix, name);
+    }
 }

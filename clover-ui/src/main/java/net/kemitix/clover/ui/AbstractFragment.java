@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public abstract class AbstractFragment<C extends Controller<C, V>, V extends View<C, V>>
+        extends AbstractFragmentComponent<C, V>
         implements Fragment<C, V> {
 
     @Getter

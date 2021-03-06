@@ -6,7 +6,8 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
-public interface Fragment<C extends Controller<C, V>, V extends View<C, V>> {
+public interface Fragment<C extends Controller<C, V>, V extends View<C, V>>
+        extends HasResources {
 
     C getController();
 

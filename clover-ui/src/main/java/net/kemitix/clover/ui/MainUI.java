@@ -20,10 +20,14 @@ public class MainUI extends Application {
                 new SaveConfigEventListener(model)
         );
 
-        Scene scene = new Scene(mainFragment.getViewRoot(), 640, 480);
+        Scene scene = new Scene(
+                mainFragment.getViewRoot(),
+                mainFragment.getIntResource("app", "width"),
+                mainFragment.getIntResource("app", "height")
+        );
         scene.getStylesheets().add(appCss());
         stage.setScene(scene);
-        stage.setTitle("Clover UI");
+        stage.setTitle(mainFragment.getStringResource("app", "title"));
         stage.show();
     }
 
