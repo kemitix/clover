@@ -9,8 +9,8 @@ public interface CloverLabel {
         return new Label(label);
     }
 
-    static CloverLabel.Builder bound() {
-        return property -> format -> {
+    static CloverLabel.Builder boundTo(SimpleStringProperty property) {
+        return format -> {
             Label label = new Label(format.formatted(property.getValue()));
             property.addListener((observable, oldValue, newValue) ->
                     label.setText(
@@ -20,8 +20,7 @@ public interface CloverLabel {
     }
 
     interface Builder {
-        Stage0 bindTo(SimpleStringProperty property);
-        interface Stage0 {Label format(String format);}
+        Label format(String format);
     }
 
 }

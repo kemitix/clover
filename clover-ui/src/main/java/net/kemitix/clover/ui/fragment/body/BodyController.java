@@ -18,7 +18,7 @@ class BodyController
 
     @Override
     public void initModel(AppModel model) {
-        setIssueDirectory(model.getIssueDirectory());
+        setIssueDirectory(model.getIssueDirectoryProperty().getValue());
     }
 
 }
