@@ -32,7 +32,7 @@ public class SettingsView
                                 .label("Save")
                                 .action(e -> emit(AppEvent.saveConfig(e)))
                 ),
-                new FlowPane(
+                new StackPane(
                         CloverLabel.boundTo(issueDirectory)
                                 .format("Directory: %s")
                 ),
