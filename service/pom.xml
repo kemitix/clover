@@ -71,7 +71,7 @@
     </dependencies>
 
     <properties>
-        <yasson.version>1.0.8</yasson.version>
+        <yasson.version>1.0.9</yasson.version>
     </properties>
 
 </project>
