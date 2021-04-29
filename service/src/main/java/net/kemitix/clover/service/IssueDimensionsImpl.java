@@ -82,6 +82,7 @@ public class IssueDimensionsImpl implements IssueDimensions {
                 .width(paperbackCover.getWidth() + trim)
                 .height(paperbackCover.getHeight() + trim)
                 .build();
+        scaledCoverArt.mustContain(paperbackCoverWithTrim);
 
         log.info("Select front cover region on scaled cover art");
         // Area on scaled image to be used for the Kindle Cover
