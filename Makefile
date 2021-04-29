@@ -1,5 +1,5 @@
 FONT_FILE=-Dfont-file=${HOME}/cossmass/binder/fonts/Snowslider/SnowSL_Std.OTF
-RUN_PARAMS=${FONT_FILE}
+RUN_PARAMS=${FONT_FILE} #-Dclover.story-card.enabled=false #-Dclover.enable-paperback=false -Dclover.enable-paperback-preview=false
 
 graphs:
 	mvn validate
