@@ -29,7 +29,7 @@ public class StoryCardDimensions {
         rowHeight = cardRegion.getHeight() / rows;
         colWidth = cardRegion.getWidth() / cols;
         IssueStoryCards storyCardSpec = issueConfig.getStoryCards();
-        scaleFromOriginal = targetSizeRegion.getWidth() / storyCardSpec.getWidth();
+        scaleFromOriginal = (float) targetSizeRegion.getWidth() / storyCardSpec.getWidth();
         sourceRegion = Region.builder()
                 .top(storyCardSpec.getTop())
                 .left(storyCardSpec.getLeft())
