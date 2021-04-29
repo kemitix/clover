@@ -112,7 +112,7 @@ public class IssueDimensionsImpl implements IssueDimensions {
                 .withTop(0)
                 .withLeft(kindleCover.getWidth() + spineWidth)
                 .withWidth(kindleCover.getWidth());
-        wrapCrop.mustContain(frontCrop);
+        wrapCrop.mustContain(frontCrop.getArea());
 
         // spineCrop is relative to backCrop
         log.info("Select spine on wrap cover");

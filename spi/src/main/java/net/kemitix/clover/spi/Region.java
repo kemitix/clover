@@ -63,7 +63,7 @@ public class Region
         }
     }
 
-    public void mustContain(Rectangle2D area) {
+    public void mustContain(Area area) {
         if (area.getWidth() > getWidth()) {
             notContains("is wider than", area);
         }
@@ -81,7 +81,7 @@ public class Region
         }
     }
 
-    private void notContains(final String message, final Rectangle2D inner) {
+    private void notContains(final String message, final Area inner) {
         throw new IllegalArgumentException(String.format(
                 "Inner %s container:\n" +
                         " Container: %s - right=%d, bottom=%d\n" +
