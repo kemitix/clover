@@ -1,5 +1,5 @@
 FONT_FILE=-Dfont-file=${HOME}/cossmass/binder/fonts/Snowslider/SnowSL_Std.OTF
-RUN_PARAMS=${FONT_FILE}
+RUN_PARAMS=${FONT_FILE} #-Dclover.story-card.enabled=false #-Dclover.enable-paperback=false -Dclover.enable-paperback-preview=false
 
 graphs:
 	mvn validate
@@ -10,17 +10,26 @@ install: .install
 	mvn install -DskipTests -Dpitest.skip
 	touch .install
 
+build:
+	mvn package -DskipTests -Dpitest.skip
+
 test:
 	mvn test ${RUN_PARAMS}
 
 issue-dir:
 	@test ${ISSUE_DIR}
 
-dev: issue-dir
+dev: issue-dir build
 	mvn -pl runner quarkus:dev ${RUN_PARAMS}
 
-run: issue-dir install
-	java -jar runner/target/quarkus-app/quarkus-run.jar ${RUN_PARAMS}
+run: issue-dir build
+	( \
+		cd runner/target/quarkus-app && \
+		java \
+			--class-path "../../../*/target/" \
+			-jar quarkus-run.jar \
+			${RUN_PARAMS} \
+	)
 
 clean:
 	mvn clean

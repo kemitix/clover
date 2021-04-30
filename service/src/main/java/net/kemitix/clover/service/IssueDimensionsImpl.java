@@ -55,40 +55,52 @@ public class IssueDimensionsImpl implements IssueDimensions {
 
     @PostConstruct
     public void init() {
+        // The area of the output Kindle Cover in pixels
         Region kindleCover = Region.builder()
                 .width((int) (kindleWidthInches * dpi))
                 .height((int) (kindleHeightInches * dpi)).build();
+        // The selected Width for the front cover on the ORIGINAL image fits
+        // both a minimum resolution and within the ORIGINAL image
         isBetween(widthFrontCoverOriginal, 1000, fullImageOriginal.getWidth());
+        // Factor to scale the original image by to fit the output Kindle image size
         scaleFromOriginal = kindleCover.getWidth() / widthFrontCoverOriginal;
+        // Dimensions of image once scaled for output resolution
         scaledCoverArt = fullImageOriginal.toBuilder()
                 .width((int) (fullImageOriginal.getWidth() * scaleFromOriginal))
                 .height((int) (fullImageOriginal.getHeight() * scaleFromOriginal))
                 .build();
+        // width of spine in pixels
         int spineWidth = (int) (spineWidthInches * dpi);
+        // The area of the output Paperback Cover in pixels
         paperbackCover = kindleCover.toBuilder()
                 .width((kindleCover.getWidth() * 2) + spineWidth)
                 .build();
+        // How much additional trim to include for Paperback in pixels
         int trim = (int) (paperbackTrimInches * dpi);
+        // The area of the output Paperback Cover with Trim in pixels
         paperbackCoverWithTrim = paperbackCover.toBuilder()
                 .width(paperbackCover.getWidth() + trim)
                 .height(paperbackCover.getHeight() + trim)
                 .build();
+        scaledCoverArt.mustContain(paperbackCoverWithTrim);
 
         log.info("Select front cover region on scaled cover art");
+        // Area on scaled image to be used for the Kindle Cover
         Region frontRegion = kindleCover.toBuilder()
                 .top((int) (topFrontCoverOriginal * scaleFromOriginal))
                 .left((int) (leftFrontCoverOriginal * scaleFromOriginal)).build();
         scaledCoverArt.mustContain(frontRegion);
 
-
         // backCrop is relative to scaledCoverArt
         log.info("Select back cover region on scaled cover art");
-        backCrop = frontRegion.withLeft(left ->
-                frontRegion.getLeft() - spineWidth - frontRegion.getWidth());
+        // Area on scaled image to be used for the Back Cover of the Paperback
+        backCrop = frontRegion
+                .withLeft(left -> left - (spineWidth + frontRegion.getWidth()));
         scaledCoverArt.mustContain(backCrop);
 
         // wrapCrop is relative to scaledCoverArt
         log.info("Select spine region on scaled cover art");
+        // Area of scaled image to be used for the PaperbackCover
         wrapCrop = backCrop.toBuilder()
                 .width(backCrop.getWidth() + spineWidth + frontRegion.getWidth())
                 .build();
@@ -96,18 +108,19 @@ public class IssueDimensionsImpl implements IssueDimensions {
 
         // frontCrop is relative to backCrop
         log.info("Select front cover on wrap cover");
-        frontCrop = Region.builder()
-                .top(0)
-                .left(kindleCover.getWidth() + spineWidth)
-                .width(kindleCover.getWidth())
-                .height(wrapCrop.getHeight()).build();
-        wrapCrop.mustContain(frontCrop);
+        // Area WITHIN wrapCrop for the front cover
+        frontCrop = wrapCrop
+                .withTop(0)
+                .withLeft(kindleCover.getWidth() + spineWidth)
+                .withWidth(kindleCover.getWidth());
+        wrapCrop.mustContain(frontCrop.getArea());
 
         // spineCrop is relative to backCrop
-        log.info("Select spine are on wrap cover");
-        spineCrop = frontCrop.toBuilder()
-                .left(frontCrop.getLeft() - spineWidth)
-                .width(spineWidth).build();
+        log.info("Select spine on wrap cover");
+        // Area WITHIN wrapCrop for the spine
+        spineCrop = frontCrop
+                .withLeft(left -> left - spineWidth)
+                .withWidth(spineWidth);
         wrapCrop.mustBeBiggerThan(spineCrop);
     }
 
