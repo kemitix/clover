@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <tiles-maven-plugin.version>2.19</tiles-maven-plugin.version>
+        <tiles-maven-plugin.version>2.20</tiles-maven-plugin.version>
         <kemitix-tiles.version>3.0.0</kemitix-tiles.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,8 +31,8 @@
         <file-reader-writer.version>1.0.0</file-reader-writer.version>
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
         <microprofile-config-api.version>1.4</microprofile-config-api.version>
-        <lombok.version>1.18.18</lombok.version>
-        <mockito.version>3.8.0</mockito.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mockito.version>3.9.0</mockito.version>
         <typed-properties.version>1.0.0</typed-properties.version>
         <text-wrap-fit-box.version>1.0.0</text-wrap-fit-box.version>
         <fontface.version>1.0.0</fontface.version>

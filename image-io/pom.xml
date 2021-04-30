@@ -13,7 +13,7 @@
     <artifactId>clover-image-io</artifactId>
 
     <properties>
-        <itextpdf.version>7.1.14</itextpdf.version>
+        <itextpdf.version>7.1.15</itextpdf.version>
         <webp-imageio.version>0.1.6</webp-imageio.version>
     </properties>
 
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-jpeg</artifactId>
-            <version>3.6.2</version>
+            <version>3.7.0</version>
             <!-- FIXME: This not being registered correctly -->
         </dependency>
         <dependency>
