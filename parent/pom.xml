@@ -36,7 +36,7 @@
         <typed-properties.version>1.0.0</typed-properties.version>
         <text-wrap-fit-box.version>1.0.0</text-wrap-fit-box.version>
         <fontface.version>1.0.0</fontface.version>
-        <snakeyaml.version>1.28</snakeyaml.version>
+        <snakeyaml.version>1.29</snakeyaml.version>
     </properties>
 
     <dependencyManagement>
