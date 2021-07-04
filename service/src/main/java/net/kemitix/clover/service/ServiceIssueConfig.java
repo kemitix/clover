@@ -47,6 +47,8 @@ public class ServiceIssueConfig implements IssueConfig {
     private int sfLeft;
     private int fantasyTop;
     private int fantasyLeft;
+    private int scienceFantasyTop;
+    private int scienceFantasyLeft;
     private int reprintTop;
     private int reprintLeft;
     private BackCoverBackgroundBox backCoverBackgroundBox;
@@ -56,6 +58,7 @@ public class ServiceIssueConfig implements IssueConfig {
     public static class Stories implements IssueStories {
         private List<Story> sf;
         private List<Story> fantasy;
+        private List<Story> scienceFantasy;
         private List<Story> reprint;
     }
 

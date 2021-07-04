@@ -75,5 +75,10 @@ public interface IssueConfig {
 
     int getSfLeft();
 
+    int getScienceFantasyTop();
+
+    int getScienceFantasyLeft();
+
     BackCoverBackgroundBox getBackCoverBackgroundBox();
+
 }
