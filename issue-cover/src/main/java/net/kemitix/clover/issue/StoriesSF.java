@@ -1,21 +1,24 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.BackCover;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
-import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.awt.*;
+import java.util.List;
 
+@Getter
 @BackCover
 @ApplicationScoped
-public class StoriesSF extends AbstractElement {
+public class StoriesSF extends AbstractStoriesList {
 
-    private static final String HEADER = "Original Science Fiction";
+    private final String header = "Original Science Fiction";
 
-    @Getter private final int priority = 10;
+    private final int priority = 10;
 
     @Inject @BackCover FontFace fontFace;
     @Inject StoryListFormatter storyListFormatter;
@@ -23,25 +26,18 @@ public class StoriesSF extends AbstractElement {
     @Inject StoriesListBlock storiesListBlock;
 
     @Override
-    public void draw(
-            Graphics2D drawable,
-            TypedProperties typedProperties
-    ) {
-        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
+    protected int getLeft() {
+        return issueConfig.getSfLeft();
     }
 
-    private Region region() {
-        return Region.builder()
-                .top(issueConfig.getSfTop())
-                .left(issueConfig.getSfLeft())
-                .build();
+    @Override
+    protected int getTop() {
+        return issueConfig.getSfTop();
     }
 
-    private String text() {
-        return String.join("\n",
-                storyListFormatter.format(
-                        HEADER,
-                        issueConfig.getStories().getSf()));
+    @Override
+    protected List<? extends IssueStory> getStories() {
+        return issueConfig.getStories().getSf();
     }
 
 }

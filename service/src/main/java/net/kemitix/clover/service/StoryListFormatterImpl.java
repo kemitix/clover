@@ -5,9 +5,7 @@ import net.kemitix.clover.spi.StoryListFormatter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +18,7 @@ public class StoryListFormatterImpl implements StoryListFormatter {
     ) {
         final List<String> list = new ArrayList<>();
         list.add(label);
-        list.addAll(stories.stream()
+        list.addAll(storyStream(stories)
                 .flatMap(story -> Stream.of(
                         "",
                         story.getTitle(),
@@ -29,6 +27,10 @@ public class StoryListFormatterImpl implements StoryListFormatter {
                 .map(String::trim)
                 .collect(Collectors.toList()));
         return list;
+    }
+
+    private Stream<? extends IssueStory> storyStream(List<? extends IssueStory> stories) {
+        return Optional.ofNullable(stories).map(Collection::stream).orElseGet(Stream::empty);
     }
 
     private Stream<String> splitOnLineBreaks(final String line) {

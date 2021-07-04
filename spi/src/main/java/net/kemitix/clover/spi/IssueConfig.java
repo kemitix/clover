@@ -35,7 +35,8 @@ public interface IssueConfig {
     int getAuthorsXOffset();
 
     default List<String> authors() {
-        return getStories().stream()
+        IssueStories stories = getStories();
+        return stories.stream()
                 .map(IssueStory::getAuthor)
                 .sorted(byAuthorName())
                 .map(IssueAuthor::authorName)

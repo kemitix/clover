@@ -1,25 +1,24 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
-import net.kemitix.clover.spi.Region;
+import net.kemitix.clover.spi.IssueStory;
 import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
-import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.awt.*;
+import java.util.List;
 
+@Getter
 @BackCover
 @ApplicationScoped
-public class StoriesScienceFantasy extends AbstractElement {
+public class StoriesScienceFantasy extends AbstractStoriesList {
 
-    private static final String HEADER = "Original Science Fantasy";
+    private final String header = "Original Science Fantasy";
 
-    @Getter private final int priority = 10;
+    private final int priority = 10;
 
     @Inject @BackCover FontFace fontFace;
     @Inject StoryListFormatter storyListFormatter;
@@ -27,25 +26,18 @@ public class StoriesScienceFantasy extends AbstractElement {
     @Inject StoriesListBlock storiesListBlock;
 
     @Override
-    public void draw(
-            Graphics2D drawable,
-            TypedProperties typedProperties
-    ) {
-        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
+    protected int getLeft() {
+        return issueConfig.getScienceFantasyLeft();
     }
 
-    private Region region() {
-        return Region.builder()
-                .top(issueConfig.getScienceFantasyTop())
-                .left(issueConfig.getScienceFantasyLeft())
-                .build();
+    @Override
+    protected int getTop() {
+        return issueConfig.getScienceFantasyTop();
     }
 
-    private String text() {
-        return String.join("\n",
-                storyListFormatter.format(
-                        HEADER,
-                        issueConfig.getStories().getScienceFantasy()));
+    @Override
+    protected List<? extends IssueStory> getStories() {
+        return issueConfig.getStories().getScienceFantasy();
     }
 
 }
