@@ -82,4 +82,6 @@ public interface IssueConfig {
 
     BackCoverBackgroundBox getBackCoverBackgroundBox();
 
+    AuthorStrapBox getAuthorStrapBox();
+
 }
