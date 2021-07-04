@@ -12,13 +12,11 @@ import javax.enterprise.inject.Vetoed;
 @Getter
 @NoArgsConstructor
 @ToString
-public class BackCoverBackgroundBox {
+public class AuthorStrapBox {
 
     private boolean show;
-    private OpaqueColour outerColour;
-    private OpaqueColour middleColour;
-    private OpaqueColour innerColour;
-    private int outerMargin;
-    private int marginStep;
+    private int top;
+    private int height;
+    private OpaqueColour colour;
 
 }

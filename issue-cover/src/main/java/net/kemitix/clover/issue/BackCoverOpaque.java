@@ -38,18 +38,18 @@ public class BackCoverOpaque
         log.info("BG-OPAQUE: " + backgroundBox);
         if (backgroundBox.isShow()) {
             box(drawable,
-                    backgroundBox.getOuterBox().getOpacity(),
-                    backgroundBox.getOuterBox().getColour(),
+                    backgroundBox.getOuterColour().getOpacity(),
+                    backgroundBox.getOuterColour().getColour(),
                     getMargin(0),
                     getMargin(1));
             box(drawable,
-                    backgroundBox.getMiddleBox().getOpacity(),
-                    backgroundBox.getMiddleBox().getColour(),
+                    backgroundBox.getMiddleColour().getOpacity(),
+                    backgroundBox.getMiddleColour().getColour(),
                     getMargin(1),
                     getMargin(2));
             fill(drawable,
-                    backgroundBox.getInnerBox().getOpacity(),
-                    backgroundBox.getInnerBox().getColour(),
+                    backgroundBox.getInnerColour().getOpacity(),
+                    backgroundBox.getInnerColour().getColour(),
                     getMargin(2));
         }
     }
