@@ -14,9 +14,9 @@ import java.util.List;
 @Getter
 @BackCover
 @ApplicationScoped
-public class StoriesSF extends AbstractStoriesList {
+public class StoriesScienceFantasy extends AbstractStoriesList {
 
-    private final String header = "Original Science Fiction";
+    private final String header = "Original Science Fantasy";
 
     private final int priority = 10;
 
@@ -27,17 +27,17 @@ public class StoriesSF extends AbstractStoriesList {
 
     @Override
     protected int getLeft() {
-        return issueConfig.getSfLeft();
+        return issueConfig.getScienceFantasyLeft();
     }
 
     @Override
     protected int getTop() {
-        return issueConfig.getSfTop();
+        return issueConfig.getScienceFantasyTop();
     }
 
     @Override
     protected List<? extends IssueStory> getStories() {
-        return issueConfig.getStories().getSf();
+        return issueConfig.getStories().getScienceFantasy();
     }
 
 }
