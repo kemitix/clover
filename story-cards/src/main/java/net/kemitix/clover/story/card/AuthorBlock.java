@@ -30,8 +30,8 @@ public class AuthorBlock extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 0,
                 issueConfig.getTitleColour(),
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
         var text = "by " + story.getAuthor().authorName();
         Region region = dimensions.getAuthorRegion();
         opaqueFill

@@ -35,8 +35,8 @@ public class GridGuide
     public void init() {
         black = colours.getColor("black");
         white = colours.getColor("white");
-        widthInches = (2 * cloverProperties.getWidth()) + issueConfig.getSpine();
-        heightInches = cloverProperties.getHeight();
+        widthInches = (2 * cloverProperties.width()) + issueConfig.getSpine();
+        heightInches = cloverProperties.height();
         widthPx = dpi(widthInches);
         heightPx = dpi(heightInches);
     }
@@ -48,7 +48,7 @@ public class GridGuide
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        int stepsPerInch = cloverProperties.getGuideLinesPerInch();
+        int stepsPerInch = cloverProperties.guideLinesPerInch();
         float stepSizeInches = (float) 1 / stepsPerInch;
 
         int xSteps = (int) (widthInches * stepsPerInch);
@@ -87,7 +87,7 @@ public class GridGuide
 
 
     private int dpi(double inches) {
-        return (int) (inches * cloverProperties.getDpi());
+        return (int) (inches * cloverProperties.dpi());
     }
 
 }

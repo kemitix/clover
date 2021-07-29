@@ -38,7 +38,7 @@ public class AuthorsOpaqueStrap
     }
 
     private Region getRegion() {
-        int trim = dpi(cloverProperties.getTrimLeft());
+        int trim = dpi(cloverProperties.trimLeft());
         return dimensions.getFrontCrop()
                 .withTop(authorStrapBox.getTop())
                 .withHeight(authorStrapBox.getHeight())
@@ -46,7 +46,7 @@ public class AuthorsOpaqueStrap
     }
 
     private int dpi(float inches) {
-        return (int) (inches * cloverProperties.getDpi());
+        return (int) (inches * cloverProperties.dpi());
     }
 
     private void fill(

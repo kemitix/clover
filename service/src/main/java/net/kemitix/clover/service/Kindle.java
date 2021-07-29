@@ -37,6 +37,6 @@ public class Kindle implements CloverFormat {
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnableKindle();
+        return cloverProperties.enableKindle();
     }
 }

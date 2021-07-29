@@ -20,7 +20,7 @@ public class WebpImageWriter
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnableWebp();
+        return cloverProperties.enableWebp();
     }
 
     @Override

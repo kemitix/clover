@@ -19,8 +19,8 @@ public class ArtCreditProducers {
                 cloverProperties.getFontLocation(),
                 36,
                 "white",
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
     }
 
 }

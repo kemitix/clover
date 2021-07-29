@@ -36,7 +36,7 @@ public class JpegImageWriter
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnableJpg();
+        return cloverProperties.enableJpg();
     }
 
     @Override

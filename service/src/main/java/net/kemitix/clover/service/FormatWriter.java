@@ -23,7 +23,7 @@ public class FormatWriter {
 
     public void write(final CloverFormat format) {
         format.getImages().forEach(image -> {
-            image.write(Paths.get(cloverProperties.getIssueDir()),
+            image.write(Paths.get(cloverProperties.issueDir()),
                     format.getName() + image.getNameQualifier(),
                     format.getImageProperties());
         });

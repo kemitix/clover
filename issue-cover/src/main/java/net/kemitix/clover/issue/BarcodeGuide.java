@@ -29,12 +29,12 @@ public class BarcodeGuide
             TypedProperties typedProperties
     ) {
         final Region region = Region.builder()
-                .top(cloverProperties.getBarcodeTop())
-                .left(cloverProperties.getBarcodeLeft())
+                .top(cloverProperties.barcodeTop())
+                .left(cloverProperties.barcodeLeft())
                 .width(cloverProperties.getBarcodeWidth())
                 .height(cloverProperties.getBarcodeHeight())
                 .build();
-        final String fillColour = cloverProperties.getBarcodeFillColour();
+        final String fillColour = cloverProperties.barcodeFillColour();
         opaqueFill.opacity(1d)
                 .colour(fillColour)
                 .region(region)

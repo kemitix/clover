@@ -30,8 +30,8 @@ public class StoryTitle extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 0,
                 issueConfig.getTitleColour(),
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
         var text = story.getTitle();
         Region region = dimensions.getTitleRegion();
         opaqueFill

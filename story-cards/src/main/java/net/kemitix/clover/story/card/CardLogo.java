@@ -52,9 +52,9 @@ public class CardLogo extends AbstractElement {
     private FontFace fontFace() {
         return FontFace.of(
                 cloverProperties.getFontLocation(),
-                properties.getLogoFontSize(),
+                properties.logoFontSize(),
                 issueConfig.getTitleColour(),
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
     }
 }

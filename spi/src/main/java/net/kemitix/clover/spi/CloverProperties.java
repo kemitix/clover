@@ -1,67 +1,96 @@
 package net.kemitix.clover.spi;
 
-import java.net.URI;
-import java.util.List;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithName;
 
+import java.io.File;
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+@ConfigMapping(prefix = "clover")
 public interface CloverProperties {
-    List<String> getImageTypes();
+
+    String imageTypes();
+
+    default List<String> getImageTypes() {
+        return Arrays.asList(imageTypes().split(","));
+    }
 
     /**
      * Front cover height in inches.
      */
-    float getHeight();
+    float height();
 
     /**
      * Front cover width in inches.
      */
-    float getWidth();
+    float width();
 
-    String getIssueDir();
+    default String issueDir() {
+        String envIssueDir = System.getenv("ISSUE_DIR");
+        String propertyIssueDir = System.getProperty("user.dir");
+        return Objects.requireNonNullElseGet(
+                envIssueDir,
+                () -> propertyIssueDir
+        );
+    }
+    String configFile();
 
-    String getConfigFile();
+    File fontFile();
 
-    URI getFontLocation();
+    default URI getFontLocation() {
+        return fontFile().toURI();
+    }
 
-    int getDropShadowXOffset();
+    @WithName("drop-shadow-x-offset")
+    int dropShadowXOffset();
 
-    int getDropShadowYOffset();
+    @WithName("drop-shadow-y-offset")
+    int dropShadowYOffset();
 
-    int getDpi();
+    int dpi();
 
-    int getBarcodeLeft();
+    int barcodeLeft();
 
-    int getBarcodeTop();
+    int barcodeTop();
 
-    int getBarcodeWidth();
+    float barcodeWidth();
 
-    int getBarcodeHeight();
+    default int getBarcodeWidth() {
+        return (int) (barcodeWidth() * dpi());
+    }
 
-    String getBarcodeFillColour();
+    float barcodeHeight();
 
-    @Deprecated(since = "issue-3")
-    Area getKindleFrontArea();
+    default int getBarcodeHeight() {
+        return (int) (barcodeHeight() * dpi());
+    }
 
-    boolean isEnablePdf();
-    boolean isEnableWebp();
-    boolean isEnableJpg();
+    String barcodeFillColour();
 
-    boolean isEnableKindle();
-    boolean isEnablePaperback();
-    boolean isEnablePaperbackPreview();
+    boolean enablePdf();
+    boolean enableWebp();
+    boolean enableJpg();
 
-    float getTrim();//inches
+    boolean enableKindle();
+    boolean enablePaperback();
+    boolean enablePaperbackPreview();
 
-    int getGuideThickness();
+    float trim();//inches
 
-    String getTrimColour();
+    int guideThickness();
 
-    float getTrimTop();//inches
+    String trimColour();
 
-    float getTrimLeft();//inches
+    float trimTop();//inches
 
-    float getTrimRight();//inches
+    float trimLeft();//inches
 
-    float getTrimBottom();//inches
+    float trimRight();//inches
 
-    int getGuideLinesPerInch();
+    float trimBottom();//inches
+
+    int guideLinesPerInch();
 }

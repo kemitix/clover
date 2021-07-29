@@ -82,7 +82,7 @@ public class LogoStraps extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 48,
                 issueConfig.getSubTitleColour(),
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
     }
 }
