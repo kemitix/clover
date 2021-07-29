@@ -20,13 +20,11 @@ public class ConfigLogging {
 
     @PostConstruct
     public void init() {
-
-
-        LOGGER.info(String.format("story-card enabled: %b", properties.isEnabled()));
-        LOGGER.info(String.format("story-card width: %d", properties.getWidth()));
-        LOGGER.info(String.format("story-card height: %d", properties.getHeight()));
-        LOGGER.info(String.format("story-card padding: %d", properties.getPadding()));
-        LOGGER.info(String.format("story-card font size: %d", properties.getLogoFontSize()));
+        LOGGER.info(String.format("story-card enabled: %b", properties.enabled()));
+        LOGGER.info(String.format("story-card width: %d", properties.width()));
+        LOGGER.info(String.format("story-card height: %d", properties.height()));
+        LOGGER.info(String.format("story-card padding: %d", properties.padding()));
+        LOGGER.info(String.format("story-card font size: %d", properties.logoFontSize()));
     }
 
 }

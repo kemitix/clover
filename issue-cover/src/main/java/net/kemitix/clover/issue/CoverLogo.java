@@ -29,8 +29,8 @@ public class CoverLogo extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 217,
                 issueConfig.getTitleColour(),
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
         var text = String.join("\n",
                 issueConfig.getPublicationTitle().split(" "));
         simpleTextEffect

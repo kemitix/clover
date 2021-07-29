@@ -48,7 +48,7 @@ public class PdfImageWriter implements ImageWriter {
             final File file,
             final TypedProperties properties
     ) {
-        final float ppiScale = pdfPPI / cloverProperties.getDpi();
+        final float ppiScale = pdfPPI / cloverProperties.dpi();
         final float pageWidth =
                 ppiScale *
                         properties.find(PdfWidth.class, Float.class)
@@ -84,7 +84,7 @@ public class PdfImageWriter implements ImageWriter {
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnablePdf();
+        return cloverProperties.enablePdf();
     }
 
 }

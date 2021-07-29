@@ -36,8 +36,8 @@ public class IssueConfigLoaderTest {
     @DisplayName("Loads the clover.yaml file")
     public void loadIssueYaml() throws IOException {
         //given
-        given(cloverConfig.getIssueDir()).willReturn("dir");
-        given(cloverConfig.getConfigFile()).willReturn("clover.yaml");
+        given(cloverConfig.issueDir()).willReturn("dir");
+        given(cloverConfig.configFile()).willReturn("clover.yaml");
         final String content =
                 """
                         ---

@@ -24,7 +24,7 @@ public class StoryCardDimensions {
 
     @PostConstruct
     void init() {
-        Region targetSizeRegion = properties.getRegion();
+        Region targetSizeRegion = properties.region();
         cardRegion = targetSizeRegion.toBuilder().top(0).left(0).build();
         rowHeight = cardRegion.getHeight() / rows;
         colWidth = cardRegion.getWidth() / cols;
@@ -62,6 +62,6 @@ public class StoryCardDimensions {
                 .height(height * rowHeight)
                 .width(width * colWidth)
                 .build()
-                .withPadding(properties.getPadding());
+                .withPadding(properties.padding());
     }
 }

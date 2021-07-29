@@ -50,6 +50,6 @@ public class StoryCardFormat implements CloverFormat {
 
     @Override
     public boolean isEnabled() {
-        return properties.isEnabled();
+        return properties.enabled();
     }
 }

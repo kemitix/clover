@@ -1,17 +1,7 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import net.kemitix.clover.spi.AbstractElement;
-import net.kemitix.clover.spi.ArtCredit;
-import net.kemitix.clover.spi.BackCover;
-import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.Issue;
-import net.kemitix.clover.spi.IssueConfig;
-import net.kemitix.clover.spi.IssueDimensions;
-import net.kemitix.clover.spi.Region;
-import net.kemitix.clover.spi.SimpleTextEffect;
-import net.kemitix.clover.spi.Spine;
-import net.kemitix.clover.spi.TextEffect;
+import net.kemitix.clover.spi.*;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -45,9 +35,9 @@ public class ArtCreditBlock
 
     private Region region() {
         final Region region = Region.builder()
-                .top(cloverProperties.getBarcodeTop())
+                .top(cloverProperties.barcodeTop())
                 .left(0)
-                .width(cloverProperties.getBarcodeLeft())
+                .width(cloverProperties.barcodeLeft())
                 .height(cloverProperties.getBarcodeHeight())
                 .build();
         return region.withMargin(20);

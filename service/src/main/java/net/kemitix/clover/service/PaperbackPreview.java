@@ -45,7 +45,7 @@ public class PaperbackPreview implements CloverFormat {
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnablePaperbackPreview();
+        return cloverProperties.enablePaperbackPreview();
     }
     private Function<Image, Image> blocks() {
         var properties = TypedProperties.create();

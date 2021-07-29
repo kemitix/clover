@@ -30,16 +30,16 @@ public class TrimMargins
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        float trimTop = cloverProperties.getTrimTop();
-        float trimLeft = cloverProperties.getTrimLeft();
-        float trimRight = cloverProperties.getTrimRight();
-        float trimBottom = cloverProperties.getTrimBottom();
+        float trimTop = cloverProperties.trimTop();
+        float trimLeft = cloverProperties.trimLeft();
+        float trimRight = cloverProperties.trimRight();
+        float trimBottom = cloverProperties.trimBottom();
         Region region = dimensions.getPaperbackCover()
                 .withTop(top -> top + dpi(trimTop))
                 .withLeft(left -> left + dpi(trimLeft))
                 .withWidth(width -> width - dpi(trimLeft + trimRight))
                 .withHeight(height -> height - dpi(trimTop + trimBottom));
-        int thickness = cloverProperties.getGuideThickness();
+        int thickness = cloverProperties.guideThickness();
         boxEffect.opacity(0.5d)
                 .thickness(thickness)
                 .colour("black")
@@ -47,7 +47,7 @@ public class TrimMargins
                 .accept(drawable);
         boxEffect.opacity(1d)
                 .thickness(thickness)
-                .colour(cloverProperties.getTrimColour())
+                .colour(cloverProperties.trimColour())
                 .region(region)
                 .accept(drawable);
         boxEffect.opacity(0.5d)
@@ -58,7 +58,7 @@ public class TrimMargins
     }
 
     private int dpi(float inches) {
-        return (int) (cloverProperties.getDpi() * inches);
+        return (int) (cloverProperties.dpi() * inches);
     }
 
 }

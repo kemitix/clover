@@ -27,7 +27,7 @@ public class SpineProducers {
                 cloverProperties.getFontLocation(),
                 62,
                 "yellow",
-                cloverProperties.getDropShadowXOffset(),
-                cloverProperties.getDropShadowYOffset());
+                cloverProperties.dropShadowXOffset(),
+                cloverProperties.dropShadowYOffset());
     }
 }

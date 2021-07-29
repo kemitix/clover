@@ -12,7 +12,6 @@ import org.yaml.snakeyaml.error.YAMLException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.json.bind.Jsonb;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -38,7 +37,7 @@ public class IssueConfigLoader {
             final FileReader fileReader
     ) {
         final File cloverFile =
-                Paths.get(config.getIssueDir(), config.getConfigFile())
+                Paths.get(config.issueDir(), config.configFile())
                 .toFile();
         LOGGER.info("Reading: " + cloverFile.getAbsolutePath());
         return parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
@@ -72,7 +71,7 @@ public class IssueConfigLoader {
             final ImageLoader imageLoader
     ) throws IOException {
         final Path coverArtPath = Paths.get(
-                cloverProperties.getIssueDir(),
+                cloverProperties.issueDir(),
                 issueConfig.getCoverArt());
         return imageLoader.load(coverArtPath.toFile());
     }

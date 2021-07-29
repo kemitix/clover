@@ -65,7 +65,7 @@ public class Paperback implements CloverFormat {
 
     @Override
     public boolean isEnabled() {
-        return cloverProperties.isEnablePaperback();
+        return cloverProperties.enablePaperback();
     }
 
 }
