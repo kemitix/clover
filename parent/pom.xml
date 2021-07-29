@@ -20,7 +20,7 @@
     <properties>
         <microprofile.version>4.1</microprofile.version>
         <tiles-maven-plugin.version>2.23</tiles-maven-plugin.version>
-        <kemitix-tiles.version>3.0.0</kemitix-tiles.version>
+        <kemitix-tiles.version>3.1.1</kemitix-tiles.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>
@@ -131,6 +131,13 @@
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
                 <version>${snakeyaml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.kemitix.tiles</groupId>
+                <artifactId>version-tracker</artifactId>
+                <version>${kemitix-tiles.version}</version>
+                <optional>true</optional>
             </dependency>
 
             <dependency>
