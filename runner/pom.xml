@@ -95,7 +95,7 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+        <quarkus.platform.version>2.1.1.Final</quarkus.platform.version>
         <quarkus-plugin.version>${quarkus.platform.version}</quarkus-plugin.version>
 
         <!-- disabled until there is some code to mutate -->
