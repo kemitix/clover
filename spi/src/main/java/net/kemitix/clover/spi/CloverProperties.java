@@ -29,13 +29,22 @@ public interface CloverProperties {
     float width();
 
     default String issueDir() {
-        String envIssueDir = System.getenv("ISSUE_DIR");
-        String propertyIssueDir = System.getProperty("user.dir");
-        return Objects.requireNonNullElseGet(
-                envIssueDir,
-                () -> propertyIssueDir
-        );
+        return environment("CLOVER_DIR")
+                .replaceFirst("^~", property("user.home"));
     }
+
+    private String environment(String s) {
+        return Objects.requireNonNull(
+                System.getenv(s),
+                "Undefined environment variable: " + s);
+    }
+
+    private String property(String s) {
+        return Objects.requireNonNull(
+                System.getProperty(s),
+                "Undefined property: " + s);
+    }
+
     String configFile();
 
     File fontFile();
