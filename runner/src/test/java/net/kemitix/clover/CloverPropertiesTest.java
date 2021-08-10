@@ -65,8 +65,6 @@ public class CloverPropertiesTest
     @DisplayName("Get plain values")
     public void getPlainValues() {
         //given
-        final String issueDir = "~/cossmass/issue";
-        System.setProperty("user.dir", issueDir);
         final Random random = new Random();
         final float width = random.nextInt();
         final float height = random.nextInt();
@@ -83,8 +81,6 @@ public class CloverPropertiesTest
         given(config.dropShadowYOffset()).willReturn(dropShadowYOffset);
         //then
         SoftAssertions.assertSoftly(s -> {
-            String configIssueDir = config.issueDir();
-            s.assertThat(configIssueDir).isEqualTo(issueDir);
             s.assertThat(config.width()).isEqualTo(width);
             s.assertThat(config.height()).isEqualTo(height);
             s.assertThat(config.dpi()).isEqualTo(dpi);
