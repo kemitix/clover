@@ -95,8 +95,8 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <quarkus.platform.version>2.1.2.Final</quarkus.platform.version>
-        <quarkus-plugin.version>${quarkus.platform.version}</quarkus-plugin.version>
+        <quarkus.version>2.1.2.Final</quarkus.version>
+        <quarkus-plugin.version>${quarkus.version}</quarkus-plugin.version>
 
         <!-- disabled until there is some code to mutate -->
         <pitest.skip>true</pitest.skip>
@@ -106,8 +106,8 @@
         <dependencies>
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-universe-bom</artifactId>
-                <version>${quarkus.platform.version}</version>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
