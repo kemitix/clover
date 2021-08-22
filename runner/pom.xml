@@ -7,13 +7,13 @@
     <parent>
         <groupId>net.kemitix.clover</groupId>
         <artifactId>clover-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.1.1</version>
         <relativePath>../parent</relativePath>
     </parent>
 
     <artifactId>clover-runner</artifactId>
     <name>clover-runner</name>
-    <version>3.0.0</version>
+    <version>3.1.1</version>
 
     <dependencies>
         <dependency>
