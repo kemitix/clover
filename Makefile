@@ -7,7 +7,7 @@ graphs:
 install: .install
 
 .install:
-	mvn install -DskipTests -Dpitest.skip
+	mvn install
 	touch .install
 
 build:
@@ -22,7 +22,7 @@ issue-dir:
 dev: issue-dir build
 	mvn -pl runner quarkus:dev ${RUN_PARAMS}
 
-run: issue-dir build
+run: issue-dir install
 	( \
 		cd runner/target/quarkus-app && \
 		java \
