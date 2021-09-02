@@ -38,9 +38,13 @@ public class IssueConfigLoader {
     ) {
         final File cloverFile =
                 Paths.get(config.issueDir(), config.configFile())
-                .toFile();
+                        .toFile();
         LOGGER.info("Reading: " + cloverFile.getAbsolutePath());
-        return parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
+        final ServiceIssueConfig issueConfig = parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
+        if (issueConfig.getWidth() < 5 || issueConfig.getHeight() < 8) {
+            throw new IllegalStateException("Width & Height should be set is clover.yaml");
+        }
+        return issueConfig;
     }
 
     private <T> T parseYamlFromFile(

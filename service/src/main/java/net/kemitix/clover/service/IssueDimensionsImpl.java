@@ -45,8 +45,8 @@ public class IssueDimensionsImpl implements IssueDimensions {
         this.fullImageOriginal = coverArtImage.getRegion();
         this.topFrontCoverOriginal = issueConfig.getKindleYOffset();
         this.leftFrontCoverOriginal = issueConfig.getKindleXOffset();
-        this.kindleWidthInches = cloverProperties.width();
-        this.kindleHeightInches = cloverProperties.height();
+        this.kindleWidthInches = issueConfig.getWidth();
+        this.kindleHeightInches = issueConfig.getHeight();
         this.widthFrontCoverOriginal = issueConfig.getFrontWidth();
         this.dpi = cloverProperties.dpi();
         this.spineWidthInches = issueConfig.getSpine();

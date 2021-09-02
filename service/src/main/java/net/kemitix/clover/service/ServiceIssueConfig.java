@@ -21,6 +21,8 @@ public class ServiceIssueConfig implements IssueConfig {
     private String subTitleColour;
     private String textColour;
     private float spine;
+    private float height;
+    private float width;
     private int paperbackXOffset;
     private int paperbackYOffset;
     private int kindleXOffset;

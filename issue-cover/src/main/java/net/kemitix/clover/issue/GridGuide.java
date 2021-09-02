@@ -35,8 +35,8 @@ public class GridGuide
     public void init() {
         black = colours.getColor("black");
         white = colours.getColor("white");
-        widthInches = (2 * cloverProperties.width()) + issueConfig.getSpine();
-        heightInches = cloverProperties.height();
+        widthInches = (2 * issueConfig.getWidth()) + issueConfig.getSpine();
+        heightInches = issueConfig.getHeight();
         widthPx = dpi(widthInches);
         heightPx = dpi(heightInches);
     }

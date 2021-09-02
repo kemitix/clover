@@ -20,6 +20,16 @@ public interface IssueConfig {
 
     float getSpine();
 
+    /**
+     * Front cover height in inches.
+     */
+    float getHeight();
+
+    /**
+     * Front cover width in inches.
+     */
+    float getWidth();
+
     String getTextColour();
 
     String getCoverArt();

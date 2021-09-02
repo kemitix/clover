@@ -34,34 +34,6 @@ public class CloverPropertiesTest
     }
 
     @Test
-    @DisplayName("Height has NOT been converted from inches to PX")
-    public void heightIsInInches() {
-        //given
-        final Random random = new Random();
-        final float height = random.nextInt();
-        given(cloverConfig.height()).willReturn(height);
-        //when
-        final float result = cloverConfig.height();
-        //then
-        assertThat(result)
-                .isEqualTo(height);
-    }
-
-    @Test
-    @DisplayName("Width has NOT been converted from inches to PX")
-    public void widthIsInInches() {
-        //given
-        final Random random = new Random();
-        final float width = random.nextInt();
-        given(cloverConfig.width()).willReturn(width);
-        //when
-        final float result = cloverConfig.width();
-        //then
-        assertThat(result)
-                .isEqualTo(width);
-    }
-
-    @Test
     @DisplayName("Get plain values")
     public void getPlainValues() {
         //given
@@ -74,15 +46,11 @@ public class CloverPropertiesTest
         //when
         final CloverProperties config = mock(CloverProperties.class);
         given(config.issueDir()).willCallRealMethod();
-        given(config.width()).willReturn(width);
-        given(config.height()).willReturn(height);
         given(config.dpi()).willReturn(dpi);
         given(config.dropShadowXOffset()).willReturn(dropShadowXOffset);
         given(config.dropShadowYOffset()).willReturn(dropShadowYOffset);
         //then
         SoftAssertions.assertSoftly(s -> {
-            s.assertThat(config.width()).isEqualTo(width);
-            s.assertThat(config.height()).isEqualTo(height);
             s.assertThat(config.dpi()).isEqualTo(dpi);
             s.assertThat(config.dropShadowXOffset()).isEqualTo(dropShadowXOffset);
             s.assertThat(config.dropShadowYOffset()).isEqualTo(dropShadowYOffset);
