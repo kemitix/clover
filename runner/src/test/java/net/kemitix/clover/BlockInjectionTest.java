@@ -39,13 +39,15 @@ public class BlockInjectionTest
     @Test
     @DisplayName("Expected Front Page Elements are @Injected")
     public void expectedFrontPageElementsAreInjected() {
-        assertThat(frontPageElements.stream().count()).isEqualTo(4);
+        assertThat(frontPageElements.stream().count()).isEqualTo(5);
         assertThat(frontPageElements.stream())
                 .anyMatch(e -> e instanceof AuthorsElement);
         assertThat(frontPageElements.stream())
                 .anyMatch(e -> e instanceof CoverLogo);
         assertThat(frontPageElements.stream())
                 .anyMatch(e -> e instanceof LogoStrapsIssue);
+        assertThat(frontPageElements.stream())
+                .anyMatch(e -> e instanceof LogoStrapsYear);
     }
 
     @Test
