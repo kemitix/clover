@@ -45,7 +45,7 @@ public class BlockInjectionTest
         assertThat(frontPageElements.stream())
                 .anyMatch(e -> e instanceof CoverLogo);
         assertThat(frontPageElements.stream())
-                .anyMatch(e -> e instanceof LogoStraps);
+                .anyMatch(e -> e instanceof LogoStrapsIssue);
     }
 
     @Test

@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 @Log
 @FrontCover
 @ApplicationScoped
-public class LogoStraps extends AbstractElement {
+public class LogoStrapsIssue extends AbstractElement {
 
     @Getter private final int priority = 20;
 
@@ -25,11 +25,13 @@ public class LogoStraps extends AbstractElement {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        FontFace fontFace = fontFace();
-        issueNumber(fontFace)
-                .andThen(issueDate(fontFace))
-                .andThen(strapLine(fontFace))
-                .accept(drawable);
+        if (IssueType.ISSUE.equals(issueConfig.getType())) {
+            FontFace fontFace = fontFace();
+            issueNumber(fontFace)
+                    .andThen(issueDate(fontFace))
+                    .andThen(strapLine(fontFace))
+                    .accept(drawable);
+        }
     }
 
     private Consumer<Graphics2D> strapLine(FontFace fontFace) {
@@ -64,7 +66,7 @@ public class LogoStraps extends AbstractElement {
         int top = 475;
         int left = 85;
         return simpleTextEffect.fontFace(fontFace)
-                .text(String.format("%s %s", issueConfig.getType(), issueConfig.getIssue()))
+                .text(String.format("Issue %s", issueConfig.getIssue()))
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
                 .region(Region.builder()
