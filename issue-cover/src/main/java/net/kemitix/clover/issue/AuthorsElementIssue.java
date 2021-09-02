@@ -24,6 +24,12 @@ public class AuthorsElementIssue extends AbstractElement {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
+        if (IssueType.ISSUE.equals(issueConfig.getType())) {
+            doDraw(drawable);
+        }
+    }
+
+    protected void doDraw(Graphics2D drawable) {
         log.info("Drawing author list");
         int top = issueConfig.getAuthorsYOffset();
         int left = issueConfig.getAuthorsXOffset() +
@@ -36,7 +42,7 @@ public class AuthorsElementIssue extends AbstractElement {
                 .accept(drawable);
     }
 
-    private Region region(int top, int left) {
+    protected Region region(int top, int left) {
         Region frontCrop = issueDimensions.getFrontCrop();
         return Region.builder()
                 .top(top).left(left)
