@@ -41,7 +41,7 @@ public class BlockInjectionTest
     public void expectedFrontPageElementsAreInjected() {
         assertThat(frontPageElements.stream().count()).isEqualTo(5);
         assertThat(frontPageElements.stream())
-                .anyMatch(e -> e instanceof AuthorsElement);
+                .anyMatch(e -> e instanceof AuthorsElementIssue);
         assertThat(frontPageElements.stream())
                 .anyMatch(e -> e instanceof CoverLogo);
         assertThat(frontPageElements.stream())

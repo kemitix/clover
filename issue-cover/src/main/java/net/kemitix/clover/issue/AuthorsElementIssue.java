@@ -13,7 +13,7 @@ import java.awt.*;
 @Log
 @FrontCover
 @ApplicationScoped
-public class AuthorsElement extends AbstractElement {
+public class AuthorsElementIssue extends AbstractElement {
 
     @Getter private final int priority = 50;
 
