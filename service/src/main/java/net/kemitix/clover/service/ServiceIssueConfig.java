@@ -15,6 +15,7 @@ public class ServiceIssueConfig implements IssueConfig {
     public ServiceIssueConfig() {
     }
 
+    private IssueType type;
     private String issue;
     private String date;
     private String titleColour;

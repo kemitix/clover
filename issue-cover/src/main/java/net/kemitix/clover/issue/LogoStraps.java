@@ -64,7 +64,7 @@ public class LogoStraps extends AbstractElement {
         int top = 475;
         int left = 85;
         return simpleTextEffect.fontFace(fontFace)
-                .text(String.format("Issue %s", issueConfig.getIssue()))
+                .text(String.format("%s %s", issueConfig.getType(), issueConfig.getIssue()))
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
                 .region(Region.builder()

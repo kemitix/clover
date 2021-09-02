@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public interface IssueConfig {
 
+    IssueType getType();
+
     String getIssue();
 
     String getTitleColour();
