@@ -35,6 +35,7 @@ public class AuthorsElementIssue extends AbstractElement {
         int left = issueConfig.getAuthorsXOffset() +
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
+                .wrap()
                 .text(authorNames())
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
