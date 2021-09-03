@@ -67,10 +67,16 @@ public interface IssueConfig {
 
 
     default String getSpineText() {
-        return String.format("%s - Issue %s - %s",
-                getPublicationTitle(),
-                getIssue(),
-                getDate());
+        return switch (getType()) {
+            case ISSUE -> String.format("%s - Issue %s - %s",
+                    getPublicationTitle(),
+                    getIssue(),
+                    getDate());
+            case YEAR -> String.format("%s - The %s Year - %s",
+                    getPublicationTitle(),
+                    getIssue(),
+                    getDate());
+        };
     }
 
     IssueStoryCards getStoryCards();

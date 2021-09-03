@@ -21,12 +21,18 @@ public class SpineProducers {
 
     @Produces @Spine
     FontFace spineFontFace(
-            CloverProperties cloverProperties
+            CloverProperties cloverProperties,
+            IssueConfig issueConfig
     ) {
+        final String colour =
+                switch (issueConfig.getType()) {
+                    case ISSUE -> "yellow";
+                    case YEAR -> "#b82248";
+                };
         return FontFace.of(
                 cloverProperties.getFontLocation(),
                 62,
-                "yellow",
+                colour,
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());
     }
