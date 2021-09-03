@@ -31,8 +31,38 @@ public class AuthorsElementIssue extends AbstractElement {
 
     protected void doDraw(Graphics2D drawable) {
         log.info("Drawing author list");
-        int top = issueConfig.getAuthorsYOffset();
-        int left = issueConfig.getAuthorsXOffset() +
+        switch (issueConfig.getAuthors().getAlignment()) {
+            case CENTRE: drawCenterAligned(drawable);break;
+            case LEFT: drawLeftAligned(drawable);break;
+            case RIGHT: {throw new UnsupportedOperationException("Right Aligned text not available");}
+        }
+    }
+
+    protected void drawCenterAligned(Graphics2D drawable) {
+        final AuthorsConfig authors = issueConfig.getAuthors();
+        int top = authors.getTop();
+        int width = authors.getWidth();
+        int left = issueDimensions.getFrontCrop().getLeft()
+                + (issueDimensions.getFrontCrop().getWidth() / 2)
+                - (width / 2);
+        Region region = Region.builder()
+                .top(top)
+                .left(left)
+                .width(width)
+                .build();
+        simpleTextEffect.fontFace(fontFace)
+                .wrap()
+                .text(authorNames())
+                .vAlign(TextEffect.VAlignment.TOP)
+                .hAlign(TextEffect.HAlignment.CENTRE)
+                .region(region)
+                .accept(drawable);
+    }
+
+    protected void drawLeftAligned(Graphics2D drawable) {
+        AuthorsConfig authors = issueConfig.getAuthors();
+        int top = authors.getTop();
+        int left = authors.getLeft() +
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
                 .wrap()

@@ -42,9 +42,7 @@ public interface IssueConfig {
 
     String getDate();
 
-    int getAuthorsYOffset();
-
-    int getAuthorsXOffset();
+    AuthorsConfig getAuthors();
 
     default List<String> authors() {
         IssueStories stories = getStories();

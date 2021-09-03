@@ -28,8 +28,7 @@ public class ServiceIssueConfig implements IssueConfig {
     private int paperbackYOffset;
     private int kindleXOffset;
     private int kindleYOffset;
-    private int authorsXOffset;
-    private int authorsYOffset;
+    private ServiceAuthorsConfig authors;
     private Cards cards;
     private TextEffect.HAlignment storiesAlignment;
     private Stories stories;
