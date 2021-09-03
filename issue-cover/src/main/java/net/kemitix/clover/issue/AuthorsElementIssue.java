@@ -49,11 +49,11 @@ public class AuthorsElementIssue extends AbstractElement {
 
     protected Region region(int top, int left) {
         Region frontCrop = issueDimensions.getFrontCrop();
-        return Region.builder()
-                .top(top).left(left)
-                .width(frontCrop.getWidth() - left)
-                .height(frontCrop.getHeight() - top)
-                .build();
+        return frontCrop
+                .withTop(top)
+                .withLeft(left)
+                .withBottom(frontCrop.getBottom())
+                .withWidth(frontCrop.getRight() - left);
     }
 
 }
