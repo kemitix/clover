@@ -50,6 +50,7 @@ public interface IssueConfig {
                 .map(IssueStory::getAuthor)
                 .sorted(byAuthorName())
                 .map(IssueAuthor::authorName)
+                .distinct()
                 .collect(Collectors.toList());
     }
 
