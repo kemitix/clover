@@ -35,11 +35,15 @@ public class AuthorsElementIssue extends AbstractElement {
         int left = issueConfig.getAuthorsXOffset() +
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
-                .text(String.join("\n", issueConfig.authors()))
+                .text(authorNames())
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
                 .region(region(top, left))
                 .accept(drawable);
+    }
+
+    protected String authorNames() {
+        return String.join("\n", issueConfig.authors());
     }
 
     protected Region region(int top, int left) {
