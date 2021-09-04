@@ -4,7 +4,6 @@ import lombok.extern.java.Log;
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.IssueConfig;
-import net.kemitix.clover.spi.IssueStory;
 import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -33,7 +32,7 @@ public class StoryCardFormat implements CloverFormat {
     }
 
     private List<Image> buildImages() {
-        return issueConfig.getStories().stream()
+        return issueConfig.getAllStories().stream()
                 .map(storyCardFactory::create)
                 .collect(Collectors.toList());
     }

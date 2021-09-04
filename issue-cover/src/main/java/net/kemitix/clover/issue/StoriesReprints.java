@@ -30,12 +30,14 @@ public class StoriesReprints extends AbstractElement {
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
+        if (issueConfig.hasSection(Section.Label.REPRINTS)) {
+            storiesListBlock.draw(fontFace, drawable, text(), region(), HEADER);
+        }
     }
 
     private String text() {
         List<? extends IssueStory> reprints = Objects.requireNonNullElseGet(
-                issueConfig.getStories().getReprint(),
+                issueConfig.getStories(Section.Label.REPRINTS),
                 Collections::emptyList
         );
         if (reprints.isEmpty()) {
@@ -49,8 +51,8 @@ public class StoriesReprints extends AbstractElement {
 
     private Region region() {
         return Region.builder()
-                .top(issueConfig.getReprintTop())
-                .left(issueConfig.getReprintLeft())
+                .top(issueConfig.getSectionTop(Section.Label.REPRINTS))
+                .left(issueConfig.getSectionLeft(Section.Label.REPRINTS))
                 .build();
     }
 

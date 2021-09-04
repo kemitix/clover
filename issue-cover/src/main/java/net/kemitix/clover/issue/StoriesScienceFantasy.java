@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.clover.spi.Section;
 import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
 
@@ -27,17 +28,17 @@ public class StoriesScienceFantasy extends AbstractStoriesList {
 
     @Override
     protected int getLeft() {
-        return issueConfig.getScienceFantasyLeft();
+        return issueConfig.getSectionLeft(Section.Label.SCIENCE_FANTASY);
     }
 
     @Override
     protected int getTop() {
-        return issueConfig.getScienceFantasyTop();
+        return issueConfig.getSectionTop(Section.Label.SCIENCE_FANTASY);
     }
 
     @Override
     protected List<? extends IssueStory> getStories() {
-        return issueConfig.getStories().getScienceFantasy();
+        return issueConfig.getStories(Section.Label.SCIENCE_FANTASY);
     }
 
 }
