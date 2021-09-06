@@ -44,6 +44,7 @@ public class AuthorsElementYear extends AuthorsElementIssue {
     protected String authorNames() {
         List<String> authors = issueConfig.authors();
         int lastIndex = authors.size() - 1;
+        //TODO "plus new original fiction from ..."
         return String.join(", ", authors.subList(0, lastIndex))
                 + " and " + authors.get(lastIndex);
     }
