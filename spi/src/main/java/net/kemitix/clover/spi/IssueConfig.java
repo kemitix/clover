@@ -109,4 +109,6 @@ public interface IssueConfig {
                 .map(Section::getTop)
                 .orElseThrow(() -> new IllegalStateException("Section %s 'top' value missing".formatted(label)));
     }
+
+    int getFrontFontSize();
 }

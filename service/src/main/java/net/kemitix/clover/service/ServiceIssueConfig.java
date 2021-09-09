@@ -31,6 +31,7 @@ public class ServiceIssueConfig implements IssueConfig {
     private int paperbackYOffset;
     private int kindleXOffset;
     private int kindleYOffset;
+    private int frontFontSize;
     private ServiceAuthorsConfig authors;
     private Cards cards;
     private String coverArt;
