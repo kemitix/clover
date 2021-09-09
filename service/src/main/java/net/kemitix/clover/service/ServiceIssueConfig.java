@@ -52,6 +52,7 @@ public class ServiceIssueConfig implements IssueConfig {
                         case FANTASY -> stories.setFantasy(section.getStories());
                         case SCIENCE_FICTION -> stories.setSf(section.getStories());
                         case SCIENCE_FANTASY -> stories.setScienceFantasy(section.getStories());
+                        case ORIGINAL -> stories.setOriginal(section.getStories());
                     }
                 });
         return stories;
@@ -64,6 +65,7 @@ public class ServiceIssueConfig implements IssueConfig {
         private List<Story> fantasy;
         private List<Story> scienceFantasy;
         private List<Story> reprint;
+        private List<Story> original;
     }
 
     @Setter

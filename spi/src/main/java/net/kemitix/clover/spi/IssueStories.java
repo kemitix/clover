@@ -14,8 +14,14 @@ public interface IssueStories {
 
     List<? extends IssueStory> getScienceFantasy();
 
+    List<? extends IssueStory> getOriginal();
+
     default Stream<IssueStory> stream() {
-        return Stream.of(getSf(), getFantasy(), getScienceFantasy(), getReprint())
+        return Stream.of(getSf(),
+                        getFantasy(),
+                        getScienceFantasy(),
+                        getReprint(),
+                        getOriginal())
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream);
     }

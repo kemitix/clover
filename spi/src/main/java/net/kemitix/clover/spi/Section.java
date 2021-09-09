@@ -19,7 +19,9 @@ public interface Section {
         REPRINTS("Reprints"),
         FANTASY("Fantasy"),
         SCIENCE_FICTION("Science Fiction"),
-        SCIENCE_FANTASY("Science Fantasy");
+        SCIENCE_FANTASY("Science Fantasy"),
+        ORIGINAL("Original"),
+        ;
 
         final String value;
     }
