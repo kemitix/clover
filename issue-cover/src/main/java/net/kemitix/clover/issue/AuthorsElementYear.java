@@ -7,7 +7,6 @@ import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.IssueType;
 import net.kemitix.clover.spi.SimpleTextEffect;
-import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -44,7 +43,6 @@ public class AuthorsElementYear extends AuthorsElementIssue {
     protected String authorNames() {
         List<String> authors = issueConfig.authors();
         int lastIndex = authors.size() - 1;
-        //TODO "plus new original fiction from ..."
         return String.join(", ", authors.subList(0, lastIndex))
                 + " and " + authors.get(lastIndex);
     }
