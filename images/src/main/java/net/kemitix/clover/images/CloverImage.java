@@ -2,6 +2,7 @@ package net.kemitix.clover.images;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import net.kemitix.clover.spi.*;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.fontface.FontCache;
@@ -12,6 +13,7 @@ import javax.enterprise.inject.Instance;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -106,15 +108,19 @@ class CloverImage implements Image {
     }
 
     @Override
+    @SneakyThrows
     public void write(
             final Path path,
             final String name,
             final TypedProperties properties
     ) {
+        final Path outputDir = path.resolve("clover");
+        Files.createDirectories(outputDir);
         config.getImageTypes()
                 .forEach(format -> {
                     final File file =
-                            path.resolve(name + "." + format)
+                            outputDir
+                                    .resolve(name + "." + format)
                                     .toFile();
                     write(format, file, properties);
                 });
