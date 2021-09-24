@@ -17,7 +17,7 @@ import java.util.List;
 @ApplicationScoped
 public class StoriesScienceFantasy extends AbstractStoriesList {
 
-    private final String header = "Original Science Fantasy";
+    private final String header = "Science Fantasy";
 
     private final int priority = 10;
 

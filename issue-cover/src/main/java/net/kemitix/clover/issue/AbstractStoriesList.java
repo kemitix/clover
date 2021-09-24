@@ -25,7 +25,8 @@ abstract class AbstractStoriesList extends AbstractElement {
             TypedProperties typedProperties
     ) {
         if (isNotEmpty()) {
-            getStoriesListBlock().draw(getFontFace(), drawable, text(), region(), getHeader());
+            getStoriesListBlock()
+                    .draw(getFontFace(), drawable, text(), region(), getHeader());
         }
     }
 
