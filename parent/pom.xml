@@ -14,7 +14,7 @@
     <groupId>net.kemitix.clover</groupId>
     <artifactId>clover-parent</artifactId>
     <name>clover-parent</name>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -37,6 +37,7 @@
         <fontface.version>1.0.0</fontface.version>
         <snakeyaml.version>1.29</snakeyaml.version>
         <smallrye-config.version>2.5.0</smallrye-config.version>
+        <yasson.version>1.0.9</yasson.version>
     </properties>
 
     <dependencyManagement>
@@ -165,7 +166,7 @@
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>yasson</artifactId>
-                <version>1.0.9</version>
+                <version>${yasson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

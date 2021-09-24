@@ -41,9 +41,12 @@ public class IssueConfigLoaderTest {
         final String content =
                 """
                         ---
+                        type: ISSUE
                         issue: %s
                         titleColour: red
                         subTitleColour: yellow
+                        width: 5
+                        height: 8
                         """.formatted(issueNumber);
         given(fileReader.read(any())).willReturn(content);
         //when

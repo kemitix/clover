@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 @Log
 @FrontCover
 @ApplicationScoped
-public class LogoStraps extends AbstractElement {
+public class LogoStrapsIssue extends AbstractElement {
 
     @Getter private final int priority = 20;
 
@@ -25,15 +25,20 @@ public class LogoStraps extends AbstractElement {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
+        if (IssueType.ISSUE.equals(issueConfig.getType())) {
+            doDraw(drawable);
+        }
+    }
+
+    protected void doDraw(Graphics2D drawable) {
         FontFace fontFace = fontFace();
-        issueNumber(fontFace)
-                .andThen(issueDate(fontFace))
-                .andThen(strapLine(fontFace))
+        bottomLeftStrap(fontFace)
+                .andThen(bottomRightStrap(fontFace))
+                .andThen(topRightStrap(fontFace))
                 .accept(drawable);
     }
 
-    private Consumer<Graphics2D> strapLine(FontFace fontFace) {
-        log.info("Drawing strap-line");
+    protected Consumer<Graphics2D> topRightStrap(FontFace fontFace) {
         return simpleTextEffect.fontFace(fontFace)
                 .text("Science Fiction and Fantasy")
                 .vAlign(TextEffect.VAlignment.TOP)
@@ -45,8 +50,7 @@ public class LogoStraps extends AbstractElement {
                 ;
     }
 
-    private Consumer<Graphics2D> issueDate(FontFace fontFace) {
-        log.info("Drawing issue date");
+    protected Consumer<Graphics2D> bottomRightStrap(FontFace fontFace) {
         int top = 390;
         return simpleTextEffect.fontFace(fontFace)
                 .text(issueConfig.getDate())
@@ -59,8 +63,7 @@ public class LogoStraps extends AbstractElement {
                 ;
     }
 
-    private Consumer<Graphics2D> issueNumber(FontFace fontFace) {
-        log.info("Drawing issue number");
+    protected Consumer<Graphics2D> bottomLeftStrap(FontFace fontFace) {
         int top = 475;
         int left = 85;
         return simpleTextEffect.fontFace(fontFace)
@@ -77,7 +80,7 @@ public class LogoStraps extends AbstractElement {
                 ;
     }
 
-    private FontFace fontFace() {
+    protected FontFace fontFace() {
         return FontFace.of(
                 cloverProperties.getFontLocation(),
                 48,

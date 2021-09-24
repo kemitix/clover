@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class IssueConfigLoader {
@@ -38,9 +39,17 @@ public class IssueConfigLoader {
     ) {
         final File cloverFile =
                 Paths.get(config.issueDir(), config.configFile())
-                .toFile();
+                        .toFile();
         LOGGER.info("Reading: " + cloverFile.getAbsolutePath());
-        return parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
+        final ServiceIssueConfig issueConfig =
+                parseYamlFromFile(cloverFile, ServiceIssueConfig.class, fileReader);
+        if (issueConfig.getWidth() < 5 || issueConfig.getHeight() < 8) {
+            throw new IllegalStateException("Width & Height should be set is clover.yaml");
+        }
+        if (Objects.isNull(issueConfig.getType())) {
+            throw new IllegalStateException("Type should be set in clover.yaml");
+        }
+        return issueConfig;
     }
 
     private <T> T parseYamlFromFile(

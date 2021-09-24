@@ -36,7 +36,7 @@ public class StoriesListBlock {
         simpleTextEffect.fontFace(fontFace)
                 .text(text)
                 .vAlign(TextEffect.VAlignment.TOP)
-                .hAlign(issueConfig.getStoriesAlignment())
+                .hAlign(issueConfig.getContents().getAlignment())
                 .region(region)
                 .accept(drawable);
         drawHeaderUnderline(drawable, header, region, fontFace);
@@ -65,7 +65,7 @@ public class StoriesListBlock {
                 .withTop(top -> top + lineHeight(drawable, header, fontFace))
                 .withHeight(backgroundBox.getMarginStep())
                 .withWidth(width);
-        if (issueConfig.getStoriesAlignment()
+        if (issueConfig.getContents().getAlignment()
                 .equals(TextEffect.HAlignment.CENTRE)) {
             return r.withLeft(left -> left - (width / 2));
         } else {

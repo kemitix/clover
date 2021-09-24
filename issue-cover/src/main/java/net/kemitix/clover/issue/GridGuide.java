@@ -11,12 +11,14 @@ import net.kemitix.properties.typed.TypedProperties;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 import java.awt.*;
 import java.util.stream.IntStream;
 
-@GuideLines
-@ApplicationScoped
+@Vetoed
+//@GuideLines
+//@ApplicationScoped
 public class GridGuide
         extends AbstractElement {
 
@@ -35,8 +37,8 @@ public class GridGuide
     public void init() {
         black = colours.getColor("black");
         white = colours.getColor("white");
-        widthInches = (2 * cloverProperties.width()) + issueConfig.getSpine();
-        heightInches = cloverProperties.height();
+        widthInches = (2 * issueConfig.getWidth()) + issueConfig.getSpine();
+        heightInches = issueConfig.getHeight();
         widthPx = dpi(widthInches);
         heightPx = dpi(heightInches);
     }

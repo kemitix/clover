@@ -18,16 +18,6 @@ public interface CloverProperties {
         return Arrays.asList(imageTypes().split(","));
     }
 
-    /**
-     * Front cover height in inches.
-     */
-    float height();
-
-    /**
-     * Front cover width in inches.
-     */
-    float width();
-
     default String issueDir() {
         return environment("CLOVER_DIR")
                 .replaceFirst("^~", property("user.home"));

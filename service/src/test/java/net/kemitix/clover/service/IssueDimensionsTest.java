@@ -38,8 +38,8 @@ public class IssueDimensionsTest
                 .willReturn(Region.builder()
                         .width(4000)
                         .height(2000).build());
-        given(cloverProperties.width()).willReturn(5f);// inches
-        given(cloverProperties.height()).willReturn(8f);// inches
+        given(issueConfig.getWidth()).willReturn(5f);// inches
+        given(issueConfig.getHeight()).willReturn(8f);// inches
         given(cloverProperties.dpi()).willReturn(320);// dots per inch
         given(issueConfig.getKindleXOffset()).willReturn(2500);
         given(issueConfig.getKindleYOffset()).willReturn(0);

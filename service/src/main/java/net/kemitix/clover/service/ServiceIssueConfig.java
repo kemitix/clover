@@ -5,7 +5,10 @@ import lombok.Setter;
 import net.kemitix.clover.spi.*;
 
 import javax.enterprise.inject.Vetoed;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Vetoed
 @Setter
@@ -15,36 +18,45 @@ public class ServiceIssueConfig implements IssueConfig {
     public ServiceIssueConfig() {
     }
 
+    private IssueType type;
     private String issue;
     private String date;
     private String titleColour;
     private String subTitleColour;
     private String textColour;
     private float spine;
+    private float height;
+    private float width;
     private int paperbackXOffset;
     private int paperbackYOffset;
     private int kindleXOffset;
     private int kindleYOffset;
-    private int authorsXOffset;
-    private int authorsYOffset;
+    private int frontFontSize;
+    private ServiceAuthorsConfig authors;
     private Cards cards;
-    private TextEffect.HAlignment storiesAlignment;
-    private Stories stories;
     private String coverArt;
     private String coverArtist;
     private String publicationTitle;
     private int frontWidth;
     private StoryCards storyCards;
-    private int sfTop;
-    private int sfLeft;
-    private int fantasyTop;
-    private int fantasyLeft;
-    private int scienceFantasyTop;
-    private int scienceFantasyLeft;
-    private int reprintTop;
-    private int reprintLeft;
     private BackCoverBackgroundBox backCoverBackgroundBox;
     private AuthorStrapBox authorStrapBox;
+    private ServiceContents contents;
+
+    @Override
+    public IssueStories getAllStories() {
+        Stories stories = new Stories();
+        contents.getSections()
+                .forEach(section -> {
+                    switch (section.label) {
+                        case FANTASY -> stories.setFantasy(section.getStories());
+                        case SCIENCE_FICTION -> stories.setSf(section.getStories());
+                        case SCIENCE_FANTASY -> stories.setScienceFantasy(section.getStories());
+                        case ORIGINAL -> stories.setOriginal(section.getStories());
+                    }
+                });
+        return stories;
+    }
 
     @Setter
     @Getter
@@ -53,6 +65,7 @@ public class ServiceIssueConfig implements IssueConfig {
         private List<Story> fantasy;
         private List<Story> scienceFantasy;
         private List<Story> reprint;
+        private List<Story> original;
     }
 
     @Setter
@@ -93,5 +106,31 @@ public class ServiceIssueConfig implements IssueConfig {
         int left;
         int width;
         int titleFontSize;
+    }
+
+    @Setter
+    @Getter
+    public static class ServiceContents implements Contents {
+        TextEffect.HAlignment alignment;
+        int fontSize;
+        List<ServiceSection> sections;
+    }
+
+    @Setter
+    @Getter
+    public static class ServiceSection implements Section {
+        Section.Label label;
+        int top;
+        int left;
+        List<Story> stories;
+    }
+
+    @Setter
+    @Getter
+    public static class ServiceAuthorsConfig implements AuthorsConfig {
+        private int top;
+        private int width;
+        private int left;
+        private TextEffect.HAlignment alignment;
     }
 }
