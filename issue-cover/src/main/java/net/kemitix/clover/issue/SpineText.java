@@ -25,16 +25,20 @@ public class SpineText extends AbstractElement {
     @Inject RotatedCenteredTextEffect<Graphics2D> rotatedCenteredTextEffect;
     @Inject @Spine Supplier<String> spineText;
     @Inject @Spine FontFace fontFace;
+    @Inject IssueConfig issueConfig;
 
     @Override
     public void draw(Graphics2D graphics2D, TypedProperties typedProperties) {
         String text = spineText.get();
+        int yOffset = (int) switch (issueConfig.getType()) {
+            case ISSUE -> -fontFace.getSize() * 0.8;
+            case YEAR -> -fontFace.getSize() * 0.4;
+        };
         rotatedCenteredTextEffect.fontFace(fontFace)
                 .text(text)
                 .vAlign(TextEffect.VAlignment.CENTRE)
                 .hAlign(TextEffect.HAlignment.CENTRE)
-                .region(dimensions.getSpineCrop()
-                        .withOffset(0, (int) (-fontFace.getSize() * 0.8)))
+                .region(dimensions.getSpineCrop().withOffset(0, yOffset))
                 .accept(graphics2D);
     }
 }

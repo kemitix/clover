@@ -77,7 +77,7 @@ public interface IssueConfig {
                     getPublicationTitle(),
                     getIssue(),
                     getDate());
-            case YEAR -> String.format("%s - The %s Year - %s",
+            case YEAR -> String.format("%s%nThe %s Year - %s",
                     getPublicationTitle(),
                     getIssue(),
                     getDate());

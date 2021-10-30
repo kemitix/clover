@@ -24,14 +24,19 @@ public class SpineProducers {
             CloverProperties cloverProperties,
             IssueConfig issueConfig
     ) {
-        final String colour =
+        String colour =
                 switch (issueConfig.getType()) {
                     case ISSUE -> "yellow";
-                    case YEAR -> "#b82248";
+                    case YEAR -> "blue";
+                };
+        int size =
+                switch (issueConfig.getType()) {
+                    case ISSUE -> 62;
+                    case YEAR -> 124;
                 };
         return FontFace.of(
                 cloverProperties.getFontLocation(),
-                62,
+                size,
                 colour,
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());
