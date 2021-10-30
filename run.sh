@@ -13,7 +13,7 @@ if [ ! -d ${ISSUE_DIR} ];then
     exit -1
 fi
 
-FONT_FILE=${HOME}/cossmass/binder/fonts/Snowslider/SnowSL_Std.OTF
+FONT_FILE=${HOME}/cossmass/issues/fonts/Snowslider/SnowSL_Std.OTF
 if [ ! -f ${FONT_FILE} ];then
     echo "ERROR: Font file not found: ${FONT_FILE}"
     exit -1
