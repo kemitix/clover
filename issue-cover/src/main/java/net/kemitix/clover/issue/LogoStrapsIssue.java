@@ -1,8 +1,15 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.AbstractElement;
+import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.FrontCover;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueDimensions;
+import net.kemitix.clover.spi.IssueType;
+import net.kemitix.clover.spi.Region;
+import net.kemitix.clover.spi.SimpleTextEffect;
+import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -11,7 +18,6 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 
-@Log
 @FrontCover
 @ApplicationScoped
 public class LogoStrapsIssue extends AbstractElement {
@@ -81,9 +87,13 @@ public class LogoStrapsIssue extends AbstractElement {
     }
 
     protected FontFace fontFace() {
+        int size = switch (issueConfig.getType()) {
+            case ISSUE -> 48;
+            case YEAR -> 60;
+        };
         return FontFace.of(
                 cloverProperties.getFontLocation(),
-                48,
+                size,
                 issueConfig.getSubTitleColour(),
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());

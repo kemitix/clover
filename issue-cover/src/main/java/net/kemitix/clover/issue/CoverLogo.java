@@ -1,8 +1,13 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.AbstractElement;
+import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.spi.FrontCover;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueDimensions;
+import net.kemitix.clover.spi.SimpleTextEffect;
+import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -10,7 +15,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
-@Log
 @FrontCover
 @ApplicationScoped
 public class CoverLogo extends AbstractElement {
@@ -24,10 +28,13 @@ public class CoverLogo extends AbstractElement {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        log.info("Drawing cover logo");
+        int size = switch (issueConfig.getType()) {
+            case ISSUE -> 217;
+            case YEAR -> 266;
+        };
         FontFace fontFace = FontFace.of(
                 cloverProperties.getFontLocation(),
-                217,
+                size,
                 issueConfig.getTitleColour(),
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());
