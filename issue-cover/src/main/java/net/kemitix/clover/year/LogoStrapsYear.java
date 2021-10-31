@@ -1,6 +1,7 @@
-package net.kemitix.clover.issue;
+package net.kemitix.clover.year;
 
 import lombok.Getter;
+import net.kemitix.clover.issue.LogoStrapsIssue;
 import net.kemitix.clover.spi.FrontCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueDimensions;
