@@ -1,6 +1,5 @@
 package net.kemitix.clover.year;
 
-import lombok.extern.java.Log;
 import net.kemitix.clover.issue.BackCoverOpaque;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
@@ -9,9 +8,7 @@ import net.kemitix.clover.spi.Section;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.Arrays;
 
-@Log
 @ApplicationScoped
 public class YearStoryListPositions {
 
@@ -35,9 +32,6 @@ public class YearStoryListPositions {
         Region leftColumns = opaque.withWidth(columnWidth);
         Region rightColumns = leftColumns.withLeft(l -> l + columnWidth + gutter);
         Integer[] rows = issueConfig.getContents().getRows().toArray(new Integer[]{});
-        log.info("Rows: " + Arrays.toString(rows));
-        log.info("Opaque: " + opaque);
-        log.info("Left Column: " + leftColumns);
         return switch (label) {
             case REPRINT_FANTASY ->
                     leftColumns.withTop(t -> t + rows[0])
