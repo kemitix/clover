@@ -1,12 +1,12 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Effect;
+import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
@@ -16,7 +16,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
-@Log
 @BackCover
 @ApplicationScoped
 public class BackCoverOpaque
@@ -29,13 +28,13 @@ public class BackCoverOpaque
     @Inject IssueDimensions dimensions;
     @Inject BackCoverBackgroundBox backgroundBox;
     @Inject CloverProperties cloverProperties;
+    @Inject @GuideLines BarcodeGuide barcodeGuide;
 
     @Override
     public void draw(
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        log.info("BG-OPAQUE: " + backgroundBox);
         if (backgroundBox.isShow()) {
             box(drawable,
                     backgroundBox.getOuterColour().getOpacity(),
@@ -68,7 +67,8 @@ public class BackCoverOpaque
             int marginOuter,
             int marginInner
     ) {
-        Effect.RegionNext<Graphics2D> pen = opaqueFill.opacity(opacity).colour(colour);
+        var pen = opaqueFill.opacity(opacity).colour(colour);
+
         int width = marginInner - marginOuter;
         Region outer = getRegion().withMargin(marginOuter);
 
@@ -96,7 +96,7 @@ public class BackCoverOpaque
                 .left(trim)
                 .width(dimensions.getFrontCrop().getWidth() - trim)
                 .build()
-                .withBottom(cloverProperties.barcodeTop())
+                .withBottom(barcodeGuide.getBarcodeRegion().getTop())
                 ;
     }
 

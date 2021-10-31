@@ -51,9 +51,9 @@ public interface CloverProperties {
 
     int dpi();
 
-    int barcodeLeft();
+    int barcodeRightPadding();
 
-    int barcodeTop();
+    int barcodeBottomPadding();
 
     float barcodeWidth();
 
