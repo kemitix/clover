@@ -14,7 +14,7 @@
     <groupId>net.kemitix.clover</groupId>
     <artifactId>clover-parent</artifactId>
     <name>clover-parent</name>
-    <version>3.2.0</version>
+    <version>4.0.0</version>
     <packaging>pom</packaging>
 
     <properties>

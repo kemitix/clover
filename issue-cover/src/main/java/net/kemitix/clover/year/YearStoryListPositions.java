@@ -19,10 +19,11 @@ public class YearStoryListPositions {
     IssueConfig issueConfig;
 
     /**
-     * Fantasy | Science Fiction
-     * Science Fantasy
-     * Original Fantasy | Original Science Fiction
-     * Original Science Fantasy
+     * Rows:
+     * 0: Fantasy | Science Fiction
+     * 1: Science Fantasy
+     * 2: Original Fantasy | Original Science Fiction
+     * 3: Original Science Fantasy
      */
     Region regionFor(Section.Label label) {
         int gutter = 40;
