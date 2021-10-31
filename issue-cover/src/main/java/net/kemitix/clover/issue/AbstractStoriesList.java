@@ -51,5 +51,4 @@ abstract class AbstractStoriesList extends AbstractElement {
                         getStories()));
     }
 
-
 }

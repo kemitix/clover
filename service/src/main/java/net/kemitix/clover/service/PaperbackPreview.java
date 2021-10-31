@@ -51,7 +51,7 @@ public class PaperbackPreview implements CloverFormat {
         var properties = TypedProperties.create();
         return image ->
                 image.withGraphics(graphics2D ->
-                        Drawable.draw(blocks, graphics2D, properties));
+                        Drawable.draw(blocks.stream(), graphics2D, properties));
     }
 
 }

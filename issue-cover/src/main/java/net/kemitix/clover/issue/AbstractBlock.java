@@ -6,14 +6,15 @@ import net.kemitix.properties.typed.TypedProperties;
 
 import javax.enterprise.inject.Instance;
 import java.awt.*;
+import java.util.stream.Stream;
 
 public abstract class AbstractBlock implements Block<Graphics2D> {
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
-        Drawable.draw(getElements(), drawable, typedProperties);
+        Drawable.draw(elements(), drawable, typedProperties);
     }
 
-    protected abstract Instance<? extends Drawable<Graphics2D>> getElements();
+    protected abstract Stream<? extends Drawable<Graphics2D>> elements();
 
 }
