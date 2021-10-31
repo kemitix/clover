@@ -12,19 +12,31 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 
-@Getter
 @BackCover
 @ApplicationScoped
 public class StoriesScienceFantasy extends AbstractStoriesList {
 
+    @Getter
     private final String header = "Science Fantasy";
 
+    @Getter
     private final int priority = 10;
 
-    @Inject @BackCover FontFace fontFace;
-    @Inject StoryListFormatter storyListFormatter;
-    @Inject IssueConfig issueConfig;
-    @Inject StoriesListBlock storiesListBlock;
+    @Inject @BackCover
+    @Getter
+    FontFace fontFace;
+
+    @Inject
+    @Getter
+    StoryListFormatter storyListFormatter;
+
+    @Inject
+    @Getter
+    IssueConfig issueConfig;
+
+    @Inject
+    @Getter
+    StoriesListBlock storiesListBlock;
 
     @Override
     protected int getLeft() {
