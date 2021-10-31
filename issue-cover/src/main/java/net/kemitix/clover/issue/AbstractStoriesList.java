@@ -8,16 +8,15 @@ import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
-abstract class AbstractStoriesList extends AbstractElement {
+public abstract class AbstractStoriesList extends AbstractElement {
 
     protected abstract IssueConfig getIssueConfig();
     protected abstract StoryListFormatter getStoryListFormatter();
     protected abstract StoriesListBlock getStoriesListBlock();
     protected abstract FontFace getFontFace();
     protected abstract String getHeader();
-    protected abstract int getLeft();
-    protected abstract int getTop();
     protected abstract List<? extends IssueStory> getStories();
+    protected abstract Section.Label getSectionLabel();
 
     @Override
     public void draw(
@@ -26,9 +25,18 @@ abstract class AbstractStoriesList extends AbstractElement {
     ) {
         if (isNotEmpty()) {
             getStoriesListBlock()
-                    .draw(getFontFace(), drawable, text(), region(), getHeader());
+                    .draw(getFontFace(), drawable, text(), region(getSectionLabel()), getHeader());
         }
     }
+
+    protected int getLeft() {
+        return 0;
+    }
+
+    protected int getTop() {
+        return 0;
+    }
+
 
     private boolean isNotEmpty() {
         return Optional.ofNullable(getStories())
@@ -37,7 +45,7 @@ abstract class AbstractStoriesList extends AbstractElement {
     }
 
 
-    private Region region() {
+    protected Region region(Section.Label label) {
         return Region.builder()
                 .top(getTop())
                 .left(getLeft())
@@ -50,6 +58,5 @@ abstract class AbstractStoriesList extends AbstractElement {
                         getHeader(),
                         getStories()));
     }
-
 
 }

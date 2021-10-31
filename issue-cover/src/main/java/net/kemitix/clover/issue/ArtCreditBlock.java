@@ -14,6 +14,8 @@ import java.awt.*;
 public class ArtCreditBlock
         extends AbstractElement {
 
+    @Inject @GuideLines BarcodeGuide barcodeGuide;
+
     @Getter
     private final int priority = 10;
 
@@ -21,6 +23,7 @@ public class ArtCreditBlock
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject @ArtCredit FontFace fontFace;
+    @Inject IssueDimensions issueDimensions;
 
     @Override
     public void draw(Graphics2D drawable, TypedProperties typedProperties) {
@@ -34,13 +37,16 @@ public class ArtCreditBlock
     }
 
     private Region region() {
-        final Region region = Region.builder()
-                .top(cloverProperties.barcodeTop())
-                .left(0)
-                .width(cloverProperties.barcodeLeft())
-                .height(cloverProperties.getBarcodeHeight())
-                .build();
-        return region.withMargin(20);
+        int trim = dpi(cloverProperties.trimLeft());
+        Region backCrop = issueDimensions.getFrontCrop().withLeft(trim);
+        Region barcode = barcodeGuide.getBarcodeRegion();
+        return barcode.withLeft(backCrop.getLeft())
+                .withRight(barcode.getLeft())
+                .withMargin(20);
+    }
+
+    private int dpi(float inches) {
+        return (int) (inches * cloverProperties.dpi());
     }
 
 }

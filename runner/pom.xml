@@ -7,13 +7,13 @@
     <parent>
         <groupId>net.kemitix.clover</groupId>
         <artifactId>clover-parent</artifactId>
-        <version>3.2.0</version>
+        <version>4.0.0</version>
         <relativePath>../parent</relativePath>
     </parent>
 
     <artifactId>clover-runner</artifactId>
     <name>clover-runner</name>
-    <version>3.2.0</version>
+    <version>4.0.0</version>
 
     <dependencies>
         <dependency>
@@ -92,7 +92,7 @@
     </dependencies>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>16</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <quarkus.version>2.1.2.Final</quarkus.version>

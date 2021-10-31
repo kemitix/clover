@@ -1,13 +1,11 @@
-package net.kemitix.clover.issue;
+package net.kemitix.clover.year;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
-import net.kemitix.clover.spi.CloverProperties;
+import net.kemitix.clover.issue.LogoStrapsIssue;
 import net.kemitix.clover.spi.FrontCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.IssueType;
-import net.kemitix.clover.spi.Region;
 import net.kemitix.clover.spi.SimpleTextEffect;
 import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
@@ -18,10 +16,13 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 
-@Log
 @FrontCover
 @ApplicationScoped
 public class LogoStrapsYear extends LogoStrapsIssue {
+
+    private static final int BOTTOM_STRAP_TOP = 484;
+    private static final int STRAP_SIDE_MARGIN = 30;
+    private static final int STRAP_PADDING = 85;
 
     @Getter
     private final int priority = 20;
@@ -41,33 +42,27 @@ public class LogoStrapsYear extends LogoStrapsIssue {
     }
 
     protected Consumer<Graphics2D> bottomRightStrap(FontFace fontFace) {
-        int top = 390;
         return simpleTextEffect.fontFace(fontFace)
                 .text(String.format("The %s Year", issueConfig.getIssue()))
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.RIGHT)
                 .region(issueDimensions.getFrontCrop()
-                        .withTop(top)
-                        .withWidth(w -> w - 30)
-                        .withPadding(85))
+                        .withTop(BOTTOM_STRAP_TOP)
+                        .withWidth(w -> w - STRAP_SIDE_MARGIN)
+                        .withPadding(STRAP_PADDING))
                 ;
     }
 
     @Override
     protected Consumer<Graphics2D> bottomLeftStrap(FontFace fontFace) {
-        int top = 475;
-        int left = 85;
         return simpleTextEffect.fontFace(fontFace)
                 .text(issueConfig.getDate())
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
-                .region(Region.builder()
-                        .top(top)
-                        .left(left + issueDimensions.getFrontCrop().getLeft() + 30)
-                        .width(issueDimensions.getFrontCrop().getWidth() -
-                                (left + issueDimensions.getFrontCrop().getLeft()))
-                        .height(issueDimensions.getFrontCrop().getHeight() - top)
-                        .build())
+                .region(issueDimensions.getFrontCrop()
+                        .withTop(BOTTOM_STRAP_TOP)
+                        .withLeft(l -> l + STRAP_SIDE_MARGIN)
+                        .withPadding(STRAP_PADDING))
                 ;
     }
 

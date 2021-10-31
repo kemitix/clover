@@ -36,7 +36,7 @@ public class StoryCardFactory {
         log.info("Generating Story Card: " + issueStory.getTitle());
         return backgroundImage
                 .withGraphics(graphics2D ->
-                        Drawable.draw(elements, graphics2D,
+                        Drawable.draw(elements.stream(), graphics2D,
                                 TypedProperties.create().
                                         with(TypedKeys.Story.class, issueStory)))
                 .withNameQualifier(slug(issueStory));

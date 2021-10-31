@@ -1,8 +1,15 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.AbstractElement;
+import net.kemitix.clover.spi.AuthorsConfig;
+import net.kemitix.clover.spi.FrontCover;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueDimensions;
+import net.kemitix.clover.spi.IssueType;
+import net.kemitix.clover.spi.Region;
+import net.kemitix.clover.spi.SimpleTextEffect;
+import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
@@ -10,7 +17,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
-@Log
+/**
+ * Displays the list of authors on the front cover.
+ */
 @FrontCover
 @ApplicationScoped
 public class AuthorsElementIssue extends AbstractElement {
@@ -30,7 +39,6 @@ public class AuthorsElementIssue extends AbstractElement {
     }
 
     protected void doDraw(Graphics2D drawable) {
-        log.info("Drawing author list");
         switch (issueConfig.getAuthors().getAlignment()) {
             case CENTRE: drawCenterAligned(drawable);break;
             case LEFT: drawLeftAligned(drawable);break;

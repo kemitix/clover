@@ -1,7 +1,7 @@
-package net.kemitix.clover.issue;
+package net.kemitix.clover.year;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
+import net.kemitix.clover.issue.AuthorsElementIssue;
 import net.kemitix.clover.spi.FrontCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueDimensions;
@@ -15,7 +15,9 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.util.List;
 
-@Log
+/**
+ * Displays the list of authors on the front cover.
+ */
 @FrontCover
 @ApplicationScoped
 public class AuthorsElementYear extends AuthorsElementIssue {

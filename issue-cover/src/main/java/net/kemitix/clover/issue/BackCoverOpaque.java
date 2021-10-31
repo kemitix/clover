@@ -1,12 +1,12 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
-import lombok.extern.java.Log;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Effect;
+import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
@@ -16,7 +16,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
 
-@Log
 @BackCover
 @ApplicationScoped
 public class BackCoverOpaque
@@ -29,13 +28,13 @@ public class BackCoverOpaque
     @Inject IssueDimensions dimensions;
     @Inject BackCoverBackgroundBox backgroundBox;
     @Inject CloverProperties cloverProperties;
+    @Inject @GuideLines BarcodeGuide barcodeGuide;
 
     @Override
     public void draw(
             Graphics2D drawable,
             TypedProperties typedProperties
     ) {
-        log.info("BG-OPAQUE: " + backgroundBox);
         if (backgroundBox.isShow()) {
             box(drawable,
                     backgroundBox.getOuterColour().getOpacity(),
@@ -68,9 +67,10 @@ public class BackCoverOpaque
             int marginOuter,
             int marginInner
     ) {
-        Effect.RegionNext<Graphics2D> pen = opaqueFill.opacity(opacity).colour(colour);
+        var pen = opaqueFill.opacity(opacity).colour(colour);
+
         int width = marginInner - marginOuter;
-        Region outer = getRegion().withMargin(marginOuter);
+        Region outer = getRegion().withPadding(marginOuter);
 
         Region topBar = outer.withHeight(width);
         pen.region(topBar).accept(drawable);
@@ -89,15 +89,13 @@ public class BackCoverOpaque
         pen.region(bottomBar).accept(drawable);
     }
 
-    private Region getRegion() {
+    public Region getRegion() {
         int trim = dpi(cloverProperties.trimLeft());
-        return Region.builder()
-                .top(trim)
-                .left(trim)
-                .width(dimensions.getFrontCrop().getWidth() - trim)
-                .build()
-                .withBottom(cloverProperties.barcodeTop())
-                ;
+        return dimensions.getBackCrop()
+                .withLeft(trim)
+                .withTop(trim)
+                .withWidth(w -> w - trim)
+                .withBottom(barcodeGuide.getBarcodeRegion().getTop());
     }
 
     private int dpi(float inches) {
@@ -112,9 +110,7 @@ public class BackCoverOpaque
     ) {
         opaqueFill.opacity(opacity)
                 .colour(colour)
-                .region(getRegion()
-                        .withMargin(margin)
-                )
+                .region(getRegion().withMargin(margin))
                 .accept(drawable);
     }
 
