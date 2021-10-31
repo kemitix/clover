@@ -21,6 +21,9 @@ public class StoriesScienceFantasy extends AbstractStoriesList {
     private final String header = "Science Fantasy";
 
     @Getter
+    private final Section.Label sectionLabel = Section.Label.SCIENCE_FANTASY;
+
+    @Getter
     private final int priority = 10;
 
     @Inject @BackCover

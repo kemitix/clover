@@ -8,6 +8,7 @@ public interface Contents {
     TextEffect.HAlignment getAlignment();
     int getFontSize();
     List<? extends Section> getSections();
+    List<Integer> getRows();
 
     default Optional<? extends Section> findSection(Section.Label label) {
         return getSections()

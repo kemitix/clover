@@ -12,7 +12,6 @@ import net.kemitix.fontface.FontFace;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
 @ApplicationScoped
 public class StoriesListBlock {
@@ -65,9 +64,10 @@ public class StoriesListBlock {
                 .withTop(top -> top + lineHeight(drawable, header, fontFace))
                 .withHeight(backgroundBox.getMarginStep())
                 .withWidth(width);
-        if (issueConfig.getContents().getAlignment()
+        if (issueConfig.getContents()
+                .getAlignment()
                 .equals(TextEffect.HAlignment.CENTRE)) {
-            return r.withLeft(left -> left - (width / 2));
+            return r.withLeft(l -> l + ((region.getWidth() - width) / 2));
         } else {
             return r;
         }
@@ -78,10 +78,9 @@ public class StoriesListBlock {
             String header,
             FontFace fontFace
     ) {
-        Font font = fontCache.loadFont(fontFace);
-        Rectangle2D stringBounds =
-                font.getStringBounds(header, drawable.getFontRenderContext());
-        return (int) stringBounds.getWidth();
+        return (int) fontCache.loadFont(fontFace)
+                .getStringBounds(header, drawable.getFontRenderContext())
+                .getWidth();
     }
 
     private int lineHeight(
@@ -89,10 +88,9 @@ public class StoriesListBlock {
             String header,
             FontFace fontFace
     ) {
-        Font font = fontCache.loadFont(fontFace);
-        Rectangle2D stringBounds =
-                font.getStringBounds(header, drawable.getFontRenderContext());
-        return (int) (stringBounds.getHeight() * 1.2);
+        return (int) (fontCache.loadFont(fontFace)
+                .getStringBounds(header, drawable.getFontRenderContext())
+                .getHeight() * 1.2);
     }
 
 }

@@ -70,7 +70,7 @@ public class BackCoverOpaque
         var pen = opaqueFill.opacity(opacity).colour(colour);
 
         int width = marginInner - marginOuter;
-        Region outer = getRegion().withMargin(marginOuter);
+        Region outer = getRegion().withPadding(marginOuter);
 
         Region topBar = outer.withHeight(width);
         pen.region(topBar).accept(drawable);
@@ -89,15 +89,13 @@ public class BackCoverOpaque
         pen.region(bottomBar).accept(drawable);
     }
 
-    private Region getRegion() {
+    public Region getRegion() {
         int trim = dpi(cloverProperties.trimLeft());
-        return Region.builder()
-                .top(trim)
-                .left(trim)
-                .width(dimensions.getFrontCrop().getWidth() - trim)
-                .build()
-                .withBottom(barcodeGuide.getBarcodeRegion().getTop())
-                ;
+        return dimensions.getBackCrop()
+                .withLeft(trim)
+                .withTop(trim)
+                .withWidth(w -> w - trim)
+                .withBottom(barcodeGuide.getBarcodeRegion().getTop());
     }
 
     private int dpi(float inches) {
@@ -112,9 +110,7 @@ public class BackCoverOpaque
     ) {
         opaqueFill.opacity(opacity)
                 .colour(colour)
-                .region(getRegion()
-                        .withMargin(margin)
-                )
+                .region(getRegion().withMargin(margin))
                 .accept(drawable);
     }
 

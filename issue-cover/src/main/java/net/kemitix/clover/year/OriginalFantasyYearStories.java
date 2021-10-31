@@ -1,10 +1,12 @@
-package net.kemitix.clover.issue;
+package net.kemitix.clover.year;
 
 import lombok.Getter;
+import net.kemitix.clover.issue.AbstractStoriesList;
+import net.kemitix.clover.issue.StoriesListBlock;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueStory;
-import net.kemitix.clover.spi.IssueType;
+import net.kemitix.clover.spi.Region;
 import net.kemitix.clover.spi.Section;
 import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
@@ -15,10 +17,8 @@ import java.util.List;
 
 @BackCover
 @ApplicationScoped
-public class StoriesFantasy extends AbstractStoriesList {
-
-    @Getter
-    private final String header = "Fantasy";
+public class OriginalFantasyYearStories
+        extends AbstractStoriesList {
 
     @Getter
     private final int priority = 10;
@@ -26,13 +26,8 @@ public class StoriesFantasy extends AbstractStoriesList {
     @Getter
     private final Section.Label sectionLabel = Section.Label.FANTASY;
 
-    @Inject @BackCover
-    @Getter
-    FontFace fontFace;
-
     @Inject
-    @Getter
-    StoryListFormatter storyListFormatter;
+    YearStoryListPositions positions;
 
     @Inject
     @Getter
@@ -40,26 +35,30 @@ public class StoriesFantasy extends AbstractStoriesList {
 
     @Inject
     @Getter
+    StoryListFormatter storyListFormatter;
+
+    @Inject
+    @Getter
     StoriesListBlock storiesListBlock;
 
+    @Inject @BackCover
+    @Getter
+    FontFace fontFace;
+
     @Override
-    protected int getLeft() {
-        return issueConfig.getSectionLeft(Section.Label.FANTASY);
+    protected String getHeader() {
+        return "The Bonus Stories / %s".formatted(
+                Section.Label.FANTASY.getValue());
     }
 
     @Override
-    protected int getTop() {
-        return issueConfig.getSectionTop(Section.Label.FANTASY);
+    protected Region region(Section.Label label) {
+        return positions.regionFor(label);
     }
 
     @Override
     protected List<? extends IssueStory> getStories() {
         return issueConfig.getStories(Section.Label.FANTASY);
-    }
-
-    @Override
-    public boolean typeFilter(IssueType type) {
-        return IssueType.ISSUE.equals(type);
     }
 
 }

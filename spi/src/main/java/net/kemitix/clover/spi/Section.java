@@ -12,15 +12,15 @@ public interface Section {
     int getLeft();
     List<? extends IssueStory> getStories();
 
-
     @Getter
     @AllArgsConstructor
     enum Label {
-        REPRINTS("Reprints"),
         FANTASY("Fantasy"),
         SCIENCE_FICTION("Science Fiction"),
         SCIENCE_FANTASY("Science Fantasy"),
-        ORIGINAL("Original"),
+        REPRINT_FANTASY("Fantasy"),
+        REPRINT_SCIENCE_FICTION("Science Fiction"),
+        REPRINT_SCIENCE_FANTASY("Science Fantasy"),
         ;
 
         final String value;

@@ -48,11 +48,14 @@ public class ServiceIssueConfig implements IssueConfig {
         Stories stories = new Stories();
         contents.getSections()
                 .forEach(section -> {
+                    final List<Story> storyList = section.getStories();
                     switch (section.label) {
-                        case FANTASY -> stories.setFantasy(section.getStories());
-                        case SCIENCE_FICTION -> stories.setSf(section.getStories());
-                        case SCIENCE_FANTASY -> stories.setScienceFantasy(section.getStories());
-                        case ORIGINAL -> stories.setOriginal(section.getStories());
+                        case FANTASY -> stories.setFantasy(storyList);
+                        case SCIENCE_FICTION -> stories.setSf(storyList);
+                        case SCIENCE_FANTASY -> stories.setScienceFantasy(storyList);
+                        case REPRINT_FANTASY -> stories.setReprintFantasy(storyList);
+                        case REPRINT_SCIENCE_FICTION -> stories.setReprintSf(storyList);
+                        case REPRINT_SCIENCE_FANTASY -> stories.setReprintScienceFantasy(storyList);
                     }
                 });
         return stories;
@@ -64,8 +67,9 @@ public class ServiceIssueConfig implements IssueConfig {
         private List<Story> sf;
         private List<Story> fantasy;
         private List<Story> scienceFantasy;
-        private List<Story> reprint;
-        private List<Story> original;
+        private List<Story> reprintSf;
+        private List<Story> reprintFantasy;
+        private List<Story> reprintScienceFantasy;
     }
 
     @Setter
@@ -114,6 +118,7 @@ public class ServiceIssueConfig implements IssueConfig {
         TextEffect.HAlignment alignment;
         int fontSize;
         List<ServiceSection> sections;
+        List<Integer> rows;
     }
 
     @Setter

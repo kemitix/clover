@@ -121,6 +121,9 @@ public class Region
                 '}';
     }
 
+    /**
+     * Creates a smaller region.
+     */
     public Region withPadding(int padding) {
         return Region.builder()
                 .top(top + padding)
@@ -128,6 +131,11 @@ public class Region
                 .width(width - (2 * padding))
                 .height(height - (2 * padding))
                 .build();
+    }
+
+    // FIXME: withMargin and withPadding - remove one of them
+    public Region withMargin(int margin) {
+        return withPadding(margin);
     }
 
     public Area getArea() {
@@ -247,15 +255,6 @@ public class Region
         int nRight = f.apply(right);
         return toBuilder()
                 .width(nRight - width)
-                .build();
-    }
-
-    public Region withMargin(int margin) {
-        return toBuilder()
-                .left(left + margin)
-                .top(top + margin)
-                .width(width - (2 * margin))
-                .height(height - (2 * margin))
                 .build();
     }
 

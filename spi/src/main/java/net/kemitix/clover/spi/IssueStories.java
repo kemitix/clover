@@ -10,18 +10,21 @@ public interface IssueStories {
 
     List<? extends IssueStory> getFantasy();
 
-    List<? extends IssueStory> getReprint();
-
     List<? extends IssueStory> getScienceFantasy();
 
-    List<? extends IssueStory> getOriginal();
+    List<? extends IssueStory> getReprintSf();
+
+    List<? extends IssueStory> getReprintFantasy();
+
+    List<? extends IssueStory> getReprintScienceFantasy();
 
     default Stream<IssueStory> stream() {
         return Stream.of(getSf(),
                         getFantasy(),
                         getScienceFantasy(),
-                        getReprint(),
-                        getOriginal())
+                        getReprintSf(),
+                        getReprintFantasy(),
+                        getReprintScienceFantasy())
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream);
     }
