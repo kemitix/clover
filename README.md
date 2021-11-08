@@ -4,7 +4,7 @@ Tool for composing cover art and other images for [Cossmass Infinities](https://
 
 ## Requirements
 
-* JDK 11+
+* JDK 17+
 
 ## Environment Variable Arguments
 
