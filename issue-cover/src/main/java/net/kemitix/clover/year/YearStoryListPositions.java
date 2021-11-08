@@ -26,9 +26,9 @@ public class YearStoryListPositions {
      * 3: Original Science Fantasy
      */
     Region regionFor(Section.Label label) {
-        int gutter = 40;
+        int gutter = 0;
         int padding = 85;
-        Region opaque = backCoverOpaque.getRegion().withPadding(padding).withWidth(w -> w - padding);
+        Region opaque = backCoverOpaque.getRegion().withPadding(padding);
         int columnWidth = (opaque.getWidth() + gutter) / 2;
         Region leftColumns = opaque.withWidth(columnWidth);
         Region rightColumns = leftColumns.withLeft(l -> l + columnWidth + gutter);
