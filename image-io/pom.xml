@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.kemitix.clover</groupId>
         <artifactId>clover-parent</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.1</version>
         <relativePath>../parent</relativePath>
     </parent>
 
