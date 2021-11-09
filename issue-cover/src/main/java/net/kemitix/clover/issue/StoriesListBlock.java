@@ -1,6 +1,7 @@
 package net.kemitix.clover.issue;
 
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
+import net.kemitix.clover.spi.BoxEffect;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
@@ -16,11 +17,14 @@ import java.awt.*;
 @ApplicationScoped
 public class StoriesListBlock {
 
+    public static final boolean drawBounds = false;
+
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject IssueConfig issueConfig;
     @Inject FontCache fontCache;
     @Inject OpaqueFill<Graphics2D> opaqueFill;
     @Inject BackCoverBackgroundBox backgroundBox;
+    @Inject BoxEffect<Graphics2D> boxEffect;
 
     public void draw(
             FontFace fontFace,
@@ -29,6 +33,13 @@ public class StoriesListBlock {
             Region region,
             String header
     ) {
+        if (drawBounds) {
+            boxEffect.opacity(1)
+                    .thickness(1)
+                    .colour("red")
+                    .region(region)
+                    .accept(drawable);
+        }
         if (text.isBlank()) {
             return;
         }

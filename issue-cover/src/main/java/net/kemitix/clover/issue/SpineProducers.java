@@ -27,7 +27,7 @@ public class SpineProducers {
         String colour =
                 switch (issueConfig.getType()) {
                     case ISSUE -> "yellow";
-                    case YEAR -> "blue";
+                    case YEAR -> "lightblue";
                 };
         int size =
                 switch (issueConfig.getType()) {
