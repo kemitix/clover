@@ -1,10 +1,9 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import net.kemitix.clover.spi.IssueStory;
 import net.kemitix.clover.spi.StoryListFormatter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

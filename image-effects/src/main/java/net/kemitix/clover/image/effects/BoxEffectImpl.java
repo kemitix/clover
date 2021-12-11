@@ -1,5 +1,7 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -10,8 +12,6 @@ import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,8 @@ public class BoxEffectImpl
         BoxEffect.ThicknessNext<Graphics2D>,
         BoxEffect.ColourNext<Graphics2D> {
 
-    @Inject Colours colours;
+    @Inject
+    Colours colours;
     @Inject OpaqueFill<Graphics2D> opaqueFill;
 
     private Region region;

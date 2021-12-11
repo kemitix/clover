@@ -1,12 +1,12 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import net.kemitix.clover.spi.*;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 @Log
@@ -18,7 +18,8 @@ public class AuthorsOpaqueStrap
     @Getter
     private final int priority = 5;
 
-    @Inject OpaqueFill<Graphics2D> opaqueFill;
+    @Inject
+    OpaqueFill<Graphics2D> opaqueFill;
     @Inject IssueDimensions dimensions;
     @Inject AuthorStrapBox authorStrapBox;
     @Inject CloverProperties cloverProperties;

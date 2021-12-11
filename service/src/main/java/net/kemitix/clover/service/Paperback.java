@@ -1,13 +1,13 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import lombok.extern.java.Log;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.*;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -17,9 +17,11 @@ import java.util.function.Function;
 @ApplicationScoped
 public class Paperback implements CloverFormat {
 
-    @Inject IssueDimensions dimensions;
+    @Inject
+    IssueDimensions dimensions;
     @Inject Image coverArtImage;
-    @Inject Instance<Block<Graphics2D>> blocks;
+    @Inject
+    Instance<Block<Graphics2D>> blocks;
     @Inject CloverProperties cloverProperties;
 
     private List<Image> images;

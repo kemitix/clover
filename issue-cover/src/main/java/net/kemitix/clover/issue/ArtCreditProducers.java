@@ -1,12 +1,11 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.clover.spi.ArtCredit;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.fontface.FontFace;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class ArtCreditProducers {

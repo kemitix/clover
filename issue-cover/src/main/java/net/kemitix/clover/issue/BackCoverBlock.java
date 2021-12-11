@@ -1,11 +1,11 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.stream.Stream;
 
@@ -17,7 +17,8 @@ public class BackCoverBlock extends AbstractBlock {
 
     @Getter private final int priority = 20;
 
-    @Inject @BackCover Instance<Element<Graphics2D>> elements;
+    @Inject @BackCover
+    Instance<Element<Graphics2D>> elements;
 
     @Override
     protected Stream<? extends Drawable<Graphics2D>> elements() {

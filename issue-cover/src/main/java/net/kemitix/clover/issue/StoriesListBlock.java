@@ -1,5 +1,7 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.BoxEffect;
 import net.kemitix.clover.spi.IssueConfig;
@@ -10,8 +12,6 @@ import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontCache;
 import net.kemitix.fontface.FontFace;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 @ApplicationScoped
@@ -19,7 +19,8 @@ public class StoriesListBlock {
 
     public static final boolean drawBounds = false;
 
-    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
+    @Inject
+    SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject IssueConfig issueConfig;
     @Inject FontCache fontCache;
     @Inject OpaqueFill<Graphics2D> opaqueFill;

@@ -1,10 +1,10 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.CloverProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.nio.file.Paths;
 
 @ApplicationScoped

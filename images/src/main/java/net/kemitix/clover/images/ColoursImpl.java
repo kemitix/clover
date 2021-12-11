@@ -1,10 +1,10 @@
 package net.kemitix.clover.images;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import net.kemitix.clover.spi.Colours;
 import net.kemitix.clover.spi.FatalCloverError;
 import org.beryx.awt.color.ColorFactory;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.awt.*;
 import java.util.Optional;
 

@@ -1,14 +1,11 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.inject.Vetoed;
 import lombok.Getter;
 import lombok.Setter;
 import net.kemitix.clover.spi.*;
 
-import javax.enterprise.inject.Vetoed;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Vetoed
 @Setter

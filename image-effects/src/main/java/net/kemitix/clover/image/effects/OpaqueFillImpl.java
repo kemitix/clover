@@ -1,5 +1,7 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -9,8 +11,6 @@ import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 
@@ -22,7 +22,8 @@ public class OpaqueFillImpl implements OpaqueFill<Graphics2D>,
         Effect.RegionNext<Graphics2D>,
         OpaqueFill.ColourNext<Graphics2D> {
 
-    @Inject Colours colours;
+    @Inject
+    Colours colours;
 
     private Region region;
     private String colour;

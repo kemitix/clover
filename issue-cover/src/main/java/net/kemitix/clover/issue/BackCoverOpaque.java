@@ -1,19 +1,18 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 @BackCover
@@ -24,7 +23,8 @@ public class BackCoverOpaque
     @Getter
     private final int priority = 5;
 
-    @Inject OpaqueFill<Graphics2D> opaqueFill;
+    @Inject
+    OpaqueFill<Graphics2D> opaqueFill;
     @Inject IssueDimensions dimensions;
     @Inject BackCoverBackgroundBox backgroundBox;
     @Inject CloverProperties cloverProperties;

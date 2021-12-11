@@ -1,13 +1,13 @@
 package net.kemitix.clover.story.card;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.extern.java.Log;
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class StoryCardFormat implements CloverFormat {
 
-    @Inject StoryCardProperties properties;
+    @Inject
+    StoryCardProperties properties;
     @Inject IssueConfig issueConfig;
     @Inject StoryCardFactory storyCardFactory;
 

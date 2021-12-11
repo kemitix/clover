@@ -1,5 +1,7 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.AuthorsConfig;
@@ -13,8 +15,6 @@ import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 /**
@@ -26,7 +26,8 @@ public class AuthorsElementIssue extends AbstractElement {
 
     @Getter private final int priority = 50;
 
-    @Inject IssueConfig issueConfig;
+    @Inject
+    IssueConfig issueConfig;
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject @FrontCover FontFace fontFace;
     @Inject IssueDimensions issueDimensions;

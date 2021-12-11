@@ -1,5 +1,7 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BoxEffect;
@@ -9,8 +11,6 @@ import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.Region;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 @GuideLines
@@ -18,7 +18,8 @@ import java.awt.*;
 public class TrimMargins
         extends AbstractElement {
 
-    @Inject BoxEffect<Graphics2D> boxEffect;
+    @Inject
+    BoxEffect<Graphics2D> boxEffect;
     @Inject IssueDimensions dimensions;
     @Inject CloverProperties cloverProperties;
 

@@ -1,12 +1,11 @@
 package net.kemitix.clover.service;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import net.kemitix.clover.spi.*;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @Log
 @Getter

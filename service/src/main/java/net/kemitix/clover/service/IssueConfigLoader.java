@@ -1,5 +1,7 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.ImageLoader;
@@ -10,8 +12,6 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.error.YAMLException;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;

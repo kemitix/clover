@@ -1,12 +1,12 @@
 package net.kemitix.clover.story.card;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 
 @StoryCard
@@ -15,7 +15,8 @@ public class AuthorBlock extends AbstractElement {
 
     @Getter private final int priority = 20;
 
-    @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
+    @Inject
+    SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject OpaqueFill<Graphics2D> opaqueFill;
     @Inject CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;

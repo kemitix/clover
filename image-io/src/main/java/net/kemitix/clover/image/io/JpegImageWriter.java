@@ -1,10 +1,10 @@
 package net.kemitix.clover.image.io;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.logging.Logger;
@@ -18,7 +18,8 @@ public class JpegImageWriter
             Logger.getLogger(
                     JpegImageWriter.class.getName());
 
-    @Inject CloverProperties cloverProperties;
+    @Inject
+    CloverProperties cloverProperties;
 
     @Override
     public boolean accepts(final String format) {

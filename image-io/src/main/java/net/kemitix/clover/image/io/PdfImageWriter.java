@@ -7,15 +7,15 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.PdfHeight;
 import net.kemitix.clover.spi.PdfWidth;
 import net.kemitix.clover.spi.ImageWriter;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
-import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,7 +35,8 @@ public class PdfImageWriter implements ImageWriter {
     // Ref: https://www.papersizes.org/a-sizes-in-pixels.htm
     private static final float pdfPPI = 72f;
 
-    @Inject CloverProperties cloverProperties;
+    @Inject
+    CloverProperties cloverProperties;
 
     @Override
     public boolean accepts(final String format) {

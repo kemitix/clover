@@ -1,5 +1,7 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.CloverProperties;
@@ -13,8 +15,6 @@ import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 
@@ -24,7 +24,8 @@ public class LogoStrapsIssue extends AbstractElement {
 
     @Getter private final int priority = 20;
 
-    @Inject CloverProperties cloverProperties;
+    @Inject
+    CloverProperties cloverProperties;
     @Inject IssueConfig issueConfig;
     @Inject SimpleTextEffect<Graphics2D> simpleTextEffect;
     @Inject IssueDimensions issueDimensions;

@@ -1,9 +1,8 @@
 package net.kemitix.clover.image.io;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverProperties;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class WebpImageWriter
@@ -11,7 +10,8 @@ public class WebpImageWriter
 
     private static final String FORMAT_NAME = "webp";
 
-    @Inject CloverProperties cloverProperties;
+    @Inject
+    CloverProperties cloverProperties;
 
     @Override
     public boolean accepts(final String format) {

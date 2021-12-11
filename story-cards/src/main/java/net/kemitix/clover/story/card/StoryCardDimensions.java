@@ -1,16 +1,16 @@
 package net.kemitix.clover.story.card;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.*;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class StoryCardDimensions {
 
-    @Inject IssueConfig issueConfig;
+    @Inject
+    IssueConfig issueConfig;
     @Inject StoryCardProperties properties;
 
     @Getter private float scaleFromOriginal;
