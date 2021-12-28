@@ -4,7 +4,6 @@ import net.kemitix.clover.spi.Block;
 import net.kemitix.clover.spi.Drawable;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.inject.Instance;
 import java.awt.*;
 import java.util.stream.Stream;
 

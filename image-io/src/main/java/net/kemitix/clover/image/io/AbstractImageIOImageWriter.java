@@ -23,12 +23,20 @@ abstract class AbstractImageIOImageWriter
             final TypedProperties properties
     ) {
         try {
-            ImageIO.write(image, getFormatName(), file);
+            doWriteImage(image, file, properties);
             LOGGER.info(String.format("Wrote %s", file));
         } catch (final IOException e) {
             LOGGER.severe("Failed to write " + file);
         }
 
+    }
+
+    protected void doWriteImage(
+            BufferedImage image,
+            File file,
+            TypedProperties properties
+    ) throws IOException {
+        ImageIO.write(image, getFormatName(), file);
     }
 
     protected abstract String getFormatName();

@@ -18,7 +18,8 @@ import java.util.List;
 @BackCover
 @ApplicationScoped
 public class OriginalFantasyYearStories
-        extends AbstractStoriesList {
+        extends AbstractStoriesList
+        implements ForYearCovers {
 
     @Getter
     private final int priority = 10;
