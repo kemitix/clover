@@ -5,7 +5,6 @@ import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.BackCoverBackgroundBox;
 import net.kemitix.clover.spi.CloverProperties;
-import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.clover.spi.OpaqueFill;

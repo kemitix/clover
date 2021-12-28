@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueStory;
-import net.kemitix.clover.spi.IssueType;
 import net.kemitix.clover.spi.Section;
 import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
@@ -15,7 +14,8 @@ import java.util.List;
 
 @BackCover
 @ApplicationScoped
-public class StoriesFantasy extends AbstractStoriesList {
+public class StoriesFantasy extends AbstractStoriesList
+        implements ForIssueCovers {
 
     @Getter
     private final String header = "Fantasy";
@@ -55,11 +55,6 @@ public class StoriesFantasy extends AbstractStoriesList {
     @Override
     protected List<? extends IssueStory> getStories() {
         return issueConfig.getStories(Section.Label.FANTASY);
-    }
-
-    @Override
-    public boolean typeFilter(IssueType type) {
-        return IssueType.ISSUE.equals(type);
     }
 
 }

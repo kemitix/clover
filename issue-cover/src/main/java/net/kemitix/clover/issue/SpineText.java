@@ -41,4 +41,5 @@ public class SpineText extends AbstractElement {
                 .region(dimensions.getSpineCrop().withOffset(0, yOffset))
                 .accept(graphics2D);
     }
+
 }
