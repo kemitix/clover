@@ -2,13 +2,23 @@ package net.kemitix.clover.service;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kemitix.clover.spi.*;
+import net.kemitix.clover.spi.AuthorStrapBox;
+import net.kemitix.clover.spi.AuthorsConfig;
+import net.kemitix.clover.spi.BackCoverBackgroundBox;
+import net.kemitix.clover.spi.Contents;
+import net.kemitix.clover.spi.IssueAuthor;
+import net.kemitix.clover.spi.IssueCards;
+import net.kemitix.clover.spi.IssueConfig;
+import net.kemitix.clover.spi.IssueCrop;
+import net.kemitix.clover.spi.IssueStories;
+import net.kemitix.clover.spi.IssueStory;
+import net.kemitix.clover.spi.IssueStoryCards;
+import net.kemitix.clover.spi.IssueType;
+import net.kemitix.clover.spi.Section;
+import net.kemitix.clover.spi.TextEffect;
 
 import javax.enterprise.inject.Vetoed;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Vetoed
 @Setter
@@ -22,7 +32,9 @@ public class ServiceIssueConfig implements IssueConfig {
     private String issue;
     private String date;
     private String titleColour;
+    private String titleShadow;
     private String subTitleColour;
+    private String subTitleShadow;
     private String textColour;
     private float spine;
     private float height;
