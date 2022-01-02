@@ -1,6 +1,7 @@
 package net.kemitix.clover.issue;
 
 import lombok.Getter;
+import lombok.extern.java.Log;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.AuthorsConfig;
 import net.kemitix.clover.spi.FrontCover;
@@ -20,9 +21,11 @@ import java.awt.*;
 /**
  * Displays the list of authors on the front cover.
  */
+@Log
 @FrontCover
 @ApplicationScoped
-public class AuthorsElementIssue extends AbstractElement {
+public class AuthorsElementIssue extends AbstractElement
+        implements ForIssueCovers {
 
     @Getter private final int priority = 50;
 
@@ -73,7 +76,6 @@ public class AuthorsElementIssue extends AbstractElement {
         int left = authors.getLeft() +
                 issueDimensions.getFrontCrop().getLeft();
         simpleTextEffect.fontFace(fontFace)
-                .wrap()
                 .text(authorNames())
                 .vAlign(TextEffect.VAlignment.TOP)
                 .hAlign(TextEffect.HAlignment.LEFT)
@@ -82,7 +84,9 @@ public class AuthorsElementIssue extends AbstractElement {
     }
 
     protected String authorNames() {
-        return String.join("\n", issueConfig.authors());
+        final String authorNames = String.join("\n", issueConfig.authors());
+        log.info("Author names: [%s]".formatted(authorNames));
+        return authorNames;
     }
 
     protected Region region(int top, int left) {

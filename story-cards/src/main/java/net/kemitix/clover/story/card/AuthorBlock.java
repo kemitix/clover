@@ -51,4 +51,11 @@ public class AuthorBlock extends AbstractElement {
 //        drawable.drawRect(region.getLeft(), region.getTop(),
 //                region.getWidth(), region.getHeight());
     }
+
+    @Override
+    public boolean typeFilter(IssueType type) {
+        return switch (type) {
+            case ISSUE, YEAR -> true;
+        };
+    }
 }
