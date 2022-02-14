@@ -44,7 +44,9 @@ public class IssueConfigLoaderTest {
                         type: ISSUE
                         issue: %s
                         titleColour: red
+                        titleShadow: blue
                         subTitleColour: yellow
+                        subTitleShadow: green
                         width: 5
                         height: 8
                         """.formatted(issueNumber);
@@ -55,6 +57,8 @@ public class IssueConfigLoaderTest {
         //then
         assertThat(issue.getIssue()).isEqualTo(issueNumber);
         assertThat(issue.getTitleColour()).isEqualTo("red");
+        assertThat(issue.getTitleShadow()).isEqualTo("blue");
         assertThat(issue.getSubTitleColour()).isEqualTo("yellow");
+        assertThat(issue.getSubTitleShadow()).isEqualTo("green");
     }
 }

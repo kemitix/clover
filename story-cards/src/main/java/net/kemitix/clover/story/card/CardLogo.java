@@ -54,6 +54,7 @@ public class CardLogo extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 properties.logoFontSize(),
                 issueConfig.getTitleColour(),
+                issueConfig.getTitleShadow(),
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());
     }

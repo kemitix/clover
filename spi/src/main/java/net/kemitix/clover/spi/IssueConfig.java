@@ -13,7 +13,11 @@ public interface IssueConfig {
 
     String getTitleColour();
 
+    String getTitleShadow();
+
     String getSubTitleColour();
+
+    String getSubTitleShadow();
 
     int getKindleYOffset();
 
