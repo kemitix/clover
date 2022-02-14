@@ -76,6 +76,7 @@ public abstract class AbstractLogoStraps extends AbstractElement {
                 cloverProperties.getFontLocation(),
                 size,
                 issueConfig.getSubTitleColour(),
+                issueConfig.getSubTitleShadow(),
                 cloverProperties.dropShadowXOffset(),
                 cloverProperties.dropShadowYOffset());
     }
