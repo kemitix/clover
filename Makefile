@@ -1,4 +1,4 @@
-FONT_FILE=-Dfont-file=${HOME}/cossmass/issues/fonts/Snowslider/SnowSL_Std.OTF
+FONT_FILE=-Dfont-file=${HOME}/cossmass/master/issues/fonts/Snowslider/SnowSL_Std.OTF
 RUN_PARAMS=${FONT_FILE} #-Dclover.story-card.enabled=false #-Dclover.enable-paperback=false -Dclover.enable-paperback-preview=false
 
 graphs:
