@@ -30,7 +30,7 @@
         <junit.version>5.8.2</junit.version>
         <assertj.version>3.22.0</assertj.version>
         <file-reader-writer.version>1.0.0</file-reader-writer.version>
-        <lombok.version>1.18.22</lombok.version>
+        <lombok.version>1.18.24</lombok.version>
         <mockito.version>4.3.1</mockito.version>
         <typed-properties.version>1.0.0</typed-properties.version>
         <text-wrap-fit-box.version>1.0.0</text-wrap-fit-box.version>
