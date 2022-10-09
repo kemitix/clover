@@ -1,11 +1,11 @@
 package net.kemitix.clover.year;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import net.kemitix.clover.spi.AbstractLogoStraps;
 import net.kemitix.clover.spi.FrontCover;
 import net.kemitix.clover.spi.TextEffect;
 import net.kemitix.fontface.FontFace;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.awt.*;
 import java.util.function.Consumer;
 

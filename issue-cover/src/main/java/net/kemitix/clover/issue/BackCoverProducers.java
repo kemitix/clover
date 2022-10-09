@@ -1,10 +1,11 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.clover.spi.*;
 import net.kemitix.fontface.FontFace;
 
-import javax.enterprise.inject.Produces;
-
+@ApplicationScoped
 public class BackCoverProducers {
 
     @Produces @BackCover

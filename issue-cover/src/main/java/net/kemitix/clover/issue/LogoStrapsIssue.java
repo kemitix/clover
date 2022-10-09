@@ -1,9 +1,8 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import net.kemitix.clover.spi.AbstractLogoStraps;
 import net.kemitix.clover.spi.FrontCover;
-
-import javax.enterprise.context.ApplicationScoped;
 
 @FrontCover
 @ApplicationScoped

@@ -1,13 +1,12 @@
 package net.kemitix.clover.year;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.issue.BackCoverOpaque;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.Region;
 import net.kemitix.clover.spi.Section;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class YearStoryListPositions {

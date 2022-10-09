@@ -1,14 +1,14 @@
 package net.kemitix.clover.image.io;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.FatalCloverError;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.ImageLoader;
 import net.kemitix.clover.spi.ImageFactory;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
-import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

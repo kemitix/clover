@@ -1,15 +1,17 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.clover.spi.*;
 import net.kemitix.fontface.FontFace;
 
-import javax.enterprise.inject.Produces;
 import java.awt.*;
 import java.util.function.Supplier;
 
+@ApplicationScoped
 public class SpineProducers {
 
-    @Produces @Spine
+    @Produces @Spine @ApplicationScoped
     Supplier<String> text(IssueConfig issueConfig) {
         return issueConfig::getSpineText;
     }

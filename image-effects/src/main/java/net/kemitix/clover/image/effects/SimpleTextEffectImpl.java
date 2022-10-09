@@ -1,5 +1,7 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.*;
 import net.kemitix.clover.spi.*;
 import net.kemitix.clover.spi.DrawText;
@@ -8,8 +10,6 @@ import net.kemitix.fontface.FontFace;
 import net.kemitix.text.fit.BoxFitter;
 import net.kemitix.text.fit.WordWrapper;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
