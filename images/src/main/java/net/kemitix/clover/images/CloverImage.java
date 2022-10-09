@@ -1,5 +1,6 @@
 package net.kemitix.clover.images;
 
+import jakarta.enterprise.inject.Instance;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -9,7 +10,6 @@ import net.kemitix.fontface.FontCache;
 import net.kemitix.properties.typed.TypedProperties;
 import org.beryx.awt.color.ColorFactory;
 
-import javax.enterprise.inject.Instance;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -1,14 +1,14 @@
 package net.kemitix.clover.images;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.fontface.FontCache;
 import net.kemitix.clover.spi.Image;
 import net.kemitix.clover.spi.ImageFactory;
 import net.kemitix.clover.spi.ImageWriter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 
 @ApplicationScoped

@@ -1,12 +1,13 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.text.fit.BoxFitter;
 import net.kemitix.text.fit.TextFit;
 import net.kemitix.text.fit.WordWrapper;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 
+@ApplicationScoped
 public class Producers {
 
     @Produces

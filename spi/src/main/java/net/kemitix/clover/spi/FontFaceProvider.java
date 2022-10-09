@@ -1,10 +1,9 @@
 package net.kemitix.clover.spi;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import net.kemitix.fontface.FontCache;
 import net.kemitix.fontface.FontLoader;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class FontFaceProvider {

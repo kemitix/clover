@@ -1,5 +1,6 @@
 package net.kemitix.clover.service;
 
+import jakarta.enterprise.inject.Vetoed;
 import lombok.Getter;
 import lombok.Setter;
 import net.kemitix.clover.spi.AuthorStrapBox;
@@ -17,7 +18,6 @@ import net.kemitix.clover.spi.IssueType;
 import net.kemitix.clover.spi.Section;
 import net.kemitix.clover.spi.TextEffect;
 
-import javax.enterprise.inject.Vetoed;
 import java.util.List;
 
 @Vetoed

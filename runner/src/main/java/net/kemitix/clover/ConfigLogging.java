@@ -1,14 +1,12 @@
 package net.kemitix.clover;
 
-import io.quarkus.runtime.Startup;
 import net.kemitix.clover.story.card.StoryCardProperties;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.logging.Logger;
 
-@Startup
 @ApplicationScoped
 public class ConfigLogging {
 

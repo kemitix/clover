@@ -1,11 +1,11 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import net.kemitix.clover.spi.*;
 import net.kemitix.fontface.FontCache;
 import net.kemitix.fontface.FontFace;
 import org.beryx.awt.color.ColorFactory;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Optional;

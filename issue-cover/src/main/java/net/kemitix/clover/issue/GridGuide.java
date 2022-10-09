@@ -1,24 +1,20 @@
 package net.kemitix.clover.issue;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.AbstractElement;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Colours;
-import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.IssueConfig;
 import net.kemitix.clover.spi.IssueDimensions;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.stream.IntStream;
 
 @Vetoed
-//@GuideLines
-//@ApplicationScoped
 public class GridGuide
         extends AbstractElement {
 

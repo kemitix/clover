@@ -1,5 +1,7 @@
 package net.kemitix.clover.image.effects;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -10,8 +12,6 @@ import net.kemitix.clover.spi.Effect;
 import net.kemitix.clover.spi.OpaqueFill;
 import net.kemitix.clover.spi.Region;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;

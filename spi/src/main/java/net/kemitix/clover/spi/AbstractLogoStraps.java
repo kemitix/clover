@@ -1,10 +1,10 @@
 package net.kemitix.clover.spi;
 
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.fontface.FontFace;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.function.Consumer;
 

@@ -1,6 +1,3 @@
-FONT_FILE=-Dfont-file=${HOME}/cossmass/master/issues/fonts/Snowslider/SnowSL_Std.OTF
-RUN_PARAMS=${FONT_FILE} #-Dclover.story-card.enabled=false #-Dclover.enable-paperback=false -Dclover.enable-paperback-preview=false
-
 graphs:
 	mvn validate
 
@@ -19,17 +16,8 @@ test:
 issue-dir:
 	@test ${CLOVER_DIR}
 
-dev: issue-dir build
-	mvn -pl runner quarkus:dev ${RUN_PARAMS}
-
 run: issue-dir install
-	( \
-		cd runner/target/quarkus-app && \
-		java \
-			--class-path "../../../*/target/" \
-			-jar quarkus-run.jar \
-			${RUN_PARAMS} \
-	)
+	java -jar runner/target/clover-runner-*-jar-with-dependencies.jar
 
 clean:
 	mvn clean
@@ -40,9 +28,3 @@ quick-build:
 
 kill-runners:
 	ps ax|grep clover-runne[r]|cut -b-5|xargs kill -9
-
-native:
-	mvn verify -Pnative -DskipTests -DskipITs -Dpitest.skip
-
-run-native:
-	./runner/target/clover-runner

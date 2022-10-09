@@ -1,18 +1,16 @@
 package net.kemitix.clover.service;
 
-import net.kemitix.clover.spi.Block;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import net.kemitix.clover.spi.CloverFormat;
 import net.kemitix.clover.spi.CloverProperties;
 import net.kemitix.clover.spi.Drawable;
 import net.kemitix.clover.spi.Element;
 import net.kemitix.clover.spi.GuideLines;
 import net.kemitix.clover.spi.Image;
-import net.kemitix.clover.spi.Region;
 import net.kemitix.properties.typed.TypedProperties;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import java.awt.*;
 import java.util.List;
 import java.util.function.Function;

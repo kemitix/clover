@@ -5,8 +5,6 @@ import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
-
 public class RegionTest
         implements WithAssertions {
 

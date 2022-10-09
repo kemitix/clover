@@ -1,11 +1,10 @@
 package net.kemitix.clover.spi;
 
+import jakarta.enterprise.inject.Vetoed;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.enterprise.inject.Vetoed;
 
 @Vetoed
 @Setter

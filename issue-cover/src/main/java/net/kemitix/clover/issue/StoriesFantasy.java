@@ -1,5 +1,7 @@
 package net.kemitix.clover.issue;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import net.kemitix.clover.spi.BackCover;
 import net.kemitix.clover.spi.IssueConfig;
@@ -8,8 +10,6 @@ import net.kemitix.clover.spi.Section;
 import net.kemitix.clover.spi.StoryListFormatter;
 import net.kemitix.fontface.FontFace;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.List;
 
 @BackCover
