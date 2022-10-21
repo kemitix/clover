@@ -19,7 +19,7 @@
 
     <properties>
         <microprofile.version>5.0</microprofile.version>
-        <tiles-maven-plugin.version>2.30</tiles-maven-plugin.version>
+        <tiles-maven-plugin.version>2.32</tiles-maven-plugin.version>
         <kemitix-tiles.version>3.2.0</kemitix-tiles.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
