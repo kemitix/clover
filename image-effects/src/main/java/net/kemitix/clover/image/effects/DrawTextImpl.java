@@ -53,11 +53,15 @@ class DrawTextImpl implements DrawText {
     }
 
     static Color getColor(final String colour) {
-        return Optional.ofNullable(
-                ColorFactory.valueOf(colour))
-                .orElseThrow(() ->
-                        new FatalCloverError(
-                                "Unknown colour: " + colour));
+        try {
+            return Optional.ofNullable(
+                            ColorFactory.valueOf(colour))
+                    .orElseThrow(() ->
+                            new FatalCloverError(
+                                    "Unknown colour: " + colour));
+        } catch (IllegalArgumentException e) {
+            throw new FatalCloverError("Selecting colour %s".formatted(colour), e);
+        }
     }
 
 }
